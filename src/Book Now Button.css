@@ -1,0 +1,17 @@
+.btn-book-now {
+  background-color: #f4f3df;
+  border-radius: 18px;
+  color: #030b2f;
+  font-family: "Inter-SemiBold", Helvetica, sans-serif;
+  font-size: clamp(16px, 1.5vw, 22px);
+  font-weight: 600;
+  padding: 12px 32px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-block; /* 👈 Keeps button sized to its content */
+  transition: background-color 0.3s ease;
+  width: auto; /* 👈 Ensures button doesn’t stretch */
+  max-width: none; /* 👈 Prevents unintended max-width from container */
+}

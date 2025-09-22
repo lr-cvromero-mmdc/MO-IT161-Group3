@@ -1,0 +1,48 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #133d87;
+  padding: 16px 64px; /* Reduced padding */
+  height: 72px;       /* Standard navbar height */
+  max-width: 1920px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.rectangle {
+  background-color: #d9d9d9;
+  width: 120px; /* Reduced size */
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.navibar {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  flex-grow: 1;
+  margin-left: 120px;  
+}
+
+.navibar a {
+  color: #eff8ff;
+  font-family: "Inter-Regular", Helvetica, sans-serif;
+  font-size: clamp(14px, 1.5vw, 18px);
+  font-weight: 400;
+  white-space: nowrap;
+  cursor: pointer;
+  text-align: center;
+  transition: color 0.3s ease;
+  text-decoration: none; /* Remove underline */
+}
+
+.navibar a:hover {
+  color: #a8caff;
+  text-decoration: underline; /* Optional: underline on hover */
+}
+
+.group {
+  flex-shrink: 0;
+}
+
