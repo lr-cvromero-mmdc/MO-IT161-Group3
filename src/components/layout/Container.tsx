@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils"
 
+// Container component that centers its content and applies horizontal padding.
 interface ContainerProps {
   children: React.ReactNode
   className?: string
