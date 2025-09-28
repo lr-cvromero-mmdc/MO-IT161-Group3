@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { ChevronRight, Car, Shield, Award, Search, MapPin, MapPin as Location, ShoppingCart, Calendar, Star, Hand, CreditCard, CheckCircle } from "lucide-react"
 
+// Service offerings for car wash
 const services = [
   {
     title: "Basic Wash",
@@ -30,6 +31,7 @@ const services = [
   },
 ]
 
+// Steps to book a car wash online
 const bookingSteps = [
   {
     icon: Location,
@@ -53,6 +55,7 @@ const bookingSteps = [
   }
 ]
 
+// Products available in the store
 const storeProducts = [
   {
     id: 1,
@@ -104,6 +107,7 @@ const storeProducts = [
   },
 ]
 
+// Customer testimonials
 const testimonials = [
   {
     id: 1,
@@ -122,6 +126,7 @@ const testimonials = [
   }
 ]
 
+// Quality features of the car wash service
 const qualityFeatures = [
   {
     icon: Hand,
@@ -146,6 +151,7 @@ const qualityFeatures = [
 ]
 
 
+// Frequently Asked Questions
 const faqs = [
   {
     question: "Do you charge extra for SUVs?",
@@ -173,6 +179,7 @@ const faqs = [
   },
 ]
 
+// Home page component
 export function Home() {
   return (
     <div className="min-h-screen">

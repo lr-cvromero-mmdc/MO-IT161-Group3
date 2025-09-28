@@ -1,10 +1,12 @@
 import { cn } from "@/lib/utils"
 
+// Props for PaymentLogo component
 interface PaymentLogoProps {
   name: string
   className?: string
 }
 
+// Component to display payment method logos with fallback to emoji
 export function PaymentLogo({ name, className }: PaymentLogoProps) {
   const logoMap = {
     visa: "/src/assets/images/logos/payments/Visa.svg",
@@ -14,6 +16,7 @@ export function PaymentLogo({ name, className }: PaymentLogoProps) {
     maya: "/src/assets/images/logos/payments/Maya.svg",
   }
 
+  //  Get the logo source based on the name prop
   const logoSrc = logoMap[name.toLowerCase() as keyof typeof logoMap]
 
   if (!logoSrc) {
@@ -32,6 +35,7 @@ export function PaymentLogo({ name, className }: PaymentLogoProps) {
     )
   }
 
+  // Render the logo image
   return (
     <img
       src={logoSrc}
