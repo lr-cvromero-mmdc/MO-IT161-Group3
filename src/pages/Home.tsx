@@ -6,18 +6,6 @@ import { Input } from "@/components/ui/input"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { ChevronRight, Car, Shield, Award, Search, MapPin, MapPin as Location, ShoppingCart, Calendar, Star, Hand, CreditCard, CheckCircle } from "lucide-react"
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Service offerings for car wash
-=======
->>>>>>> origin/staging
-=======
-// Service offerings for car wash
->>>>>>> Stashed changes
-=======
-// Service offerings for car wash
->>>>>>> Stashed changes
 const services = [
   {
     title: "Basic Wash",
@@ -42,18 +30,6 @@ const services = [
   },
 ]
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Steps to book a car wash online
-=======
->>>>>>> origin/staging
-=======
-// Steps to book a car wash online
->>>>>>> Stashed changes
-=======
-// Steps to book a car wash online
->>>>>>> Stashed changes
 const bookingSteps = [
   {
     icon: Location,
@@ -77,18 +53,6 @@ const bookingSteps = [
   }
 ]
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Products available in the store
-=======
->>>>>>> origin/staging
-=======
-// Products available in the store
->>>>>>> Stashed changes
-=======
-// Products available in the store
->>>>>>> Stashed changes
 const storeProducts = [
   {
     id: 1,
@@ -140,18 +104,6 @@ const storeProducts = [
   },
 ]
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Customer testimonials
-=======
->>>>>>> origin/staging
-=======
-// Customer testimonials
->>>>>>> Stashed changes
-=======
-// Customer testimonials
->>>>>>> Stashed changes
 const testimonials = [
   {
     id: 1,
@@ -170,18 +122,6 @@ const testimonials = [
   }
 ]
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Quality features of the car wash service
-=======
->>>>>>> origin/staging
-=======
-// Quality features of the car wash service
->>>>>>> Stashed changes
-=======
-// Quality features of the car wash service
->>>>>>> Stashed changes
 const qualityFeatures = [
   {
     icon: Hand,
@@ -206,18 +146,6 @@ const qualityFeatures = [
 ]
 
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Frequently Asked Questions
-=======
->>>>>>> origin/staging
-=======
-// Frequently Asked Questions
->>>>>>> Stashed changes
-=======
-// Frequently Asked Questions
->>>>>>> Stashed changes
 const faqs = [
   {
     question: "Do you charge extra for SUVs?",
@@ -245,18 +173,6 @@ const faqs = [
   },
 ]
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Home page component
-=======
->>>>>>> origin/staging
-=======
-// Home page component
->>>>>>> Stashed changes
-=======
-// Home page component
->>>>>>> Stashed changes
 export function Home() {
   return (
     <div className="min-h-screen">

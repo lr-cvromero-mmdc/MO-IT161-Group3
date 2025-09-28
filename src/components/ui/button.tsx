@@ -4,18 +4,6 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Button component using Radix UI
-=======
->>>>>>> origin/staging
-=======
-// Button component using Radix UI
->>>>>>> Stashed changes
-=======
-// Button component using Radix UI
->>>>>>> Stashed changes
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
@@ -45,36 +33,12 @@ const buttonVariants = cva(
   }
 )
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Button props interface
-=======
->>>>>>> origin/staging
-=======
-// Button props interface
->>>>>>> Stashed changes
-=======
-// Button props interface
->>>>>>> Stashed changes
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Button component definition
-=======
->>>>>>> origin/staging
-=======
-// Button component definition
->>>>>>> Stashed changes
-=======
-// Button component definition
->>>>>>> Stashed changes
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
@@ -89,16 +53,4 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 )
 Button.displayName = "Button"
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Exporting Button and buttonVariants
-=======
->>>>>>> origin/staging
-=======
-// Exporting Button and buttonVariants
->>>>>>> Stashed changes
-=======
-// Exporting Button and buttonVariants
->>>>>>> Stashed changes
 export { Button, buttonVariants }
