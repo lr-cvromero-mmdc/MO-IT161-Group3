@@ -208,7 +208,7 @@ export function Home() {
                     <div className="flex items-center">
                       <div className="w-16 h-0.5 bg-brand-cream"></div>
                       <h2 className="text-brand-cream text-sm font-medium tracking-wider uppercase ml-4">
-                        ESPINOSA'S CAR WASH LOCATOR
+                        FIND AN ESPINOSA'S CAR WASH NEAR YOU
                       </h2>
                     </div>
                   </div>
@@ -284,18 +284,22 @@ export function Home() {
               </p>
 
               {/* KPI Cards */}
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-4 gap-4">
                 <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
-                  <div className="text-3xl font-bold text-brand-dark mb-2">15+</div>
+                  <div className="text-3xl font-bold text-brand-dark mb-2">5+</div>
                   <div className="text-sm text-neutral-600">Years</div>
                 </div>
                 <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
-                  <div className="text-3xl font-bold text-brand-dark mb-2">10k+</div>
+                  <div className="text-3xl font-bold text-brand-dark mb-2">5k+</div>
                   <div className="text-sm text-neutral-600">Cars cleaned</div>
                 </div>
                 <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
-                  <div className="text-3xl font-bold text-brand-dark mb-2">4.9</div>
-                  <div className="text-sm text-neutral-600">Avg. rating</div>
+                  <div className="text-3xl font-bold text-brand-dark mb-2">4.9/5</div>
+                  <div className="text-sm text-neutral-600">Customer rating</div>
+                </div>
+                <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
+                  <div className="text-3xl font-bold text-brand-dark mb-2">100%</div>
+                  <div className="text-sm text-neutral-600">Service satisfaction guaranteed!</div>
                 </div>
               </div>
             </div>
@@ -463,7 +467,7 @@ export function Home() {
               <span className="mx-4 text-brand-primary text-sm font-medium">Testimonials</span>
             </div>
             <h3 className="text-3xl md:text-4xl font-bold text-brand-dark">
-              5+ Years Helping Filipino Car Owners
+              5+ Years of Serving Filipino Car Owners
             </h3>
           </div>
 
