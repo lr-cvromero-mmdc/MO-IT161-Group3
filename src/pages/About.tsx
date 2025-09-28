@@ -1,7 +1,18 @@
+// About page - Professional car wash services with family values and quality focus
 import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ChevronRight, Star, Clock, Users, Car, Shield, Award, Heart, Hand } from "lucide-react"
+import { 
+  ChevronRight, 
+  Star, 
+  Clock, 
+  Users, 
+  Car, 
+  Shield, 
+  Award, 
+  Heart, 
+  Hand 
+} from "lucide-react"
 
 // Performance indicators displayed 
 const kpis = [
