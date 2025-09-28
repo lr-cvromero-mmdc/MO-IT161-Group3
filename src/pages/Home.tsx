@@ -1,11 +1,25 @@
-// Home page - Updated with real images replacing placeholders across all sections
+// Home page - Professional car wash services with real images and modern design
 import { Link } from "react-router-dom"
 import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { ChevronRight, Car, Shield, Award, Search, MapPin, MapPin as Location, ShoppingCart, Calendar, Star, Hand, CreditCard, CheckCircle } from "lucide-react"
+import { 
+  ChevronRight, 
+  Car, 
+  Shield, 
+  Award, 
+  Search, 
+  MapPin, 
+  MapPin as Location, 
+  ShoppingCart, 
+  Calendar, 
+  Star, 
+  Hand, 
+  CreditCard, 
+  CheckCircle 
+} from "lucide-react"
 
 // Service offerings for car wash
 const services = [
