@@ -22,7 +22,7 @@ const navigation = [
   { name: "Services", href: "/services" },
   { name: "How It Works", href: "/#how-it-works" },
   { name: "Locations", href: "/locations" },
-  { name: "Contact", href: "/#contact" },
+  { name: "Contact", href: "/contact" },
 ]
 
 // Header component
@@ -32,7 +32,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const firstMenuItemRef = useRef<HTMLAnchorElement>(null)
-  const lastMenuItemRef = useRef<HTMLAnchorElement>(null)
+  const lastMenuItemRef = useRef<HTMLButtonElement>(null)
 
   // Scroll detection for transparent header
   useEffect(() => {
@@ -97,6 +97,7 @@ export function Header() {
           {/* Logo */}
           <Link 
             to="/" 
+            onClick={() => window.scrollTo(0, 0)}
             className="flex items-center space-x-3 focus-ring rounded-lg"
             aria-label="Espinosa's Hand Carwash - Home"
           >
@@ -114,6 +115,7 @@ export function Header() {
               <Link
                 key={item.name}
                 to={item.href}
+                onClick={() => window.scrollTo(0, 0)}
                 className={`text-sm font-medium transition-colors focus-ring rounded-sm px-2 py-1 ${
                   location.pathname === item.href
                     ? isHomePage && !isScrolled ? "text-brand-primary" : "text-brand-cream"
@@ -173,7 +175,10 @@ export function Header() {
                         ? "text-brand-primary font-semibold"
                         : "text-brand-dark hover:text-brand-primary"
                     }`}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => {
+                      setIsOpen(false)
+                      window.scrollTo(0, 0)
+                    }}
                   >
                     {item.name}
                   </Link>
