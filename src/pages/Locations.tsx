@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { MapPin, Clock, Phone, CreditCard, Smartphone, QrCode } from "lucide-react"
 
+// List of Espinosa's branch locations with contact and payment details
 const locations = [
   {
     name: "Espinosa's Main Branch",
@@ -30,6 +31,7 @@ const locations = [
   },
 ]
 
+//
 const paymentMethods = [
   { name: "Visa", icon: CreditCard, color: "text-blue-600" },
   { name: "Mastercard", icon: CreditCard, color: "text-red-600" },
@@ -37,6 +39,7 @@ const paymentMethods = [
   { name: "QR Ph", icon: QrCode, color: "text-green-600" },
 ]
 
+// Card component to display individual location details
 function LocationCard({ location }: { location: typeof locations[0] }) {
   return (
     <Card className="h-full hover:shadow-lg transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
@@ -123,6 +126,7 @@ function LocationCard({ location }: { location: typeof locations[0] }) {
   )
 }
 
+// Locations page component
 export function Locations() {
   return (
     <div className="min-h-screen bg-white">
