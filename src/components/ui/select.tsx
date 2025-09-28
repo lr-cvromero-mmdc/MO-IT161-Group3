@@ -4,6 +4,7 @@ import { Check, ChevronDown, ChevronUp } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Select component using Radix UI
 const Select = SelectPrimitive.Root
@@ -16,13 +17,22 @@ const SelectValue = SelectPrimitive.Value
 
 // Trigger button for the select
 =======
+=======
+// Select component using Radix UI
+>>>>>>> Stashed changes
 const Select = SelectPrimitive.Root
 
+// Grouping related components
 const SelectGroup = SelectPrimitive.Group
 
+// Value display component
 const SelectValue = SelectPrimitive.Value
 
+<<<<<<< Updated upstream
 >>>>>>> origin/staging
+=======
+// Trigger button for the select
+>>>>>>> Stashed changes
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
@@ -43,10 +53,14 @@ const SelectTrigger = React.forwardRef<
 ))
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Scroll buttons for the select dropdown
 =======
 >>>>>>> origin/staging
+=======
+// Scroll buttons for the select dropdown
+>>>>>>> Stashed changes
 const SelectScrollUpButton = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>
@@ -64,10 +78,14 @@ const SelectScrollUpButton = React.forwardRef<
 ))
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Scroll down button for the select dropdown
 =======
 >>>>>>> origin/staging
+=======
+// Scroll down button for the select dropdown
+>>>>>>> Stashed changes
 const SelectScrollDownButton = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.ScrollDownButton>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>
@@ -86,10 +104,14 @@ const SelectScrollDownButton = React.forwardRef<
 SelectScrollDownButton.displayName =
   SelectPrimitive.ScrollDownButton.displayName
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Content component for the select dropdown
 =======
 >>>>>>> origin/staging
+=======
+// Content component for the select dropdown
+>>>>>>> Stashed changes
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
@@ -122,10 +144,14 @@ const SelectContent = React.forwardRef<
 ))
 SelectContent.displayName = SelectPrimitive.Content.displayName
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Label component for grouping items
 =======
 >>>>>>> origin/staging
+=======
+// Label component for grouping items
+>>>>>>> Stashed changes
 const SelectLabel = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Label>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
@@ -138,10 +164,14 @@ const SelectLabel = React.forwardRef<
 ))
 SelectLabel.displayName = SelectPrimitive.Label.displayName
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Individual item component for the select dropdown
 =======
 >>>>>>> origin/staging
+=======
+// Individual item component for the select dropdown
+>>>>>>> Stashed changes
 const SelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
@@ -165,10 +195,14 @@ const SelectItem = React.forwardRef<
 ))
 SelectItem.displayName = SelectPrimitive.Item.displayName
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Separator component for dividing groups of items
 =======
 >>>>>>> origin/staging
+=======
+// Separator component for dividing groups of items
+>>>>>>> Stashed changes
 const SelectSeparator = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>
@@ -181,10 +215,14 @@ const SelectSeparator = React.forwardRef<
 ))
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Exporting all components for external use
 =======
 >>>>>>> origin/staging
+=======
+// Exporting all components for external use
+>>>>>>> Stashed changes
 export {
   Select,
   SelectGroup,

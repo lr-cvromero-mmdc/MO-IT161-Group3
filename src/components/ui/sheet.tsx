@@ -5,6 +5,7 @@ import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Sheet (similar to Dialog) component using Radix UI
 const Sheet = SheetPrimitive.Root
@@ -20,15 +21,25 @@ const SheetPortal = SheetPrimitive.Portal
 
 // Overlay for the sheet
 =======
+=======
+// Sheet (similar to Dialog) component using Radix UI
+>>>>>>> Stashed changes
 const Sheet = SheetPrimitive.Root
 
+// Trigger to open the sheet
 const SheetTrigger = SheetPrimitive.Trigger
 
+// Close button for the sheet
 const SheetClose = SheetPrimitive.Close
 
+// Portal for rendering the sheet in a different part of the DOM
 const SheetPortal = SheetPrimitive.Portal
 
+<<<<<<< Updated upstream
 >>>>>>> origin/staging
+=======
+// Overlay for the sheet
+>>>>>>> Stashed changes
 const SheetOverlay = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
@@ -44,10 +55,14 @@ const SheetOverlay = React.forwardRef<
 ))
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Variants for the sheet content based on the side it appears from
 =======
 >>>>>>> origin/staging
+=======
+// Variants for the sheet content based on the side it appears from
+>>>>>>> Stashed changes
 const sheetVariants = cva(
   "fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
   {
@@ -67,18 +82,26 @@ const sheetVariants = cva(
   }
 )
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Content of the sheet
 =======
 >>>>>>> origin/staging
+=======
+// Content of the sheet
+>>>>>>> Stashed changes
 interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
     VariantProps<typeof sheetVariants> {}
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Content component for the sheet
 =======
 >>>>>>> origin/staging
+=======
+// Content component for the sheet
+>>>>>>> Stashed changes
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps
@@ -100,10 +123,14 @@ const SheetContent = React.forwardRef<
 ))
 SheetContent.displayName = SheetPrimitive.Content.displayName
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Header for the sheet
 =======
 >>>>>>> origin/staging
+=======
+// Header for the sheet
+>>>>>>> Stashed changes
 const SheetHeader = ({
   className,
   ...props
@@ -118,10 +145,14 @@ const SheetHeader = ({
 )
 SheetHeader.displayName = "SheetHeader"
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Footer for the sheet
 =======
 >>>>>>> origin/staging
+=======
+// Footer for the sheet
+>>>>>>> Stashed changes
 const SheetFooter = ({
   className,
   ...props
@@ -136,10 +167,14 @@ const SheetFooter = ({
 )
 SheetFooter.displayName = "SheetFooter"
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Title for the sheet
 =======
 >>>>>>> origin/staging
+=======
+// Title for the sheet
+>>>>>>> Stashed changes
 const SheetTitle = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>
@@ -152,10 +187,14 @@ const SheetTitle = React.forwardRef<
 ))
 SheetTitle.displayName = SheetPrimitive.Title.displayName
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Description for the sheet
 =======
 >>>>>>> origin/staging
+=======
+// Description for the sheet
+>>>>>>> Stashed changes
 const SheetDescription = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description>
@@ -168,10 +207,14 @@ const SheetDescription = React.forwardRef<
 ))
 SheetDescription.displayName = SheetPrimitive.Description.displayName
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Exporting all the components for use in other parts of the application
 =======
 >>>>>>> origin/staging
+=======
+// Exporting all the components for use in other parts of the application
+>>>>>>> Stashed changes
 export {
   Sheet,
   SheetPortal,

@@ -7,10 +7,14 @@ import { About } from "@/pages/About"
 import { Services } from "@/pages/Services"
 import { Locations } from "@/pages/Locations"
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Main application component
 =======
 >>>>>>> origin/staging
+=======
+// Main application component
+>>>>>>> Stashed changes
 function App() {
   return (
     <div className="min-h-screen bg-white">
@@ -29,8 +33,12 @@ function App() {
   )
 }
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Exporting the App component as default
 =======
 >>>>>>> origin/staging
+=======
+// Exporting the App component as default
+>>>>>>> Stashed changes
 export default App

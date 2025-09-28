@@ -2,11 +2,16 @@ import { Link, useLocation } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Container } from "./Container"
 import { ChevronRight, Menu } from "lucide-react"
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 
 // Mobile menu (Sheet) components
 =======
 >>>>>>> origin/staging
+=======
+
+// Mobile menu (Sheet) components
+>>>>>>> Stashed changes
 import {
   Sheet,
   SheetContent,
@@ -15,16 +20,22 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 
 // React hooks
 import { useState, useEffect, useRef } from "react"
 
 // Navigation links data
+<<<<<<< Updated upstream
 =======
 import { useState, useEffect, useRef } from "react"
 
 >>>>>>> origin/staging
+=======
+>>>>>>> Stashed changes
 const navigation = [
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
@@ -33,10 +44,14 @@ const navigation = [
   { name: "Contact", href: "/#contact" },
 ]
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Header component
 =======
 >>>>>>> origin/staging
+=======
+// Header component
+>>>>>>> Stashed changes
 export function Header() {
   const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
@@ -91,14 +106,20 @@ export function Header() {
     }
   }, [isOpen])
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
   // Determine header classes based on scroll and route
   const isHomePage = location.pathname === '/'
   
   // Dynamic header classes
+<<<<<<< Updated upstream
 =======
   const isHomePage = location.pathname === '/'
 >>>>>>> origin/staging
+=======
+>>>>>>> Stashed changes
   const headerClasses = `sticky top-0 z-50 transition-all duration-300 ${
     isHomePage && !isScrolled 
       ? 'bg-transparent shadow-none' 

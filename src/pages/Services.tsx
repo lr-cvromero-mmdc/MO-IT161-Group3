@@ -6,10 +6,14 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ChevronRight, Search, Car, Shield, Award, Clock, Star, Filter, ShoppingCart, Package } from "lucide-react"
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Service categories for filtering
 =======
 >>>>>>> origin/staging
+=======
+// Service categories for filtering
+>>>>>>> Stashed changes
 const serviceCategories = [
   { value: "all", label: "All Services" },
   { value: "basic", label: "Basic Wash" },
@@ -19,10 +23,14 @@ const serviceCategories = [
   { value: "products", label: "Products" },
 ]
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Store products data
 =======
 >>>>>>> origin/staging
+=======
+// Store products data
+>>>>>>> Stashed changes
 const storeProducts = [
   {
     id: 1,
@@ -74,10 +82,14 @@ const storeProducts = [
   },
 ]
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Service offerings data
 =======
 >>>>>>> origin/staging
+=======
+// Service offerings data
+>>>>>>> Stashed changes
 const services = [
   {
     id: 1,
@@ -147,10 +159,14 @@ const services = [
   },
 ]
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Services page component
 =======
 >>>>>>> origin/staging
+=======
+// Services page component
+>>>>>>> Stashed changes
 export function Services() {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("all")

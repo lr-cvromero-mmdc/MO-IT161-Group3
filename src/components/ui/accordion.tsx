@@ -4,15 +4,21 @@ import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 // Accordion component using Radix UI
 const Accordion = AccordionPrimitive.Root
 
 // Accordion Item component
+<<<<<<< Updated upstream
 =======
 const Accordion = AccordionPrimitive.Root
 
 >>>>>>> origin/staging
+=======
+>>>>>>> Stashed changes
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
@@ -25,10 +31,14 @@ const AccordionItem = React.forwardRef<
 ))
 AccordionItem.displayName = "AccordionItem"
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Accordion Trigger component
 =======
 >>>>>>> origin/staging
+=======
+// Accordion Trigger component
+>>>>>>> Stashed changes
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
@@ -49,10 +59,14 @@ const AccordionTrigger = React.forwardRef<
 ))
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Accordion Content component
 =======
 >>>>>>> origin/staging
+=======
+// Accordion Content component
+>>>>>>> Stashed changes
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
@@ -66,13 +80,19 @@ const AccordionContent = React.forwardRef<
   </AccordionPrimitive.Content>
 ))
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 // Set display names for better debugging
 AccordionContent.displayName = AccordionPrimitive.Content.displayName
 
 // Export all components
+<<<<<<< Updated upstream
 =======
 AccordionContent.displayName = AccordionPrimitive.Content.displayName
 
 >>>>>>> origin/staging
+=======
+>>>>>>> Stashed changes
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }

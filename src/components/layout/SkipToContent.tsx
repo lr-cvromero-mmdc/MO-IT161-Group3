@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom"
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // SkipToContent component for accessibility
 =======
 >>>>>>> origin/staging
+=======
+// SkipToContent component for accessibility
+>>>>>>> Stashed changes
 export function SkipToContent() {
   return (
     <Link
