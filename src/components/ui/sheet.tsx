@@ -5,7 +5,6 @@ import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-// Sheet (similar to Dialog) component using Radix UI
 const Sheet = SheetPrimitive.Root
 
 // Trigger to open the sheet
@@ -17,7 +16,6 @@ const SheetClose = SheetPrimitive.Close
 // Portal for rendering the sheet in a different part of the DOM
 const SheetPortal = SheetPrimitive.Portal
 
-// Overlay for the sheet
 const SheetOverlay = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
@@ -33,7 +31,6 @@ const SheetOverlay = React.forwardRef<
 ))
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName
 
-// Variants for the sheet content based on the side it appears from
 const sheetVariants = cva(
   "fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
   {
@@ -53,12 +50,10 @@ const sheetVariants = cva(
   }
 )
 
-// Content of the sheet
 interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
     VariantProps<typeof sheetVariants> {}
 
-// Content component for the sheet
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps
@@ -80,7 +75,6 @@ const SheetContent = React.forwardRef<
 ))
 SheetContent.displayName = SheetPrimitive.Content.displayName
 
-// Header for the sheet
 const SheetHeader = ({
   className,
   ...props
@@ -95,7 +89,6 @@ const SheetHeader = ({
 )
 SheetHeader.displayName = "SheetHeader"
 
-// Footer for the sheet
 const SheetFooter = ({
   className,
   ...props
@@ -110,7 +103,6 @@ const SheetFooter = ({
 )
 SheetFooter.displayName = "SheetFooter"
 
-// Title for the sheet
 const SheetTitle = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>
@@ -123,7 +115,6 @@ const SheetTitle = React.forwardRef<
 ))
 SheetTitle.displayName = SheetPrimitive.Title.displayName
 
-// Description for the sheet
 const SheetDescription = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description>
@@ -136,7 +127,6 @@ const SheetDescription = React.forwardRef<
 ))
 SheetDescription.displayName = SheetPrimitive.Description.displayName
 
-// Exporting all the components for use in other parts of the application
 export {
   Sheet,
   SheetPortal,

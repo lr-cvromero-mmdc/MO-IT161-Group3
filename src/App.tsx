@@ -8,7 +8,6 @@ import { Services } from "@/pages/Services"
 import { Locations } from "@/pages/Locations"
 import { Contact } from "@/pages/Contact"
 
-// Main application component
 function App() {
   return (
     <div className="min-h-screen bg-white">
@@ -28,5 +27,4 @@ function App() {
   )
 }
 
-// Exporting the App component as default
 export default App

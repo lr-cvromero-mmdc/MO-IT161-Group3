@@ -5,7 +5,6 @@ import { ChevronRight, Star, Shield, Facebook, Instagram, MessageCircle, Phone, 
 import { Button } from "@/components/ui/button"
 import { PaymentLogo } from "@/components/ui/PaymentLogo"
 
-// Define footer links
 const footerLinks = {
   company: [
     { name: "About", href: "/about", scrollToTop: true },
@@ -19,20 +18,12 @@ const footerLinks = {
     { name: "Full Detailing", href: "/services#detailing", scrollToTop: true },
   ],
   support: [
-    { name: "Help & Support", href: "/contact", scrollToTop: true },
-    { name: "FAQs", href: "/services#faq", scrollToTop: true },
-    { name: "Call Us", href: "tel:+639171234567", scrollToTop: false },
+    { name: "Customer Feedback", href: "/#feedback" },
+    { name: "Franchising", href: "/#franchising" },
+    { name: "Join Our Team", href: "/#careers" },
   ],
 }
 
-// Define social links
-const socialLinks = [
-  { name: "Facebook", href: "https://facebook.com/espinosascarwash", icon: Facebook },
-  { name: "Instagram", href: "https://instagram.com/espinosascarwash", icon: Instagram },
-  { name: "TikTok", href: "https://tiktok.com/@espinosascarwash", icon: MessageCircle },
-]
-
-// Define payment methods
 const paymentMethods = [
   { name: "Visa", key: "visa" },
   { name: "MasterCard", key: "mastercard" },
@@ -41,7 +32,6 @@ const paymentMethods = [
   { name: "Maya", key: "maya" },
 ]
 
-// Footer Component
 export function Footer() {
   return (
     <footer className="bg-brand-dark text-white">

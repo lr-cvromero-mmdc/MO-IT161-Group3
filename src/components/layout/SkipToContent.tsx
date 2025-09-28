@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 
-// SkipToContent component for accessibility
 export function SkipToContent() {
   return (
     <Link

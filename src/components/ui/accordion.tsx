@@ -4,10 +4,8 @@ import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-// Accordion component using Radix UI
 const Accordion = AccordionPrimitive.Root
 
-// Accordion Item component
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
@@ -20,7 +18,6 @@ const AccordionItem = React.forwardRef<
 ))
 AccordionItem.displayName = "AccordionItem"
 
-// Accordion Trigger component
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
@@ -41,7 +38,6 @@ const AccordionTrigger = React.forwardRef<
 ))
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
 
-// Accordion Content component
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
@@ -55,8 +51,6 @@ const AccordionContent = React.forwardRef<
   </AccordionPrimitive.Content>
 ))
 
-// Set display names for better debugging
 AccordionContent.displayName = AccordionPrimitive.Content.displayName
 
-// Export all components
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }

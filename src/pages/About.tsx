@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ChevronRight, Star, Clock, Users, Car, Shield, Award, Heart, Hand } from "lucide-react"
 
-// Performance indicators displayed 
 const kpis = [
   {
     number: "120+",
@@ -27,7 +26,6 @@ const kpis = [
   },
 ]
 
-// Core business values
 const values = [
   {
     title: "Family-Owned",
@@ -51,7 +49,6 @@ const values = [
   },
 ]
 
-// About page component
 export function About() {
   return (
     <div className="min-h-screen bg-white">
