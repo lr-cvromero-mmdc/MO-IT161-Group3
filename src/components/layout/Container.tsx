@@ -1,10 +1,14 @@
 import { cn } from "@/lib/utils"
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Container component that centers its content and applies horizontal padding.
 =======
 >>>>>>> origin/staging
+=======
+// Container component that centers its content and applies horizontal padding.
+>>>>>>> Stashed changes
 =======
 // Container component that centers its content and applies horizontal padding.
 >>>>>>> Stashed changes

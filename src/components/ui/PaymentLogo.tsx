@@ -1,10 +1,14 @@
 import { cn } from "@/lib/utils"
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Props for PaymentLogo component
 =======
 >>>>>>> origin/staging
+=======
+// Props for PaymentLogo component
+>>>>>>> Stashed changes
 =======
 // Props for PaymentLogo component
 >>>>>>> Stashed changes
@@ -14,10 +18,14 @@ interface PaymentLogoProps {
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Component to display payment method logos with fallback to emoji
 =======
 >>>>>>> origin/staging
+=======
+// Component to display payment method logos with fallback to emoji
+>>>>>>> Stashed changes
 =======
 // Component to display payment method logos with fallback to emoji
 >>>>>>> Stashed changes
@@ -31,10 +39,14 @@ export function PaymentLogo({ name, className }: PaymentLogoProps) {
   }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
   //  Get the logo source based on the name prop
 =======
 >>>>>>> origin/staging
+=======
+  //  Get the logo source based on the name prop
+>>>>>>> Stashed changes
 =======
   //  Get the logo source based on the name prop
 >>>>>>> Stashed changes
@@ -57,10 +69,14 @@ export function PaymentLogo({ name, className }: PaymentLogoProps) {
   }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
   // Render the logo image
 =======
 >>>>>>> origin/staging
+=======
+  // Render the logo image
+>>>>>>> Stashed changes
 =======
   // Render the logo image
 >>>>>>> Stashed changes

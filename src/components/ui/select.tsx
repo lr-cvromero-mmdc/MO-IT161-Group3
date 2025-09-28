@@ -5,7 +5,10 @@ import { Check, ChevronDown, ChevronUp } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 // Select component using Radix UI
 const Select = SelectPrimitive.Root
 
@@ -16,6 +19,7 @@ const SelectGroup = SelectPrimitive.Group
 const SelectValue = SelectPrimitive.Value
 
 // Trigger button for the select
+<<<<<<< Updated upstream
 =======
 =======
 // Select component using Radix UI
@@ -32,6 +36,8 @@ const SelectValue = SelectPrimitive.Value
 >>>>>>> origin/staging
 =======
 // Trigger button for the select
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
@@ -54,10 +60,14 @@ const SelectTrigger = React.forwardRef<
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Scroll buttons for the select dropdown
 =======
 >>>>>>> origin/staging
+=======
+// Scroll buttons for the select dropdown
+>>>>>>> Stashed changes
 =======
 // Scroll buttons for the select dropdown
 >>>>>>> Stashed changes
@@ -79,10 +89,14 @@ const SelectScrollUpButton = React.forwardRef<
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Scroll down button for the select dropdown
 =======
 >>>>>>> origin/staging
+=======
+// Scroll down button for the select dropdown
+>>>>>>> Stashed changes
 =======
 // Scroll down button for the select dropdown
 >>>>>>> Stashed changes
@@ -105,10 +119,14 @@ SelectScrollDownButton.displayName =
   SelectPrimitive.ScrollDownButton.displayName
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Content component for the select dropdown
 =======
 >>>>>>> origin/staging
+=======
+// Content component for the select dropdown
+>>>>>>> Stashed changes
 =======
 // Content component for the select dropdown
 >>>>>>> Stashed changes
@@ -145,10 +163,14 @@ const SelectContent = React.forwardRef<
 SelectContent.displayName = SelectPrimitive.Content.displayName
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Label component for grouping items
 =======
 >>>>>>> origin/staging
+=======
+// Label component for grouping items
+>>>>>>> Stashed changes
 =======
 // Label component for grouping items
 >>>>>>> Stashed changes
@@ -165,10 +187,14 @@ const SelectLabel = React.forwardRef<
 SelectLabel.displayName = SelectPrimitive.Label.displayName
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Individual item component for the select dropdown
 =======
 >>>>>>> origin/staging
+=======
+// Individual item component for the select dropdown
+>>>>>>> Stashed changes
 =======
 // Individual item component for the select dropdown
 >>>>>>> Stashed changes
@@ -196,10 +222,14 @@ const SelectItem = React.forwardRef<
 SelectItem.displayName = SelectPrimitive.Item.displayName
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Separator component for dividing groups of items
 =======
 >>>>>>> origin/staging
+=======
+// Separator component for dividing groups of items
+>>>>>>> Stashed changes
 =======
 // Separator component for dividing groups of items
 >>>>>>> Stashed changes
@@ -216,10 +246,14 @@ const SelectSeparator = React.forwardRef<
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Exporting all components for external use
 =======
 >>>>>>> origin/staging
+=======
+// Exporting all components for external use
+>>>>>>> Stashed changes
 =======
 // Exporting all components for external use
 >>>>>>> Stashed changes

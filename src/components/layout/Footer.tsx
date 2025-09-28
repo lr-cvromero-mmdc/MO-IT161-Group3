@@ -5,10 +5,14 @@ import { Button } from "@/components/ui/button"
 import { PaymentLogo } from "@/components/ui/PaymentLogo"
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Define footer links
 =======
 >>>>>>> origin/staging
+=======
+// Define footer links
+>>>>>>> Stashed changes
 =======
 // Define footer links
 >>>>>>> Stashed changes
@@ -30,10 +34,14 @@ const footerLinks = {
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Define payment methods
 =======
 >>>>>>> origin/staging
+=======
+// Define payment methods
+>>>>>>> Stashed changes
 =======
 // Define payment methods
 >>>>>>> Stashed changes
@@ -46,10 +54,14 @@ const paymentMethods = [
 ]
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Footer Component
 =======
 >>>>>>> origin/staging
+=======
+// Footer Component
+>>>>>>> Stashed changes
 =======
 // Footer Component
 >>>>>>> Stashed changes

@@ -4,10 +4,14 @@ import { Card, CardContent } from "@/components/ui/card"
 import { ChevronRight, Star, Clock, Users, Car, Shield, Award, Heart, Hand } from "lucide-react"
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Performance indicators displayed 
 =======
 >>>>>>> origin/staging
+=======
+// Performance indicators displayed 
+>>>>>>> Stashed changes
 =======
 // Performance indicators displayed 
 >>>>>>> Stashed changes
@@ -35,10 +39,14 @@ const kpis = [
 ]
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Core business values
 =======
 >>>>>>> origin/staging
+=======
+// Core business values
+>>>>>>> Stashed changes
 =======
 // Core business values
 >>>>>>> Stashed changes
@@ -66,10 +74,14 @@ const values = [
 ]
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // About page component
 =======
 >>>>>>> origin/staging
+=======
+// About page component
+>>>>>>> Stashed changes
 =======
 // About page component
 >>>>>>> Stashed changes

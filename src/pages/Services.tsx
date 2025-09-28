@@ -7,10 +7,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ChevronRight, Search, Car, Shield, Award, Clock, Star, Filter, ShoppingCart, Package } from "lucide-react"
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Service categories for filtering
 =======
 >>>>>>> origin/staging
+=======
+// Service categories for filtering
+>>>>>>> Stashed changes
 =======
 // Service categories for filtering
 >>>>>>> Stashed changes
@@ -24,10 +28,14 @@ const serviceCategories = [
 ]
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Store products data
 =======
 >>>>>>> origin/staging
+=======
+// Store products data
+>>>>>>> Stashed changes
 =======
 // Store products data
 >>>>>>> Stashed changes
@@ -83,10 +91,14 @@ const storeProducts = [
 ]
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Service offerings data
 =======
 >>>>>>> origin/staging
+=======
+// Service offerings data
+>>>>>>> Stashed changes
 =======
 // Service offerings data
 >>>>>>> Stashed changes
@@ -160,10 +172,14 @@ const services = [
 ]
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Services page component
 =======
 >>>>>>> origin/staging
+=======
+// Services page component
+>>>>>>> Stashed changes
 =======
 // Services page component
 >>>>>>> Stashed changes

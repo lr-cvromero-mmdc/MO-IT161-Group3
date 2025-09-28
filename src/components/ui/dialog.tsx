@@ -5,7 +5,10 @@ import { X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 // Dialog component using Radix UI
 const Dialog = DialogPrimitive.Root
 
@@ -19,6 +22,7 @@ const DialogPortal = DialogPrimitive.Portal
 const DialogClose = DialogPrimitive.Close
 
 // Overlay component for the dialog background
+<<<<<<< Updated upstream
 =======
 =======
 // Dialog component using Radix UI
@@ -38,6 +42,8 @@ const DialogClose = DialogPrimitive.Close
 >>>>>>> origin/staging
 =======
 // Overlay component for the dialog background
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
@@ -55,10 +61,14 @@ const DialogOverlay = React.forwardRef<
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Content component for the dialog
 =======
 >>>>>>> origin/staging
+=======
+// Content component for the dialog
+>>>>>>> Stashed changes
 =======
 // Content component for the dialog
 >>>>>>> Stashed changes
@@ -87,10 +97,14 @@ const DialogContent = React.forwardRef<
 DialogContent.displayName = DialogPrimitive.Content.displayName
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Header component for the dialog
 =======
 >>>>>>> origin/staging
+=======
+// Header component for the dialog
+>>>>>>> Stashed changes
 =======
 // Header component for the dialog
 >>>>>>> Stashed changes
@@ -109,10 +123,14 @@ const DialogHeader = ({
 DialogHeader.displayName = "DialogHeader"
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Footer component for the dialog
 =======
 >>>>>>> origin/staging
+=======
+// Footer component for the dialog
+>>>>>>> Stashed changes
 =======
 // Footer component for the dialog
 >>>>>>> Stashed changes
@@ -131,10 +149,14 @@ const DialogFooter = ({
 DialogFooter.displayName = "DialogFooter"
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Title component for the dialog
 =======
 >>>>>>> origin/staging
+=======
+// Title component for the dialog
+>>>>>>> Stashed changes
 =======
 // Title component for the dialog
 >>>>>>> Stashed changes
@@ -154,10 +176,14 @@ const DialogTitle = React.forwardRef<
 DialogTitle.displayName = DialogPrimitive.Title.displayName
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Description component for the dialog
 =======
 >>>>>>> origin/staging
+=======
+// Description component for the dialog
+>>>>>>> Stashed changes
 =======
 // Description component for the dialog
 >>>>>>> Stashed changes
@@ -174,10 +200,14 @@ const DialogDescription = React.forwardRef<
 DialogDescription.displayName = DialogPrimitive.Description.displayName
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Exporting all dialog components
 =======
 >>>>>>> origin/staging
+=======
+// Exporting all dialog components
+>>>>>>> Stashed changes
 =======
 // Exporting all dialog components
 >>>>>>> Stashed changes

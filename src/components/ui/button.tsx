@@ -5,10 +5,14 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Button component using Radix UI
 =======
 >>>>>>> origin/staging
+=======
+// Button component using Radix UI
+>>>>>>> Stashed changes
 =======
 // Button component using Radix UI
 >>>>>>> Stashed changes
@@ -42,10 +46,14 @@ const buttonVariants = cva(
 )
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Button props interface
 =======
 >>>>>>> origin/staging
+=======
+// Button props interface
+>>>>>>> Stashed changes
 =======
 // Button props interface
 >>>>>>> Stashed changes
@@ -56,10 +64,14 @@ export interface ButtonProps
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Button component definition
 =======
 >>>>>>> origin/staging
+=======
+// Button component definition
+>>>>>>> Stashed changes
 =======
 // Button component definition
 >>>>>>> Stashed changes
@@ -78,10 +90,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button"
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // Exporting Button and buttonVariants
 =======
 >>>>>>> origin/staging
+=======
+// Exporting Button and buttonVariants
+>>>>>>> Stashed changes
 =======
 // Exporting Button and buttonVariants
 >>>>>>> Stashed changes
