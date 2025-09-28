@@ -3,7 +3,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ChevronRight, Star, Clock, Users, Car, Shield, Award, Heart, Hand } from "lucide-react"
 
+<<<<<<< HEAD
 // Performance indicators displayed 
+=======
+>>>>>>> origin/staging
 const kpis = [
   {
     number: "120+",
@@ -27,7 +30,10 @@ const kpis = [
   },
 ]
 
+<<<<<<< HEAD
 // Core business values
+=======
+>>>>>>> origin/staging
 const values = [
   {
     title: "Family-Owned",
@@ -51,7 +57,10 @@ const values = [
   },
 ]
 
+<<<<<<< HEAD
 // About page component
+=======
+>>>>>>> origin/staging
 export function About() {
   return (
     <div className="min-h-screen bg-white">

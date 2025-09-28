@@ -4,7 +4,10 @@ import { ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PaymentLogo } from "@/components/ui/PaymentLogo"
 
+<<<<<<< HEAD
 // Define footer links
+=======
+>>>>>>> origin/staging
 const footerLinks = {
   company: [
     { name: "About", href: "/about" },
@@ -22,7 +25,10 @@ const footerLinks = {
   ],
 }
 
+<<<<<<< HEAD
 // Define payment methods
+=======
+>>>>>>> origin/staging
 const paymentMethods = [
   { name: "Visa", key: "visa" },
   { name: "MasterCard", key: "mastercard" },
@@ -31,7 +37,10 @@ const paymentMethods = [
   { name: "Maya", key: "maya" },
 ]
 
+<<<<<<< HEAD
 // Footer Component
+=======
+>>>>>>> origin/staging
 export function Footer() {
   return (
     <footer className="bg-brand-dark text-white">

@@ -2,7 +2,10 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+<<<<<<< HEAD
 // Card container with border, background, and shadow
+=======
+>>>>>>> origin/staging
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -18,7 +21,10 @@ const Card = React.forwardRef<
 ))
 Card.displayName = "Card"
 
+<<<<<<< HEAD
 // Header section with vertical spacing
+=======
+>>>>>>> origin/staging
 const CardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -31,7 +37,10 @@ const CardHeader = React.forwardRef<
 ))
 CardHeader.displayName = "CardHeader"
 
+<<<<<<< HEAD
 //Title text, styled as a heading
+=======
+>>>>>>> origin/staging
 const CardTitle = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLHeadingElement>
@@ -47,7 +56,10 @@ const CardTitle = React.forwardRef<
 ))
 CardTitle.displayName = "CardTitle"
 
+<<<<<<< HEAD
 // Description text below the title
+=======
+>>>>>>> origin/staging
 const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
@@ -60,7 +72,10 @@ const CardDescription = React.forwardRef<
 ))
 CardDescription.displayName = "CardDescription"
 
+<<<<<<< HEAD
 // Main content area
+=======
+>>>>>>> origin/staging
 const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -69,7 +84,10 @@ const CardContent = React.forwardRef<
 ))
 CardContent.displayName = "CardContent"
 
+<<<<<<< HEAD
 // Footer section with padding
+=======
+>>>>>>> origin/staging
 const CardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -82,5 +100,8 @@ const CardFooter = React.forwardRef<
 ))
 CardFooter.displayName = "CardFooter"
 
+<<<<<<< HEAD
 // Export all card components
+=======
+>>>>>>> origin/staging
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }

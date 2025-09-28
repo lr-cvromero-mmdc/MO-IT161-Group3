@@ -7,7 +7,10 @@ import { About } from "@/pages/About"
 import { Services } from "@/pages/Services"
 import { Locations } from "@/pages/Locations"
 
+<<<<<<< HEAD
 // Main application component
+=======
+>>>>>>> origin/staging
 function App() {
   return (
     <div className="min-h-screen bg-white">
@@ -26,5 +29,8 @@ function App() {
   )
 }
 
+<<<<<<< HEAD
 // Exporting the App component as default
+=======
+>>>>>>> origin/staging
 export default App

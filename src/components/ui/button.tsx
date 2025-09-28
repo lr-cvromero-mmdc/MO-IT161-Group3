@@ -4,7 +4,10 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
+<<<<<<< HEAD
 // Button component using Radix UI
+=======
+>>>>>>> origin/staging
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
@@ -34,14 +37,20 @@ const buttonVariants = cva(
   }
 )
 
+<<<<<<< HEAD
 // Button props interface
+=======
+>>>>>>> origin/staging
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
+<<<<<<< HEAD
 // Button component definition
+=======
+>>>>>>> origin/staging
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
@@ -56,5 +65,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 )
 Button.displayName = "Button"
 
+<<<<<<< HEAD
 // Exporting Button and buttonVariants
+=======
+>>>>>>> origin/staging
 export { Button, buttonVariants }

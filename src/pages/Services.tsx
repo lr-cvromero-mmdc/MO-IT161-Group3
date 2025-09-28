@@ -6,7 +6,10 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ChevronRight, Search, Car, Shield, Award, Clock, Star, Filter, ShoppingCart, Package } from "lucide-react"
 
+<<<<<<< HEAD
 // Service categories for filtering
+=======
+>>>>>>> origin/staging
 const serviceCategories = [
   { value: "all", label: "All Services" },
   { value: "basic", label: "Basic Wash" },
@@ -16,7 +19,10 @@ const serviceCategories = [
   { value: "products", label: "Products" },
 ]
 
+<<<<<<< HEAD
 // Store products data
+=======
+>>>>>>> origin/staging
 const storeProducts = [
   {
     id: 1,
@@ -68,7 +74,10 @@ const storeProducts = [
   },
 ]
 
+<<<<<<< HEAD
 // Service offerings data
+=======
+>>>>>>> origin/staging
 const services = [
   {
     id: 1,
@@ -138,7 +147,10 @@ const services = [
   },
 ]
 
+<<<<<<< HEAD
 // Services page component
+=======
+>>>>>>> origin/staging
 export function Services() {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("all")

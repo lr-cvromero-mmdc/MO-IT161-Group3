@@ -6,7 +6,10 @@ import { Input } from "@/components/ui/input"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { ChevronRight, Car, Shield, Award, Search, MapPin, MapPin as Location, ShoppingCart, Calendar, Star, Hand, CreditCard, CheckCircle } from "lucide-react"
 
+<<<<<<< HEAD
 // Service offerings for car wash
+=======
+>>>>>>> origin/staging
 const services = [
   {
     title: "Basic Wash",
@@ -31,7 +34,10 @@ const services = [
   },
 ]
 
+<<<<<<< HEAD
 // Steps to book a car wash online
+=======
+>>>>>>> origin/staging
 const bookingSteps = [
   {
     icon: Location,
@@ -55,7 +61,10 @@ const bookingSteps = [
   }
 ]
 
+<<<<<<< HEAD
 // Products available in the store
+=======
+>>>>>>> origin/staging
 const storeProducts = [
   {
     id: 1,
@@ -107,7 +116,10 @@ const storeProducts = [
   },
 ]
 
+<<<<<<< HEAD
 // Customer testimonials
+=======
+>>>>>>> origin/staging
 const testimonials = [
   {
     id: 1,
@@ -126,7 +138,10 @@ const testimonials = [
   }
 ]
 
+<<<<<<< HEAD
 // Quality features of the car wash service
+=======
+>>>>>>> origin/staging
 const qualityFeatures = [
   {
     icon: Hand,
@@ -151,7 +166,10 @@ const qualityFeatures = [
 ]
 
 
+<<<<<<< HEAD
 // Frequently Asked Questions
+=======
+>>>>>>> origin/staging
 const faqs = [
   {
     question: "Do you charge extra for SUVs?",
@@ -179,7 +197,10 @@ const faqs = [
   },
 ]
 
+<<<<<<< HEAD
 // Home page component
+=======
+>>>>>>> origin/staging
 export function Home() {
   return (
     <div className="min-h-screen">
