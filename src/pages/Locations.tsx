@@ -1,7 +1,15 @@
+// Locations page - Branch locations with contact details and payment methods
 import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { MapPin, Clock, Phone, CreditCard, Smartphone, QrCode } from "lucide-react"
+import { 
+  MapPin, 
+  Clock, 
+  Phone, 
+  CreditCard, 
+  Smartphone, 
+  QrCode 
+} from "lucide-react"
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream

@@ -1,10 +1,25 @@
+// Home page - Professional car wash services with real images and modern design
 import { Link } from "react-router-dom"
 import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { ChevronRight, Car, Shield, Award, Search, MapPin, MapPin as Location, ShoppingCart, Calendar, Star, Hand, CreditCard, CheckCircle } from "lucide-react"
+import { 
+  ChevronRight, 
+  Car, 
+  Shield, 
+  Award, 
+  Search, 
+  MapPin, 
+  MapPin as Location, 
+  ShoppingCart, 
+  Calendar, 
+  Star, 
+  Hand, 
+  CreditCard, 
+  CheckCircle 
+} from "lucide-react"
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -262,18 +277,14 @@ export function Home() {
     <div className="min-h-screen">
           {/* Hero Section */}
           <section className="relative bg-brand-dark text-white py-20 min-h-[600px] overflow-hidden">
-            {/* Background Video/Image Placeholder */}
+            {/* Background Image */}
             <div className="absolute inset-0 z-0">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary/20 to-brand-dark/80 flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div className="w-20 h-20 bg-neutral-700/50 rounded-full flex items-center justify-center mx-auto">
-                    <MapPin className="h-10 w-10 text-neutral-400" />
-                  </div>
-                  <p className="text-neutral-400 text-lg font-medium tracking-wider uppercase">
-                    VIDEO PLACEHOLDER
-                  </p>
-                </div>
-              </div>
+              <img 
+                src="/src/assets/images/services/hero-background.jpg" 
+                alt="Professional car wash service background"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/40 to-brand-dark/70"></div>
             </div>
 
             {/* Content Overlay */}
@@ -325,8 +336,8 @@ export function Home() {
                     size="lg"
                     className="bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold text-lg px-8 py-4 focus-ring rounded-lg"
                   >
-                    <Link to="/#book-now" className="flex items-center gap-2">
-                      Book Now
+                    <Link to="/services" onClick={() => window.scrollTo(0, 0)} className="flex items-center gap-2">
+                    Book Now
                       <ChevronRight className="h-5 w-5" />
                     </Link>
                   </Button>
@@ -339,12 +350,14 @@ export function Home() {
       <section className="py-20 bg-neutral-100">
         <Container>
           <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Column - Video/Image Placeholder */}
+            {/* Left Column - About Image */}
             <div className="col-span-12 lg:col-span-6">
-              <div className="bg-brand-dark rounded-2xl h-80 lg:h-96 flex items-center justify-center">
-                <p className="text-white text-lg font-medium tracking-wider uppercase">
-                  VIDEO/IMAGE PLACEHOLDER
-                </p>
+              <div className="rounded-2xl h-80 lg:h-96 overflow-hidden">
+                <img 
+                  src="/src/assets/images/services/full-detailing.jpg" 
+                  alt="Professional car detailing service"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
 
@@ -402,11 +415,19 @@ export function Home() {
           <div className="grid grid-cols-12 gap-6 md:gap-8">
             {services.map((service) => (
               <Card key={service.title} className="col-span-12 md:col-span-4 bg-white rounded-2xl shadow-lg border-0 overflow-hidden group hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
-                {/* Image Placeholder */}
-                <div className="h-48 bg-brand-dark flex items-center justify-center">
-                  <p className="text-white text-sm font-medium tracking-wider uppercase">
-                    IMAGE PLACEHOLDER
-                  </p>
+                {/* Service Image */}
+                <div className="h-48 bg-brand-dark overflow-hidden">
+                  <img 
+                    src={
+                      service.title === "Basic Wash" ? "/src/assets/images/services/basic-wash.jpg" :
+                      service.title === "Premium Wash" ? "/src/assets/images/services/premium-wash.jpg" :
+                      service.title === "Full Detailing" ? "/src/assets/images/services/full-detailing.jpg" :
+                      "/src/assets/images/services/basic-wash.jpg"
+                    }
+                    alt={`Professional ${service.title.toLowerCase()} service`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
                 </div>
                 
                 <CardContent className="p-6">
@@ -435,8 +456,8 @@ export function Home() {
                     asChild
                     className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold py-3 rounded-lg focus-ring"
                   >
-                    <Link to="/#book-now">
-                      Select
+                    <Link to="/services" onClick={() => window.scrollTo(0, 0)}>
+                    Select
                     </Link>
                   </Button>
                 </CardContent>
@@ -466,11 +487,22 @@ export function Home() {
           <div className="grid grid-cols-12 gap-6 md:gap-8">
             {storeProducts.slice(0, 4).map((product) => (
               <Card key={product.id} className="col-span-12 md:col-span-6 lg:col-span-3 bg-white rounded-2xl shadow-lg border-0 overflow-hidden group hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
-                {/* Image Placeholder */}
-                <div className="h-48 bg-brand-dark flex items-center justify-center">
-                  <p className="text-white text-sm font-medium tracking-wider uppercase">
-                    IMAGE PLACEHOLDER
-                  </p>
+                {/* Product Image */}
+                <div className="h-48 bg-white overflow-hidden flex items-center justify-center p-4">
+                  <img 
+                    src={
+                      product.name.includes("Shampoo") ? "/src/assets/images/products/car-shampoo.png" :
+                      product.name.includes("Microfiber") ? "/src/assets/images/products/microfiber-towel.png" :
+                      product.name.includes("Wax") ? "/src/assets/images/products/car-wax.png" :
+                      product.name.includes("Tire") ? "/src/assets/images/products/tire-gel.png" :
+                      product.name.includes("Interior") ? "/src/assets/images/products/interior-cleaner.png" :
+                      product.name.includes("Brush") ? "/src/assets/images/products/wheel-brush.png" :
+                      "/src/assets/images/products/car-shampoo.png"
+                    }
+                    alt={product.name}
+                    className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
                 </div>
                 
                 <CardContent className="p-6">
@@ -491,8 +523,8 @@ export function Home() {
                       variant="outline"
                       className="border-neutral-300 text-brand-dark hover:bg-neutral-50 focus-ring rounded-lg"
                     >
-                      <Link to="/services">
-                        Add
+                      <Link to="/services" onClick={() => window.scrollTo(0, 0)}>
+                      Add
                       </Link>
                     </Button>
                   </div>
@@ -583,8 +615,8 @@ export function Home() {
               size="lg"
               className="bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold text-lg px-8 py-4 focus-ring"
             >
-              <Link to="/#book-now">
-                Claim Your Discount
+              <Link to="/services" onClick={() => window.scrollTo(0, 0)}>
+              Claim Your Discount
               </Link>
             </Button>
           </div>
@@ -642,10 +674,12 @@ export function Home() {
           <div className="grid grid-cols-12 gap-6 md:gap-8">
             {/* Customer Feedback */}
             <Card className="col-span-12 md:col-span-4 bg-brand-dark rounded-2xl overflow-hidden group hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
-              <div className="h-48 bg-brand-dark flex items-center justify-center">
-                <p className="text-white text-sm font-medium tracking-wider uppercase">
-                  IMAGE PLACEHOLDER
-                </p>
+              <div className="h-48 bg-brand-dark overflow-hidden">
+                <img 
+                  src="/src/assets/images/services/premium-wash.jpg" 
+                  alt="Customer feedback and testimonials"
+                  className="w-full h-full object-cover opacity-80"
+                />
               </div>
               <CardContent className="p-8 text-center">
                 <h4 className="text-xl font-bold text-white mb-4">Customer Feedback</h4>
@@ -656,8 +690,8 @@ export function Home() {
                   asChild
                   className="w-full bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold focus-ring rounded-lg"
                 >
-                  <Link to="/#contact">
-                    Submit Now
+                  <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
+                  Submit Now
                   </Link>
                 </Button>
               </CardContent>
@@ -665,10 +699,12 @@ export function Home() {
 
             {/* Franchising */}
             <Card className="col-span-12 md:col-span-4 bg-brand-dark rounded-2xl overflow-hidden group hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
-              <div className="h-48 bg-brand-dark flex items-center justify-center">
-                <p className="text-white text-sm font-medium tracking-wider uppercase">
-                  IMAGE PLACEHOLDER
-                </p>
+            <div className="h-48 bg-brand-dark overflow-hidden">
+                <img 
+                  src="/src/assets/images/services/full-detailing.jpg" 
+                  alt="Franchising opportunities"
+                  className="w-full h-full object-cover opacity-80"
+                />
               </div>
               <CardContent className="p-8 text-center">
                 <h4 className="text-xl font-bold text-white mb-4">Franchising</h4>
@@ -679,8 +715,8 @@ export function Home() {
                   asChild
                   className="w-full bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold focus-ring rounded-lg"
                 >
-                  <Link to="/#contact">
-                    Inquire Now
+                  <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
+                  Inquire Now
                   </Link>
                 </Button>
               </CardContent>
@@ -688,10 +724,12 @@ export function Home() {
 
             {/* Join Our Team */}
             <Card className="col-span-12 md:col-span-4 bg-brand-dark rounded-2xl overflow-hidden group hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
-              <div className="h-48 bg-brand-dark flex items-center justify-center">
-                <p className="text-white text-sm font-medium tracking-wider uppercase">
-                  IMAGE PLACEHOLDER
-                </p>
+            <div className="h-48 bg-brand-dark overflow-hidden">
+                <img 
+                  src="/src/assets/images/services/basic-wash.jpg" 
+                  alt="Join our team opportunities"
+                  className="w-full h-full object-cover opacity-80"
+                />
               </div>
               <CardContent className="p-8 text-center">
                 <h4 className="text-xl font-bold text-white mb-4">Join Our Team</h4>
@@ -702,8 +740,8 @@ export function Home() {
                   asChild
                   className="w-full bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold focus-ring rounded-lg"
                 >
-                  <Link to="/#contact">
-                    Inquire Now
+                  <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
+                  Inquire Now
                   </Link>
                 </Button>
               </CardContent>
@@ -734,43 +772,6 @@ export function Home() {
                   </p>
                 </Card>
               ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Contact CTA */}
-      <section className="bg-brand-dark text-white py-20">
-        <Container>
-          <div className="grid grid-cols-12">
-            <div className="col-span-12 lg:col-start-3 lg:col-span-8 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Ready to Book Your Car Wash?
-              </h2>
-              <p className="text-lg md:text-xl text-neutral-300 mb-8">
-                Join thousands of satisfied customers who trust us with their vehicles.
-              </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold text-lg px-8 py-4 focus-ring"
-              >
-                <Link to="/#book-now">
-                  Book Now
-                </Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="border-brand-cream text-brand-cream hover:bg-brand-cream hover:text-brand-dark font-semibold text-lg px-8 py-4 focus-ring"
-              >
-                <Link to="/locations">
-                  See Locations
-                </Link>
-              </Button>
-            </div>
             </div>
           </div>
         </Container>
