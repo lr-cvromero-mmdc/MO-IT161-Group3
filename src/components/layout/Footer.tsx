@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { PaymentLogo } from "@/components/ui/PaymentLogo"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Define footer links
 =======
 <<<<<<< Updated upstream
@@ -20,6 +21,9 @@ import { PaymentLogo } from "@/components/ui/PaymentLogo"
 // Define footer links
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Define footer links
+>>>>>>> origin/main
 const footerLinks = {
   company: [
     { name: "About", href: "/about" },
@@ -38,6 +42,7 @@ const footerLinks = {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Define payment methods
 =======
 <<<<<<< Updated upstream
@@ -53,6 +58,9 @@ const footerLinks = {
 // Define payment methods
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Define payment methods
+>>>>>>> origin/main
 const paymentMethods = [
   { name: "Visa", key: "visa" },
   { name: "MasterCard", key: "mastercard" },
@@ -62,6 +70,7 @@ const paymentMethods = [
 ]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Footer Component
 =======
 <<<<<<< Updated upstream
@@ -77,6 +86,9 @@ const paymentMethods = [
 // Footer Component
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Footer Component
+>>>>>>> origin/main
 export function Footer() {
   return (
     <footer className="bg-brand-dark text-white">

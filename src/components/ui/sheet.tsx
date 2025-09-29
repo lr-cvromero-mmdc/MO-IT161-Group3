@@ -6,6 +6,7 @@ import { X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -13,6 +14,8 @@ import { cn } from "@/lib/utils"
 =======
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+>>>>>>> origin/main
 // Sheet (similar to Dialog) component using Radix UI
 const Sheet = SheetPrimitive.Root
 
@@ -26,6 +29,7 @@ const SheetClose = SheetPrimitive.Close
 const SheetPortal = SheetPrimitive.Portal
 
 // Overlay for the sheet
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< Updated upstream
@@ -52,6 +56,8 @@ const SheetPortal = SheetPrimitive.Portal
 =======
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+>>>>>>> origin/main
 const SheetOverlay = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
@@ -68,6 +74,7 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Variants for the sheet content based on the side it appears from
 =======
 <<<<<<< Updated upstream
@@ -83,6 +90,9 @@ SheetOverlay.displayName = SheetPrimitive.Overlay.displayName
 // Variants for the sheet content based on the side it appears from
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Variants for the sheet content based on the side it appears from
+>>>>>>> origin/main
 const sheetVariants = cva(
   "fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
   {
@@ -103,6 +113,7 @@ const sheetVariants = cva(
 )
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Content of the sheet
 =======
 <<<<<<< Updated upstream
@@ -118,11 +129,15 @@ const sheetVariants = cva(
 // Content of the sheet
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Content of the sheet
+>>>>>>> origin/main
 interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
     VariantProps<typeof sheetVariants> {}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Content component for the sheet
 =======
 <<<<<<< Updated upstream
@@ -138,6 +153,9 @@ interface SheetContentProps
 // Content component for the sheet
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Content component for the sheet
+>>>>>>> origin/main
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps
@@ -160,6 +178,7 @@ const SheetContent = React.forwardRef<
 SheetContent.displayName = SheetPrimitive.Content.displayName
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Header for the sheet
 =======
 <<<<<<< Updated upstream
@@ -175,6 +194,9 @@ SheetContent.displayName = SheetPrimitive.Content.displayName
 // Header for the sheet
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Header for the sheet
+>>>>>>> origin/main
 const SheetHeader = ({
   className,
   ...props
@@ -190,6 +212,7 @@ const SheetHeader = ({
 SheetHeader.displayName = "SheetHeader"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Footer for the sheet
 =======
 <<<<<<< Updated upstream
@@ -205,6 +228,9 @@ SheetHeader.displayName = "SheetHeader"
 // Footer for the sheet
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Footer for the sheet
+>>>>>>> origin/main
 const SheetFooter = ({
   className,
   ...props
@@ -220,6 +246,7 @@ const SheetFooter = ({
 SheetFooter.displayName = "SheetFooter"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Title for the sheet
 =======
 <<<<<<< Updated upstream
@@ -235,6 +262,9 @@ SheetFooter.displayName = "SheetFooter"
 // Title for the sheet
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Title for the sheet
+>>>>>>> origin/main
 const SheetTitle = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>
@@ -248,6 +278,7 @@ const SheetTitle = React.forwardRef<
 SheetTitle.displayName = SheetPrimitive.Title.displayName
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Description for the sheet
 =======
 <<<<<<< Updated upstream
@@ -263,6 +294,9 @@ SheetTitle.displayName = SheetPrimitive.Title.displayName
 // Description for the sheet
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Description for the sheet
+>>>>>>> origin/main
 const SheetDescription = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description>
@@ -276,6 +310,7 @@ const SheetDescription = React.forwardRef<
 SheetDescription.displayName = SheetPrimitive.Description.displayName
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Exporting all the components for use in other parts of the application
 =======
 <<<<<<< Updated upstream
@@ -291,6 +326,9 @@ SheetDescription.displayName = SheetPrimitive.Description.displayName
 // Exporting all the components for use in other parts of the application
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Exporting all the components for use in other parts of the application
+>>>>>>> origin/main
 export {
   Sheet,
   SheetPortal,

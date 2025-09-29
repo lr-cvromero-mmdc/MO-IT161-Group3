@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Container } from "./Container"
 import { ChevronRight, Menu } from "lucide-react"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 // Mobile menu (Sheet) components
 =======
@@ -22,6 +23,10 @@ import { ChevronRight, Menu } from "lucide-react"
 // Mobile menu (Sheet) components
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+
+// Mobile menu (Sheet) components
+>>>>>>> origin/main
 import {
   Sheet,
   SheetContent,
@@ -31,6 +36,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -40,11 +46,14 @@ import {
 =======
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+>>>>>>> origin/main
 
 // React hooks
 import { useState, useEffect, useRef } from "react"
 
 // Navigation links data
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< Updated upstream
@@ -58,6 +67,8 @@ import { useState, useEffect, useRef } from "react"
 =======
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+>>>>>>> origin/main
 const navigation = [
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
@@ -67,6 +78,7 @@ const navigation = [
 ]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Header component
 =======
 <<<<<<< Updated upstream
@@ -82,6 +94,9 @@ const navigation = [
 // Header component
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Header component
+>>>>>>> origin/main
 export function Header() {
   const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
@@ -137,6 +152,7 @@ export function Header() {
   }, [isOpen])
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -146,10 +162,13 @@ export function Header() {
 =======
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+>>>>>>> origin/main
   // Determine header classes based on scroll and route
   const isHomePage = location.pathname === '/'
   
   // Dynamic header classes
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< Updated upstream
@@ -162,6 +181,8 @@ export function Header() {
 =======
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+>>>>>>> origin/main
   const headerClasses = `sticky top-0 z-50 transition-all duration-300 ${
     isHomePage && !isScrolled 
       ? 'bg-transparent shadow-none' 
