@@ -1,4 +1,4 @@
-// Contact page - New page with mobile-first design, one-tap actions, and trust-building elements
+// Contact page - Mobile-first design with one-tap actions and trust-building elements
 import { useState } from "react"
 import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"

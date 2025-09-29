@@ -1,8 +1,28 @@
+// Locations page - Branch locations with contact details and payment methods
 import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { MapPin, Clock, Phone, CreditCard, Smartphone, QrCode } from "lucide-react"
+import { 
+  MapPin, 
+  Clock, 
+  Phone, 
+  CreditCard, 
+  Smartphone, 
+  QrCode 
+} from "lucide-react"
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// List of Espinosa's branch locations with contact and payment details
+=======
+>>>>>>> origin/staging
+=======
+// List of Espinosa's branch locations with contact and payment details
+>>>>>>> Stashed changes
+=======
+// List of Espinosa's branch locations with contact and payment details
+>>>>>>> Stashed changes
 const locations = [
   {
     name: "Espinosa's Main Branch",
@@ -30,6 +50,18 @@ const locations = [
   },
 ]
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+//
+=======
+>>>>>>> origin/staging
+=======
+//
+>>>>>>> Stashed changes
+=======
+//
+>>>>>>> Stashed changes
 const paymentMethods = [
   { name: "Visa", icon: CreditCard, color: "text-blue-600" },
   { name: "Mastercard", icon: CreditCard, color: "text-red-600" },
@@ -37,6 +69,18 @@ const paymentMethods = [
   { name: "QR Ph", icon: QrCode, color: "text-green-600" },
 ]
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Card component to display individual location details
+=======
+>>>>>>> origin/staging
+=======
+// Card component to display individual location details
+>>>>>>> Stashed changes
+=======
+// Card component to display individual location details
+>>>>>>> Stashed changes
 function LocationCard({ location }: { location: typeof locations[0] }) {
   return (
     <Card className="h-full hover:shadow-lg transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
@@ -123,6 +167,18 @@ function LocationCard({ location }: { location: typeof locations[0] }) {
   )
 }
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Locations page component
+=======
+>>>>>>> origin/staging
+=======
+// Locations page component
+>>>>>>> Stashed changes
+=======
+// Locations page component
+>>>>>>> Stashed changes
 export function Locations() {
   return (
     <div className="min-h-screen bg-white">

@@ -6,8 +6,19 @@ import { Home } from "@/pages/Home"
 import { About } from "@/pages/About"
 import { Services } from "@/pages/Services"
 import { Locations } from "@/pages/Locations"
-import { Contact } from "@/pages/Contact"
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Main application component
+=======
+>>>>>>> origin/staging
+=======
+// Main application component
+>>>>>>> Stashed changes
+=======
+// Main application component
+>>>>>>> Stashed changes
 function App() {
   return (
     <div className="min-h-screen bg-white">
@@ -19,7 +30,6 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/locations" element={<Locations />} />
-          <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
       <Footer />
@@ -27,4 +37,16 @@ function App() {
   )
 }
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Exporting the App component as default
+=======
+>>>>>>> origin/staging
+=======
+// Exporting the App component as default
+>>>>>>> Stashed changes
+=======
+// Exporting the App component as default
+>>>>>>> Stashed changes
 export default App

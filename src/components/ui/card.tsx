@@ -2,6 +2,18 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Card container with border, background, and shadow
+=======
+>>>>>>> origin/staging
+=======
+// Card container with border, background, and shadow
+>>>>>>> Stashed changes
+=======
+// Card container with border, background, and shadow
+>>>>>>> Stashed changes
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -17,6 +29,18 @@ const Card = React.forwardRef<
 ))
 Card.displayName = "Card"
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Header section with vertical spacing
+=======
+>>>>>>> origin/staging
+=======
+// Header section with vertical spacing
+>>>>>>> Stashed changes
+=======
+// Header section with vertical spacing
+>>>>>>> Stashed changes
 const CardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -29,6 +53,18 @@ const CardHeader = React.forwardRef<
 ))
 CardHeader.displayName = "CardHeader"
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+//Title text, styled as a heading
+=======
+>>>>>>> origin/staging
+=======
+//Title text, styled as a heading
+>>>>>>> Stashed changes
+=======
+//Title text, styled as a heading
+>>>>>>> Stashed changes
 const CardTitle = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLHeadingElement>
@@ -44,6 +80,18 @@ const CardTitle = React.forwardRef<
 ))
 CardTitle.displayName = "CardTitle"
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Description text below the title
+=======
+>>>>>>> origin/staging
+=======
+// Description text below the title
+>>>>>>> Stashed changes
+=======
+// Description text below the title
+>>>>>>> Stashed changes
 const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
@@ -56,6 +104,18 @@ const CardDescription = React.forwardRef<
 ))
 CardDescription.displayName = "CardDescription"
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Main content area
+=======
+>>>>>>> origin/staging
+=======
+// Main content area
+>>>>>>> Stashed changes
+=======
+// Main content area
+>>>>>>> Stashed changes
 const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -64,6 +124,18 @@ const CardContent = React.forwardRef<
 ))
 CardContent.displayName = "CardContent"
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Footer section with padding
+=======
+>>>>>>> origin/staging
+=======
+// Footer section with padding
+>>>>>>> Stashed changes
+=======
+// Footer section with padding
+>>>>>>> Stashed changes
 const CardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -76,4 +148,16 @@ const CardFooter = React.forwardRef<
 ))
 CardFooter.displayName = "CardFooter"
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Export all card components
+=======
+>>>>>>> origin/staging
+=======
+// Export all card components
+>>>>>>> Stashed changes
+=======
+// Export all card components
+>>>>>>> Stashed changes
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
