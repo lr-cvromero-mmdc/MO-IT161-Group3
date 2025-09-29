@@ -1,6 +1,25 @@
 import { Link } from "react-router-dom"
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // SkipToContent component for accessibility
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// SkipToContent component for accessibility
+=======
+>>>>>>> origin/staging
+=======
+// SkipToContent component for accessibility
+>>>>>>> Stashed changes
+=======
+// SkipToContent component for accessibility
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// SkipToContent component for accessibility
+>>>>>>> origin/main
 export function SkipToContent() {
   return (
     <Link

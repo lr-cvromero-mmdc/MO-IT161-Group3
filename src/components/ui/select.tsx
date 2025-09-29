@@ -4,6 +4,17 @@ import { Check, ChevronDown, ChevronUp } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+>>>>>>> origin/main
 // Select component using Radix UI
 const Select = SelectPrimitive.Root
 
@@ -14,6 +25,32 @@ const SelectGroup = SelectPrimitive.Group
 const SelectValue = SelectPrimitive.Value
 
 // Trigger button for the select
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+=======
+// Select component using Radix UI
+>>>>>>> Stashed changes
+const Select = SelectPrimitive.Root
+
+// Grouping related components
+const SelectGroup = SelectPrimitive.Group
+
+// Value display component
+const SelectValue = SelectPrimitive.Value
+
+<<<<<<< Updated upstream
+>>>>>>> origin/staging
+=======
+// Trigger button for the select
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+>>>>>>> origin/main
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
@@ -34,7 +71,26 @@ const SelectTrigger = React.forwardRef<
 ))
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // Scroll buttons for the select dropdown
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Scroll buttons for the select dropdown
+=======
+>>>>>>> origin/staging
+=======
+// Scroll buttons for the select dropdown
+>>>>>>> Stashed changes
+=======
+// Scroll buttons for the select dropdown
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Scroll buttons for the select dropdown
+>>>>>>> origin/main
 const SelectScrollUpButton = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>
@@ -52,7 +108,26 @@ const SelectScrollUpButton = React.forwardRef<
 ))
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // Scroll down button for the select dropdown
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Scroll down button for the select dropdown
+=======
+>>>>>>> origin/staging
+=======
+// Scroll down button for the select dropdown
+>>>>>>> Stashed changes
+=======
+// Scroll down button for the select dropdown
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Scroll down button for the select dropdown
+>>>>>>> origin/main
 const SelectScrollDownButton = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.ScrollDownButton>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>
@@ -71,7 +146,26 @@ const SelectScrollDownButton = React.forwardRef<
 SelectScrollDownButton.displayName =
   SelectPrimitive.ScrollDownButton.displayName
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // Content component for the select dropdown
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Content component for the select dropdown
+=======
+>>>>>>> origin/staging
+=======
+// Content component for the select dropdown
+>>>>>>> Stashed changes
+=======
+// Content component for the select dropdown
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Content component for the select dropdown
+>>>>>>> origin/main
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
@@ -104,7 +198,26 @@ const SelectContent = React.forwardRef<
 ))
 SelectContent.displayName = SelectPrimitive.Content.displayName
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // Label component for grouping items
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Label component for grouping items
+=======
+>>>>>>> origin/staging
+=======
+// Label component for grouping items
+>>>>>>> Stashed changes
+=======
+// Label component for grouping items
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Label component for grouping items
+>>>>>>> origin/main
 const SelectLabel = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Label>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
@@ -117,7 +230,26 @@ const SelectLabel = React.forwardRef<
 ))
 SelectLabel.displayName = SelectPrimitive.Label.displayName
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // Individual item component for the select dropdown
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Individual item component for the select dropdown
+=======
+>>>>>>> origin/staging
+=======
+// Individual item component for the select dropdown
+>>>>>>> Stashed changes
+=======
+// Individual item component for the select dropdown
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Individual item component for the select dropdown
+>>>>>>> origin/main
 const SelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
@@ -141,7 +273,26 @@ const SelectItem = React.forwardRef<
 ))
 SelectItem.displayName = SelectPrimitive.Item.displayName
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // Separator component for dividing groups of items
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Separator component for dividing groups of items
+=======
+>>>>>>> origin/staging
+=======
+// Separator component for dividing groups of items
+>>>>>>> Stashed changes
+=======
+// Separator component for dividing groups of items
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Separator component for dividing groups of items
+>>>>>>> origin/main
 const SelectSeparator = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>
@@ -154,7 +305,26 @@ const SelectSeparator = React.forwardRef<
 ))
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // Exporting all components for external use
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Exporting all components for external use
+=======
+>>>>>>> origin/staging
+=======
+// Exporting all components for external use
+>>>>>>> Stashed changes
+=======
+// Exporting all components for external use
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Exporting all components for external use
+>>>>>>> origin/main
 export {
   Select,
   SelectGroup,

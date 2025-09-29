@@ -1,12 +1,51 @@
+<<<<<<< HEAD
+// Home page - Professional car wash services with real images and modern design
+=======
+>>>>>>> origin/main
 import { Link } from "react-router-dom"
 import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+<<<<<<< HEAD
+import { 
+  ChevronRight, 
+  Car, 
+  Shield, 
+  Award, 
+  Search, 
+  MapPin, 
+  MapPin as Location, 
+  ShoppingCart, 
+  Calendar, 
+  Star, 
+  Hand, 
+  CreditCard, 
+  CheckCircle 
+} from "lucide-react"
+
+<<<<<<< HEAD
+// Service offerings for car wash
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Service offerings for car wash
+=======
+>>>>>>> origin/staging
+=======
+// Service offerings for car wash
+>>>>>>> Stashed changes
+=======
+// Service offerings for car wash
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
 import { ChevronRight, Car, Shield, Award, Search, MapPin, MapPin as Location, ShoppingCart, Calendar, Star, Hand, CreditCard, CheckCircle } from "lucide-react"
 
 // Service offerings for car wash
+>>>>>>> origin/main
 const services = [
   {
     title: "Basic Wash",
@@ -31,7 +70,26 @@ const services = [
   },
 ]
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // Steps to book a car wash online
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Steps to book a car wash online
+=======
+>>>>>>> origin/staging
+=======
+// Steps to book a car wash online
+>>>>>>> Stashed changes
+=======
+// Steps to book a car wash online
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Steps to book a car wash online
+>>>>>>> origin/main
 const bookingSteps = [
   {
     icon: Location,
@@ -55,7 +113,26 @@ const bookingSteps = [
   }
 ]
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // Products available in the store
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Products available in the store
+=======
+>>>>>>> origin/staging
+=======
+// Products available in the store
+>>>>>>> Stashed changes
+=======
+// Products available in the store
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Products available in the store
+>>>>>>> origin/main
 const storeProducts = [
   {
     id: 1,
@@ -107,7 +184,26 @@ const storeProducts = [
   },
 ]
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // Customer testimonials
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Customer testimonials
+=======
+>>>>>>> origin/staging
+=======
+// Customer testimonials
+>>>>>>> Stashed changes
+=======
+// Customer testimonials
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Customer testimonials
+>>>>>>> origin/main
 const testimonials = [
   {
     id: 1,
@@ -126,7 +222,26 @@ const testimonials = [
   }
 ]
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // Quality features of the car wash service
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Quality features of the car wash service
+=======
+>>>>>>> origin/staging
+=======
+// Quality features of the car wash service
+>>>>>>> Stashed changes
+=======
+// Quality features of the car wash service
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Quality features of the car wash service
+>>>>>>> origin/main
 const qualityFeatures = [
   {
     icon: Hand,
@@ -151,7 +266,26 @@ const qualityFeatures = [
 ]
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // Frequently Asked Questions
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Frequently Asked Questions
+=======
+>>>>>>> origin/staging
+=======
+// Frequently Asked Questions
+>>>>>>> Stashed changes
+=======
+// Frequently Asked Questions
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Frequently Asked Questions
+>>>>>>> origin/main
 const faqs = [
   {
     question: "Do you charge extra for SUVs?",
@@ -179,12 +313,41 @@ const faqs = [
   },
 ]
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // Home page component
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Home page component
+=======
+>>>>>>> origin/staging
+=======
+// Home page component
+>>>>>>> Stashed changes
+=======
+// Home page component
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Home page component
+>>>>>>> origin/main
 export function Home() {
   return (
     <div className="min-h-screen">
           {/* Hero Section */}
           <section className="relative bg-brand-dark text-white py-20 min-h-[600px] overflow-hidden">
+<<<<<<< HEAD
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+              <img 
+                src="/src/assets/images/services/hero-background.jpg" 
+                alt="Professional car wash service background"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/40 to-brand-dark/70"></div>
+=======
             {/* Background Video/Image Placeholder */}
             <div className="absolute inset-0 z-0">
               <div className="w-full h-full bg-gradient-to-br from-brand-primary/20 to-brand-dark/80 flex items-center justify-center">
@@ -197,6 +360,7 @@ export function Home() {
                   </p>
                 </div>
               </div>
+>>>>>>> origin/main
             </div>
 
             {/* Content Overlay */}
@@ -248,8 +412,13 @@ export function Home() {
                     size="lg"
                     className="bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold text-lg px-8 py-4 focus-ring rounded-lg"
                   >
+<<<<<<< HEAD
+                    <Link to="/services" onClick={() => window.scrollTo(0, 0)} className="flex items-center gap-2">
+                    Book Now
+=======
                     <Link to="/#book-now" className="flex items-center gap-2">
                       Book Now
+>>>>>>> origin/main
                       <ChevronRight className="h-5 w-5" />
                     </Link>
                   </Button>
@@ -262,12 +431,23 @@ export function Home() {
       <section className="py-20 bg-neutral-100">
         <Container>
           <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
+<<<<<<< HEAD
+            {/* Left Column - About Image */}
+            <div className="col-span-12 lg:col-span-6">
+              <div className="rounded-2xl h-80 lg:h-96 overflow-hidden">
+                <img 
+                  src="/src/assets/images/services/full-detailing.jpg" 
+                  alt="Professional car detailing service"
+                  className="w-full h-full object-cover"
+                />
+=======
             {/* Left Column - Video/Image Placeholder */}
             <div className="col-span-12 lg:col-span-6">
               <div className="bg-brand-dark rounded-2xl h-80 lg:h-96 flex items-center justify-center">
                 <p className="text-white text-lg font-medium tracking-wider uppercase">
                   VIDEO/IMAGE PLACEHOLDER
                 </p>
+>>>>>>> origin/main
               </div>
             </div>
 
@@ -325,11 +505,27 @@ export function Home() {
           <div className="grid grid-cols-12 gap-6 md:gap-8">
             {services.map((service) => (
               <Card key={service.title} className="col-span-12 md:col-span-4 bg-white rounded-2xl shadow-lg border-0 overflow-hidden group hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
+<<<<<<< HEAD
+                {/* Service Image */}
+                <div className="h-48 bg-brand-dark overflow-hidden">
+                  <img 
+                    src={
+                      service.title === "Basic Wash" ? "/src/assets/images/services/basic-wash.jpg" :
+                      service.title === "Premium Wash" ? "/src/assets/images/services/premium-wash.jpg" :
+                      service.title === "Full Detailing" ? "/src/assets/images/services/full-detailing.jpg" :
+                      "/src/assets/images/services/basic-wash.jpg"
+                    }
+                    alt={`Professional ${service.title.toLowerCase()} service`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+=======
                 {/* Image Placeholder */}
                 <div className="h-48 bg-brand-dark flex items-center justify-center">
                   <p className="text-white text-sm font-medium tracking-wider uppercase">
                     IMAGE PLACEHOLDER
                   </p>
+>>>>>>> origin/main
                 </div>
                 
                 <CardContent className="p-6">
@@ -358,8 +554,13 @@ export function Home() {
                     asChild
                     className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold py-3 rounded-lg focus-ring"
                   >
+<<<<<<< HEAD
+                    <Link to="/services" onClick={() => window.scrollTo(0, 0)}>
+                    Select
+=======
                     <Link to="/#book-now">
                       Select
+>>>>>>> origin/main
                     </Link>
                   </Button>
                 </CardContent>
@@ -389,11 +590,30 @@ export function Home() {
           <div className="grid grid-cols-12 gap-6 md:gap-8">
             {storeProducts.slice(0, 4).map((product) => (
               <Card key={product.id} className="col-span-12 md:col-span-6 lg:col-span-3 bg-white rounded-2xl shadow-lg border-0 overflow-hidden group hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
+<<<<<<< HEAD
+                {/* Product Image */}
+                <div className="h-48 bg-white overflow-hidden flex items-center justify-center p-4">
+                  <img 
+                    src={
+                      product.name.includes("Shampoo") ? "/src/assets/images/products/car-shampoo.png" :
+                      product.name.includes("Microfiber") ? "/src/assets/images/products/microfiber-towel.png" :
+                      product.name.includes("Wax") ? "/src/assets/images/products/car-wax.png" :
+                      product.name.includes("Tire") ? "/src/assets/images/products/tire-gel.png" :
+                      product.name.includes("Interior") ? "/src/assets/images/products/interior-cleaner.png" :
+                      product.name.includes("Brush") ? "/src/assets/images/products/wheel-brush.png" :
+                      "/src/assets/images/products/car-shampoo.png"
+                    }
+                    alt={product.name}
+                    className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+=======
                 {/* Image Placeholder */}
                 <div className="h-48 bg-brand-dark flex items-center justify-center">
                   <p className="text-white text-sm font-medium tracking-wider uppercase">
                     IMAGE PLACEHOLDER
                   </p>
+>>>>>>> origin/main
                 </div>
                 
                 <CardContent className="p-6">
@@ -414,8 +634,13 @@ export function Home() {
                       variant="outline"
                       className="border-neutral-300 text-brand-dark hover:bg-neutral-50 focus-ring rounded-lg"
                     >
+<<<<<<< HEAD
+                      <Link to="/services" onClick={() => window.scrollTo(0, 0)}>
+                      Add
+=======
                       <Link to="/services">
                         Add
+>>>>>>> origin/main
                       </Link>
                     </Button>
                   </div>
@@ -506,8 +731,13 @@ export function Home() {
               size="lg"
               className="bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold text-lg px-8 py-4 focus-ring"
             >
+<<<<<<< HEAD
+              <Link to="/services" onClick={() => window.scrollTo(0, 0)}>
+              Claim Your Discount
+=======
               <Link to="/#book-now">
                 Claim Your Discount
+>>>>>>> origin/main
               </Link>
             </Button>
           </div>
@@ -565,10 +795,19 @@ export function Home() {
           <div className="grid grid-cols-12 gap-6 md:gap-8">
             {/* Customer Feedback */}
             <Card className="col-span-12 md:col-span-4 bg-brand-dark rounded-2xl overflow-hidden group hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
+<<<<<<< HEAD
+              <div className="h-48 bg-brand-dark overflow-hidden">
+                <img 
+                  src="/src/assets/images/services/premium-wash.jpg" 
+                  alt="Customer feedback and testimonials"
+                  className="w-full h-full object-cover opacity-80"
+                />
+=======
               <div className="h-48 bg-brand-dark flex items-center justify-center">
                 <p className="text-white text-sm font-medium tracking-wider uppercase">
                   IMAGE PLACEHOLDER
                 </p>
+>>>>>>> origin/main
               </div>
               <CardContent className="p-8 text-center">
                 <h4 className="text-xl font-bold text-white mb-4">Customer Feedback</h4>
@@ -579,8 +818,13 @@ export function Home() {
                   asChild
                   className="w-full bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold focus-ring rounded-lg"
                 >
+<<<<<<< HEAD
+                  <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
+                  Submit Now
+=======
                   <Link to="/#contact">
                     Submit Now
+>>>>>>> origin/main
                   </Link>
                 </Button>
               </CardContent>
@@ -588,10 +832,19 @@ export function Home() {
 
             {/* Franchising */}
             <Card className="col-span-12 md:col-span-4 bg-brand-dark rounded-2xl overflow-hidden group hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
+<<<<<<< HEAD
+            <div className="h-48 bg-brand-dark overflow-hidden">
+                <img 
+                  src="/src/assets/images/services/full-detailing.jpg" 
+                  alt="Franchising opportunities"
+                  className="w-full h-full object-cover opacity-80"
+                />
+=======
               <div className="h-48 bg-brand-dark flex items-center justify-center">
                 <p className="text-white text-sm font-medium tracking-wider uppercase">
                   IMAGE PLACEHOLDER
                 </p>
+>>>>>>> origin/main
               </div>
               <CardContent className="p-8 text-center">
                 <h4 className="text-xl font-bold text-white mb-4">Franchising</h4>
@@ -602,8 +855,13 @@ export function Home() {
                   asChild
                   className="w-full bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold focus-ring rounded-lg"
                 >
+<<<<<<< HEAD
+                  <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
+                  Inquire Now
+=======
                   <Link to="/#contact">
                     Inquire Now
+>>>>>>> origin/main
                   </Link>
                 </Button>
               </CardContent>
@@ -611,10 +869,19 @@ export function Home() {
 
             {/* Join Our Team */}
             <Card className="col-span-12 md:col-span-4 bg-brand-dark rounded-2xl overflow-hidden group hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
+<<<<<<< HEAD
+            <div className="h-48 bg-brand-dark overflow-hidden">
+                <img 
+                  src="/src/assets/images/services/basic-wash.jpg" 
+                  alt="Join our team opportunities"
+                  className="w-full h-full object-cover opacity-80"
+                />
+=======
               <div className="h-48 bg-brand-dark flex items-center justify-center">
                 <p className="text-white text-sm font-medium tracking-wider uppercase">
                   IMAGE PLACEHOLDER
                 </p>
+>>>>>>> origin/main
               </div>
               <CardContent className="p-8 text-center">
                 <h4 className="text-xl font-bold text-white mb-4">Join Our Team</h4>
@@ -625,8 +892,13 @@ export function Home() {
                   asChild
                   className="w-full bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold focus-ring rounded-lg"
                 >
+<<<<<<< HEAD
+                  <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
+                  Inquire Now
+=======
                   <Link to="/#contact">
                     Inquire Now
+>>>>>>> origin/main
                   </Link>
                 </Button>
               </CardContent>
@@ -661,6 +933,8 @@ export function Home() {
           </div>
         </Container>
       </section>
+<<<<<<< HEAD
+=======
 
       {/* Contact CTA */}
       <section className="bg-brand-dark text-white py-20">
@@ -698,6 +972,7 @@ export function Home() {
           </div>
         </Container>
       </section>
+>>>>>>> origin/main
     </div>
   )
 }
