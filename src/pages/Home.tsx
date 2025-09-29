@@ -59,24 +59,8 @@ const services = [
     features: ["Everything in Premium", "Wax application", "Leather conditioning", "Engine bay clean"],
     icon: Award,
   },
-]
 
-<<<<<<< HEAD
 // Steps to book a car wash online
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Steps to book a car wash online
-=======
->>>>>>> origin/staging
-=======
-// Steps to book a car wash online
->>>>>>> Stashed changes
-=======
-// Steps to book a car wash online
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const bookingSteps = [
   {
     icon: Location,
@@ -99,23 +83,8 @@ const bookingSteps = [
     description: "We'll have your car looking new again."
   }
 ]
+// Products available in the store
 
-<<<<<<< HEAD
-// Products available in the store
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Products available in the store
-=======
->>>>>>> origin/staging
-=======
-// Products available in the store
->>>>>>> Stashed changes
-=======
-// Products available in the store
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const storeProducts = [
   {
     id: 1,
@@ -167,22 +136,7 @@ const storeProducts = [
   },
 ]
 
-<<<<<<< HEAD
 // Customer testimonials
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Customer testimonials
-=======
->>>>>>> origin/staging
-=======
-// Customer testimonials
->>>>>>> Stashed changes
-=======
-// Customer testimonials
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const testimonials = [
   {
     id: 1,
@@ -201,22 +155,7 @@ const testimonials = [
   }
 ]
 
-<<<<<<< HEAD
 // Quality features of the car wash service
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Quality features of the car wash service
-=======
->>>>>>> origin/staging
-=======
-// Quality features of the car wash service
->>>>>>> Stashed changes
-=======
-// Quality features of the car wash service
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const qualityFeatures = [
   {
     icon: Hand,
@@ -240,23 +179,7 @@ const qualityFeatures = [
   }
 ]
 
-
-<<<<<<< HEAD
 // Frequently Asked Questions
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Frequently Asked Questions
-=======
->>>>>>> origin/staging
-=======
-// Frequently Asked Questions
->>>>>>> Stashed changes
-=======
-// Frequently Asked Questions
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const faqs = [
   {
     question: "Do you charge extra for SUVs?",
@@ -284,22 +207,7 @@ const faqs = [
   },
 ]
 
-<<<<<<< HEAD
 // Home page component
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Home page component
-=======
->>>>>>> origin/staging
-=======
-// Home page component
->>>>>>> Stashed changes
-=======
-// Home page component
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 export function Home() {
   return (
     <div className="min-h-screen">
