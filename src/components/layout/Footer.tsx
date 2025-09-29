@@ -4,7 +4,22 @@ import { ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PaymentLogo } from "@/components/ui/PaymentLogo"
 
+<<<<<<< HEAD
 // Define footer links
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Define footer links
+=======
+>>>>>>> origin/staging
+=======
+// Define footer links
+>>>>>>> Stashed changes
+=======
+// Define footer links
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const footerLinks = {
   company: [
     { name: "About", href: "/about" },
@@ -22,7 +37,22 @@ const footerLinks = {
   ],
 }
 
+<<<<<<< HEAD
 // Define payment methods
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Define payment methods
+=======
+>>>>>>> origin/staging
+=======
+// Define payment methods
+>>>>>>> Stashed changes
+=======
+// Define payment methods
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const paymentMethods = [
   { name: "Visa", key: "visa" },
   { name: "MasterCard", key: "mastercard" },
@@ -31,7 +61,22 @@ const paymentMethods = [
   { name: "Maya", key: "maya" },
 ]
 
+<<<<<<< HEAD
 // Footer Component
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Footer Component
+=======
+>>>>>>> origin/staging
+=======
+// Footer Component
+>>>>>>> Stashed changes
+=======
+// Footer Component
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 export function Footer() {
   return (
     <footer className="bg-brand-dark text-white">
