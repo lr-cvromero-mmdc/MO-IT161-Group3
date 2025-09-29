@@ -5,6 +5,7 @@ import { ChevronRight, Star, Shield, Facebook, Instagram, MessageCircle, Phone, 
 import { Button } from "@/components/ui/button"
 import { PaymentLogo } from "@/components/ui/PaymentLogo"
 
+// Define footer links
 const footerLinks = {
   company: [
     { name: "About", href: "/about", scrollToTop: true },
@@ -24,6 +25,7 @@ const footerLinks = {
   ],
 }
 
+// Define payment methods
 const paymentMethods = [
   { name: "Visa", key: "visa" },
   { name: "MasterCard", key: "mastercard" },
@@ -32,6 +34,7 @@ const paymentMethods = [
   { name: "Maya", key: "maya" },
 ]
 
+// Footer Component
 export function Footer() {
   return (
     <footer className="bg-brand-dark text-white">
