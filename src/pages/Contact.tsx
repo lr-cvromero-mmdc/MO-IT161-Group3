@@ -8,21 +8,11 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { 
   Phone, 
   Mail, 
-  MapPin, 
-  Clock, 
   CheckCircle,
   Send,
-  ChevronRight,
-  Navigation,
   MessageCircle,
   Star,
   Shield,
-  Users,
-  Award,
-  Facebook,
-  Instagram,
-  MessageSquare,
-  Calendar,
   Timer,
   AlertCircle
 } from "lucide-react"
@@ -118,12 +108,6 @@ const contactFaqs = [
   }
 ]
 
-// Social media links
-const socialLinks = [
-  { name: "Facebook", href: "https://facebook.com/espinosascarwash", icon: Facebook, color: "bg-blue-600 hover:bg-blue-700" },
-  { name: "Instagram", href: "https://instagram.com/espinosascarwash", icon: Instagram, color: "bg-pink-600 hover:bg-pink-700" },
-  { name: "TikTok", href: "https://tiktok.com/@espinosascarwash", icon: MessageSquare, color: "bg-black hover:bg-gray-800" },
-]
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -261,32 +245,6 @@ export function Contact() {
                 <Shield className="h-5 w-5 text-green-400" />
                 <span className="text-lg font-semibold">{trustIndicators.satisfactionGuarantee} Guarantee</span>
               </div>
-            </div>
-
-            {/* Quick Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-white text-brand-primary hover:bg-brand-cream font-bold text-lg px-8 py-4 h-auto focus-ring shadow-lg"
-              >
-                <a href="tel:+639171234567" className="flex items-center gap-3">
-                  <Phone className="h-6 w-6" />
-                  <span>Call Now</span>
-                </a>
-              </Button>
-              
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-brand-primary font-semibold text-lg px-8 py-4 h-auto focus-ring bg-transparent"
-              >
-                <a href="https://wa.me/639171234567" className="flex items-center gap-3">
-                  <MessageCircle className="h-6 w-6" />
-                  <span>WhatsApp</span>
-                </a>
-              </Button>
             </div>
           </div>
         </Container>
@@ -570,58 +528,8 @@ export function Contact() {
         </Container>
       </section>
 
-      {/* Social Media & Trust Section */}
-      <section className="py-16 bg-neutral-50">
-        <Container>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4">
-              Follow Us & Stay Connected
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Get updates, tips, and see our work on social media.
-            </p>
-          </div>
 
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-            {/* Social Media Links */}
-            <div className="flex items-center gap-4">
-              {socialLinks.map((social) => {
-                const IconComponent = social.icon
-                return (
-                  <a
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`p-4 rounded-full text-white transition-all duration-300 hover:scale-110 focus-ring ${social.color}`}
-                    aria-label={`Follow us on ${social.name}`}
-                  >
-                    <IconComponent className="h-8 w-8" />
-                  </a>
-                )
-              })}
-            </div>
-
-            {/* Trust Badges */}
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2">
-                <Award className="h-6 w-6 text-brand-primary" />
-                <span className="font-semibold text-brand-dark">{trustIndicators.yearsInBusiness} Years</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Users className="h-6 w-6 text-brand-primary" />
-                <span className="font-semibold text-brand-dark">{trustIndicators.customersServed} Customers</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="h-6 w-6 text-green-600" />
-                <span className="font-semibold text-green-600">{trustIndicators.satisfactionGuarantee} Guarantee</span>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Mobile Sticky Action Bar */}
+      {/* Mobile Sticky Action Bar - Simplified */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg z-50 md:hidden">
         <div className="flex">
           <Button
@@ -630,25 +538,16 @@ export function Contact() {
           >
             <a href="tel:+639171234567" className="flex flex-col items-center gap-1">
               <Phone className="h-5 w-5" />
-              <span className="text-sm">Call</span>
+              <span className="text-sm">Call Now</span>
             </a>
           </Button>
           <Button
             asChild
-            className="flex-1 rounded-none border-r border-neutral-200 bg-green-600 text-white hover:bg-green-700 font-semibold py-4 focus-ring"
+            className="flex-1 rounded-none bg-green-600 text-white hover:bg-green-700 font-semibold py-4 focus-ring"
           >
             <a href="https://wa.me/639171234567" className="flex flex-col items-center gap-1">
               <MessageCircle className="h-5 w-5" />
               <span className="text-sm">WhatsApp</span>
-            </a>
-          </Button>
-          <Button
-            asChild
-            className="flex-1 rounded-none bg-blue-600 text-white hover:bg-blue-700 font-semibold py-4 focus-ring"
-          >
-            <a href="mailto:hello@espinosacarwash.com" className="flex flex-col items-center gap-1">
-              <Mail className="h-5 w-5" />
-              <span className="text-sm">Email</span>
             </a>
           </Button>
         </div>
