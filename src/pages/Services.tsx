@@ -1,6 +1,6 @@
 // Services page - Booking-focused design with real images, sticky booking bar, and enhanced product section
 import { useState, useEffect } from "react"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -301,8 +301,7 @@ const faqs = [
 
 export function Services() {
   const location = useLocation()
-  const navigate = useNavigate()
-  const { addToCart, state } = useCart()
+  const { addToCart } = useCart()
   const { success, info } = useToast()
   const [activeTab, setActiveTab] = useState("services")
   
@@ -334,14 +333,10 @@ export function Services() {
     return matchesSearch && matchesCategory
   })
 
-  const handleServiceSelect = (service: any) => {
-    setSelectedService(service)
-    setShowBookingBar(true)
-  }
 
   const handleBookNow = () => {
     // This would typically navigate to a booking form or modal
-    console.log("Booking service:", selectedService)
+    // Booking service logic here
   }
 
   return (
