@@ -39,6 +39,33 @@ const locations = [
     lng: 121.0244,
     coordinates: "14.5547°N, 121.0244°E",
   },
+  {
+    name: "Espinosa's Cebu City",
+    address: "321 Ayala Center Cebu, Cebu City, Cebu",
+    hours: "Mon-Sun: 7:00 AM - 8:00 PM",
+    phone: "+63 32 4567 8901",
+    lat: 10.3157,
+    lng: 123.8854,
+    coordinates: "10.3157°N, 123.8854°E",
+  },
+  {
+    name: "Espinosa's Davao City",
+    address: "654 SM Lanang Premier, Davao City, Davao del Sur",
+    hours: "Mon-Sun: 7:00 AM - 8:00 PM",
+    phone: "+63 82 5678 9012",
+    lat: 7.0735,
+    lng: 125.6128,
+    coordinates: "7.0735°N, 125.6128°E",
+  },
+  {
+    name: "Espinosa's Iloilo City",
+    address: "987 SM City Iloilo, Iloilo City, Iloilo",
+    hours: "Mon-Sun: 7:00 AM - 8:00 PM",
+    phone: "+63 33 6789 0123",
+    lat: 10.7202,
+    lng: 122.5621,
+    coordinates: "10.7202°N, 122.5621°E",
+  },
 ]
 
 
@@ -122,7 +149,7 @@ export function Locations() {
               Our Locations
             </h1>
             <p className="text-lg md:text-xl text-brand-cream mb-8">
-              Find the nearest Espinosa's Hand Carwash location. We're conveniently located across Metro Manila.
+              Find the nearest Espinosa's Hand Carwash location. We're conveniently located across Metro Manila, Cebu, Davao, and Iloilo.
             </p>
           </div>
         </Container>
@@ -136,7 +163,7 @@ export function Locations() {
               Find All Locations
             </h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Interactive map showing all Espinosa's Hand Carwash locations across Metro Manila. 
+              Interactive map showing all Espinosa's Hand Carwash locations across the Philippines. 
               Click on any marker for more details and directions.
             </p>
           </div>
