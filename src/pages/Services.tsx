@@ -33,8 +33,6 @@ const serviceCategories = [
   { value: "addons", label: "Add-ons" },
 ]
 
-<<<<<<< HEAD
-=======
 const productCategories = [
   { value: "all", label: "All Products" },
   { value: "cleaning", label: "Cleaning" },
@@ -43,7 +41,6 @@ const productCategories = [
   { value: "bundles", label: "Bundles" },
 ]
 
->>>>>>> d22dabb131907638b4504ff7d042bf2cc3fbabcb
 const storeProducts = [
   {
     id: 1,
@@ -229,8 +226,6 @@ const services = [
   },
 ]
 
-<<<<<<< HEAD
-=======
 const testimonials = [
   {
     id: 1,
@@ -278,7 +273,6 @@ const faqs = [
   }
 ]
 
->>>>>>> d22dabb131907638b4504ff7d042bf2cc3fbabcb
 export function Services() {
   const [activeTab, setActiveTab] = useState("services")
   const [searchTerm, setSearchTerm] = useState("")

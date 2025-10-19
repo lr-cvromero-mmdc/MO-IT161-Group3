@@ -14,18 +14,7 @@ import {
   Hand 
 } from "lucide-react"
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
 // Performance indicators displayed 
-=======
->>>>>>> origin/staging
-=======
-// Performance indicators displayed 
->>>>>>> Stashed changes
-=======
-// Performance indicators displayed 
->>>>>>> Stashed changes
 const kpis = [
   {
     number: "120+",
@@ -49,18 +38,7 @@ const kpis = [
   },
 ]
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
 // Core business values
-=======
->>>>>>> origin/staging
-=======
-// Core business values
->>>>>>> Stashed changes
-=======
-// Core business values
->>>>>>> Stashed changes
 const values = [
   {
     title: "Family-Owned",
@@ -84,18 +62,7 @@ const values = [
   },
 ]
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
 // About page component
-=======
->>>>>>> origin/staging
-=======
-// About page component
->>>>>>> Stashed changes
-=======
-// About page component
->>>>>>> Stashed changes
 export function About() {
   return (
     <div className="min-h-screen bg-white">
