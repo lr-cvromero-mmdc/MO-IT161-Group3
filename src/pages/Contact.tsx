@@ -14,7 +14,8 @@ import {
   Star,
   Shield,
   Timer,
-  AlertCircle
+  AlertCircle,
+  Users
 } from "lucide-react"
 
 // Trust indicators data
@@ -29,15 +30,15 @@ const trustIndicators = {
 // Contact methods with enhanced information
 const contactMethods = [
   {
-    icon: Phone,
-    title: "Call Us",
-    subtitle: "RECOMMENDED",
-    description: "Speak directly with our team",
-    details: "+63 917 123 4567",
-    action: "Call Now",
-    href: "tel:+639171234567",
-    responseTime: "Immediate",
-    waitTime: "Usually under 30 seconds",
+  icon: Phone,
+  title: "Call Us",
+  subtitle: "RECOMMENDED",
+  description: "Speak directly with our team",
+  details: "+63 917 123 4567",
+  action: "Call Now",
+  href: "tel:+639171234567",
+  responseTime: "Immediate",
+  waitTime: "Usually under 30 seconds",
     staffedHours: "7 AM - 7 PM daily",
     color: "primary",
     accent: "bg-brand-primary/10 border-brand-primary/20 text-brand-primary",
@@ -182,13 +183,13 @@ export function Contact() {
     
     // Reset form after success
     setTimeout(() => {
-      setFormData({
-        name: "",
-        contact: "",
+    setFormData({
+      name: "",
+      contact: "",
         serviceType: "",
         preferredMethod: "",
-        message: ""
-      })
+      message: ""
+    })
       setIsSuccess(false)
     }, 3000)
   }
@@ -234,13 +235,13 @@ export function Contact() {
                   ))}
                 </div>
                 <span className="text-lg font-semibold">{trustIndicators.averageRating}/5</span>
-              </div>
-              
+                </div>
+                
               <div className="flex items-center gap-2">
                 <Timer className="h-5 w-5 text-green-400" />
                 <span className="text-lg font-semibold">{trustIndicators.responseTime} response</span>
-              </div>
-              
+                </div>
+                
               <div className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-green-400" />
                 <span className="text-lg font-semibold">{trustIndicators.satisfactionGuarantee} Guarantee</span>
@@ -297,7 +298,7 @@ export function Contact() {
                       method.color === 'primary' 
                         ? 'bg-brand-primary text-white hover:bg-brand-primary/90' 
                         : method.color === 'green'
-                        ? 'bg-green-600 text-white hover:bg-green-700'
+                        ? 'bg-green-600 text-white hover:bg-green-700' 
                         : 'bg-blue-600 text-white hover:bg-blue-700'
                     }`}
                   >
@@ -349,44 +350,44 @@ export function Contact() {
                     </div>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="name" className="block text-lg font-semibold text-brand-dark mb-2">
-                          Your Name *
-                        </label>
-                        <Input
-                          id="name"
-                          name="name"
-                          type="text"
-                          required
-                          value={formData.name}
-                          onChange={handleInputChange}
+                  <div>
+                    <label htmlFor="name" className="block text-lg font-semibold text-brand-dark mb-2">
+                      Your Name *
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={handleInputChange}
                           className={`focus-ring text-lg py-3 ${formErrors.name ? 'border-red-500 focus:border-red-500' : ''}`}
-                          placeholder="Enter your full name"
-                        />
+                      placeholder="Enter your full name"
+                    />
                         {formErrors.name && (
                           <div className="flex items-center gap-2 mt-2 text-red-600">
                             <AlertCircle className="h-4 w-4" />
                             <span className="text-sm">{formErrors.name}</span>
                           </div>
                         )}
-                      </div>
+                  </div>
 
-                      <div>
-                        <label htmlFor="contact" className="block text-lg font-semibold text-brand-dark mb-2">
-                          Phone or Email *
-                        </label>
-                        <Input
-                          id="contact"
-                          name="contact"
-                          type="text"
-                          required
-                          value={formData.contact}
-                          onChange={handleInputChange}
+                  <div>
+                    <label htmlFor="contact" className="block text-lg font-semibold text-brand-dark mb-2">
+                      Phone or Email *
+                    </label>
+                    <Input
+                      id="contact"
+                      name="contact"
+                      type="text"
+                      required
+                      value={formData.contact}
+                      onChange={handleInputChange}
                           className={`focus-ring text-lg py-3 ${formErrors.contact ? 'border-red-500 focus:border-red-500' : ''}`}
-                          placeholder="Phone number or email address"
-                        />
+                      placeholder="Phone number or email address"
+                    />
                         {formErrors.contact && (
                           <div className="flex items-center gap-2 mt-2 text-red-600">
                             <AlertCircle className="h-4 w-4" />
@@ -439,19 +440,19 @@ export function Contact() {
                           <option value="email">Email</option>
                         </select>
                       </div>
-                    </div>
+                  </div>
 
-                    <div>
-                      <label htmlFor="message" className="block text-lg font-semibold text-brand-dark mb-2">
+                  <div>
+                    <label htmlFor="message" className="block text-lg font-semibold text-brand-dark mb-2">
                         Tell us what you need *
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        required
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
                         rows={5}
-                        value={formData.message}
-                        onChange={handleInputChange}
+                      value={formData.message}
+                      onChange={handleInputChange}
                         className={`w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent resize-none focus-ring text-lg ${formErrors.message ? 'border-red-500 focus:border-red-500' : ''}`}
                         placeholder="Tell us what service you need, any specific requirements, or questions you have..."
                       />
@@ -468,14 +469,14 @@ export function Contact() {
                           {formData.message.length}/500 characters
                         </span>
                       </div>
-                    </div>
+                  </div>
 
-                    <Button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 font-bold text-xl py-4 focus-ring"
-                    >
-                      {isSubmitting ? (
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 font-bold text-xl py-4 focus-ring"
+                  >
+                    {isSubmitting ? (
                         <div className="flex items-center gap-3">
                           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
                           <span>Sending Message...</span>
@@ -485,13 +486,13 @@ export function Contact() {
                           <Send className="h-6 w-6" />
                           <span>Send Message</span>
                         </div>
-                      )}
-                    </Button>
-                    
-                    <p className="text-sm text-neutral-500 text-center mt-4">
+                    )}
+                  </Button>
+                  
+                  <p className="text-sm text-neutral-500 text-center mt-4">
                       Your details are kept private and only used to respond to your inquiry. We never share your information.
-                    </p>
-                  </form>
+                  </p>
+                </form>
                 )}
               </CardContent>
             </Card>
