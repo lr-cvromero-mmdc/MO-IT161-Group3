@@ -149,7 +149,7 @@ export function Contact() {
   return (
     <div className="min-h-screen bg-white pb-20 md:pb-0">
       {/* Hero Section */}
-      <section className="bg-brand-primary text-white py-16">
+      <section className="bg-brand-primary text-white py-16 pt-32">
         <Container>
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">

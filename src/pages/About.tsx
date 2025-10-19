@@ -1,9 +1,7 @@
 // About page - Professional car wash services with family values and quality focus
 import { Container } from "@/components/layout/Container"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { 
-  ChevronRight, 
   Star, 
   Clock, 
   Users, 
@@ -67,17 +65,15 @@ export function About() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-brand-primary text-white py-20">
+      <section className="bg-brand-primary text-white py-20 pt-32">
         <Container>
-          <div className="grid grid-cols-12">
-            <div className="col-span-12 lg:col-start-3 lg:col-span-8 text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                About Espinosa's
-              </h1>
-              <p className="text-lg md:text-xl text-brand-cream mb-8">
-                Where Cars Come to Shine - A family story of dedication, quality, and community.
-              </p>
-            </div>
+          <div className="text-center max-w-3xl mx-auto">
+            <h1 className="espinosa-hero text-white mb-6">
+              About Espinosa's
+            </h1>
+            <p className="espinosa-body-large text-brand-cream mb-8">
+              Where Cars Come to Shine - A family story of dedication, quality, and community.
+            </p>
           </div>
         </Container>
       </section>
@@ -88,7 +84,7 @@ export function About() {
           <div className="grid grid-cols-12 gap-6 lg:gap-12 items-center">
             <div className="col-span-12 lg:col-span-6 space-y-8">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-6">
+                <h2 className="espinosa-section-title text-brand-dark mb-6">
                   Our Story
                 </h2>
                 <div className="w-16 h-1 bg-brand-primary mb-6"></div>
@@ -111,16 +107,6 @@ export function About() {
                 </p>
               </div>
 
-              <Button
-                asChild
-                size="lg"
-                className="bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold text-lg px-8 py-4 focus-ring"
-              >
-                <a href="/#book-now">
-                  Book Your Wash
-                  <ChevronRight className="ml-2 h-5 w-5" />
-                </a>
-              </Button>
             </div>
             
             <div className="col-span-12 lg:col-span-6 relative">
@@ -255,40 +241,6 @@ export function About() {
         </Container>
       </section>
 
-      {/* Contact CTA */}
-      <section className="bg-brand-dark text-white py-20">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Experience the Difference?
-            </h2>
-            <p className="text-lg md:text-xl text-neutral-300 mb-8">
-              Join our family of satisfied customers and see why Espinosa's is the trusted choice for hand car washing.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold text-lg px-8 py-4 focus-ring"
-              >
-                <a href="/#book-now">
-                  Book Now
-                </a>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="border-brand-cream text-brand-cream hover:bg-brand-cream hover:text-brand-dark font-semibold text-lg px-8 py-4 focus-ring"
-              >
-                <a href="/locations">
-                  See Locations
-                </a>
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </section>
     </div>
   )
 }

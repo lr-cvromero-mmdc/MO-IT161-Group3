@@ -6,9 +6,10 @@ interface PaymentLogoProps {
   className?: string
 }
 
-// Component to display payment method logos with fallback to emoji
+// Component to display payment method logos with SVG files and emoji fallback
 export function PaymentLogo({ name, className }: PaymentLogoProps) {
-  const logoMap = {
+  // SVG logo mapping for payment methods
+  const logoSrc = {
     visa: "/src/assets/images/logos/payments/Visa.svg",
     mastercard: "/src/assets/images/logos/payments/Mastercard.svg",
     gcash: "/src/assets/images/logos/payments/Gcash.svg",
@@ -16,47 +17,44 @@ export function PaymentLogo({ name, className }: PaymentLogoProps) {
     maya: "/src/assets/images/logos/payments/Maya.svg",
   }
 
-  //  Get the logo source based on the name prop
-  const logoSrc = logoMap[name.toLowerCase() as keyof typeof logoMap]
+  // Emoji fallback mapping
+  const emojiMap = {
+    visa: "💳",
+    mastercard: "💳", 
+    gcash: "📱",
+    "qr-ph": "📱",
+    maya: "📱",
+  }
 
-  if (!logoSrc) {
+  // Get the logo source based on the name prop
+  const svgSrc = logoSrc[name.toLowerCase() as keyof typeof logoSrc]
+  const emoji = emojiMap[name.toLowerCase() as keyof typeof emojiMap] || "💳"
+  
+  if (!svgSrc) {
     // Fallback to emoji if SVG not found
-    const emojiMap = {
-      visa: "💳",
-      mastercard: "💳",
-      gcash: "📱",
-      "qr-ph": "📱",
-      maya: "📱",
-    }
     return (
-      <span className={cn("text-3xl", className)}>
-        {emojiMap[name.toLowerCase() as keyof typeof emojiMap] || "💳"}
-      </span>
+      <div className={cn("flex items-center justify-center", className)}>
+        <span className="text-3xl">{emoji}</span>
+      </div>
     )
   }
 
-  // Render the logo image
+  // Render the SVG logo with fallback
   return (
-    <img
-      src={logoSrc}
-      alt={`${name} logo`}
-      className={cn("h-12 w-auto object-contain", className)}
-      onError={(e) => {
-        // Fallback to emoji if image fails to load
-        const target = e.target as HTMLImageElement
-    const emojiMap = {
-      visa: "💳",
-      mastercard: "💳",
-      gcash: "📱",
-      "qr-ph": "📱",
-      maya: "📱",
-    }
-        target.style.display = "none"
-        const parent = target.parentElement
-        if (parent) {
-          parent.innerHTML = `<span class="text-4xl">${emojiMap[name.toLowerCase() as keyof typeof emojiMap] || "💳"}</span>`
-        }
-      }}
-    />
+    <div className={cn("flex items-center justify-center", className)}>
+      <img
+        src={svgSrc}
+        alt={`${name} logo`}
+        className="h-12 w-auto object-contain"
+        onError={(e) => {
+          // Fallback to emoji if SVG fails to load
+          const target = e.target as HTMLImageElement
+          const parent = target.parentElement
+          if (parent) {
+            parent.innerHTML = `<span class="text-3xl">${emoji}</span>`
+          }
+        }}
+      />
+    </div>
   )
 }

@@ -308,7 +308,7 @@ export function Services() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header Section with Background Image */}
-      <section className="relative bg-brand-primary text-white py-20 min-h-[500px] flex items-center">
+      <section className="relative bg-brand-primary text-white py-20 min-h-[500px] flex items-center pt-32">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -323,10 +323,10 @@ export function Services() {
         <div className="relative z-10 w-full">
           <Container>
             <div className="text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <h1 className="espinosa-hero text-white mb-4">
                 Book Your Car Service
               </h1>
-              <p className="text-lg md:text-xl text-brand-cream mb-8 max-w-3xl mx-auto">
+              <p className="espinosa-body-large text-brand-cream mb-8 max-w-3xl mx-auto">
                 Professional hand washing and detailing services. Choose your service, book online, and we'll take care of the rest.
               </p>
               
@@ -369,7 +369,7 @@ export function Services() {
       {/* Search and Filter Section */}
       <section className="py-8 bg-brand-cream">
         <Container>
-          <div className="flex flex-col md:flex-row gap-4 max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row gap-4 max-w-3xl mx-auto">
                 {/* Search Input */}
                 <div className="flex-1 relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" />

@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom"
 import { Button } from "@/components/ui/button"
-import { Container } from "./Container"
+import { Logo } from "@/components/ui/Logo"
 import { ChevronRight, Menu } from "lucide-react"
 
 // Mobile menu (Sheet) components
@@ -22,7 +22,7 @@ const navigation = [
   { name: "Services", href: "/services" },
   { name: "How It Works", href: "/#how-it-works" },
   { name: "Locations", href: "/locations" },
-  { name: "Contact", href: "/#contact" },
+  { name: "Contact", href: "/contact" },
 ]
 
 // Header component
@@ -32,16 +32,16 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const firstMenuItemRef = useRef<HTMLAnchorElement>(null)
-  const lastMenuItemRef = useRef<HTMLAnchorElement>(null)
+  const lastMenuItemRef = useRef<HTMLButtonElement>(null)
 
-  // Scroll detection for transparent header
+  // Scroll detection for navbar background with improved threshold
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY
-      setIsScrolled(scrollTop > 50)
+      setIsScrolled(scrollTop > 80) // Increased threshold for better UX
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -80,121 +80,123 @@ export function Header() {
     }
   }, [isOpen])
 
-  // Determine header classes based on scroll and route
-  const isHomePage = location.pathname === '/'
-  
-  // Dynamic header classes
-  const headerClasses = `sticky top-0 z-50 transition-all duration-300 ${
-    isHomePage && !isScrolled 
-      ? 'bg-transparent shadow-none' 
-      : 'bg-brand-primary shadow-sm'
+  // Professional navbar classes with enhanced styling
+  const headerClasses = `navbar-professional ${
+    !isScrolled 
+      ? 'navbar-transparent' 
+      : 'navbar-solid'
   }`
 
   return (
-    <header className={headerClasses}>
-      <Container>
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link 
-            to="/" 
-            className="flex items-center space-x-3 focus-ring rounded-lg"
-            aria-label="Espinosa's Hand Carwash - Home"
-          >
-            <div className="h-10 w-10 rounded-lg bg-brand-cream flex items-center justify-center">
-              <span className="text-brand-primary font-bold text-lg">E</span>
-            </div>
-            <span className={`text-lg font-bold transition-colors ${
-              isHomePage && !isScrolled ? 'text-brand-dark' : 'text-white'
-            }`}>Espinosa's</span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6" role="navigation" aria-label="Main navigation">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`text-sm font-medium transition-colors focus-ring rounded-sm px-2 py-1 ${
-                  location.pathname === item.href
-                    ? isHomePage && !isScrolled ? "text-brand-primary" : "text-brand-cream"
-                    : isHomePage && !isScrolled ? "text-brand-dark/80 hover:text-brand-primary" : "text-white/90 hover:text-brand-accent"
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Desktop CTA Button */}
-          <div className="hidden md:block">
-            <Button
-              asChild
-              className="bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold focus-ring"
+    <header className="fixed top-0 left-0 right-0 z-[1000]">
+      <div className={headerClasses}>
+        <div className="flex items-center justify-between w-full h-16 px-6">
+          {/* Logo - Left Zone */}
+          <div className="flex-shrink-0 flex items-center h-full">
+            <Link 
+              to="/" 
+              onClick={() => window.scrollTo(0, 0)}
+              className="transition-transform hover:scale-105 flex items-center h-full focus:outline-none"
+              aria-label="Espinosa's Hand Carwash - Home"
             >
-              <Link to="/#book-now" className="flex items-center space-x-2">
-                <span>Book Now</span>
-                <ChevronRight className="h-4 w-4" />
-              </Link>
-            </Button>
+              <Logo 
+                context="header"
+                background="light"
+              />
+            </Link>
           </div>
 
-          {/* Mobile Menu */}
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="sm"
-                className={`md:hidden focus-ring transition-colors ${
-                  isHomePage && !isScrolled 
-                    ? 'text-brand-dark hover:bg-brand-dark/10' 
-                    : 'text-white hover:bg-white/10'
-                }`}
-                aria-label="Open mobile menu"
-              >
-                <Menu className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-80 bg-brand-cream">
+          {/* Desktop Navigation - Center Zone */}
+          <nav className="hidden lg:flex items-center justify-center absolute left-1/2 transform -translate-x-1/2 h-16" role="navigation" aria-label="Main navigation">
+            <div className="flex items-center gap-6 h-full">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  onClick={() => window.scrollTo(0, 0)}
+                  className={`nav-link-professional flex items-center h-full transition-all duration-200 ${
+                    location.pathname === item.href ? 'active' : ''
+                  } text-white hover:text-brand-cream hover:scale-105`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </nav>
+
+          {/* Desktop CTA Button - Right Zone */}
+          <div className="hidden lg:flex items-center flex-shrink-0 h-full">
+            <Link 
+              to="/#book-now" 
+              className="cta-button-professional flex items-center gap-2 hover:scale-105 transition-all duration-200"
+              onClick={() => window.scrollTo(0, 0)}
+            >
+              <span>Book Now</span>
+              <ChevronRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          {/* Mobile Menu - Right Zone */}
+          <div className="lg:hidden flex items-center flex-shrink-0">
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={`focus-ring transition-all duration-200 p-2 rounded-lg ${
+                    !isScrolled 
+                      ? 'text-brand-dark hover:bg-brand-dark/10' 
+                      : 'text-white hover:bg-white/10'
+                  }`}
+                  aria-label="Open mobile menu"
+                >
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+            <SheetContent side="right" className="w-80 mobile-menu-professional">
               <SheetHeader>
-                <SheetTitle className="text-brand-dark">Menu</SheetTitle>
-                <SheetDescription className="text-neutral-600">
+                <SheetTitle className="text-white font-bold text-xl">Menu</SheetTitle>
+                <SheetDescription className="text-neutral-300">
                   Navigate to different sections of our website
                 </SheetDescription>
               </SheetHeader>
               
-              <nav className="mt-8 space-y-4" role="navigation" aria-label="Mobile navigation" ref={menuRef}>
+              <nav className="mt-8 space-y-2" role="navigation" aria-label="Mobile navigation" ref={menuRef}>
                 {navigation.map((item, index) => (
                   <Link
                     key={item.name}
                     ref={index === 0 ? firstMenuItemRef : undefined}
                     to={item.href}
-                    className={`block transition-colors focus-ring rounded-sm px-3 py-2 text-lg ${
+                    className={`block nav-link-professional text-white hover:text-brand-cream ${
                       location.pathname === item.href
-                        ? "text-brand-primary font-semibold"
-                        : "text-brand-dark hover:text-brand-primary"
+                        ? "active font-semibold"
+                        : ""
                     }`}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => {
+                      setIsOpen(false)
+                      window.scrollTo(0, 0)
+                    }}
                   >
                     {item.name}
                   </Link>
                 ))}
                 
-                <div className="pt-4 border-t border-neutral-200">
-                  <Button
-                    asChild
-                    ref={lastMenuItemRef}
-                    className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold focus-ring"
+                <div className="pt-6 mt-6 border-t border-white/20">
+                  <Link
+                    to="/#book-now" 
+                    className="cta-button-professional w-full flex items-center justify-center gap-2"
+                    onClick={() => setIsOpen(false)}
                   >
-                    <Link to="/#book-now" onClick={() => setIsOpen(false)}>
-                      Book Now
-                    </Link>
-                  </Button>
+                    <span>Book Now</span>
+                    <ChevronRight className="h-4 w-4" />
+                  </Link>
                 </div>
               </nav>
             </SheetContent>
-          </Sheet>
+            </Sheet>
+          </div>
         </div>
-      </Container>
+      </div>
     </header>
   )
 }

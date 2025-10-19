@@ -79,11 +79,35 @@ const config: Config = {
         ring: "hsl(var(--ring))",
       },
       
-      // Typography
-      fontFamily: tokens.typography.fontFamily,
-      fontSize: tokens.typography.fontSize,
+      // Typography - Espinosa Brand Fonts
+      fontFamily: {
+        // Brand typography hierarchy
+        'hero': ['oxanium', 'system-ui', 'sans-serif'], // Hero headings, logo text, main titles
+        'heading': ['oxanium', 'system-ui', 'sans-serif'], // Section titles and subheadings
+        'body': ['open-sans', 'system-ui', 'sans-serif'], // Paragraphs, buttons, UI text
+        
+        // Fallback to existing tokens for compatibility
+        ...tokens.typography.fontFamily,
+      },
+      fontSize: {
+        // Brand typography scale - tight spacing
+        'hero': ['5.5rem', { lineHeight: '0.9', letterSpacing: '-0.5px' }], // 88px
+        'hero-sm': ['4rem', { lineHeight: '0.9', letterSpacing: '-0.5px' }], // 64px mobile
+        'section': ['2rem', { lineHeight: '1.0', letterSpacing: '-0.25px' }], // 32px
+        'section-sm': ['1.5rem', { lineHeight: '1.0', letterSpacing: '-0.25px' }], // 24px mobile
+        
+        // Existing tokens
+        ...tokens.typography.fontSize,
+      },
       fontWeight: tokens.typography.fontWeight,
-      letterSpacing: tokens.typography.letterSpacing,
+      letterSpacing: {
+        'hero': '-0.5px',
+        'section': '-0.25px',
+        'tight': '-0.5px',
+        'tighter': '-0.75px',
+        'normal': '0px',
+        ...tokens.typography.letterSpacing,
+      },
       
       // Spacing
       spacing: tokens.spacing,
@@ -120,6 +144,9 @@ const config: Config = {
       maxWidth: {
         'container': '1200px',
         'container-xl': '1280px',
+        'container-sm': '640px',
+        'container-md': '768px',
+        'container-lg': '1024px',
       },
       
       // Grid

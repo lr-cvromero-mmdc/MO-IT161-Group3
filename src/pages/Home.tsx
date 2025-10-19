@@ -1,24 +1,28 @@
 // Home page - Professional car wash services with real images and modern design
 import { Link } from "react-router-dom"
 import { Container } from "@/components/layout/Container"
+import { Section } from "@/components/layout/Section"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { LocationSearchResults } from "@/components/ui/LocationSearchResults"
+import { LocationSearchSuggestions } from "@/components/ui/LocationSearchSuggestions"
+import { useLocationSearch } from "@/hooks/useLocationSearch"
+import type { Location } from "@/lib/locationUtils"
 import { 
   ChevronRight, 
   Car, 
   Shield, 
   Award, 
   Search, 
-  MapPin, 
-  MapPin as Location, 
+  MapPin,
   ShoppingCart, 
   Calendar, 
   Star, 
   Hand, 
-  CreditCard, 
-  CheckCircle 
+  CheckCircle,
+  Loader2
 } from "lucide-react"
 
 // Service offerings for car wash
@@ -49,7 +53,7 @@ const services = [
 // Steps to book a car wash online
 const bookingSteps = [
   {
-    icon: Location,
+    icon: MapPin,
     title: "Locate nearest Espinosa's",
     description: "Enter your address or postcode."
   },
@@ -194,148 +198,265 @@ const faqs = [
   },
 ]
 
+// Location data for search functionality
+const locations: Location[] = [
+  {
+    name: "Espinosa's Main Branch",
+    address: "123 Main Street, Makati City, Metro Manila",
+    hours: "Mon-Sun: 7:00 AM - 8:00 PM",
+    phone: "+63 2 1234 5678",
+    lat: 14.5995,
+    lng: 120.9842,
+    coordinates: "14.5995°N, 120.9842°E",
+  },
+  {
+    name: "Espinosa's Quezon City",
+    address: "456 Quezon Avenue, Quezon City, Metro Manila",
+    hours: "Mon-Sun: 7:00 AM - 8:00 PM",
+    phone: "+63 2 2345 6789",
+    lat: 14.6760,
+    lng: 121.0437,
+    coordinates: "14.6760°N, 121.0437°E",
+  },
+  {
+    name: "Espinosa's Taguig",
+    address: "789 BGC High Street, Taguig City, Metro Manila",
+    hours: "Mon-Sun: 7:00 AM - 8:00 PM",
+    phone: "+63 2 3456 7890",
+    lat: 14.5547,
+    lng: 121.0244,
+    coordinates: "14.5547°N, 121.0244°E",
+  },
+]
+
 // Home page component
 export function Home() {
+  // Location search functionality
+  const {
+    isLoading,
+    error,
+    result,
+    suggestions,
+    searchQuery,
+    updateSearchQuery,
+    searchByText,
+    searchByCoordinates,
+    getCurrentLocation,
+    clearResults,
+    clearError
+  } = useLocationSearch(locations)
+
+  // Handle search form submission
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      searchByText(searchQuery)
+    }
+  }
+
+  // Handle suggestion click
+  const handleSuggestionClick = (lat: number, lng: number, name: string) => {
+    updateSearchQuery(name)
+    searchByCoordinates(lat, lng)
+  }
+
   return (
     <div className="min-h-screen">
           {/* Hero Section */}
-          <section className="relative bg-brand-dark text-white py-20 min-h-[600px] overflow-hidden">
-            {/* Background Image */}
-            <div className="absolute inset-0 z-0">
-              <img 
-                src="/src/assets/images/services/hero-background.jpg" 
-                alt="Professional car wash service background"
-                className="w-full h-full object-cover"
+          <section className="relative bg-brand-dark text-white min-h-screen flex items-center justify-center overflow-hidden">
+            {/* Background Video */}
+            <div className="absolute inset-0 z-0 overflow-hidden">
+              <iframe
+                src="https://www.youtube.com/embed/ghdkQpEeJFE?autoplay=1&mute=1&loop=1&playlist=ghdkQpEeJFE&controls=0&showinfo=0&rel=0&modestbranding=1&start=0&iv_load_policy=3&fs=0&disablekb=1"
+                title="Professional car wash service background video"
+                className="absolute inset-0 w-full h-full"
+                style={{
+                  width: '100vw',
+                  height: '56.25vw', /* 16:9 aspect ratio */
+                  minHeight: '100vh',
+                  minWidth: '177.77vh', /* 16:9 aspect ratio */
+                  left: '50%',
+                  top: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: -1,
+                  border: 'none',
+                  pointerEvents: 'none'
+                }}
+                frameBorder="0"
+                allow="autoplay; encrypted-media"
+                allowFullScreen={false}
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/40 to-brand-dark/70"></div>
+              {/* Enhanced gradient overlay for better text readability */}
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/50 via-brand-dark/70 to-brand-dark/85"></div>
             </div>
 
             {/* Content Overlay */}
-            <div className="relative z-10">
+            <div className="relative z-10 w-full">
               <Container>
-                <div className="max-w-2xl">
-                  {/* Header */}
-                  <div className="space-y-2 mb-8">
-                    <div className="flex items-center">
-                      <div className="w-16 h-0.5 bg-brand-cream"></div>
-                      <h2 className="text-brand-cream text-sm font-medium tracking-wider uppercase ml-4">
+                <div className="max-w-4xl text-left pt-20">
+                  {/* Header Badge */}
+                  <div className="mb-8">
+                    <div className="inline-flex items-center gap-3 bg-brand-primary/20 backdrop-blur-sm border border-brand-cream/20 rounded-full px-6 py-3">
+                      <div className="w-2 h-2 bg-brand-cream rounded-full"></div>
+                      <span className="text-brand-cream text-sm font-medium tracking-wider uppercase">
                         ESPINOSA'S CAR WASH LOCATOR
-                      </h2>
+                      </span>
                     </div>
                   </div>
 
                   {/* Main Headline */}
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                    Where Cars Come to Shine
+                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                    Where Cars Come<br />
+                    <span className="text-brand-cream">to Shine</span>
                   </h1>
 
                   {/* Description */}
-                  <p className="text-lg md:text-xl text-neutral-300 max-w-lg mb-8">
+                  <p className="text-xl md:text-2xl text-neutral-200 max-w-2xl mb-12 leading-relaxed">
                     Family-owned. Meticulous hand washing & detailing at neighborhood-friendly pricing.
                   </p>
 
-                  {/* Search Section */}
-                  <div className="space-y-4 mb-8">
-                    {/* Search Bar */}
-                    <div className="relative max-w-md">
-                      <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" />
+                  {/* Search and CTA Section */}
+                  <div className="max-w-2xl space-y-6">
+                    {/* Search Form */}
+                    <form onSubmit={handleSearchSubmit} className="relative">
+                      <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 h-6 w-6 text-brand-primary z-10" />
                       <Input
                         type="text"
-                        placeholder="Enter city or postcode"
-                        className="pl-12 pr-4 py-4 text-lg bg-white text-brand-dark placeholder:text-neutral-400 focus-ring rounded-lg"
+                        value={searchQuery}
+                        onChange={(e) => updateSearchQuery(e.target.value)}
+                        placeholder="Enter city or area in Metro Manila"
+                        className="pl-16 pr-6 py-6 text-lg bg-white/95 backdrop-blur-sm text-brand-dark placeholder:text-neutral-500 focus-ring rounded-2xl border-0 shadow-2xl"
+                        disabled={isLoading}
                       />
-                    </div>
+                      
+                      {/* Search Suggestions */}
+                      <LocationSearchSuggestions
+                        suggestions={suggestions}
+                        onSuggestionClick={handleSuggestionClick}
+                      />
+                    </form>
 
-                    {/* Location Option */}
-                    <div className="flex items-center gap-3 text-neutral-300">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span className="text-sm">Or use your current location</span>
+                    {/* Current Location Option */}
+                    <button
+                      onClick={getCurrentLocation}
+                      disabled={isLoading}
+                      className="flex items-center gap-3 text-neutral-300 hover:text-white transition-all duration-200 disabled:opacity-50"
+                    >
+                      {isLoading ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      )}
+                      <span className="text-lg">
+                        {isLoading ? 'Finding your location...' : 'Or use your current location'}
+                      </span>
+                    </button>
+
+                    {/* Error Display */}
+                    {error && (
+                      <div className="bg-red-500/20 backdrop-blur-sm border border-red-500/30 rounded-xl p-4 text-red-200 text-center">
+                        {error}
+                        <button
+                          onClick={clearError}
+                          className="ml-2 underline hover:no-underline"
+                        >
+                          Dismiss
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Search Results */}
+                    {result && (
+                      <LocationSearchResults
+                        location={result.location}
+                        userLocation={result.userLocation}
+                        onClose={clearResults}
+                      />
+                    )}
+
+                    {/* CTA Button */}
+                    <div className="pt-4">
+                      <Button
+                        asChild
+                        size="lg"
+                        className="bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold text-xl px-12 py-6 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105"
+                      >
+                        <Link to="/services" onClick={() => window.scrollTo(0, 0)} className="flex items-center gap-3">
+                          Book Now
+                          <ChevronRight className="h-6 w-6" />
+                        </Link>
+                      </Button>
                     </div>
                   </div>
-
-                  {/* CTA Button */}
-                  <Button
-                    asChild
-                    size="lg"
-                    className="bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold text-lg px-8 py-4 focus-ring rounded-lg"
-                  >
-                    <Link to="/services" onClick={() => window.scrollTo(0, 0)} className="flex items-center gap-2">
-                    Book Now
-                      <ChevronRight className="h-5 w-5" />
-                    </Link>
-                  </Button>
                 </div>
               </Container>
             </div>
           </section>
 
       {/* About Section */}
-      <section className="py-20 bg-neutral-100">
-        <Container>
-          <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Column - About Image */}
-            <div className="col-span-12 lg:col-span-6">
-              <div className="rounded-2xl h-80 lg:h-96 overflow-hidden">
-                <img 
-                  src="/src/assets/images/services/full-detailing.jpg" 
-                  alt="Professional car detailing service"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+      <Section background="neutral" className="py-20" fullWidthBackground>
+        <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left Column - About Image */}
+          <div className="col-span-12 lg:col-span-6">
+            <div className="rounded-2xl h-80 lg:h-96 overflow-hidden">
+              <img 
+                src="/src/assets/images/services/full-detailing.jpg" 
+                alt="Professional car detailing service"
+                className="w-full h-full object-cover"
+              />
             </div>
+          </div>
 
-            {/* Right Column - Content */}
-            <div className="col-span-12 lg:col-span-6 space-y-8">
-              {/* Heading */}
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark">
-                About Espinosa's
-              </h2>
+          {/* Right Column - Content */}
+          <div className="col-span-12 lg:col-span-6 space-y-8">
+            {/* Heading */}
+            <h2 className="espinosa-section-title text-brand-dark">
+              About Espinosa's
+            </h2>
 
-              {/* Description */}
-              <p className="text-lg text-neutral-600 leading-relaxed">
-                Small, family-run, and proudly local—Espinosa's focuses on meticulous hand washing and detailing with a personal touch. We believe every car deserves the same care we give our own.
-              </p>
+            {/* Description */}
+            <p className="text-lg text-neutral-600 leading-relaxed">
+              Small, family-run, and proudly local—Espinosa's focuses on meticulous hand washing and detailing with a personal touch. We believe every car deserves the same care we give our own.
+            </p>
 
-              {/* KPI Cards */}
-              <div className="grid grid-cols-3 gap-4">
-                <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
-                  <div className="text-3xl font-bold text-brand-dark mb-2">15+</div>
-                  <div className="text-sm text-neutral-600">Years</div>
-                </div>
-                <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
-                  <div className="text-3xl font-bold text-brand-dark mb-2">10k+</div>
-                  <div className="text-sm text-neutral-600">Cars cleaned</div>
-                </div>
-                <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
-                  <div className="text-3xl font-bold text-brand-dark mb-2">4.9</div>
-                  <div className="text-sm text-neutral-600">Avg. rating</div>
-                </div>
+            {/* KPI Cards */}
+            <div className="grid grid-cols-3 gap-4">
+              <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
+                <div className="text-3xl font-bold text-brand-dark mb-2">15+</div>
+                <div className="text-sm text-neutral-600">Years</div>
+              </div>
+              <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
+                <div className="text-3xl font-bold text-brand-dark mb-2">10k+</div>
+                <div className="text-sm text-neutral-600">Cars cleaned</div>
+              </div>
+              <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
+                <div className="text-3xl font-bold text-brand-dark mb-2">4.9</div>
+                <div className="text-sm text-neutral-600">Avg. rating</div>
               </div>
             </div>
           </div>
-        </Container>
-      </section>
+        </div>
+      </Section>
 
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-white">
-        <Container>
-            <div className="text-center mb-16">
-              {/* Small header with lines */}
-              <div className="flex items-center justify-center mb-4">
-                <div className="w-16 h-0.5 bg-brand-primary"></div>
-                <span className="mx-4 text-brand-primary text-sm font-medium">Our Services</span>
-              </div>
-              
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4">
-                Espinosa's Car Wash Services
-              </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              From quick washes to full detailing—packages tailored for you.
-            </p>
+      <Section id="services" background="white" className="py-20">
+        <div className="text-center mb-16">
+          {/* Small header with lines */}
+          <div className="flex items-center justify-center mb-4">
+            <div className="w-8 h-0.5 bg-brand-primary"></div>
+            <span className="mx-4 text-brand-primary text-sm font-medium">Our Services</span>
           </div>
+          
+          <h2 className="espinosa-section-title text-brand-dark mb-4">
+            Espinosa's Car Wash Services
+          </h2>
+          <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+            From quick washes to full detailing—packages tailored for you.
+          </p>
+        </div>
 
-          <div className="grid grid-cols-12 gap-6 md:gap-8">
+        <div className="grid grid-cols-12 gap-6 md:gap-8">
             {services.map((service) => (
               <Card key={service.title} className="col-span-12 md:col-span-4 bg-white rounded-2xl shadow-lg border-0 overflow-hidden group hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
                 {/* Service Image */}
@@ -386,28 +507,26 @@ export function Home() {
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </Container>
-      </section>
+        </div>
+      </Section>
 
       {/* Our Store Section */}
-      <section className="py-20 bg-white">
-        <Container>
-          <div className="flex items-center justify-between mb-12">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark">
-                Our Store
-              </h2>
-            </div>
-            <Link 
-              to="/services" 
-              className="text-brand-primary hover:text-brand-primary/80 font-medium focus-ring rounded-sm px-2 py-1"
-            >
-              View all
-            </Link>
+      <Section background="white" className="py-20">
+        <div className="flex items-center justify-between mb-12">
+          <div>
+            <h2 className="espinosa-section-title text-brand-dark">
+              Our Store
+            </h2>
           </div>
+          <Link 
+            to="/services" 
+            className="text-brand-primary hover:text-brand-primary/80 font-medium focus-ring rounded-sm px-2 py-1"
+          >
+            View all
+          </Link>
+        </div>
 
-          <div className="grid grid-cols-12 gap-6 md:gap-8">
+        <div className="grid grid-cols-12 gap-6 md:gap-8">
             {storeProducts.slice(0, 4).map((product) => (
               <Card key={product.id} className="col-span-12 md:col-span-6 lg:col-span-3 bg-white rounded-2xl shadow-lg border-0 overflow-hidden group hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
                 {/* Product Image */}
@@ -454,21 +573,19 @@ export function Home() {
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </Container>
-      </section>
+        </div>
+      </Section>
 
       {/* How To Book Online Section */}
-      <section className="py-20 bg-brand-cream">
-        <Container>
-          <div className="text-center mb-16">
-            <div className="w-16 h-0.5 bg-brand-primary mx-auto mb-4"></div>
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4">
-              How To Book Online
-            </h2>
-          </div>
+      <Section background="cream" className="py-20" fullWidthBackground>
+        <div className="text-center mb-16">
+          <div className="w-8 h-0.5 bg-brand-primary mx-auto mb-4"></div>
+          <h2 className="espinosa-section-title text-brand-dark mb-4">
+            How To Book Online
+          </h2>
+        </div>
 
-          <div className="grid grid-cols-12 gap-6 md:gap-8">
+        <div className="grid grid-cols-12 gap-6 md:gap-8">
             {bookingSteps.map((step, index) => (
               <Card key={index} className="col-span-12 md:col-span-6 lg:col-span-3 bg-white rounded-2xl shadow-lg border-0 text-center p-6 hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
                 <div className="mx-auto mb-4 p-4 bg-brand-cream rounded-2xl w-fit">
@@ -482,24 +599,22 @@ export function Home() {
                 </p>
               </Card>
             ))}
-          </div>
-        </Container>
-      </section>
+        </div>
+      </Section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-neutral-100">
-        <Container>
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-16 h-0.5 bg-brand-primary"></div>
-              <span className="mx-4 text-brand-primary text-sm font-medium">Testimonials</span>
-            </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-brand-dark">
-              5+ Years Helping Filipino Car Owners
-            </h3>
+      <Section background="neutral" className="py-20" fullWidthBackground>
+        <div className="text-center mb-16">
+          <div className="flex items-center justify-center mb-4">
+            <div className="w-8 h-0.5 bg-brand-primary"></div>
+            <span className="mx-4 text-brand-primary text-sm font-medium">Testimonials</span>
           </div>
+          <h3 className="text-3xl md:text-4xl font-bold text-brand-dark">
+            5+ Years Helping Filipino Car Owners
+          </h3>
+        </div>
 
-          <div className="grid grid-cols-12 gap-6 md:gap-8">
+        <div className="grid grid-cols-12 gap-6 md:gap-8">
             {testimonials.map((testimonial) => (
               <Card key={testimonial.id} className="col-span-12 md:col-span-4 bg-white rounded-2xl shadow-lg border-0 p-6 hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
                 <div className="flex items-start gap-4">
@@ -518,14 +633,13 @@ export function Home() {
                 </div>
               </Card>
             ))}
-          </div>
-        </Container>
-      </section>
+        </div>
+      </Section>
 
 
       {/* Promo Banner */}
-      <section className="bg-brand-accent py-16">
-        <Container>
+      <Section background="none" className="py-16" fullWidthBackground>
+        <div className="bg-brand-accent rounded-2xl p-8">
           <div className="text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-brand-dark mb-4">
               First Time Customer?
@@ -543,24 +657,23 @@ export function Home() {
               </Link>
             </Button>
           </div>
-        </Container>
-      </section>
+        </div>
+      </Section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 bg-white">
-        <Container>
-          <div className="text-center mb-16">
-            <div className="w-16 h-0.5 bg-brand-primary mx-auto mb-4"></div>
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto">
-              Everything you need to know about our car wash services.
-            </p>
-          </div>
+      <Section id="faq" background="white" className="py-20" fullWidthBackground>
+        <div className="text-center mb-16">
+          <div className="w-8 h-0.5 bg-brand-primary mx-auto mb-4"></div>
+          <h2 className="espinosa-section-title text-brand-dark mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto">
+            Everything you need to know about our car wash services.
+          </p>
+        </div>
 
-          <div className="grid grid-cols-12">
-            <div className="col-span-12 lg:col-start-3 lg:col-span-8">
+        <div className="grid grid-cols-12">
+          <div className="col-span-12 lg:col-start-3 lg:col-span-8">
             <Accordion type="single" collapsible className="space-y-4">
               {faqs.map((faq, index) => (
                 <AccordionItem key={index} value={`item-${index}`} className="border border-neutral-200 rounded-lg px-6">
@@ -573,28 +686,26 @@ export function Home() {
                 </AccordionItem>
               ))}
             </Accordion>
-            </div>
           </div>
-        </Container>
-      </section>
+        </div>
+      </Section>
 
       {/* Contact Us Section */}
-      <section className="py-20 bg-brand-cream">
-        <Container>
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-16 h-0.5 bg-brand-primary"></div>
-              <span className="mx-4 text-brand-primary text-sm font-medium">Contact The Espinosa Car Wash Team</span>
-            </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-brand-dark mb-6">
-              Want To Get In Touch?
-            </h3>
-            <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
-              Whether you'd like to share feedback, ask about our fleet packages, or explore joining the Espinosa's team, we'd love to hear from you. Select the option below that fits best, and we'll get back to you soon.
-            </p>
+      <Section background="cream" className="py-20" fullWidthBackground>
+        <div className="text-center mb-16">
+          <div className="flex items-center justify-center mb-4">
+            <div className="w-8 h-0.5 bg-brand-primary"></div>
+            <span className="mx-4 text-brand-primary text-sm font-medium">Contact The Espinosa Car Wash Team</span>
           </div>
+          <h3 className="espinosa-section-title text-brand-dark mb-6">
+            Want To Get In Touch?
+          </h3>
+          <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+            Whether you'd like to share feedback, ask about our fleet packages, or explore joining the Espinosa's team, we'd love to hear from you. Select the option below that fits best, and we'll get back to you soon.
+          </p>
+        </div>
 
-          <div className="grid grid-cols-12 gap-6 md:gap-8">
+        <div className="grid grid-cols-12 gap-6 md:gap-8">
             {/* Customer Feedback */}
             <Card className="col-span-12 md:col-span-4 bg-brand-dark rounded-2xl overflow-hidden group hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
               <div className="h-48 bg-brand-dark overflow-hidden">
@@ -669,19 +780,17 @@ export function Home() {
                 </Button>
               </CardContent>
             </Card>
-          </div>
-        </Container>
-      </section>
+        </div>
+      </Section>
 
       {/* Quality Guaranteed Section */}
-      <section className="py-20 bg-white">
-        <Container>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-12">
-              Quality Guaranteed
-            </h2>
+      <Section background="white" className="py-20" fullWidthBackground>
+        <div className="text-center mb-16">
+          <h2 className="espinosa-section-title text-brand-dark mb-12">
+            Quality Guaranteed
+          </h2>
 
-            <div className="grid grid-cols-12 gap-6 md:gap-8">
+          <div className="grid grid-cols-12 gap-6 md:gap-8">
               {qualityFeatures.map((feature, index) => (
                 <Card key={index} className="col-span-12 md:col-span-6 lg:col-span-3 bg-white rounded-2xl shadow-lg border border-brand-accent p-6 text-center hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
                   <div className="mx-auto mb-4 p-3 bg-brand-accent rounded-full w-fit">
@@ -695,10 +804,9 @@ export function Home() {
                   </p>
                 </Card>
               ))}
-            </div>
           </div>
-        </Container>
-      </section>
+        </div>
+      </Section>
     </div>
   )
 }
