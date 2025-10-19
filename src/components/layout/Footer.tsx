@@ -1,37 +1,29 @@
-// Footer component - Redesigned with trust signals, conversion-focused CTAs, and improved navigation
+// Footer component - Redesigned with improved navigation
 import { Link } from "react-router-dom"
 import { Section } from "./Section"
 import { Logo } from "@/components/ui/Logo"
-import { ChevronRight, Star, Shield, Facebook, Instagram, MessageCircle, Phone, MapPin } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Phone } from "lucide-react"
 import { PaymentLogo } from "@/components/ui/PaymentLogo"
 
 // Define footer links
 const footerLinks = {
   company: [
-    { name: "About", href: "/about", scrollToTop: true },
-    { name: "Locations", href: "/locations", scrollToTop: true },
-    { name: "Contact", href: "/contact", scrollToTop: true },
+    { name: "About", href: "/about" },
+    { name: "Locations", href: "/locations" },
+    { name: "Contact", href: "/contact" },
   ],
   services: [
-    { name: "Book Now", href: "/services", scrollToTop: true },
-    { name: "See All Packages", href: "/services", scrollToTop: true },
-    { name: "Premium Wash", href: "/services#premium", scrollToTop: true },
-    { name: "Full Detailing", href: "/services#detailing", scrollToTop: true },
+    { name: "Book Now", href: "/services" },
+    { name: "All Services", href: "/services" },
+    { name: "How It Works", href: "/how-it-works" },
+    { name: "Service Packages", href: "/services" },
   ],
   support: [
-    { name: "Help & Support", href: "/contact", scrollToTop: true },
-    { name: "FAQs", href: "/services#faq", scrollToTop: true },
-    { name: "Call Us", href: "tel:+639171234567", scrollToTop: false },
+    { name: "Help & Support", href: "/contact" },
+    { name: "Contact Us", href: "/contact" },
+    { name: "Call Us", href: "tel:+639171234567", isExternal: true },
   ],
 }
-
-// Define social links
-const socialLinks = [
-  { name: "Facebook", href: "https://facebook.com/espinosascarwash", icon: Facebook },
-  { name: "Instagram", href: "https://instagram.com/espinosascarwash", icon: Instagram },
-  { name: "TikTok", href: "https://tiktok.com/@espinosascarwash", icon: MessageCircle },
-]
 
 // Define payment methods
 const paymentMethods = [
@@ -42,90 +34,25 @@ const paymentMethods = [
   { name: "Maya", key: "maya" },
 ]
 
+// Helper function to handle link clicks
+const handleLinkClick = (href: string, isExternal: boolean = false) => {
+  if (isExternal) {
+    return // Let browser handle external links
+  }
+  
+  if (href.startsWith('/#')) {
+    // Handle anchor links to home page sections
+    window.location.href = href
+  } else {
+    // Regular navigation - scroll to top after navigation
+    window.scrollTo(0, 0)
+  }
+}
+
 // Footer Component
 export function Footer() {
   return (
     <footer className="bg-brand-dark text-white">
-      <Section background="none" className="bg-gradient-to-r from-brand-primary/10 to-brand-accent/10 border-b border-neutral-700" fullWidthBackground>
-          <div className="py-16">
-            <div className="text-center space-y-8">
-              {/* Main CTA Section */}
-              <div className="space-y-4">
-                <h3 className="text-3xl md:text-4xl font-bold text-white">
-                  Ready to Book Your Service?
-                </h3>
-                <p className="text-neutral-300 text-lg max-w-2xl mx-auto">
-                  Fast, easy booking in just 2 minutes. Professional car care made simple.
-                </p>
-              </div>
-              
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-brand-accent text-brand-dark hover:bg-brand-accent/90 font-bold text-xl px-12 py-6 h-auto focus-ring shadow-lg"
-                >
-                  <Link to="/services" onClick={() => window.scrollTo(0, 0)} className="flex items-center space-x-3">
-                    <span>Book a Service</span>
-                    <ChevronRight className="h-6 w-6" />
-                  </Link>
-                </Button>
-                
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="border-white text-white hover:bg-white hover:text-brand-dark font-semibold text-lg px-8 py-6 h-auto focus-ring bg-transparent"
-                >
-                  <Link to="/locations" onClick={() => window.scrollTo(0, 0)} className="flex items-center space-x-2">
-                    <MapPin className="h-5 w-5" />
-                    <span>See Locations</span>
-                  </Link>
-                </Button>
-              </div>
-
-              {/* Trust Bar */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-8 pt-6">
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <span className="text-lg font-semibold text-white">4.9/5</span>
-                  <span className="text-neutral-300">•</span>
-                  <span className="text-neutral-300 font-medium">5,000+ happy drivers</span>
-                </div>
-                
-                <div className="flex items-center gap-2 text-neutral-300">
-                  <Shield className="h-4 w-4 text-green-400" />
-                  <span className="font-medium">100% Satisfaction Guarantee</span>
-                </div>
-
-                {/* Social Links */}
-                <div className="flex items-center gap-3">
-                  {socialLinks.map((social) => {
-                    const IconComponent = social.icon
-                    return (
-                      <a
-                        key={social.name}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors focus-ring"
-                        aria-label={`Follow us on ${social.name}`}
-                      >
-                        <IconComponent className="h-6 w-6" />
-                      </a>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-      </Section>
-
       {/* Payment Methods */}
       <Section background="none" fullWidthBackground>
         <div className="py-8">
@@ -176,7 +103,7 @@ export function Footer() {
                     <li key={link.name}>
                       <Link
                         to={link.href}
-                        onClick={() => link.scrollToTop && window.scrollTo(0, 0)}
+                        onClick={() => handleLinkClick(link.href)}
                         className="text-neutral-300 hover:text-brand-accent transition-colors text-sm focus-ring rounded-sm px-1 py-0.5"
                       >
                         {link.name}
@@ -194,7 +121,7 @@ export function Footer() {
                     <li key={link.name}>
                       <Link
                         to={link.href}
-                        onClick={() => link.scrollToTop && window.scrollTo(0, 0)}
+                        onClick={() => handleLinkClick(link.href)}
                         className="text-neutral-300 hover:text-brand-accent transition-colors text-sm focus-ring rounded-sm px-1 py-0.5"
                       >
                         {link.name}
@@ -210,7 +137,7 @@ export function Footer() {
                 <ul className="space-y-3">
                   {footerLinks.support.map((link) => (
                     <li key={link.name}>
-                      {link.href.startsWith('tel:') ? (
+                      {link.isExternal ? (
                         <a
                           href={link.href}
                           className="text-neutral-300 hover:text-brand-accent transition-colors text-sm focus-ring rounded-sm px-1 py-0.5 flex items-center gap-2"
@@ -221,7 +148,7 @@ export function Footer() {
                       ) : (
                         <Link
                           to={link.href}
-                          onClick={() => link.scrollToTop && window.scrollTo(0, 0)}
+                          onClick={() => handleLinkClick(link.href)}
                           className="text-neutral-300 hover:text-brand-accent transition-colors text-sm focus-ring rounded-sm px-1 py-0.5"
                         >
                           {link.name}

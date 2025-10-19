@@ -2,8 +2,7 @@ import { useState, useCallback } from 'react'
 import { 
   Location, 
   findNearestLocation, 
-  searchMetroManilaArea,
-  isWithinMetroManila
+  searchPhilippineArea
 } from '@/lib/locationUtils'
 
 export interface LocationSearchResult {
@@ -33,7 +32,7 @@ export function useLocationSearch(locations: Location[]) {
     setState(prev => ({
       ...prev,
       searchQuery: query,
-      suggestions: query.length > 0 ? searchMetroManilaArea(query).slice(0, 5) : []
+      suggestions: query.length > 0 ? searchPhilippineArea(query).slice(0, 5) : []
     }))
   }, [])
 
@@ -44,13 +43,13 @@ export function useLocationSearch(locations: Location[]) {
     setState(prev => ({ ...prev, isLoading: true, error: null }))
 
     try {
-      const areas = searchMetroManilaArea(query)
+      const areas = searchPhilippineArea(query)
       
       if (areas.length === 0) {
         setState(prev => ({
           ...prev,
           isLoading: false,
-          error: 'Location not found in Metro Manila area'
+          error: 'Location not found. Try searching for Metro Manila, Cebu, Davao, or Iloilo.'
         }))
         return
       }
@@ -82,15 +81,6 @@ export function useLocationSearch(locations: Location[]) {
     setState(prev => ({ ...prev, isLoading: true, error: null }))
 
     try {
-      if (!isWithinMetroManila(lat, lng)) {
-        setState(prev => ({
-          ...prev,
-          isLoading: false,
-          error: 'Location is outside Metro Manila area'
-        }))
-        return
-      }
-
       const nearest = findNearestLocation(lat, lng, locations)
 
       setState(prev => ({
@@ -127,15 +117,6 @@ export function useLocationSearch(locations: Location[]) {
       (position) => {
         const { latitude, longitude } = position.coords
         
-        if (!isWithinMetroManila(latitude, longitude)) {
-          setState(prev => ({
-            ...prev,
-            isLoading: false,
-            error: 'You appear to be outside Metro Manila area'
-          }))
-          return
-        }
-
         const nearest = findNearestLocation(latitude, longitude, locations)
 
         setState(prev => ({

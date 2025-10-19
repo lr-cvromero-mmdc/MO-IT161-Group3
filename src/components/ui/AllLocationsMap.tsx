@@ -27,15 +27,16 @@ interface AllLocationsMapProps {
 }
 
 export function AllLocationsMap({ locations, className }: AllLocationsMapProps) {
-  // Calculate center point of all locations (Metro Manila area)
-  const centerLat = locations.reduce((sum, loc) => sum + loc.lat, 0) / locations.length
-  const centerLng = locations.reduce((sum, loc) => sum + loc.lng, 0) / locations.length
+  // Center of Philippines for country-wide view
+  const philippinesCenter: [number, number] = [12.8797, 121.7740]
+  // Zoom level 6 shows the entire Philippines
+  const defaultZoom = 6
 
   return (
     <div className={cn("w-full h-96 rounded-lg overflow-hidden border border-neutral-200 shadow-sm", className)}>
       <MapContainer
-        center={[centerLat, centerLng]}
-        zoom={12}
+        center={philippinesCenter}
+        zoom={defaultZoom}
         style={{ height: '100%', width: '100%' }}
         zoomControl={true}
         scrollWheelZoom={true}
@@ -76,7 +77,7 @@ export function AllLocationsMap({ locations, className }: AllLocationsMapProps) 
                     rel="noopener noreferrer"
                     className="text-brand-primary hover:underline text-xs font-medium"
                   >
-                    Get Directions →
+                    Get Directions
                   </a>
                 </div>
               </div>

@@ -1,10 +1,13 @@
 // Services page - Booking-focused design with real images, sticky booking bar, and enhanced product section
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useCart } from "@/hooks/useCart"
+import { useToast } from "@/hooks/useToast"
 import { 
   ChevronRight, 
   Search, 
@@ -41,12 +44,15 @@ const productCategories = [
   { value: "bundles", label: "Bundles" },
 ]
 
+// Note: All prices below already include 12% VAT
 const storeProducts = [
   {
-    id: 1,
+    id: "car-shampoo",
     name: "Premium Car Shampoo",
-    price: "₱299",
-    originalPrice: "₱399",
+    price: 299,
+    priceDisplay: "₱299",
+    originalPrice: 399,
+    originalPriceDisplay: "₱399",
     description: "Professional-grade car shampoo (500ml) for gentle cleaning. pH-balanced formula.",
     category: "cleaning",
     image: "/src/assets/images/products/car-shampoo.png",
@@ -55,9 +61,10 @@ const storeProducts = [
     isRecommended: true
   },
   {
-    id: 2,
+    id: "microfiber-towels",
     name: "Microfiber Towels (Set of 3)",
-    price: "₱499",
+    price: 499,
+    priceDisplay: "₱499",
     description: "High-quality microfiber towels (16x16 inches) for streak-free drying. Machine washable.",
     category: "cleaning",
     image: "/src/assets/images/products/microfiber-towel.png",
@@ -66,9 +73,10 @@ const storeProducts = [
     isRecommended: true
   },
   {
-    id: 3,
+    id: "car-wax",
     name: "Car Wax (16oz)",
-    price: "₱799",
+    price: 799,
+    priceDisplay: "₱799",
     description: "Long-lasting car wax (16oz) for protection and shine. Lasts 3-6 months.",
     category: "protection",
     image: "/src/assets/images/products/car-wax.png",
@@ -76,9 +84,10 @@ const storeProducts = [
     stockStatus: "In Stock"
   },
   {
-    id: 4,
+    id: "tire-shine",
     name: "Tire Shine Gel",
-    price: "₱199",
+    price: 199,
+    priceDisplay: "₱199",
     description: "Non-greasy tire shine (250ml) for a glossy finish. Water-resistant formula.",
     category: "protection",
     image: "/src/assets/images/products/tire-gel.png",
@@ -86,9 +95,10 @@ const storeProducts = [
     stockStatus: "Restocking Soon"
   },
   {
-    id: 5,
+    id: "interior-cleaner",
     name: "Interior Cleaner",
-    price: "₱399",
+    price: 399,
+    priceDisplay: "₱399",
     description: "Safe cleaner (500ml) for dashboard, seats, and interior surfaces. Non-toxic formula.",
     category: "cleaning",
     image: "/src/assets/images/products/interior-cleaner.png",
@@ -96,9 +106,10 @@ const storeProducts = [
     stockStatus: "In Stock"
   },
   {
-    id: 6,
+    id: "wheel-brush",
     name: "Wheel Brush Set",
-    price: "₱599",
+    price: 599,
+    priceDisplay: "₱599",
     description: "Professional wheel cleaning brushes (3 brushes) for all rim types. Durable nylon bristles.",
     category: "tools",
     image: "/src/assets/images/products/wheel-brush.png",
@@ -106,10 +117,12 @@ const storeProducts = [
     stockStatus: "In Stock"
   },
   {
-    id: 7,
+    id: "detailing-kit",
     name: "Complete Detailing Kit",
-    price: "₱1,800",
-    originalPrice: "₱2,200",
+    price: 1800,
+    priceDisplay: "₱1,800",
+    originalPrice: 2200,
+    originalPriceDisplay: "₱2,200",
     description: "Everything you need: shampoo, towels, wax, and cleaner. Save ₱400!",
     category: "bundles",
     image: "/src/assets/images/products/detailing-kit.png",
@@ -120,13 +133,16 @@ const storeProducts = [
   },
 ]
 
+// Note: All prices below already include 12% VAT
 const services = [
   {
-    id: 1,
+    id: "basic-wash",
     title: "Basic Wash",
     category: "basic",
-    price: "₱1,500",
-    duration: "30 min",
+    price: 1500,
+    priceDisplay: "₱1,500",
+    duration: 30,
+    durationDisplay: "30 min",
     description: "Exterior wash, wheel clean, dry & shine. Perfect for weekly maintenance.",
     features: ["Exterior wash", "Wheel cleaning", "Dry & shine", "Tire dressing"],
     popular: false,
@@ -139,11 +155,13 @@ const services = [
     framing: "Essential Care"
   },
   {
-    id: 2,
+    id: "premium-wash",
     title: "Premium Wash",
     category: "premium",
-    price: "₱2,500",
-    duration: "45 min",
+    price: 2500,
+    priceDisplay: "₱2,500",
+    duration: 45,
+    durationDisplay: "45 min",
     description: "Basic wash plus interior vacuum, dashboard clean, tire shine. Complete care.",
     features: ["Everything in Basic", "Interior vacuum", "Dashboard clean", "Tire shine"],
     popular: true,
@@ -157,11 +175,13 @@ const services = [
     isRecommended: true
   },
   {
-    id: 3,
+    id: "full-detailing",
     title: "Full Detailing",
     category: "detailing",
-    price: "₱4,500",
-    duration: "90 min",
+    price: 4500,
+    priceDisplay: "₱4,500",
+    duration: 90,
+    durationDisplay: "90 min",
     description: "Premium wash plus wax, leather conditioning, engine bay clean. Showroom ready.",
     features: ["Everything in Premium", "Wax application", "Leather conditioning", "Engine bay clean"],
     popular: false,
@@ -174,11 +194,13 @@ const services = [
     framing: "Complete Care"
   },
   {
-    id: 4,
+    id: "wax-application",
     title: "Wax Application",
     category: "addons",
-    price: "₱800",
-    duration: "20 min",
+    price: 800,
+    priceDisplay: "₱800",
+    duration: 20,
+    durationDisplay: "20 min",
     description: "Professional wax application for extra protection and shine.",
     features: ["Premium wax", "Hand application", "UV protection", "Long-lasting shine"],
     popular: false,
@@ -191,11 +213,13 @@ const services = [
     framing: "Add-on Service"
   },
   {
-    id: 5,
+    id: "interior-deep-clean",
     title: "Interior Deep Clean",
     category: "addons",
-    price: "₱1,200",
-    duration: "30 min",
+    price: 1200,
+    priceDisplay: "₱1,200",
+    duration: 30,
+    durationDisplay: "30 min",
     description: "Thorough interior cleaning including seats, carpets, and dashboard.",
     features: ["Seat cleaning", "Carpet shampoo", "Dashboard detail", "Leather treatment"],
     popular: false,
@@ -208,11 +232,13 @@ const services = [
     framing: "Add-on Service"
   },
   {
-    id: 6,
+    id: "engine-bay-clean",
     title: "Engine Bay Clean",
     category: "addons",
-    price: "₱600",
-    duration: "15 min",
+    price: 600,
+    priceDisplay: "₱600",
+    duration: 15,
+    durationDisplay: "15 min",
     description: "Safe engine bay cleaning to remove dirt and grime.",
     features: ["Safe cleaning", "Degreasing", "Protection coating", "Visual inspection"],
     popular: false,
@@ -274,7 +300,20 @@ const faqs = [
 ]
 
 export function Services() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { addToCart, state } = useCart()
+  const { success, info } = useToast()
   const [activeTab, setActiveTab] = useState("services")
+  
+  // Show message if redirected from booking page
+  useEffect(() => {
+    if (location.state?.message) {
+      info('Cart Empty', location.state.message)
+      // Clear the state to prevent showing the message again
+      window.history.replaceState({}, document.title)
+    }
+  }, [location.state, info])
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [selectedService, setSelectedService] = useState<any>(null)
@@ -465,10 +504,10 @@ export function Services() {
                       </div>
                       <CardTitle className="text-2xl text-brand-dark mb-2">{service.title}</CardTitle>
                       <div className="flex items-center justify-center gap-4 text-lg mb-4">
-                        <span className="text-3xl font-bold text-brand-primary">{service.price}</span>
+                        <span className="text-3xl font-bold text-brand-primary">{service.priceDisplay}</span>
                         <div className="flex items-center gap-2 text-neutral-600 bg-neutral-100 px-3 py-1 rounded-full">
                           <Clock className="h-5 w-5 text-brand-primary" />
-                          <span className="font-semibold">{service.duration}</span>
+                          <span className="font-semibold">{service.durationDisplay}</span>
                         </div>
                       </div>
                     </CardHeader>
@@ -504,11 +543,23 @@ export function Services() {
                       </ul>
                       
                       <Button
-                        onClick={() => handleServiceSelect(service)}
-                        className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold text-lg py-3 focus-ring"
+                        onClick={() => {
+                          addToCart({
+                            id: service.id,
+                            type: 'service',
+                            name: service.title,
+                            price: service.price,
+                            quantity: 1,
+                            description: service.description,
+                            duration: service.duration,
+                            image: service.image,
+                          })
+                          success(`${service.title} added to cart!`, 'Click the cart icon to book your date & time.')
+                        }}
+                        className="w-full font-semibold text-lg py-3 focus-ring bg-brand-primary text-white hover:bg-brand-primary/90"
                       >
-                        <Calendar className="h-5 w-5 mr-2" />
-                        Select & Book
+                        <ShoppingCart className="h-5 w-5 mr-2" />
+                        Add to Cart
                       </Button>
                     </CardContent>
                   </Card>
@@ -588,9 +639,9 @@ export function Services() {
                         <div className="text-center mb-4">
                           <h3 className="text-xl font-bold text-brand-dark mb-2">{product.name}</h3>
                           <div className="flex items-center justify-center gap-2 mb-2">
-                            <span className="text-2xl font-bold text-brand-primary">{product.price}</span>
+                            <span className="text-2xl font-bold text-brand-primary">{product.priceDisplay}</span>
                             {product.originalPrice && (
-                              <span className="text-lg text-neutral-400 line-through">{product.originalPrice}</span>
+                              <span className="text-lg text-neutral-400 line-through">{product.originalPriceDisplay}</span>
                             )}
                           </div>
                           <p className="text-sm text-neutral-600 mb-4">
@@ -628,7 +679,18 @@ export function Services() {
                               ? 'bg-gradient-to-r from-brand-primary to-brand-accent hover:from-brand-primary/90 hover:to-brand-accent/90 text-white' 
                               : 'bg-brand-primary hover:bg-brand-primary/90 text-white'
                           }`}
-                          onClick={() => console.log("Add to cart:", product)}
+                          onClick={() => {
+                            addToCart({
+                              id: product.id,
+                              type: 'product',
+                              name: product.name,
+                              price: product.price,
+                              quantity: 1,
+                              description: product.description,
+                              image: product.image,
+                            })
+                            success(`${product.name} added to cart!`, 'You can continue shopping or proceed to checkout.')
+                          }}
                         >
                           <ShoppingCart className="h-4 w-4 mr-2" />
                           {product.isBundle ? 'Get Bundle Deal' : 'Add to Cart'}
@@ -656,7 +718,7 @@ export function Services() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">{selectedService.title}</h3>
-                  <p className="text-neutral-600">{selectedService.duration} • {selectedService.price}</p>
+                  <p className="text-neutral-600">{selectedService.durationDisplay} | {selectedService.priceDisplay}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -785,7 +847,7 @@ export function Services() {
                 />
                 <div>
                   <h3 className="font-semibold text-brand-dark">{selectedService.title}</h3>
-                  <p className="text-sm text-neutral-600">{selectedService.duration} • {selectedService.price}</p>
+                  <p className="text-sm text-neutral-600">{selectedService.durationDisplay} | {selectedService.priceDisplay}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">

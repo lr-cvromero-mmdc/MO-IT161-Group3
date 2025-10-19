@@ -9,6 +9,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { LocationSearchResults } from "@/components/ui/LocationSearchResults"
 import { LocationSearchSuggestions } from "@/components/ui/LocationSearchSuggestions"
 import { useLocationSearch } from "@/hooks/useLocationSearch"
+import { useCart } from "@/hooks/useCart"
+import { useToast } from "@/hooks/useToast"
 import type { Location } from "@/lib/locationUtils"
 import { 
   ChevronRight, 
@@ -28,25 +30,34 @@ import {
 // Service offerings for car wash
 const services = [
   {
+    id: "basic-wash",
     title: "Basic Wash",
-    price: "₱1,500",
+    price: 1500,
+    priceDisplay: "₱1,500",
     description: "Exterior wash, wheel clean, dry & shine. Perfect for weekly maintenance.",
     features: ["Exterior wash", "Wheel cleaning", "Dry & shine", "Tire dressing"],
     icon: Car,
+    duration: 30,
   },
   {
+    id: "premium-wash",
     title: "Premium Wash",
-    price: "₱2,500",
+    price: 2500,
+    priceDisplay: "₱2,500",
     description: "Basic wash plus interior vacuum, dashboard clean, tire shine. Complete care.",
     features: ["Everything in Basic", "Interior vacuum", "Dashboard clean", "Tire shine"],
     icon: Shield,
+    duration: 45,
   },
   {
+    id: "full-detailing",
     title: "Full Detailing",
-    price: "₱4,500",
+    price: 4500,
+    priceDisplay: "₱4,500",
     description: "Premium wash plus wax, leather conditioning, engine bay clean. Showroom ready.",
     features: ["Everything in Premium", "Wax application", "Leather conditioning", "Engine bay clean"],
     icon: Award,
+    duration: 90,
   },
 ]
 
@@ -77,49 +88,55 @@ const bookingSteps = [
 // Products available in the store
 const storeProducts = [
   {
-    id: 1,
+    id: "car-shampoo",
     name: "Premium Car Shampoo",
-    price: "₱299",
+    price: 299,
+    priceDisplay: "₱299",
     description: "Professional-grade car shampoo for gentle cleaning",
     image: "🧽",
     category: "cleaning",
   },
   {
-    id: 2,
+    id: "microfiber-towels",
     name: "Microfiber Towels (Set of 3)",
-    price: "₱499",
+    price: 499,
+    priceDisplay: "₱499",
     description: "High-quality microfiber towels for streak-free drying",
     image: "🧻",
     category: "cleaning",
   },
   {
-    id: 3,
+    id: "car-wax",
     name: "Car Wax (16oz)",
-    price: "₱799",
+    price: 799,
+    priceDisplay: "₱799",
     description: "Long-lasting car wax for protection and shine",
     image: "✨",
     category: "protection",
   },
   {
-    id: 4,
+    id: "tire-shine",
     name: "Tire Shine Gel",
-    price: "₱199",
+    price: 199,
+    priceDisplay: "₱199",
     description: "Non-greasy tire shine for a glossy finish",
     image: "🛞",
     category: "protection",
   },
   {
-    id: 5,
+    id: "interior-cleaner",
     name: "Interior Cleaner",
-    price: "₱399",
+    price: 399,
+    priceDisplay: "₱399",
     description: "Safe cleaner for dashboard, seats, and interior surfaces",
     image: "🧴",
     category: "cleaning",
   },
   {
-    id: 6,
+    id: "wheel-brush",
     name: "Wheel Brush Set",
-    price: "₱599",
+    price: 599,
+    priceDisplay: "₱599",
     description: "Professional wheel cleaning brushes for all rim types",
     image: "🪥",
     category: "tools",
@@ -198,7 +215,7 @@ const faqs = [
   },
 ]
 
-// Location data for search functionality
+// Location data for search functionality - All Espinosa's branches across the Philippines
 const locations: Location[] = [
   {
     name: "Espinosa's Main Branch",
@@ -227,10 +244,41 @@ const locations: Location[] = [
     lng: 121.0244,
     coordinates: "14.5547°N, 121.0244°E",
   },
+  {
+    name: "Espinosa's Cebu City",
+    address: "321 Ayala Center Cebu, Cebu City, Cebu",
+    hours: "Mon-Sun: 7:00 AM - 8:00 PM",
+    phone: "+63 32 4567 8901",
+    lat: 10.3157,
+    lng: 123.8854,
+    coordinates: "10.3157°N, 123.8854°E",
+  },
+  {
+    name: "Espinosa's Davao City",
+    address: "654 SM Lanang Premier, Davao City, Davao del Sur",
+    hours: "Mon-Sun: 7:00 AM - 8:00 PM",
+    phone: "+63 82 5678 9012",
+    lat: 7.0735,
+    lng: 125.6128,
+    coordinates: "7.0735°N, 125.6128°E",
+  },
+  {
+    name: "Espinosa's Iloilo City",
+    address: "987 SM City Iloilo, Iloilo City, Iloilo",
+    hours: "Mon-Sun: 7:00 AM - 8:00 PM",
+    phone: "+63 33 6789 0123",
+    lat: 10.7202,
+    lng: 122.5621,
+    coordinates: "10.7202°N, 122.5621°E",
+  },
 ]
 
 // Home page component
 export function Home() {
+  // Cart functionality
+  const { addToCart } = useCart()
+  const { success } = useToast()
+  
   // Location search functionality
   const {
     isLoading,
@@ -312,7 +360,7 @@ export function Home() {
 
                   {/* Description */}
                   <p className="text-xl md:text-2xl text-neutral-200 max-w-2xl mb-12 leading-relaxed">
-                    Family-owned. Meticulous hand washing & detailing at neighborhood-friendly pricing.
+                    Family-owned. Meticulous hand washing & detailing at neighborhood-friendly pricing. Now serving Metro Manila, Cebu, Davao, and Iloilo.
                   </p>
 
                   {/* Search and CTA Section */}
@@ -438,7 +486,6 @@ export function Home() {
         </div>
       </Section>
 
-
       {/* Services Section */}
       <Section id="services" background="white" className="py-20">
         <div className="text-center mb-16">
@@ -482,7 +529,7 @@ export function Home() {
                   {/* Pricing */}
                   <div className="text-center mb-4">
                     <p className="text-sm text-neutral-500 mb-1">Starting at</p>
-                    <div className="text-3xl font-bold text-brand-dark">{service.price}</div>
+                    <div className="text-3xl font-bold text-brand-dark">{service.priceDisplay}</div>
                   </div>
                   
                   {/* Features List */}
@@ -495,15 +542,26 @@ export function Home() {
                     ))}
                   </ul>
                   
-                  {/* CTA Button */}
-                  <Button
-                    asChild
-                    className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold py-3 rounded-lg focus-ring"
-                  >
-                    <Link to="/services" onClick={() => window.scrollTo(0, 0)}>
-                    Select
-                    </Link>
-                  </Button>
+                       {/* CTA Button */}
+                       <Button
+                         onClick={() => {
+                           addToCart({
+                             id: service.id,
+                             type: 'service',
+                             name: service.title,
+                             price: service.price,
+                             quantity: 1,
+                             description: service.description,
+                             duration: service.duration,
+                             requiresLocation: true,
+                             requiresTimeSlot: true,
+                           })
+                           success(`${service.title} added to booking!`, 'Complete your booking details to secure your slot.')
+                         }}
+                         className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold py-3 rounded-lg focus-ring"
+                       >
+                         Book Now
+                       </Button>
                 </CardContent>
               </Card>
             ))}
@@ -557,17 +615,26 @@ export function Home() {
                   
                   <div className="flex items-center justify-between">
                     <div className="text-xl font-bold text-brand-dark">
-                      {product.price}
+                      {product.priceDisplay}
                     </div>
                     <Button
-                      asChild
+                      onClick={() => {
+                        addToCart({
+                          id: product.id,
+                          type: 'product',
+                          name: product.name,
+                          price: product.price,
+                          quantity: 1,
+                          description: product.description,
+                          image: product.image,
+                        })
+                        success(`${product.name} added to cart!`, 'You can continue shopping or proceed to checkout.')
+                      }}
                       size="sm"
                       variant="outline"
                       className="border-neutral-300 text-brand-dark hover:bg-neutral-50 focus-ring rounded-lg"
                     >
-                      <Link to="/services" onClick={() => window.scrollTo(0, 0)}>
-                      Add
-                      </Link>
+                      Add to Cart
                     </Button>
                   </div>
                 </CardContent>

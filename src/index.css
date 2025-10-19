@@ -31,6 +31,8 @@
 /* Minimal Map Styles */
 .leaflet-container {
   background: #f8fafc !important;
+  position: relative;
+  z-index: 1;
 }
 
 /* Hide unnecessary map elements */
@@ -46,6 +48,35 @@
 .leaflet-control-zoom {
   border: none !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  z-index: 10000 !important; /* Higher than floating cart button */
+}
+
+/* Floating Cart Button Styles */
+.floating-cart-button {
+  /* Ensure it's above all other content */
+  z-index: 9999;
+  
+  /* Smooth transitions */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Prevent body scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 640px) {
+  .floating-cart-button {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+/* Ensure modal doesn't interfere with other elements */
+.cart-modal-backdrop {
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .leaflet-control-zoom a {
@@ -70,6 +101,15 @@
   margin-left: 10px !important;
 }
 
+/* Ensure Leaflet controls are properly layered */
+.leaflet-control-container {
+  z-index: 10000 !important;
+}
+
+.leaflet-control-container .leaflet-top {
+  z-index: 10000 !important;
+}
+
 /* Clean marker styles */
 .leaflet-marker-icon {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1)) !important;
@@ -90,25 +130,22 @@
     height: 4rem; /* 64px - automotive industry standard */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 2rem; /* Pill-shaped container */
-    margin: 0.5rem auto;
-    max-width: 1200px;
-    width: calc(100% - 1rem);
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
     position: relative;
     z-index: 1000;
   }
 
   .navbar-transparent {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .navbar-solid {
-    background: rgba(19, 62, 135, 0.95);
-    border: 1px solid rgba(19, 62, 135, 0.3);
-    box-shadow: 0 8px 32px rgba(19, 62, 135, 0.4);
+    background: rgba(19, 62, 135, 0.98);
+    border-bottom: 1px solid rgba(19, 62, 135, 0.2);
+    box-shadow: 0 2px 12px rgba(19, 62, 135, 0.3);
   }
 
   .nav-link-professional {
@@ -142,32 +179,86 @@
 
   .cta-button-professional {
     font-family: 'open-sans', system-ui, sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     padding: 0.75rem 2rem;
     background: linear-gradient(135deg, #f3f3e0 0%, #e8e7d0 100%);
     color: #133e87;
     border-radius: 2rem;
     transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 16px rgba(243, 243, 224, 0.4);
-    border: 2px solid rgba(19, 62, 135, 0.1);
+    box-shadow: 0 4px 16px rgba(243, 243, 224, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+    border: none;
     font-size: 0.9rem;
+    letter-spacing: 0.025em;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    min-height: 2.75rem;
+    white-space: nowrap;
+  }
+
+  .cta-button-professional::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 250ms ease;
   }
 
   .cta-button-professional:hover {
-    background: linear-gradient(135deg, #e8e7d0 0%, #dddcc0 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(243, 243, 224, 0.6);
-    border-color: rgba(19, 62, 135, 0.2);
+    background: linear-gradient(135deg, #fcfcec 0%, #f3f3e0 100%);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 24px rgba(243, 243, 224, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+  }
+
+  .cta-button-professional:hover::before {
+    opacity: 1;
+  }
+
+  .cta-button-professional:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 8px rgba(243, 243, 224, 0.5);
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .cta-button-professional:focus {
+    outline: none;
+    box-shadow: 0 4px 16px rgba(243, 243, 224, 0.6), 0 0 0 3px rgba(255, 255, 255, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
   }
 
   .mobile-menu-professional {
-    background: rgba(19, 62, 135, 0.98);
+    background: rgba(19, 62, 135, 0.98) !important;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+  }
+
+  .mobile-menu-professional .nav-link-professional {
+    display: block;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: white;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: all 200ms ease;
+  }
+
+  .mobile-menu-professional .nav-link-professional:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #f3f3e0;
+  }
+
+  .mobile-menu-professional .nav-link-professional.active {
+    background: rgba(243, 243, 224, 0.15);
+    color: #f3f3e0;
+  }
+
+  .mobile-menu-professional .nav-link-professional::after {
+    display: none;
   }
 
   .shadow-3xl {

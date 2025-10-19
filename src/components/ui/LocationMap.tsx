@@ -27,7 +27,7 @@ export function LocationMap({ name, address, lat, lng, className }: LocationMapP
         center={[lat, lng]}
         zoom={15}
         style={{ height: '100%', width: '100%' }}
-        zoomControl={true}
+        zoomControl={false}
         scrollWheelZoom={false}
       >
         <TileLayer

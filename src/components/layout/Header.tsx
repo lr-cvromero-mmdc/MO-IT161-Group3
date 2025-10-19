@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/ui/Logo"
+import { FloatingCartButton } from "@/components/cart/FloatingCartButton"
 import { ChevronRight, Menu } from "lucide-react"
 
 // Mobile menu (Sheet) components
@@ -20,7 +21,7 @@ import { useState, useEffect, useRef } from "react"
 const navigation = [
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
-  { name: "How It Works", href: "/#how-it-works" },
+  { name: "How It Works", href: "/how-it-works" },
   { name: "Locations", href: "/locations" },
   { name: "Contact", href: "/contact" },
 ]
@@ -88,14 +89,15 @@ export function Header() {
   }`
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[1000]">
-      <div className={headerClasses}>
-        <div className="flex items-center justify-between w-full h-16 px-6">
+    <>
+      <header className="fixed top-0 left-0 right-0 z-[1000]">
+        <div className={headerClasses}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
           {/* Logo - Left Zone */}
           <div className="flex-shrink-0 flex items-center h-full">
             <Link 
               to="/" 
-              onClick={() => window.scrollTo(0, 0)}
               className="transition-transform hover:scale-105 flex items-center h-full focus:outline-none"
               aria-label="Espinosa's Hand Carwash - Home"
             >
@@ -113,7 +115,6 @@ export function Header() {
                 <Link
                   key={item.name}
                   to={item.href}
-                  onClick={() => window.scrollTo(0, 0)}
                   className={`nav-link-professional flex items-center h-full transition-all duration-200 ${
                     location.pathname === item.href ? 'active' : ''
                   } text-white hover:text-brand-cream hover:scale-105`}
@@ -125,11 +126,11 @@ export function Header() {
           </nav>
 
           {/* Desktop CTA Button - Right Zone */}
-          <div className="hidden lg:flex items-center flex-shrink-0 h-full">
+          <div className="hidden lg:flex items-center flex-shrink-0 h-full gap-4">
             <Link 
-              to="/#book-now" 
-              className="cta-button-professional flex items-center gap-2 hover:scale-105 transition-all duration-200"
-              onClick={() => window.scrollTo(0, 0)}
+              to="/services" 
+              className="cta-button-professional flex items-center gap-2 hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-primary"
+              aria-label="Book your car wash service now"
             >
               <span>Book Now</span>
               <ChevronRight className="h-4 w-4" />
@@ -137,7 +138,7 @@ export function Header() {
           </div>
 
           {/* Mobile Menu - Right Zone */}
-          <div className="lg:hidden flex items-center flex-shrink-0">
+          <div className="lg:hidden flex items-center flex-shrink-0 gap-2">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
                 <Button
@@ -156,9 +157,6 @@ export function Header() {
             <SheetContent side="right" className="w-80 mobile-menu-professional">
               <SheetHeader>
                 <SheetTitle className="text-white font-bold text-xl">Menu</SheetTitle>
-                <SheetDescription className="text-neutral-300">
-                  Navigate to different sections of our website
-                </SheetDescription>
               </SheetHeader>
               
               <nav className="mt-8 space-y-2" role="navigation" aria-label="Mobile navigation" ref={menuRef}>
@@ -172,10 +170,7 @@ export function Header() {
                         ? "active font-semibold"
                         : ""
                     }`}
-                    onClick={() => {
-                      setIsOpen(false)
-                      window.scrollTo(0, 0)
-                    }}
+                    onClick={() => setIsOpen(false)}
                   >
                     {item.name}
                   </Link>
@@ -183,9 +178,10 @@ export function Header() {
                 
                 <div className="pt-6 mt-6 border-t border-white/20">
                   <Link
-                    to="/#book-now" 
-                    className="cta-button-professional w-full flex items-center justify-center gap-2"
+                    to="/services" 
+                    className="cta-button-professional w-full flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-primary"
                     onClick={() => setIsOpen(false)}
+                    aria-label="Book your car wash service now"
                   >
                     <span>Book Now</span>
                     <ChevronRight className="h-4 w-4" />
@@ -196,7 +192,12 @@ export function Header() {
             </Sheet>
           </div>
         </div>
-      </div>
+        </div>
+        </div>
     </header>
+    
+    {/* Floating Cart Button */}
+    <FloatingCartButton />
+  </>
   )
 }
