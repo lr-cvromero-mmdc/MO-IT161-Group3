@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import logoSvg from "@/assets/images/logos/brand/SVG/espinosa-logo.svg"
 
 // Logo component with proper sizing and positioning for different contexts
 interface LogoProps {
@@ -12,7 +13,7 @@ export function Logo({
   background = 'light',
   className
 }: LogoProps) {
-  const logoSrc = "/src/assets/images/logos/brand/SVG/espinosa-logo.svg"
+  const logoSrc = logoSvg
 
   // Context-specific sizing that considers the container and usage
   const getContextClasses = () => {
