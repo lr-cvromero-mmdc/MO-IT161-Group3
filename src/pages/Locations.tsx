@@ -1,39 +1,17 @@
-// Locations page - Branch locations with contact details and payment methods
 import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { 
-  MapPin, 
-  Clock, 
-  Phone, 
-  CreditCard, 
-  Smartphone, 
-  QrCode 
-} from "lucide-react"
+import { MapPin, Clock, Phone, CreditCard, Smartphone, QrCode } from "lucide-react"
 
-<<<<<<< HEAD
 // List of Espinosa's branch locations with contact and payment details
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// List of Espinosa's branch locations with contact and payment details
-=======
->>>>>>> origin/staging
-=======
-// List of Espinosa's branch locations with contact and payment details
->>>>>>> Stashed changes
-=======
-// List of Espinosa's branch locations with contact and payment details
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const locations = [
   {
     name: "Espinosa's Main Branch",
     address: "123 Main Street, Makati City, Metro Manila",
     hours: "Mon-Sun: 7:00 AM - 8:00 PM",
     phone: "+63 2 1234 5678",
-    payments: ["Visa", "Mastercard", "GCash", "QR Ph", "Maya"],
+    lat: 14.5995,
+    lng: 120.9842,
     coordinates: "14.5995°N, 120.9842°E",
   },
   {
@@ -41,7 +19,8 @@ const locations = [
     address: "456 Quezon Avenue, Quezon City, Metro Manila",
     hours: "Mon-Sun: 7:00 AM - 8:00 PM",
     phone: "+63 2 2345 6789",
-    payments: ["Visa", "Mastercard", "GCash", "QR Ph", "Maya"],
+    lat: 14.6760,
+    lng: 121.0437,
     coordinates: "14.6760°N, 121.0437°E",
   },
   {
@@ -49,33 +28,20 @@ const locations = [
     address: "789 BGC High Street, Taguig City, Metro Manila",
     hours: "Mon-Sun: 7:00 AM - 8:00 PM",
     phone: "+63 2 3456 7890",
-    payments: ["Visa", "Mastercard", "GCash", "QR Ph", "Maya"],
+    lat: 14.5547,
+    lng: 121.0244,
     coordinates: "14.5547°N, 121.0244°E",
   },
 ]
 
-<<<<<<< HEAD
 //
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-//
-=======
->>>>>>> origin/staging
-=======
-//
->>>>>>> Stashed changes
-=======
-//
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const paymentMethods = [
   { name: "Visa", icon: CreditCard, color: "text-blue-600" },
   { name: "Mastercard", icon: CreditCard, color: "text-red-600" },
   { name: "GCash", icon: Smartphone, color: "text-blue-500" },
   { name: "QR Ph", icon: QrCode, color: "text-green-600" },
 ]
+
 
 <<<<<<< HEAD
 // Card component to display individual location details
@@ -124,34 +90,15 @@ function LocationCard({ location }: { location: typeof locations[0] }) {
           </div>
         </div>
 
-        {/* Payment Methods */}
-        <div className="space-y-2">
-          <p className="font-medium text-brand-dark">Payment Methods</p>
-          <div className="flex flex-wrap gap-2">
-            {location.payments.map((payment) => {
-              const method = paymentMethods.find(m => m.name === payment)
-              return (
-                <div
-                  key={payment}
-                  className="flex items-center gap-1 px-2 py-1 bg-brand-accent rounded-md text-xs"
-                >
-                  {method && <method.icon className={`h-3 w-3 ${method.color}`} />}
-                  <span className="text-brand-dark">{payment}</span>
-                </div>
-              )
-            })}
-          </div>
-        </div>
 
-        {/* Map Placeholder */}
+        {/* Interactive Map */}
         <div className="mt-6">
-          <div className="bg-neutral-100 rounded-lg h-32 flex items-center justify-center border-2 border-dashed border-neutral-300">
-            <div className="text-center">
-              <MapPin className="h-8 w-8 text-neutral-400 mx-auto mb-2" />
-              <p className="text-sm text-neutral-500">Map View</p>
-              <p className="text-xs text-neutral-400">{location.coordinates}</p>
-            </div>
-          </div>
+          <LocationMap
+            name={location.name}
+            address={location.address}
+            lat={location.lat}
+            lng={location.lng}
+          />
         </div>
 
         {/* Action Buttons */}
@@ -199,21 +146,37 @@ export function Locations() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-brand-primary text-white py-20">
+      <section className="bg-brand-primary text-white py-20 pt-32">
         <Container>
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Our Locations
             </h1>
             <p className="text-lg md:text-xl text-brand-cream mb-8">
-              Find the nearest Espinosa's Hand Carwash location. We're conveniently located across Metro Manila.
+              Find the nearest Espinosa's Hand Carwash location. We're conveniently located across Metro Manila, Cebu, Davao, and Iloilo.
             </p>
           </div>
         </Container>
       </section>
 
+      {/* Find All Locations Map */}
+      <section className="bg-neutral-50 py-20">
+        <Container>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4">
+              Find All Locations
+            </h2>
+            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+              Interactive map showing all Espinosa's Hand Carwash locations across the Philippines. 
+              Click on any marker for more details and directions.
+            </p>
+          </div>
+          <AllLocationsMap locations={locations} />
+        </Container>
+      </section>
+
       {/* Locations Grid */}
-      <section className="py-20">
+      <section className="bg-white py-20">
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {locations.map((location, index) => (
@@ -223,66 +186,7 @@ export function Locations() {
         </Container>
       </section>
 
-      {/* Payment Methods Section */}
-      <section className="bg-brand-cream py-16">
-        <Container>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-brand-dark mb-4">
-              Payment Options
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              We accept all major payment methods for your convenience.
-            </p>
-          </div>
 
-          <div className="flex flex-wrap justify-center items-center gap-8">
-            {paymentMethods.map((method) => (
-              <div
-                key={method.name}
-                className="flex items-center space-x-3 bg-white px-6 py-4 rounded-lg shadow-sm"
-              >
-                <method.icon className={`h-8 w-8 ${method.color}`} />
-                <span className="font-medium text-brand-dark">{method.name}</span>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Contact CTA */}
-      <section className="bg-brand-dark text-white py-20">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Can't Find Your Location?
-            </h2>
-            <p className="text-lg md:text-xl text-neutral-300 mb-8">
-              We're expanding! Contact us to request a new location or get updates on upcoming branches.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold text-lg px-8 py-4 focus-ring"
-              >
-                <a href="tel:+63212345678">
-                  Call Us
-                </a>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="border-brand-cream text-brand-cream hover:bg-brand-cream hover:text-brand-dark font-semibold text-lg px-8 py-4 focus-ring"
-              >
-                <a href="mailto:info@espinosacarwash.com">
-                  Email Us
-                </a>
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </section>
     </div>
   )
 }
