@@ -3,26 +3,8 @@ import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/ui/Logo"
 import { FloatingCartButton } from "@/components/cart/FloatingCartButton"
 import { ChevronRight, Menu } from "lucide-react"
-<<<<<<< HEAD
 
 // Mobile menu (Sheet) components
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-
-// Mobile menu (Sheet) components
-=======
->>>>>>> origin/staging
-=======
-
-// Mobile menu (Sheet) components
->>>>>>> Stashed changes
-=======
-
-// Mobile menu (Sheet) components
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 import {
   Sheet,
   SheetContent,
@@ -31,34 +13,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 
 // React hooks
 import { useState, useEffect, useRef } from "react"
 
 // Navigation links data
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-import { useState, useEffect, useRef } from "react"
-
->>>>>>> origin/staging
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const navigation = [
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
@@ -67,22 +26,7 @@ const navigation = [
   { name: "Contact", href: "/#contact" },
 ]
 
-<<<<<<< HEAD
 // Header component
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Header component
-=======
->>>>>>> origin/staging
-=======
-// Header component
->>>>>>> Stashed changes
-=======
-// Header component
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 export function Header() {
   const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
@@ -137,10 +81,38 @@ export function Header() {
     }
   }, [isOpen])
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+>>>>>>> origin/main
   // Determine header classes based on scroll and route
   const isHomePage = location.pathname === '/'
   
   // Dynamic header classes
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+  const isHomePage = location.pathname === '/'
+>>>>>>> origin/staging
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+>>>>>>> origin/main
   const headerClasses = `sticky top-0 z-50 transition-all duration-300 ${
     isHomePage && !isScrolled 
       ? 'bg-transparent shadow-none' 

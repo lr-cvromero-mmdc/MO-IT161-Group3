@@ -1,9 +1,41 @@
+<<<<<<< HEAD
+// Locations page - Branch locations with contact details and payment methods
+import { Container } from "@/components/layout/Container"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { 
+  MapPin, 
+  Clock, 
+  Phone, 
+  CreditCard, 
+  Smartphone, 
+  QrCode 
+} from "lucide-react"
+
+<<<<<<< HEAD
+// List of Espinosa's branch locations with contact and payment details
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// List of Espinosa's branch locations with contact and payment details
+=======
+>>>>>>> origin/staging
+=======
+// List of Espinosa's branch locations with contact and payment details
+>>>>>>> Stashed changes
+=======
+// List of Espinosa's branch locations with contact and payment details
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
 import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { MapPin, Clock, Phone, CreditCard, Smartphone, QrCode } from "lucide-react"
 
 // List of Espinosa's branch locations with contact and payment details
+>>>>>>> origin/main
 const locations = [
   {
     name: "Espinosa's Main Branch",
@@ -34,7 +66,26 @@ const locations = [
   },
 ]
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 //
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+//
+=======
+>>>>>>> origin/staging
+=======
+//
+>>>>>>> Stashed changes
+=======
+//
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+//
+>>>>>>> origin/main
 const paymentMethods = [
   { name: "Visa", icon: CreditCard, color: "text-blue-600" },
   { name: "Mastercard", icon: CreditCard, color: "text-red-600" },
@@ -42,23 +93,7 @@ const paymentMethods = [
   { name: "QR Ph", icon: QrCode, color: "text-green-600" },
 ]
 
-
-<<<<<<< HEAD
 // Card component to display individual location details
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Card component to display individual location details
-=======
->>>>>>> origin/staging
-=======
-// Card component to display individual location details
->>>>>>> Stashed changes
-=======
-// Card component to display individual location details
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 function LocationCard({ location }: { location: typeof locations[0] }) {
   return (
     <Card className="h-full hover:shadow-lg transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
@@ -126,22 +161,7 @@ function LocationCard({ location }: { location: typeof locations[0] }) {
   )
 }
 
-<<<<<<< HEAD
 // Locations page component
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Locations page component
-=======
->>>>>>> origin/staging
-=======
-// Locations page component
->>>>>>> Stashed changes
-=======
-// Locations page component
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 export function Locations() {
   return (
     <div className="min-h-screen bg-white">

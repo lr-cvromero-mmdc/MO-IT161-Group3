@@ -1,9 +1,44 @@
+<<<<<<< HEAD
+// About page - Professional car wash services with family values and quality focus
+import { Container } from "@/components/layout/Container"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { 
+  ChevronRight, 
+  Star, 
+  Clock, 
+  Users, 
+  Car, 
+  Shield, 
+  Award, 
+  Heart, 
+  Hand 
+} from "lucide-react"
+
+<<<<<<< HEAD
+// Performance indicators displayed 
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Performance indicators displayed 
+=======
+>>>>>>> origin/staging
+=======
+// Performance indicators displayed 
+>>>>>>> Stashed changes
+=======
+// Performance indicators displayed 
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
 import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ChevronRight, Star, Clock, Users, Car, Shield, Award, Heart, Hand } from "lucide-react"
 
 // Performance indicators displayed 
+>>>>>>> origin/main
 const kpis = [
   {
     number: "120+",
@@ -27,7 +62,26 @@ const kpis = [
   },
 ]
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // Core business values
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Core business values
+=======
+>>>>>>> origin/staging
+=======
+// Core business values
+>>>>>>> Stashed changes
+=======
+// Core business values
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Core business values
+>>>>>>> origin/main
 const values = [
   {
     title: "Family-Owned",
@@ -51,7 +105,26 @@ const values = [
   },
 ]
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 // About page component
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// About page component
+=======
+>>>>>>> origin/staging
+=======
+// About page component
+>>>>>>> Stashed changes
+=======
+// About page component
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// About page component
+>>>>>>> origin/main
 export function About() {
   return (
     <div className="min-h-screen bg-white">

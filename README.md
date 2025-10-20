@@ -15,9 +15,18 @@ A modern, responsive website for Espinosa's Hand Carwash built with React, Vite,
 
 ### Brand Colors
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> origin/rolling-local-cvromero
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/rolling-local-cvromero
+=======
+>>>>>>> origin/main
+>>>>>>> origin/staging
 - **Primary**: #133e87 (headers, nav, CTAs)
 - **Cream**: #f3f3e0 (backgrounds/content)
 - **Accent**: #eff7ff (subtle bg/borders)
@@ -25,9 +34,18 @@ A modern, responsive website for Espinosa's Hand Carwash built with React, Vite,
 
 ### Typography
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> origin/rolling-local-cvromero
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/rolling-local-cvromero
+=======
+>>>>>>> origin/main
+>>>>>>> origin/staging
 - **Font Family**: Inter (Google Fonts)
 - **Font Weights**: 100-900
 - **Responsive Sizing**: Mobile-first approach
@@ -43,23 +61,43 @@ A modern, responsive website for Espinosa's Hand Carwash built with React, Vite,
 
 ### Prerequisites
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/staging
 - Node.js 18+ 
 =======
 
 - Node.js 18+
 >>>>>>> origin/rolling-local-cvromero
+<<<<<<< HEAD
+=======
+=======
+- Node.js 18+ 
+>>>>>>> origin/main
+>>>>>>> origin/staging
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> origin/main
+>>>>>>> origin/staging
 ```bash
 git clone <repository-url>
 cd espinosa-carwash
 ```
 
 2. Install dependencies
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/staging
 =======
 
 ```bash
@@ -70,15 +108,29 @@ cd MO-IT161-Group3
 2. Install dependencies
 
 >>>>>>> origin/rolling-local-cvromero
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/main
+>>>>>>> origin/staging
 ```bash
 npm install
 ```
 
 3. Start the development server
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> origin/rolling-local-cvromero
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/rolling-local-cvromero
+=======
+>>>>>>> origin/main
+>>>>>>> origin/staging
 ```bash
 npm run dev
 ```
@@ -154,12 +206,22 @@ The project uses a comprehensive design token system defined in `src/lib/tokens.
 
 ### Adding New Colors
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> origin/main
+>>>>>>> origin/staging
 Add new colors to the `colors` object in `src/lib/tokens.ts` and they will be available in Tailwind classes.
 
 ### Adding New Components
 Create new components in the `src/components/` directory following the existing patterns.
 
 ### Modifying Styles
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/staging
 =======
 
 Add new colors to the `colors` object in `src/lib/tokens.ts` and they will be available in Tailwind classes.
@@ -171,6 +233,11 @@ Create new components in the `src/components/` directory following the existing 
 ### Modifying Styles
 
 >>>>>>> origin/rolling-local-cvromero
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/main
+>>>>>>> origin/staging
 Update the design tokens in `src/lib/tokens.ts` or add custom styles in `src/index.css`.
 
 ## Browser Support

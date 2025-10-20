@@ -12,9 +12,25 @@ import { Services } from "@/pages/Services"
 import { Locations } from "@/pages/Locations"
 import { Contact } from "@/pages/Contact"
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+// Main application component
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Main application component
+=======
+>>>>>>> origin/staging
+=======
+// Main application component
+>>>>>>> Stashed changes
+=======
 // Main application component
 >>>>>>> Stashed changes
 >>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
+// Main application component
 function App() {
   return (
     <div className="min-h-screen bg-white">
@@ -34,20 +50,5 @@ function App() {
   )
 }
 
-<<<<<<< HEAD
 // Exporting the App component as default
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Exporting the App component as default
-=======
->>>>>>> origin/staging
-=======
-// Exporting the App component as default
->>>>>>> Stashed changes
-=======
-// Exporting the App component as default
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 export default App

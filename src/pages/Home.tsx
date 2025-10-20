@@ -6,6 +6,40 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+<<<<<<< HEAD
+import { 
+  ChevronRight, 
+  Car, 
+  Shield, 
+  Award, 
+  Search, 
+  MapPin, 
+  MapPin as Location, 
+  ShoppingCart, 
+  Calendar, 
+  Star, 
+  Hand, 
+  CreditCard, 
+  CheckCircle 
+} from "lucide-react"
+
+<<<<<<< HEAD
+// Service offerings for car wash
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Service offerings for car wash
+=======
+>>>>>>> origin/staging
+=======
+// Service offerings for car wash
+>>>>>>> Stashed changes
+=======
+// Service offerings for car wash
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
+=======
 import { ChevronRight, Car, Shield, Award, Search, MapPin, MapPin as Location, ShoppingCart, Calendar, Star, Hand, CreditCard, CheckCircle } from "lucide-react"
 
 <<<<<<< HEAD
@@ -398,6 +432,16 @@ export function Home() {
     <div className="min-h-screen">
           {/* Hero Section */}
           <section className="relative bg-brand-dark text-white py-20 min-h-[600px] overflow-hidden">
+<<<<<<< HEAD
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+              <img 
+                src="/src/assets/images/services/hero-background.jpg" 
+                alt="Professional car wash service background"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/40 to-brand-dark/70"></div>
+=======
             {/* Background Video/Image Placeholder */}
             <div className="absolute inset-0 z-0">
               <div className="w-full h-full bg-gradient-to-br from-brand-primary/20 to-brand-dark/80 flex items-center justify-center">
@@ -410,6 +454,7 @@ export function Home() {
                   </p>
                 </div>
               </div>
+>>>>>>> origin/main
             </div>
 
             {/* Content Overlay */}
@@ -506,8 +551,13 @@ export function Home() {
                     size="lg"
                     className="bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold text-lg px-8 py-4 focus-ring rounded-lg"
                   >
+<<<<<<< HEAD
+                    <Link to="/services" onClick={() => window.scrollTo(0, 0)} className="flex items-center gap-2">
+                    Book Now
+=======
                     <Link to="/#book-now" className="flex items-center gap-2">
                       Book Now
+>>>>>>> origin/main
                       <ChevronRight className="h-5 w-5" />
                     </Link>
                   </Button>
@@ -520,12 +570,23 @@ export function Home() {
       <section className="py-20 bg-neutral-100">
         <Container>
           <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
+<<<<<<< HEAD
+            {/* Left Column - About Image */}
+            <div className="col-span-12 lg:col-span-6">
+              <div className="rounded-2xl h-80 lg:h-96 overflow-hidden">
+                <img 
+                  src="/src/assets/images/services/full-detailing.jpg" 
+                  alt="Professional car detailing service"
+                  className="w-full h-full object-cover"
+                />
+=======
             {/* Left Column - Video/Image Placeholder */}
             <div className="col-span-12 lg:col-span-6">
               <div className="bg-brand-dark rounded-2xl h-80 lg:h-96 flex items-center justify-center">
                 <p className="text-white text-lg font-medium tracking-wider uppercase">
                   VIDEO/IMAGE PLACEHOLDER
                 </p>
+>>>>>>> origin/main
               </div>
             </div>
 
@@ -641,8 +702,13 @@ export function Home() {
                     asChild
                     className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold py-3 rounded-lg focus-ring"
                   >
+<<<<<<< HEAD
+                    <Link to="/services" onClick={() => window.scrollTo(0, 0)}>
+                    Select
+=======
                     <Link to="/#book-now">
                       Select
+>>>>>>> origin/main
                     </Link>
                   </Button>
                 </CardContent>
@@ -717,8 +783,13 @@ export function Home() {
                       variant="outline"
                       className="border-neutral-300 text-brand-dark hover:bg-neutral-50 focus-ring rounded-lg"
                     >
+<<<<<<< HEAD
+                      <Link to="/services" onClick={() => window.scrollTo(0, 0)}>
+                      Add
+=======
                       <Link to="/services">
                         Add
+>>>>>>> origin/main
                       </Link>
                     </Button>
                   </div>
@@ -965,6 +1036,8 @@ export function Home() {
           </div>
         </Container>
       </section>
+<<<<<<< HEAD
+=======
 
       {/* Contact CTA */}
       <section className="bg-brand-dark text-white py-20">
@@ -1002,6 +1075,7 @@ export function Home() {
           </div>
         </Container>
       </section>
+>>>>>>> origin/main
     </div>
   )
 }
