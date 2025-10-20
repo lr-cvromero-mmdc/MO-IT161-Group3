@@ -1,16 +1,9 @@
-// Locations page - Branch locations with contact details
 import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { LocationMap } from "@/components/ui/LocationMap"
-import { AllLocationsMap } from "@/components/ui/AllLocationsMap"
-import { 
-  MapPin, 
-  Clock, 
-  Phone
-} from "lucide-react"
+import { MapPin, Clock, Phone, CreditCard, Smartphone, QrCode } from "lucide-react"
 
-// List of Espinosa's branch locations with contact details
+// List of Espinosa's branch locations with contact and payment details
 const locations = [
   {
     name: "Espinosa's Main Branch",
@@ -39,37 +32,33 @@ const locations = [
     lng: 121.0244,
     coordinates: "14.5547°N, 121.0244°E",
   },
-  {
-    name: "Espinosa's Cebu City",
-    address: "321 Ayala Center Cebu, Cebu City, Cebu",
-    hours: "Mon-Sun: 7:00 AM - 8:00 PM",
-    phone: "+63 32 4567 8901",
-    lat: 10.3157,
-    lng: 123.8854,
-    coordinates: "10.3157°N, 123.8854°E",
-  },
-  {
-    name: "Espinosa's Davao City",
-    address: "654 SM Lanang Premier, Davao City, Davao del Sur",
-    hours: "Mon-Sun: 7:00 AM - 8:00 PM",
-    phone: "+63 82 5678 9012",
-    lat: 7.0735,
-    lng: 125.6128,
-    coordinates: "7.0735°N, 125.6128°E",
-  },
-  {
-    name: "Espinosa's Iloilo City",
-    address: "987 SM City Iloilo, Iloilo City, Iloilo",
-    hours: "Mon-Sun: 7:00 AM - 8:00 PM",
-    phone: "+63 33 6789 0123",
-    lat: 10.7202,
-    lng: 122.5621,
-    coordinates: "10.7202°N, 122.5621°E",
-  },
+]
+
+//
+const paymentMethods = [
+  { name: "Visa", icon: CreditCard, color: "text-blue-600" },
+  { name: "Mastercard", icon: CreditCard, color: "text-red-600" },
+  { name: "GCash", icon: Smartphone, color: "text-blue-500" },
+  { name: "QR Ph", icon: QrCode, color: "text-green-600" },
 ]
 
 
+<<<<<<< HEAD
 // Card component to display individual location details
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Card component to display individual location details
+=======
+>>>>>>> origin/staging
+=======
+// Card component to display individual location details
+>>>>>>> Stashed changes
+=======
+// Card component to display individual location details
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 function LocationCard({ location }: { location: typeof locations[0] }) {
   return (
     <Card className="h-full hover:shadow-lg transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
@@ -137,7 +126,22 @@ function LocationCard({ location }: { location: typeof locations[0] }) {
   )
 }
 
+<<<<<<< HEAD
 // Locations page component
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Locations page component
+=======
+>>>>>>> origin/staging
+=======
+// Locations page component
+>>>>>>> Stashed changes
+=======
+// Locations page component
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 export function Locations() {
   return (
     <div className="min-h-screen bg-white">

@@ -6,28 +6,24 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { LocationSearchResults } from "@/components/ui/LocationSearchResults"
-import { LocationSearchSuggestions } from "@/components/ui/LocationSearchSuggestions"
-import { useLocationSearch } from "@/hooks/useLocationSearch"
-import { useCart } from "@/hooks/useCart"
-import { useToast } from "@/hooks/useToast"
-import type { Location } from "@/lib/locationUtils"
-import { 
-  ChevronRight, 
-  Car, 
-  Shield, 
-  Award, 
-  Search, 
-  MapPin,
-  ShoppingCart, 
-  Calendar, 
-  Star, 
-  Hand, 
-  CheckCircle,
-  Loader2
-} from "lucide-react"
+import { ChevronRight, Car, Shield, Award, Search, MapPin, MapPin as Location, ShoppingCart, Calendar, Star, Hand, CreditCard, CheckCircle } from "lucide-react"
 
+<<<<<<< HEAD
 // Service offerings for car wash
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Service offerings for car wash
+=======
+>>>>>>> origin/staging
+=======
+// Service offerings for car wash
+>>>>>>> Stashed changes
+=======
+// Service offerings for car wash
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const services = [
   {
     id: "basic-wash",
@@ -61,7 +57,22 @@ const services = [
   },
 ]
 
+<<<<<<< HEAD
 // Steps to book a car wash online
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Steps to book a car wash online
+=======
+>>>>>>> origin/staging
+=======
+// Steps to book a car wash online
+>>>>>>> Stashed changes
+=======
+// Steps to book a car wash online
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const bookingSteps = [
   {
     icon: MapPin,
@@ -85,7 +96,22 @@ const bookingSteps = [
   }
 ]
 
+<<<<<<< HEAD
 // Products available in the store
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Products available in the store
+=======
+>>>>>>> origin/staging
+=======
+// Products available in the store
+>>>>>>> Stashed changes
+=======
+// Products available in the store
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const storeProducts = [
   {
     id: "car-shampoo",
@@ -143,7 +169,22 @@ const storeProducts = [
   },
 ]
 
+<<<<<<< HEAD
 // Customer testimonials
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Customer testimonials
+=======
+>>>>>>> origin/staging
+=======
+// Customer testimonials
+>>>>>>> Stashed changes
+=======
+// Customer testimonials
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const testimonials = [
   {
     id: 1,
@@ -162,7 +203,22 @@ const testimonials = [
   }
 ]
 
+<<<<<<< HEAD
 // Quality features of the car wash service
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Quality features of the car wash service
+=======
+>>>>>>> origin/staging
+=======
+// Quality features of the car wash service
+>>>>>>> Stashed changes
+=======
+// Quality features of the car wash service
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const qualityFeatures = [
   {
     icon: Hand,
@@ -187,7 +243,22 @@ const qualityFeatures = [
 ]
 
 
+<<<<<<< HEAD
 // Frequently Asked Questions
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Frequently Asked Questions
+=======
+>>>>>>> origin/staging
+=======
+// Frequently Asked Questions
+>>>>>>> Stashed changes
+=======
+// Frequently Asked Questions
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const faqs = [
   {
     question: "Do you charge extra for SUVs?",
@@ -273,7 +344,22 @@ const locations: Location[] = [
   },
 ]
 
+<<<<<<< HEAD
 // Home page component
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Home page component
+=======
+>>>>>>> origin/staging
+=======
+// Home page component
+>>>>>>> Stashed changes
+=======
+// Home page component
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 export function Home() {
   // Cart functionality
   const { addToCart } = useCart()
@@ -311,44 +397,36 @@ export function Home() {
   return (
     <div className="min-h-screen">
           {/* Hero Section */}
-          <section className="relative bg-brand-dark text-white min-h-screen flex items-center justify-center overflow-hidden">
-            {/* Background Video */}
-            <div className="absolute inset-0 z-0 overflow-hidden">
-              <iframe
-                src="https://www.youtube.com/embed/ghdkQpEeJFE?autoplay=1&mute=1&loop=1&playlist=ghdkQpEeJFE&controls=0&showinfo=0&rel=0&modestbranding=1&start=0&iv_load_policy=3&fs=0&disablekb=1"
-                title="Professional car wash service background video"
-                className="absolute inset-0 w-full h-full"
-                style={{
-                  width: '100vw',
-                  height: '56.25vw', /* 16:9 aspect ratio */
-                  minHeight: '100vh',
-                  minWidth: '177.77vh', /* 16:9 aspect ratio */
-                  left: '50%',
-                  top: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  zIndex: -1,
-                  border: 'none',
-                  pointerEvents: 'none'
-                }}
-                frameBorder="0"
-                allow="autoplay; encrypted-media"
-                allowFullScreen={false}
-              />
-              {/* Enhanced gradient overlay for better text readability */}
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/50 via-brand-dark/70 to-brand-dark/85"></div>
+          <section className="relative bg-brand-dark text-white py-20 min-h-[600px] overflow-hidden">
+            {/* Background Video/Image Placeholder */}
+            <div className="absolute inset-0 z-0">
+              <div className="w-full h-full bg-gradient-to-br from-brand-primary/20 to-brand-dark/80 flex items-center justify-center">
+                <div className="text-center space-y-4">
+                  <div className="w-20 h-20 bg-neutral-700/50 rounded-full flex items-center justify-center mx-auto">
+                    <MapPin className="h-10 w-10 text-neutral-400" />
+                  </div>
+                  <p className="text-neutral-400 text-lg font-medium tracking-wider uppercase">
+                    VIDEO PLACEHOLDER
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Content Overlay */}
             <div className="relative z-10 w-full">
               <Container>
-                <div className="max-w-4xl text-left pt-20">
-                  {/* Header Badge */}
-                  <div className="mb-8">
-                    <div className="inline-flex items-center gap-3 bg-brand-primary/20 backdrop-blur-sm border border-brand-cream/20 rounded-full px-6 py-3">
-                      <div className="w-2 h-2 bg-brand-cream rounded-full"></div>
-                      <span className="text-brand-cream text-sm font-medium tracking-wider uppercase">
+                <div className="max-w-2xl">
+                  {/* Header */}
+                  <div className="space-y-2 mb-8">
+                    <div className="flex items-center">
+                      <div className="w-16 h-0.5 bg-brand-cream"></div>
+                      <h2 className="text-brand-cream text-sm font-medium tracking-wider uppercase ml-4">
+<<<<<<<<< Temporary merge branch 1
                         ESPINOSA'S CAR WASH LOCATOR
-                      </span>
+=========
+                        FIND AN ESPINOSA'S CAR WASH NEAR YOU
+>>>>>>>>> Temporary merge branch 2
+                      </h2>
                     </div>
                   </div>
 
@@ -422,38 +500,34 @@ export function Home() {
                       />
                     )}
 
-                    {/* CTA Button */}
-                    <div className="pt-4">
-                      <Button
-                        asChild
-                        size="lg"
-                        className="bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold text-xl px-12 py-6 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105"
-                      >
-                        <Link to="/services" onClick={() => window.scrollTo(0, 0)} className="flex items-center gap-3">
-                          Book Now
-                          <ChevronRight className="h-6 w-6" />
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
+                  {/* CTA Button */}
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold text-lg px-8 py-4 focus-ring rounded-lg"
+                  >
+                    <Link to="/#book-now" className="flex items-center gap-2">
+                      Book Now
+                      <ChevronRight className="h-5 w-5" />
+                    </Link>
+                  </Button>
                 </div>
               </Container>
             </div>
           </section>
 
       {/* About Section */}
-      <Section background="neutral" className="py-20" fullWidthBackground>
-        <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Column - About Image */}
-          <div className="col-span-12 lg:col-span-6">
-            <div className="rounded-2xl h-80 lg:h-96 overflow-hidden">
-              <img 
-                src="/src/assets/images/services/full-detailing.jpg" 
-                alt="Professional car detailing service"
-                className="w-full h-full object-cover"
-              />
+      <section className="py-20 bg-neutral-100">
+        <Container>
+          <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left Column - Video/Image Placeholder */}
+            <div className="col-span-12 lg:col-span-6">
+              <div className="bg-brand-dark rounded-2xl h-80 lg:h-96 flex items-center justify-center">
+                <p className="text-white text-lg font-medium tracking-wider uppercase">
+                  VIDEO/IMAGE PLACEHOLDER
+                </p>
+              </div>
             </div>
-          </div>
 
           {/* Right Column - Content */}
           <div className="col-span-12 lg:col-span-6 space-y-8">
@@ -467,19 +541,39 @@ export function Home() {
               Small, family-run, and proudly local—Espinosa's focuses on meticulous hand washing and detailing with a personal touch. We believe every car deserves the same care we give our own.
             </p>
 
-            {/* KPI Cards */}
-            <div className="grid grid-cols-3 gap-4">
-              <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
-                <div className="text-3xl font-bold text-brand-dark mb-2">15+</div>
-                <div className="text-sm text-neutral-600">Years</div>
-              </div>
-              <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
-                <div className="text-3xl font-bold text-brand-dark mb-2">10k+</div>
-                <div className="text-sm text-neutral-600">Cars cleaned</div>
-              </div>
-              <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
-                <div className="text-3xl font-bold text-brand-dark mb-2">4.9</div>
-                <div className="text-sm text-neutral-600">Avg. rating</div>
+              {/* KPI Cards */}
+<<<<<<<<< Temporary merge branch 1
+              <div className="grid grid-cols-3 gap-4">
+                <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
+                  <div className="text-3xl font-bold text-brand-dark mb-2">15+</div>
+                  <div className="text-sm text-neutral-600">Years</div>
+                </div>
+                <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
+                  <div className="text-3xl font-bold text-brand-dark mb-2">10k+</div>
+                  <div className="text-sm text-neutral-600">Cars cleaned</div>
+                </div>
+                <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
+                  <div className="text-3xl font-bold text-brand-dark mb-2">4.9</div>
+                  <div className="text-sm text-neutral-600">Avg. rating</div>
+=========
+              <div className="grid grid-cols-4 gap-4">
+                <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
+                  <div className="text-3xl font-bold text-brand-dark mb-2">5+</div>
+                  <div className="text-sm text-neutral-600">Years</div>
+                </div>
+                <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
+                  <div className="text-3xl font-bold text-brand-dark mb-2">5k+</div>
+                  <div className="text-sm text-neutral-600">Cars cleaned</div>
+                </div>
+                <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
+                  <div className="text-3xl font-bold text-brand-dark mb-2">4.9/5</div>
+                  <div className="text-sm text-neutral-600">Customer rating</div>
+                </div>
+                <div className="bg-white rounded-lg p-6 text-center border border-neutral-200">
+                  <div className="text-3xl font-bold text-brand-dark mb-2">100%</div>
+                  <div className="text-sm text-neutral-600">Service satisfaction guaranteed!</div>
+>>>>>>>>> Temporary merge branch 2
+                </div>
               </div>
             </div>
           </div>
@@ -542,26 +636,15 @@ export function Home() {
                     ))}
                   </ul>
                   
-                       {/* CTA Button */}
-                       <Button
-                         onClick={() => {
-                           addToCart({
-                             id: service.id,
-                             type: 'service',
-                             name: service.title,
-                             price: service.price,
-                             quantity: 1,
-                             description: service.description,
-                             duration: service.duration,
-                             requiresLocation: true,
-                             requiresTimeSlot: true,
-                           })
-                           success(`${service.title} added to booking!`, 'Complete your booking details to secure your slot.')
-                         }}
-                         className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold py-3 rounded-lg focus-ring"
-                       >
-                         Book Now
-                       </Button>
+                  {/* CTA Button */}
+                  <Button
+                    asChild
+                    className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold py-3 rounded-lg focus-ring"
+                  >
+                    <Link to="/#book-now">
+                      Select
+                    </Link>
+                  </Button>
                 </CardContent>
               </Card>
             ))}
@@ -634,7 +717,9 @@ export function Home() {
                       variant="outline"
                       className="border-neutral-300 text-brand-dark hover:bg-neutral-50 focus-ring rounded-lg"
                     >
-                      Add to Cart
+                      <Link to="/services">
+                        Add
+                      </Link>
                     </Button>
                   </div>
                 </CardContent>
@@ -670,16 +755,21 @@ export function Home() {
       </Section>
 
       {/* Testimonials Section */}
-      <Section background="neutral" className="py-20" fullWidthBackground>
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center mb-4">
-            <div className="w-8 h-0.5 bg-brand-primary"></div>
-            <span className="mx-4 text-brand-primary text-sm font-medium">Testimonials</span>
+      <section className="py-20 bg-neutral-100">
+        <Container>
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-16 h-0.5 bg-brand-primary"></div>
+              <span className="mx-4 text-brand-primary text-sm font-medium">Testimonials</span>
+            </div>
+            <h3 className="text-3xl md:text-4xl font-bold text-brand-dark">
+<<<<<<<<< Temporary merge branch 1
+              5+ Years Helping Filipino Car Owners
+=========
+              5+ Years of Serving Filipino Car Owners
+>>>>>>>>> Temporary merge branch 2
+            </h3>
           </div>
-          <h3 className="text-3xl md:text-4xl font-bold text-brand-dark">
-            5+ Years Helping Filipino Car Owners
-          </h3>
-        </div>
 
         <div className="grid grid-cols-12 gap-6 md:gap-8">
             {testimonials.map((testimonial) => (
@@ -871,9 +961,47 @@ export function Home() {
                   </p>
                 </Card>
               ))}
+            </div>
           </div>
-        </div>
-      </Section>
+        </Container>
+      </section>
+
+      {/* Contact CTA */}
+      <section className="bg-brand-dark text-white py-20">
+        <Container>
+          <div className="grid grid-cols-12">
+            <div className="col-span-12 lg:col-start-3 lg:col-span-8 text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Ready to Book Your Car Wash?
+              </h2>
+              <p className="text-lg md:text-xl text-neutral-300 mb-8">
+                Join thousands of satisfied customers who trust us with their vehicles.
+              </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                asChild
+                size="lg"
+                className="bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold text-lg px-8 py-4 focus-ring"
+              >
+                <Link to="/#book-now">
+                  Book Now
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-brand-cream text-brand-cream hover:bg-brand-cream hover:text-brand-dark font-semibold text-lg px-8 py-4 focus-ring"
+              >
+                <Link to="/locations">
+                  See Locations
+                </Link>
+              </Button>
+            </div>
+            </div>
+          </div>
+        </Container>
+      </section>
     </div>
   )
 }

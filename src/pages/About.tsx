@@ -1,7 +1,57 @@
-// About page - Basic placeholder for team development
 import { Container } from "@/components/layout/Container"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { ChevronRight, Star, Clock, Users, Car, Shield, Award, Heart, Hand } from "lucide-react"
 
-// About page component - Ready for team development
+// Performance indicators displayed 
+const kpis = [
+  {
+    number: "120+",
+    label: "Happy Customers",
+    icon: Users,
+  },
+  {
+    number: "5+",
+    label: "Years Experience",
+    icon: Clock,
+  },
+  {
+    number: "5,000+",
+    label: "Cars Washed",
+    icon: Car,
+  },
+  {
+    number: "4.9/5",
+    label: "Star Rating",
+    icon: Star,
+  },
+]
+
+// Core business values
+const values = [
+  {
+    title: "Family-Owned",
+    description: "We're a local family business that treats every customer like family. Personal service you can trust.",
+    icon: Heart,
+  },
+  {
+    title: "Hand-Washed Only",
+    description: "No machines, no shortcuts. Every car gets the personal attention it deserves with meticulous hand washing.",
+    icon: Hand,
+  },
+  {
+    title: "Quality Guaranteed",
+    description: "100% satisfaction guarantee. If you're not happy, we'll make it right or refund your money.",
+    icon: Shield,
+  },
+  {
+    title: "Neighborhood Friendly",
+    description: "Fair pricing that works for local families. Premium service without the premium price tag.",
+    icon: Award,
+  },
+]
+
+// About page component
 export function About() {
   return (
     <div className="min-h-screen bg-white">

@@ -11,40 +11,43 @@ import { HowItWorks } from "@/pages/HowItWorks"
 import { Services } from "@/pages/Services"
 import { Locations } from "@/pages/Locations"
 import { Contact } from "@/pages/Contact"
-import { Booking } from "@/pages/Booking"
-import { BookingConfirmation } from "@/pages/BookingConfirmation"
-import { ServiceBooking } from "@/pages/ServiceBooking"
-import { ProductCheckout } from "@/pages/ProductCheckout"
 
 // Main application component
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 function App() {
   return (
-    <ToastProvider>
-      <CartProvider>
-        <div className="min-h-screen bg-white">
-          <ScrollToTop />
-          <SkipToContent />
-          <Header />
-          <main id="main-content">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/how-it-works" element={<HowItWorks />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/locations" element={<Locations />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/booking" element={<Booking />} />
-              <Route path="/booking-confirmation" element={<BookingConfirmation />} />
-              <Route path="/service-booking" element={<ServiceBooking />} />
-              <Route path="/checkout" element={<ProductCheckout />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </CartProvider>
-    </ToastProvider>
+    <div className="min-h-screen bg-white">
+      <SkipToContent />
+      <Header />
+      <main id="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/locations" element={<Locations />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
   )
 }
 
+<<<<<<< HEAD
 // Exporting the App component as default
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Exporting the App component as default
+=======
+>>>>>>> origin/staging
+=======
+// Exporting the App component as default
+>>>>>>> Stashed changes
+=======
+// Exporting the App component as default
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 export default App

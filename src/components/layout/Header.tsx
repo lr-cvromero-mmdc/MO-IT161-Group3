@@ -3,8 +3,26 @@ import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/ui/Logo"
 import { FloatingCartButton } from "@/components/cart/FloatingCartButton"
 import { ChevronRight, Menu } from "lucide-react"
+<<<<<<< HEAD
 
 // Mobile menu (Sheet) components
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+
+// Mobile menu (Sheet) components
+=======
+>>>>>>> origin/staging
+=======
+
+// Mobile menu (Sheet) components
+>>>>>>> Stashed changes
+=======
+
+// Mobile menu (Sheet) components
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 import {
   Sheet,
   SheetContent,
@@ -13,27 +31,65 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 
 // React hooks
 import { useState, useEffect, useRef } from "react"
 
 // Navigation links data
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+import { useState, useEffect, useRef } from "react"
+
+>>>>>>> origin/staging
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const navigation = [
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
   { name: "How It Works", href: "/how-it-works" },
   { name: "Locations", href: "/locations" },
-  { name: "Contact", href: "/contact" },
+  { name: "Contact", href: "/#contact" },
 ]
 
+<<<<<<< HEAD
 // Header component
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Header component
+=======
+>>>>>>> origin/staging
+=======
+// Header component
+>>>>>>> Stashed changes
+=======
+// Header component
+>>>>>>> Stashed changes
+>>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 export function Header() {
   const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const firstMenuItemRef = useRef<HTMLAnchorElement>(null)
-  const lastMenuItemRef = useRef<HTMLButtonElement>(null)
+  const lastMenuItemRef = useRef<HTMLAnchorElement>(null)
 
   // Scroll detection for navbar background with improved threshold
   useEffect(() => {
@@ -81,48 +137,51 @@ export function Header() {
     }
   }, [isOpen])
 
-  // Professional navbar classes with enhanced styling
-  const headerClasses = `navbar-professional ${
-    !isScrolled 
-      ? 'navbar-transparent' 
-      : 'navbar-solid'
+  // Determine header classes based on scroll and route
+  const isHomePage = location.pathname === '/'
+  
+  // Dynamic header classes
+  const headerClasses = `sticky top-0 z-50 transition-all duration-300 ${
+    isHomePage && !isScrolled 
+      ? 'bg-transparent shadow-none' 
+      : 'bg-brand-primary shadow-sm'
   }`
 
   return (
-    <>
-      <header className="fixed top-0 left-0 right-0 z-[1000]">
-        <div className={headerClasses}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo - Left Zone */}
-          <div className="flex-shrink-0 flex items-center h-full">
-            <Link 
-              to="/" 
-              className="transition-transform hover:scale-105 flex items-center h-full focus:outline-none"
-              aria-label="Espinosa's Hand Carwash - Home"
-            >
-              <Logo 
-                context="header"
-                background="light"
-              />
-            </Link>
-          </div>
-
-          {/* Desktop Navigation - Center Zone */}
-          <nav className="hidden lg:flex items-center justify-center absolute left-1/2 transform -translate-x-1/2 h-16" role="navigation" aria-label="Main navigation">
-            <div className="flex items-center gap-6 h-full">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`nav-link-professional flex items-center h-full transition-all duration-200 ${
-                    location.pathname === item.href ? 'active' : ''
-                  } text-white hover:text-brand-cream hover:scale-105`}
-                >
-                  {item.name}
-                </Link>
-              ))}
+    <header className={headerClasses}>
+      <Container>
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo */}
+          <Link 
+            to="/" 
+            onClick={() => window.scrollTo(0, 0)}
+            className="flex items-center space-x-3 focus-ring rounded-lg"
+            aria-label="Espinosa's Hand Carwash - Home"
+          >
+            <div className="h-10 w-10 rounded-lg bg-brand-cream flex items-center justify-center">
+              <span className="text-brand-primary font-bold text-lg">E</span>
             </div>
+            <span className={`text-lg font-bold transition-colors ${
+              isHomePage && !isScrolled ? 'text-brand-dark' : 'text-white'
+            }`}>Espinosa's</span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-6" role="navigation" aria-label="Main navigation">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                onClick={() => window.scrollTo(0, 0)}
+                className={`text-sm font-medium transition-colors focus-ring rounded-sm px-2 py-1 ${
+                  location.pathname === item.href
+                    ? isHomePage && !isScrolled ? "text-brand-primary" : "text-brand-cream"
+                    : isHomePage && !isScrolled ? "text-brand-dark/80 hover:text-brand-primary" : "text-white/90 hover:text-brand-accent"
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
           </nav>
 
           {/* Desktop CTA Button - Right Zone */}
