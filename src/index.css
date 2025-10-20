@@ -1,10 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+@import 'leaflet/dist/leaflet.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/* Custom map styles - Minimal and Clean */
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.leaflet-popup-tip {
+  background: white;
+}
+
+.leaflet-control-zoom a {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+}
+
+/* Minimal Map Styles */
+.leaflet-container {
+  background: #f8fafc !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hide unnecessary map elements */
+.leaflet-control-attribution {
+  display: none !important;
+}
+
+.leaflet-control-scale {
+  display: none !important;
+}
+
+/* Simplify zoom controls */
+.leaflet-control-zoom {
+  border: none !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  z-index: 10000 !important; /* Higher than floating cart button */
+}
+
+/* Floating Cart Button Styles */
+.floating-cart-button {
+  /* Ensure it's above all other content */
+  z-index: 9999;
+  
+  /* Smooth transitions */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Prevent body scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 640px) {
+  .floating-cart-button {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+/* Ensure modal doesn't interfere with other elements */
+.cart-modal-backdrop {
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.leaflet-control-zoom a {
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  color: #374151 !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  width: 32px !important;
+  height: 32px !important;
+  line-height: 30px !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: #f9fafb !important;
+  border-color: #d1d5db !important;
+}
+
+/* Hide map tiles attribution */
+.leaflet-control-container .leaflet-top.leaflet-left {
+  margin-top: 10px !important;
+  margin-left: 10px !important;
+}
+
+/* Ensure Leaflet controls are properly layered */
+.leaflet-control-container {
+  z-index: 10000 !important;
+}
+
+.leaflet-control-container .leaflet-top {
+  z-index: 10000 !important;
+}
+
+/* Clean marker styles */
+.leaflet-marker-icon {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1)) !important;
+}
+
+/* Espinosa Brand Typography System */
+@layer components {
+  /* Centered Container Utility */
+  .espinosa-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  /* Professional Navbar Styles */
+  .navbar-professional {
+    height: 4rem; /* 64px - automotive industry standard */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    position: relative;
+    z-index: 1000;
+  }
+
+  .navbar-transparent {
+    background: rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-solid {
+    background: rgba(19, 62, 135, 0.98);
+    border-bottom: 1px solid rgba(19, 62, 135, 0.2);
+    box-shadow: 0 2px 12px rgba(19, 62, 135, 0.3);
+  }
+
+  .nav-link-professional {
+    font-family: 'open-sans', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.025em;
+    padding: 0 1rem;
+    border-radius: 0.5rem;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    text-decoration: none;
+  }
+
+  .nav-link-professional::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #f3f3e0;
+    transition: all 200ms ease-in-out;
+    transform: translateX(-50%);
+  }
+
+  .nav-link-professional:hover::after,
+  .nav-link-professional.active::after {
+    width: 80%;
+  }
+
+  .cta-button-professional {
+    font-family: 'open-sans', system-ui, sans-serif;
+    font-weight: 700;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, #f3f3e0 0%, #e8e7d0 100%);
+    color: #133e87;
+    border-radius: 2rem;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(243, 243, 224, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+    border: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.025em;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    min-height: 2.75rem;
+    white-space: nowrap;
+  }
+
+  .cta-button-professional::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 250ms ease;
+  }
+
+  .cta-button-professional:hover {
+    background: linear-gradient(135deg, #fcfcec 0%, #f3f3e0 100%);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 24px rgba(243, 243, 224, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+  }
+
+  .cta-button-professional:hover::before {
+    opacity: 1;
+  }
+
+  .cta-button-professional:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 8px rgba(243, 243, 224, 0.5);
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .cta-button-professional:focus {
+    outline: none;
+    box-shadow: 0 4px 16px rgba(243, 243, 224, 0.6), 0 0 0 3px rgba(255, 255, 255, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+  }
+
+  .mobile-menu-professional {
+    background: rgba(19, 62, 135, 0.98) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .mobile-menu-professional .nav-link-professional {
+    display: block;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: white;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: all 200ms ease;
+  }
+
+  .mobile-menu-professional .nav-link-professional:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #f3f3e0;
+  }
+
+  .mobile-menu-professional .nav-link-professional.active {
+    background: rgba(243, 243, 224, 0.15);
+    color: #f3f3e0;
+  }
+
+  .mobile-menu-professional .nav-link-professional::after {
+    display: none;
+  }
+
+  .shadow-3xl {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:ring-offset-2 focus:ring-offset-transparent;
+  }
+
+  /* Typography Hierarchy */
+  .espinosa-hero {
+    font-family: 'oxanium', system-ui, sans-serif;
+    font-size: 5.5rem;
+    line-height: 0.9;
+    letter-spacing: -0.5px;
+    font-weight: bold; /* Oxanium Bold */
+  }
+
+  .espinosa-hero-sm {
+    font-family: 'oxanium', system-ui, sans-serif;
+    font-size: 4rem;
+    line-height: 0.9;
+    letter-spacing: -0.5px;
+    font-weight: bold; /* Oxanium Bold */
+  }
+
+  .espinosa-section-title {
+    font-family: 'oxanium', system-ui, sans-serif;
+    font-size: 2rem;
+    line-height: 1.0;
+    letter-spacing: -0.25px;
+    font-weight: bold; /* Oxanium Bold */
+  }
+
+
+  .espinosa-body {
+    font-family: 'open-sans', system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .espinosa-body-large {
+    font-family: 'open-sans', system-ui, sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+
+  /* Responsive Typography */
+  @media (max-width: 768px) {
+    .espinosa-hero {
+      font-size: 4rem;
+      line-height: 0.85;
+    }
+    
+    .espinosa-section-title {
+      font-size: 1.5rem;
+      line-height: 0.95;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .espinosa-hero {
+      font-size: 3rem;
+      line-height: 0.85;
+      letter-spacing: -0.75px;
+    }
+    
+    .espinosa-section-title {
+      font-size: 1.25rem;
+      line-height: 0.95;
+      letter-spacing: -0.5px;
+    }
+  }
+}
 
 @layer base {
+  /* Set Open Sans as default body font */
+  body {
+    font-family: 'open-sans', system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 400;
+    padding-top: 0; /* Remove padding to eliminate white gap */
+  }
+
+  /* Default heading styles with brand fonts */
+  h1 {
+    font-family: 'oxanium', system-ui, sans-serif;
+    font-weight: bold; /* Oxanium Bold */
+    letter-spacing: -0.5px;
+    line-height: 0.9;
+  }
+
+  h2, h3 {
+    font-family: 'oxanium', system-ui, sans-serif;
+    font-weight: bold; /* Oxanium Bold */
+    letter-spacing: -0.25px;
+    line-height: 1.0;
+  }
+
+  h4, h5, h6 {
+    font-family: 'open-sans', system-ui, sans-serif;
+    font-weight: 600;
+  }
+
+  /* Button and form elements */
+  button, input, textarea, select {
+    font-family: 'open-sans', system-ui, sans-serif;
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;

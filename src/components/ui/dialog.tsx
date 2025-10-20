@@ -4,17 +4,6 @@ import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
->>>>>>> origin/main
 // Dialog component using Radix UI
 const Dialog = DialogPrimitive.Root
 
@@ -28,35 +17,6 @@ const DialogPortal = DialogPrimitive.Portal
 const DialogClose = DialogPrimitive.Close
 
 // Overlay component for the dialog background
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-=======
-=======
-// Dialog component using Radix UI
->>>>>>> Stashed changes
-const Dialog = DialogPrimitive.Root
-
-// Trigger component for opening the dialog
-const DialogTrigger = DialogPrimitive.Trigger
-
-// Portal component for rendering dialog content outside the DOM hierarchy
-const DialogPortal = DialogPrimitive.Portal
-
-// Component for closing the dialog
-const DialogClose = DialogPrimitive.Close
-
-<<<<<<< Updated upstream
->>>>>>> origin/staging
-=======
-// Overlay component for the dialog background
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
->>>>>>> origin/main
 const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
@@ -72,26 +32,7 @@ const DialogOverlay = React.forwardRef<
 ))
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Content component for the dialog
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Content component for the dialog
-=======
->>>>>>> origin/staging
-=======
-// Content component for the dialog
->>>>>>> Stashed changes
-=======
-// Content component for the dialog
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Content component for the dialog
->>>>>>> origin/main
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
@@ -116,26 +57,7 @@ const DialogContent = React.forwardRef<
 ))
 DialogContent.displayName = DialogPrimitive.Content.displayName
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Header component for the dialog
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Header component for the dialog
-=======
->>>>>>> origin/staging
-=======
-// Header component for the dialog
->>>>>>> Stashed changes
-=======
-// Header component for the dialog
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Header component for the dialog
->>>>>>> origin/main
 const DialogHeader = ({
   className,
   ...props
@@ -150,26 +72,7 @@ const DialogHeader = ({
 )
 DialogHeader.displayName = "DialogHeader"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Footer component for the dialog
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Footer component for the dialog
-=======
->>>>>>> origin/staging
-=======
-// Footer component for the dialog
->>>>>>> Stashed changes
-=======
-// Footer component for the dialog
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Footer component for the dialog
->>>>>>> origin/main
 const DialogFooter = ({
   className,
   ...props
@@ -184,26 +87,7 @@ const DialogFooter = ({
 )
 DialogFooter.displayName = "DialogFooter"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Title component for the dialog
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Title component for the dialog
-=======
->>>>>>> origin/staging
-=======
-// Title component for the dialog
->>>>>>> Stashed changes
-=======
-// Title component for the dialog
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Title component for the dialog
->>>>>>> origin/main
 const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
@@ -219,26 +103,7 @@ const DialogTitle = React.forwardRef<
 ))
 DialogTitle.displayName = DialogPrimitive.Title.displayName
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Description component for the dialog
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Description component for the dialog
-=======
->>>>>>> origin/staging
-=======
-// Description component for the dialog
->>>>>>> Stashed changes
-=======
-// Description component for the dialog
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Description component for the dialog
->>>>>>> origin/main
 const DialogDescription = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
@@ -251,26 +116,7 @@ const DialogDescription = React.forwardRef<
 ))
 DialogDescription.displayName = DialogPrimitive.Description.displayName
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Exporting all dialog components
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Exporting all dialog components
-=======
->>>>>>> origin/staging
-=======
-// Exporting all dialog components
->>>>>>> Stashed changes
-=======
-// Exporting all dialog components
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Exporting all dialog components
->>>>>>> origin/main
 export {
   Dialog,
   DialogPortal,

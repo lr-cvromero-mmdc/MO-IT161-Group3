@@ -5,17 +5,6 @@ import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
->>>>>>> origin/main
 // Sheet (similar to Dialog) component using Radix UI
 const Sheet = SheetPrimitive.Root
 
@@ -29,42 +18,13 @@ const SheetClose = SheetPrimitive.Close
 const SheetPortal = SheetPrimitive.Portal
 
 // Overlay for the sheet
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-=======
-=======
-// Sheet (similar to Dialog) component using Radix UI
->>>>>>> Stashed changes
-const Sheet = SheetPrimitive.Root
-
-// Trigger to open the sheet
-const SheetTrigger = SheetPrimitive.Trigger
-
-// Close button for the sheet
-const SheetClose = SheetPrimitive.Close
-
-// Portal for rendering the sheet in a different part of the DOM
-const SheetPortal = SheetPrimitive.Portal
-
-<<<<<<< Updated upstream
->>>>>>> origin/staging
-=======
-// Overlay for the sheet
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
->>>>>>> origin/main
 const SheetOverlay = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Overlay
     className={cn(
-      "fixed inset-0 z-50 bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      "fixed inset-0 z-[10000] bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
       className
     )}
     {...props}
@@ -73,28 +33,9 @@ const SheetOverlay = React.forwardRef<
 ))
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Variants for the sheet content based on the side it appears from
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Variants for the sheet content based on the side it appears from
-=======
->>>>>>> origin/staging
-=======
-// Variants for the sheet content based on the side it appears from
->>>>>>> Stashed changes
-=======
-// Variants for the sheet content based on the side it appears from
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Variants for the sheet content based on the side it appears from
->>>>>>> origin/main
 const sheetVariants = cva(
-  "fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
+  "fixed z-[10001] gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
   {
     variants: {
       side: {
@@ -112,50 +53,12 @@ const sheetVariants = cva(
   }
 )
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Content of the sheet
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Content of the sheet
-=======
->>>>>>> origin/staging
-=======
-// Content of the sheet
->>>>>>> Stashed changes
-=======
-// Content of the sheet
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Content of the sheet
->>>>>>> origin/main
 interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
     VariantProps<typeof sheetVariants> {}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Content component for the sheet
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Content component for the sheet
-=======
->>>>>>> origin/staging
-=======
-// Content component for the sheet
->>>>>>> Stashed changes
-=======
-// Content component for the sheet
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Content component for the sheet
->>>>>>> origin/main
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps
@@ -177,26 +80,7 @@ const SheetContent = React.forwardRef<
 ))
 SheetContent.displayName = SheetPrimitive.Content.displayName
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Header for the sheet
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Header for the sheet
-=======
->>>>>>> origin/staging
-=======
-// Header for the sheet
->>>>>>> Stashed changes
-=======
-// Header for the sheet
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Header for the sheet
->>>>>>> origin/main
 const SheetHeader = ({
   className,
   ...props
@@ -211,26 +95,7 @@ const SheetHeader = ({
 )
 SheetHeader.displayName = "SheetHeader"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Footer for the sheet
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Footer for the sheet
-=======
->>>>>>> origin/staging
-=======
-// Footer for the sheet
->>>>>>> Stashed changes
-=======
-// Footer for the sheet
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Footer for the sheet
->>>>>>> origin/main
 const SheetFooter = ({
   className,
   ...props
@@ -245,26 +110,7 @@ const SheetFooter = ({
 )
 SheetFooter.displayName = "SheetFooter"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Title for the sheet
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Title for the sheet
-=======
->>>>>>> origin/staging
-=======
-// Title for the sheet
->>>>>>> Stashed changes
-=======
-// Title for the sheet
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Title for the sheet
->>>>>>> origin/main
 const SheetTitle = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>
@@ -277,26 +123,7 @@ const SheetTitle = React.forwardRef<
 ))
 SheetTitle.displayName = SheetPrimitive.Title.displayName
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Description for the sheet
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Description for the sheet
-=======
->>>>>>> origin/staging
-=======
-// Description for the sheet
->>>>>>> Stashed changes
-=======
-// Description for the sheet
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Description for the sheet
->>>>>>> origin/main
 const SheetDescription = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description>
@@ -309,26 +136,7 @@ const SheetDescription = React.forwardRef<
 ))
 SheetDescription.displayName = SheetPrimitive.Description.displayName
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Exporting all the components for use in other parts of the application
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Exporting all the components for use in other parts of the application
-=======
->>>>>>> origin/staging
-=======
-// Exporting all the components for use in other parts of the application
->>>>>>> Stashed changes
-=======
-// Exporting all the components for use in other parts of the application
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Exporting all the components for use in other parts of the application
->>>>>>> origin/main
 export {
   Sheet,
   SheetPortal,

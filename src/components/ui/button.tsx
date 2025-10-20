@@ -4,26 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Button component using Radix UI
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Button component using Radix UI
-=======
->>>>>>> origin/staging
-=======
-// Button component using Radix UI
->>>>>>> Stashed changes
-=======
-// Button component using Radix UI
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Button component using Radix UI
->>>>>>> origin/main
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
@@ -53,52 +34,14 @@ const buttonVariants = cva(
   }
 )
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Button props interface
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Button props interface
-=======
->>>>>>> origin/staging
-=======
-// Button props interface
->>>>>>> Stashed changes
-=======
-// Button props interface
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Button props interface
->>>>>>> origin/main
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Button component definition
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Button component definition
-=======
->>>>>>> origin/staging
-=======
-// Button component definition
->>>>>>> Stashed changes
-=======
-// Button component definition
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Button component definition
->>>>>>> origin/main
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
@@ -113,24 +56,5 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 )
 Button.displayName = "Button"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Exporting Button and buttonVariants
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Exporting Button and buttonVariants
-=======
->>>>>>> origin/staging
-=======
-// Exporting Button and buttonVariants
->>>>>>> Stashed changes
-=======
-// Exporting Button and buttonVariants
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Exporting Button and buttonVariants
->>>>>>> origin/main
 export { Button, buttonVariants }

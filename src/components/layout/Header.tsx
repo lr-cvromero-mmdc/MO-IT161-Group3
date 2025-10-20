@@ -1,32 +1,10 @@
 import { Link, useLocation } from "react-router-dom"
 import { Button } from "@/components/ui/button"
-import { Container } from "./Container"
+import { Logo } from "@/components/ui/Logo"
+import { FloatingCartButton } from "@/components/cart/FloatingCartButton"
 import { ChevronRight, Menu } from "lucide-react"
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 // Mobile menu (Sheet) components
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-
-// Mobile menu (Sheet) components
-=======
->>>>>>> origin/staging
-=======
-
-// Mobile menu (Sheet) components
->>>>>>> Stashed changes
-=======
-
-// Mobile menu (Sheet) components
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-
-// Mobile menu (Sheet) components
->>>>>>> origin/main
 import {
   Sheet,
   SheetContent,
@@ -35,68 +13,20 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
->>>>>>> origin/main
 
 // React hooks
 import { useState, useEffect, useRef } from "react"
 
 // Navigation links data
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-import { useState, useEffect, useRef } from "react"
-
->>>>>>> origin/staging
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
->>>>>>> origin/main
 const navigation = [
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
-  { name: "How It Works", href: "/#how-it-works" },
+  { name: "How It Works", href: "/how-it-works" },
   { name: "Locations", href: "/locations" },
   { name: "Contact", href: "/#contact" },
 ]
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Header component
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Header component
-=======
->>>>>>> origin/staging
-=======
-// Header component
->>>>>>> Stashed changes
-=======
-// Header component
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-=======
-// Header component
->>>>>>> origin/main
 export function Header() {
   const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
@@ -105,14 +35,14 @@ export function Header() {
   const firstMenuItemRef = useRef<HTMLAnchorElement>(null)
   const lastMenuItemRef = useRef<HTMLAnchorElement>(null)
 
-  // Scroll detection for transparent header
+  // Scroll detection for navbar background with improved threshold
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY
-      setIsScrolled(scrollTop > 50)
+      setIsScrolled(scrollTop > 80) // Increased threshold for better UX
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -196,6 +126,7 @@ export function Header() {
           {/* Logo */}
           <Link 
             to="/" 
+            onClick={() => window.scrollTo(0, 0)}
             className="flex items-center space-x-3 focus-ring rounded-lg"
             aria-label="Espinosa's Hand Carwash - Home"
           >
@@ -213,6 +144,7 @@ export function Header() {
               <Link
                 key={item.name}
                 to={item.href}
+                onClick={() => window.scrollTo(0, 0)}
                 className={`text-sm font-medium transition-colors focus-ring rounded-sm px-2 py-1 ${
                   location.pathname === item.href
                     ? isHomePage && !isScrolled ? "text-brand-primary" : "text-brand-cream"
@@ -224,53 +156,50 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Desktop CTA Button */}
-          <div className="hidden md:block">
-            <Button
-              asChild
-              className="bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold focus-ring"
+          {/* Desktop CTA Button - Right Zone */}
+          <div className="hidden lg:flex items-center flex-shrink-0 h-full gap-4">
+            <Link 
+              to="/services" 
+              className="cta-button-professional flex items-center gap-2 hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-primary"
+              aria-label="Book your car wash service now"
             >
-              <Link to="/#book-now" className="flex items-center space-x-2">
-                <span>Book Now</span>
-                <ChevronRight className="h-4 w-4" />
-              </Link>
-            </Button>
+              <span>Book Now</span>
+              <ChevronRight className="h-4 w-4" />
+            </Link>
           </div>
 
-          {/* Mobile Menu */}
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="sm"
-                className={`md:hidden focus-ring transition-colors ${
-                  isHomePage && !isScrolled 
-                    ? 'text-brand-dark hover:bg-brand-dark/10' 
-                    : 'text-white hover:bg-white/10'
-                }`}
-                aria-label="Open mobile menu"
-              >
-                <Menu className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-80 bg-brand-cream">
+          {/* Mobile Menu - Right Zone */}
+          <div className="lg:hidden flex items-center flex-shrink-0 gap-2">
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={`focus-ring transition-all duration-200 p-2 rounded-lg ${
+                    !isScrolled 
+                      ? 'text-brand-dark hover:bg-brand-dark/10' 
+                      : 'text-white hover:bg-white/10'
+                  }`}
+                  aria-label="Open mobile menu"
+                >
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+            <SheetContent side="right" className="w-80 mobile-menu-professional">
               <SheetHeader>
-                <SheetTitle className="text-brand-dark">Menu</SheetTitle>
-                <SheetDescription className="text-neutral-600">
-                  Navigate to different sections of our website
-                </SheetDescription>
+                <SheetTitle className="text-white font-bold text-xl">Menu</SheetTitle>
               </SheetHeader>
               
-              <nav className="mt-8 space-y-4" role="navigation" aria-label="Mobile navigation" ref={menuRef}>
+              <nav className="mt-8 space-y-2" role="navigation" aria-label="Mobile navigation" ref={menuRef}>
                 {navigation.map((item, index) => (
                   <Link
                     key={item.name}
                     ref={index === 0 ? firstMenuItemRef : undefined}
                     to={item.href}
-                    className={`block transition-colors focus-ring rounded-sm px-3 py-2 text-lg ${
+                    className={`block nav-link-professional text-white hover:text-brand-cream ${
                       location.pathname === item.href
-                        ? "text-brand-primary font-semibold"
-                        : "text-brand-dark hover:text-brand-primary"
+                        ? "active font-semibold"
+                        : ""
                     }`}
                     onClick={() => setIsOpen(false)}
                   >
@@ -278,22 +207,28 @@ export function Header() {
                   </Link>
                 ))}
                 
-                <div className="pt-4 border-t border-neutral-200">
-                  <Button
-                    asChild
-                    ref={lastMenuItemRef}
-                    className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold focus-ring"
+                <div className="pt-6 mt-6 border-t border-white/20">
+                  <Link
+                    to="/services" 
+                    className="cta-button-professional w-full flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-primary"
+                    onClick={() => setIsOpen(false)}
+                    aria-label="Book your car wash service now"
                   >
-                    <Link to="/#book-now" onClick={() => setIsOpen(false)}>
-                      Book Now
-                    </Link>
-                  </Button>
+                    <span>Book Now</span>
+                    <ChevronRight className="h-4 w-4" />
+                  </Link>
                 </div>
               </nav>
             </SheetContent>
-          </Sheet>
+            </Sheet>
+          </div>
         </div>
-      </Container>
+        </div>
+        </div>
     </header>
+    
+    {/* Floating Cart Button */}
+    <FloatingCartButton />
+  </>
   )
 }
