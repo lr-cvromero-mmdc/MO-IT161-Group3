@@ -6,6 +6,7 @@ import { MapPin, Clock, Phone, Search } from "lucide-react"
 import { LocationMap } from "@/components/ui/LocationMap"
 import { AllLocationsMap } from "@/components/ui/AllLocationsMap"
 import { useState, useMemo } from "react"
+import heroBackgroundImage from "@/assets/images/pages/Locations/hero-background.png"
 
 // List of Espinosa's branch locations with contact and payment details
 const locations = [
@@ -157,31 +158,47 @@ export function Locations() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="bg-brand-primary text-white py-20 pt-32">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Our Locations
-            </h1>
-            <p className="text-lg md:text-xl text-brand-cream mb-8">
-              Find the nearest Espinosa's Hand Carwash location. We're conveniently located across Metro Manila.
-            </p>
-            
-            {/* Search Bar */}
-            <div className="relative max-w-md mx-auto">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" />
-              <Input
-                type="text"
-                placeholder="Search by city or branch name..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-white text-brand-dark border-2 border-brand-cream focus:border-brand-accent h-12"
-                aria-label="Search locations"
-              />
+      {/* Hero Section with Background Image */}
+      <section className="relative bg-brand-primary text-white py-20 pt-32 min-h-[500px] flex items-center">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={heroBackgroundImage} 
+            alt="Our Locations - Find us near you"
+            className="w-full h-full object-cover"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/85 via-brand-primary/75 to-brand-dark/80"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="relative z-10 w-full">
+          <Container>
+            <div className="text-center max-w-3xl mx-auto">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                Our Locations
+              </h1>
+              <p className="text-lg md:text-xl text-brand-cream/90 mb-8">
+                Find the nearest Espinosa's Hand Carwash location. We're conveniently located across Metro Manila.
+              </p>
+              
+              {/* Search Bar */}
+              <div className="relative max-w-md mx-auto">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" />
+                <Input
+                  type="text"
+                  placeholder="Search by city or branch name..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 bg-white text-brand-dark border-2 border-brand-cream focus:border-brand-accent h-12"
+                  aria-label="Search locations"
+                />
+              </div>
             </div>
-          </div>
-        </Container>
+          </Container>
+        </div>
       </section>
 
       {/* Find All Locations Map */}

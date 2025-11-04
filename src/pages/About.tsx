@@ -19,6 +19,9 @@ import {
   TrendingUp,
   Zap,
 } from "lucide-react"
+import heroBackgroundImage from "@/assets/images/pages/about/hero-background-about.png"
+import ourStoryImage from "@/assets/images/pages/about/our-story.jpg"
+import ourVisionImage from "@/assets/images/pages/about/our-vision.jpg"
 
 // Company Statistics
 const companyStats = [
@@ -104,21 +107,37 @@ export function About() {
         description="Learn about Espinosa's Hand Carwash - a family-owned car wash business serving Philippines since 2016. Discover our mission, values, and commitment to quality."
         keywords="about us, car wash company, family business, Philippines car wash, professional detailing, car care history"
       />
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-brand-primary via-brand-primary/90 to-brand-dark py-20 pt-32 text-white">
-        <Container>
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-heading">
-              About Espinosa's
-            </h1>
-            <p className="text-xl md:text-2xl text-brand-cream/90 mb-8">
-              Where Cars Come to Shine
-            </p>
-            <p className="text-lg text-white/80 leading-relaxed">
-              We're more than just a car wash. We're a team of passionate professionals dedicated to giving your vehicle the care and attention it deserves.
-            </p>
-          </div>
-        </Container>
+      {/* Hero Section with Background Image */}
+      <section className="relative bg-brand-primary py-20 pt-32 text-white min-h-[500px] flex items-center">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={heroBackgroundImage} 
+            alt="Espinosa's Hand Carwash - About Us"
+            className="w-full h-full object-cover"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/80 via-brand-primary/70 to-brand-dark/80"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="relative z-10 w-full">
+          <Container>
+            <div className="max-w-3xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-heading">
+                About Espinosa's
+              </h1>
+              <p className="text-xl md:text-2xl text-brand-cream/90 mb-8">
+                Where Cars Come to Shine
+              </p>
+              <p className="text-lg text-white/90 leading-relaxed">
+                We're more than just a car wash. We're a team of passionate professionals dedicated to giving your vehicle the care and attention it deserves.
+              </p>
+            </div>
+          </Container>
+        </div>
       </section>
 
       {/* Company Stats */}
@@ -214,15 +233,10 @@ export function About() {
               <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow overflow-hidden">
                 <div className="relative h-48 overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop"
+                    src={ourStoryImage}
                     alt="Our Mission - Professional car care"
                     className="w-full h-full object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement
-                      target.style.display = 'none'
-                      const placeholder = target.nextElementSibling as HTMLElement
-                      if (placeholder) placeholder.style.display = 'flex'
-                    }}
+                    loading="lazy"
                   />
                   <div className="hidden absolute inset-0 bg-gradient-to-br from-brand-primary/80 to-brand-primary flex items-center justify-center">
                     <Target className="h-16 w-16 text-white opacity-50" />
@@ -247,15 +261,10 @@ export function About() {
               <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow overflow-hidden">
                 <div className="relative h-48 overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1492144534654-ae16c2d5d3a1?w=600&h=400&fit=crop"
+                    src={ourVisionImage}
                     alt="Our Vision - Future goals"
                     className="w-full h-full object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement
-                      target.style.display = 'none'
-                      const placeholder = target.nextElementSibling as HTMLElement
-                      if (placeholder) placeholder.style.display = 'flex'
-                    }}
+                    loading="lazy"
                   />
                   <div className="hidden absolute inset-0 bg-gradient-to-br from-brand-accent/80 to-brand-accent flex items-center justify-center">
                     <TrendingUp className="h-16 w-16 text-white opacity-50" />

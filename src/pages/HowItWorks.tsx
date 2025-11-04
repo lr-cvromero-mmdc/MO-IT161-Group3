@@ -10,6 +10,7 @@ import {
   ArrowRight,
 } from "lucide-react"
 import { HOME_BOOKING_STEPS } from "./home/content"
+import heroBackgroundImage from "@/assets/images/pages/HowItWorks/hero-background.jpg"
 
 // Booking steps data
 const bookingSteps = HOME_BOOKING_STEPS.map((step, index) => ({
@@ -64,21 +65,37 @@ const howItWorksFaqs = [
 export function HowItWorks() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-brand-primary via-brand-primary/90 to-brand-dark py-20 pt-32 text-white">
-        <Container>
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-heading">
-              How It Works
-            </h1>
-            <p className="text-xl md:text-2xl text-brand-cream/90 mb-4">
-              Simple steps to get your car clean
-            </p>
-            <p className="text-lg text-white/80 leading-relaxed">
-              Booking your car wash service is quick and easy. Follow these simple steps to get started.
-            </p>
-          </div>
-        </Container>
+      {/* Hero Section with Background Image */}
+      <section className="relative bg-brand-primary py-20 pt-32 text-white min-h-[500px] flex items-center">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={heroBackgroundImage} 
+            alt="How It Works - Easy booking process"
+            className="w-full h-full object-cover"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/85 via-brand-primary/75 to-brand-dark/85"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="relative z-10 w-full">
+          <Container>
+            <div className="max-w-3xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-heading">
+                How It Works
+              </h1>
+              <p className="text-xl md:text-2xl text-brand-cream/90 mb-4">
+                Simple steps to get your car clean
+              </p>
+              <p className="text-lg text-white/90 leading-relaxed">
+                Booking your car wash service is quick and easy. Follow these simple steps to get started.
+              </p>
+            </div>
+          </Container>
+        </div>
       </section>
 
       {/* Booking Steps Section */}
