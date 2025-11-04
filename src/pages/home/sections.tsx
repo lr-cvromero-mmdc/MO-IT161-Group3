@@ -169,15 +169,15 @@ export function HeroSection({
 export function AboutSection() {
   return (
     <Section background="neutral" className="py-20" fullWidthBackground>
-      <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
-        <div className="col-span-12 lg:col-span-6">
-          <div className="rounded-2xl h-80 lg:h-96 overflow-hidden">
+      <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="col-span-12 lg:col-span-6 h-full">
+          <div className="rounded-2xl h-full overflow-hidden">
             <img src={locationsHeroImage} alt="Professional car detailing service" className="w-full h-full object-cover" loading="lazy" />
           </div>
         </div>
 
-        <div className="col-span-12 lg:col-span-6 space-y-8">
-          <div>
+        <div className="col-span-12 lg:col-span-6 flex flex-col h-full">
+          <div className="mb-8">
             <div className="inline-block px-4 py-2 bg-brand-accent rounded-full text-brand-primary text-sm font-semibold mb-4">
               Family-Owned Since 2016
             </div>
