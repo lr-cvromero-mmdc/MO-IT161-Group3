@@ -1,8 +1,6 @@
 // About page - Complete About Us page with company story, mission, vision, values, and team
 import { Container } from "@/components/layout/Container"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
 import { SEO } from "@/components/seo/SEO"
 import {
   Award,
@@ -22,6 +20,9 @@ import {
 import heroBackgroundImage from "@/assets/images/pages/about/hero-background-about.png"
 import ourStoryImage from "@/assets/images/pages/about/our-story.jpg"
 import ourVisionImage from "@/assets/images/pages/about/our-vision.jpg"
+import mariaEspinosaImage from "@/assets/images/pages/about/Maria Espinosa.jpg"
+import juanDelaCruzImage from "@/assets/images/pages/about/JuanDelaCruz.jpg"
+import sarahChenImage from "@/assets/images/pages/about/Sarah Chen.jpg"
 
 // Company Statistics
 const companyStats = [
@@ -72,18 +73,21 @@ const teamMembers = [
     role: "Founder & CEO",
     description: "With over 10 years in the automotive care industry, Maria founded Espinosa's with a vision to provide premium hand car wash services.",
     expertise: "Customer Service, Business Strategy",
+    image: mariaEspinosaImage,
   },
   {
     name: "Juan Dela Cruz",
     role: "Operations Manager",
     description: "Juan ensures smooth operations across all branches, maintaining quality standards and training our professional team.",
     expertise: "Operations, Quality Control",
+    image: juanDelaCruzImage,
   },
   {
     name: "Sarah Chen",
     role: "Head of Customer Experience",
     description: "Sarah leads our customer service team, ensuring every customer receives personalized attention and exceptional service.",
     expertise: "Customer Relations, Service Excellence",
+    image: sarahChenImage,
   },
 ]
 
@@ -414,25 +418,19 @@ export function About() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-8 mb-20">
               {teamMembers.map((member, index) => (
                 <Card key={index} className="border border-neutral-200 hover:shadow-lg transition-shadow text-center">
                   <CardHeader>
-                    <div className="relative w-32 h-32 mx-auto mb-4">
+                    <div className="relative w-40 h-40 mx-auto mb-4 overflow-hidden rounded-full border-4 border-brand-cream shadow-md">
                       <img
-                        src={`https://i.pravatar.cc/300?img=${index + 10}`}
+                        src={member.image}
                         alt={member.name}
-                        className="w-32 h-32 rounded-full object-cover border-4 border-brand-cream shadow-md"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement
-                          target.style.display = 'none'
-                          const placeholder = target.nextElementSibling as HTMLElement
-                          if (placeholder) placeholder.style.display = 'flex'
-                        }}
+                        className={`w-full h-full object-cover ${
+                          member.name === "Maria Espinosa" ? "object-[center_20%]" : "object-top"
+                        }`}
+                        loading="lazy"
                       />
-                      <div className="hidden absolute inset-0 w-32 h-32 bg-gradient-to-br from-brand-primary to-brand-accent rounded-full flex items-center justify-center border-4 border-brand-cream shadow-md">
-                        <Users className="h-16 w-16 text-white opacity-75" />
-                      </div>
                     </div>
                     <CardTitle className="text-xl font-bold text-brand-dark">
                       {member.name}
@@ -453,32 +451,6 @@ export function About() {
                   </CardContent>
                 </Card>
               ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Call to Action Section */}
-      <section className="py-20 bg-gradient-to-br from-brand-primary via-brand-primary/90 to-brand-dark text-white">
-        <Container>
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 font-heading">
-              Experience the Espinosa's Difference
-            </h2>
-            <p className="text-xl text-white/90 mb-8">
-              Ready to give your vehicle the care it deserves? Book your service today and see why thousands of customers trust Espinosa's.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/services" onClick={() => window.scrollTo(0, 0)}>
-                <Button size="lg" className="bg-white text-brand-primary hover:bg-brand-cream border-2 border-white text-lg px-8 py-6 font-semibold">
-                  Book a Service
-                </Button>
-              </Link>
-              <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
-                <Button size="lg" variant="outline" className="bg-transparent border-2 border-white text-white hover:bg-white/10 hover:border-white text-lg px-8 py-6 font-semibold">
-                  Contact Us
-                </Button>
-              </Link>
             </div>
           </div>
         </Container>
