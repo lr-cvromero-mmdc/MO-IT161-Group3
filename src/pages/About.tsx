@@ -3,6 +3,7 @@ import { Container } from "@/components/layout/Container"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
+import { SEO } from "@/components/seo/SEO"
 import {
   Award,
   CheckCircle,
@@ -98,6 +99,11 @@ const missionVision = {
 export function About() {
   return (
     <div className="min-h-screen bg-white">
+      <SEO 
+        title="About Us - Our Story"
+        description="Learn about Espinosa's Hand Carwash - a family-owned car wash business serving Philippines since 2016. Discover our mission, values, and commitment to quality."
+        keywords="about us, car wash company, family business, Philippines car wash, professional detailing, car care history"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-brand-primary via-brand-primary/90 to-brand-dark py-20 pt-32 text-white">
         <Container>

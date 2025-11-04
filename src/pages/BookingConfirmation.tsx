@@ -129,7 +129,7 @@ export function BookingConfirmation() {
             We couldn't find your booking details. Please contact us if you need assistance.
           </p>
           <Button asChild className="bg-brand-primary text-white hover:bg-brand-primary/90">
-            <Link to="/contact">
+            <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
               Contact Support
             </Link>
           </Button>
@@ -445,7 +445,7 @@ export function BookingConfirmation() {
             {/* Return Home */}
             <div className="text-center mt-8">
               <Button asChild size="lg" className="bg-brand-primary text-white hover:bg-brand-primary/90">
-                <Link to="/">
+                <Link to="/" onClick={() => window.scrollTo(0, 0)}>
                   Return to Home
                 </Link>
               </Button>

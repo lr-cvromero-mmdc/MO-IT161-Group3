@@ -13,6 +13,7 @@ import {
 
 import type { Location } from "@/lib/locationUtils"
 
+// Using same images as Services page for consistency
 import carShampooImg from "@/assets/images/products/car-shampoo.png"
 import microfiberTowelImg from "@/assets/images/products/microfiber-towel.png"
 import carWaxImg from "@/assets/images/products/car-wax.png"
@@ -213,7 +214,7 @@ export const HOME_QUALITY_FEATURES: HomeQualityFeature[] = [
   },
   {
     icon: Star,
-    title: "1M+ Cars Cleaned",
+    title: "50K+ Cars Cleaned",
     description: "Trusted by thousands of satisfied customers across the country.",
   },
 ]
@@ -245,6 +246,7 @@ export const HOME_FAQS: HomeFaq[] = [
   },
 ]
 
+// Same locations as Locations page - all Metro Manila branches
 export const HOME_LOCATIONS: Location[] = [
   {
     name: "Espinosa's Main Branch",
@@ -253,16 +255,16 @@ export const HOME_LOCATIONS: Location[] = [
     phone: "+63 2 1234 5678",
     lat: 14.5995,
     lng: 120.9842,
-    coordinates: "14.5995 N, 120.9842 E",
+    coordinates: "14.5995°N, 120.9842°E",
   },
   {
     name: "Espinosa's Quezon City",
     address: "456 Quezon Avenue, Quezon City, Metro Manila",
     hours: "Mon-Sun: 7:00 AM - 8:00 PM",
     phone: "+63 2 2345 6789",
-    lat: 14.676,
+    lat: 14.6760,
     lng: 121.0437,
-    coordinates: "14.6760 N, 121.0437 E",
+    coordinates: "14.6760°N, 121.0437°E",
   },
   {
     name: "Espinosa's Taguig",
@@ -271,33 +273,33 @@ export const HOME_LOCATIONS: Location[] = [
     phone: "+63 2 3456 7890",
     lat: 14.5547,
     lng: 121.0244,
-    coordinates: "14.5547 N, 121.0244 E",
+    coordinates: "14.5547°N, 121.0244°E",
   },
   {
-    name: "Espinosa's Cebu City",
-    address: "321 Ayala Center Cebu, Cebu City, Cebu",
+    name: "Espinosa's Pasig",
+    address: "321 Ortigas Avenue, Pasig City, Metro Manila",
     hours: "Mon-Sun: 7:00 AM - 8:00 PM",
-    phone: "+63 32 4567 8901",
-    lat: 10.3157,
-    lng: 123.8854,
-    coordinates: "10.3157 N, 123.8854 E",
+    phone: "+63 2 4567 8901",
+    lat: 14.5764,
+    lng: 121.0851,
+    coordinates: "14.5764°N, 121.0851°E",
   },
   {
-    name: "Espinosa's Davao City",
-    address: "654 SM Lanang Premier, Davao City, Davao del Sur",
+    name: "Espinosa's Mandaluyong",
+    address: "654 Shaw Boulevard, Mandaluyong City, Metro Manila",
     hours: "Mon-Sun: 7:00 AM - 8:00 PM",
-    phone: "+63 82 5678 9012",
-    lat: 7.0735,
-    lng: 125.6128,
-    coordinates: "7.0735 N, 125.6128 E",
+    phone: "+63 2 5678 9012",
+    lat: 14.5794,
+    lng: 121.0359,
+    coordinates: "14.5794°N, 121.0359°E",
   },
   {
-    name: "Espinosa's Iloilo City",
-    address: "987 SM City Iloilo, Iloilo City, Iloilo",
+    name: "Espinosa's Alabang",
+    address: "987 Alabang-Zapote Road, Muntinlupa City, Metro Manila",
     hours: "Mon-Sun: 7:00 AM - 8:00 PM",
-    phone: "+63 33 6789 0123",
-    lat: 10.7202,
-    lng: 122.5621,
-    coordinates: "10.7202 N, 122.5621 E",
+    phone: "+63 2 6789 0123",
+    lat: 14.4296,
+    lng: 121.0418,
+    coordinates: "14.4296°N, 121.0418°E",
   },
 ]

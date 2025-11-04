@@ -4,20 +4,19 @@ import { Section } from "@/components/layout/Section"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { LocationSearchResults } from "@/components/ui/LocationSearchResults"
 import { LocationSearchSuggestions } from "@/components/ui/LocationSearchSuggestions"
 import { Loader2, ChevronRight, Search } from "lucide-react"
 import type { LocationSearchResult } from "@/hooks/useLocationSearch"
 import type {
   HomeBookingStep,
-  HomeFaq,
   HomeQualityFeature,
   HomeService,
   HomeStoreProduct,
   HomeTestimonial,
 } from "./content"
 
+// Using same images as Services page for consistency
 import basicWashImage from "@/assets/images/services/basic-wash.jpg"
 import premiumWashImage from "@/assets/images/services/premium-wash.jpg"
 import fullDetailingImage from "@/assets/images/services/full-detailing.jpg"
@@ -52,26 +51,32 @@ export function HeroSection({
   return (
     <section className="relative bg-brand-dark text-white min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <iframe
-          src="https://www.youtube.com/embed/ghdkQpEeJFE?autoplay=1&mute=1&loop=1&playlist=ghdkQpEeJFE&controls=0&showinfo=0&rel=0&modestbranding=1&start=0&iv_load_policy=3&fs=0&disablekb=1"
-          title="Professional car wash service background video"
-          className="absolute inset-0 w-full h-full"
-          style={{
-            width: "100vw",
-            height: "56.25vw",
-            minHeight: "100vh",
-            minWidth: "177.77vh",
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%, -50%)",
-            zIndex: -1,
-            border: "none",
-            pointerEvents: "none",
-          }}
-          frameBorder="0"
-          allow="autoplay; encrypted-media"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/50 via-brand-dark/70 to-brand-dark/85" />
+        {/* YouTube Video Background - Hidden Branding */}
+        <div className="absolute inset-0" style={{ overflow: "hidden" }}>
+          <iframe
+            src="https://www.youtube.com/embed/ghdkQpEeJFE?autoplay=1&mute=1&loop=1&playlist=ghdkQpEeJFE&controls=0&showinfo=0&rel=0&modestbranding=1&autohide=1&iv_load_policy=3&fs=0&disablekb=1&playsinline=1&enablejsapi=1&origin=https://espinosacarwash.com"
+            title="Professional car wash service background video"
+            className="absolute"
+            style={{
+              width: "100vw",
+              height: "56.25vw",
+              minHeight: "100vh",
+              minWidth: "177.77vh",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%) scale(1.02)",
+              border: "none",
+              pointerEvents: "none",
+            }}
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            loading="eager"
+          />
+        </div>
+        {/* Overlay to hide YouTube branding at edges */}
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/50 via-brand-dark/70 to-brand-dark/85" style={{ zIndex: 1 }} />
+        {/* Additional overlay to cover bottom YouTube controls area */}
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-brand-dark to-transparent" style={{ zIndex: 1 }} />
       </div>
 
       <div className="relative z-10 w-full">
@@ -173,7 +178,7 @@ export function AboutSection() {
         <div className="col-span-12 lg:col-span-6 space-y-8">
           <div>
             <div className="inline-block px-4 py-2 bg-brand-accent rounded-full text-brand-primary text-sm font-semibold mb-4">
-              Family-Owned Since 1985
+              Family-Owned Since 2016
             </div>
             <h2 className="espinosa-section-title text-brand-dark mb-6">
               Meticulous Hand Washing, Modern Results
@@ -187,15 +192,15 @@ export function AboutSection() {
 
           <div className="grid grid-cols-12 gap-4">
             <Card className="col-span-6 bg-white rounded-2xl shadow-lg border-0 p-6 text-center">
-              <h3 className="text-3xl font-bold text-brand-dark mb-2">38+</h3>
+              <h3 className="text-3xl font-bold text-brand-dark mb-2">8+</h3>
               <p className="text-sm text-neutral-500">Years of detail experience</p>
             </Card>
             <Card className="col-span-6 bg-white rounded-2xl shadow-lg border-0 p-6 text-center">
-              <h3 className="text-3xl font-bold text-brand-dark mb-2">120K</h3>
-              <p className="text-sm text-neutral-500">Cars detailed annually</p>
+              <h3 className="text-3xl font-bold text-brand-dark mb-2">50K+</h3>
+              <p className="text-sm text-neutral-500">Cars detailed to date</p>
             </Card>
             <Card className="col-span-6 bg-white rounded-2xl shadow-lg border-0 p-6 text-center">
-              <h3 className="text-3xl font-bold text-brand-dark mb-2">25+</h3>
+              <h3 className="text-3xl font-bold text-brand-dark mb-2">6</h3>
               <p className="text-sm text-neutral-500">Branches nationwide</p>
             </Card>
             <Card className="col-span-6 bg-white rounded-2xl shadow-lg border-0 p-6 text-center">
@@ -232,7 +237,7 @@ export function ServicesSection({ services, onSelectService }: ServicesSectionPr
           </div>
           <h2 className="espinosa-section-title text-brand-dark">Choose Your Package</h2>
         </div>
-        <Link to="/services" className="text-brand-primary hover:text-brand-primary/80 font-medium focus-ring rounded-sm px-2 py-1">
+        <Link to="/services" onClick={() => window.scrollTo(0, 0)} className="text-brand-primary hover:text-brand-primary/80 font-medium focus-ring rounded-sm px-2 py-1">
           View full catalog
         </Link>
       </div>
@@ -293,7 +298,7 @@ export function StoreSection({ products, onAddProduct }: StoreSectionProps) {
     <Section background="white" className="py-20">
       <div className="flex items-center justify-between mb-12">
         <h2 className="espinosa-section-title text-brand-dark">Our Store</h2>
-        <Link to="/services" className="text-brand-primary hover:text-brand-primary/80 font-medium focus-ring rounded-sm px-2 py-1">
+        <Link to="/services" onClick={() => window.scrollTo(0, 0)} className="text-brand-primary hover:text-brand-primary/80 font-medium focus-ring rounded-sm px-2 py-1">
           View all
         </Link>
       </div>
@@ -353,7 +358,7 @@ export function BookingStepsSection({ steps }: BookingStepsSectionProps) {
           <h2 className="espinosa-section-title text-brand-dark">Book in four easy steps</h2>
         </div>
         <Button asChild variant="outline" className="border-brand-primary text-brand-primary hover:bg-brand-primary/10 focus-ring">
-          <Link to="/booking">Start Booking</Link>
+          <Link to="/booking" onClick={() => window.scrollTo(0, 0)}>Start Booking</Link>
         </Button>
       </div>
 
@@ -401,58 +406,6 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
             <div className="text-sm text-brand-cream font-semibold uppercase tracking-widest">{testimonial.customer}</div>
           </Card>
         ))}
-      </div>
-    </Section>
-  )
-}
-
-export function PromoBanner() {
-  return (
-    <Section background="primary" className="py-16" fullWidthBackground>
-      <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-        <div>
-          <h3 className="text-3xl font-bold text-white mb-4">Save More With Our Loyalty Program</h3>
-          <p className="text-white/80 text-lg max-w-2xl">
-            Earn points every time you book a service. Redeem rewards, get priority scheduling, and unlock exclusive offers.
-          </p>
-        </div>
-        <Button
-          asChild
-          className="bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold px-8 py-4 rounded-lg focus-ring"
-        >
-          <Link to="/about">Learn More</Link>
-        </Button>
-      </div>
-    </Section>
-  )
-}
-
-interface FaqSectionProps {
-  faqs: HomeFaq[]
-}
-
-export function FaqSection({ faqs }: FaqSectionProps) {
-  return (
-    <Section id="faq" background="white" className="py-20" fullWidthBackground>
-      <div className="text-center mb-16">
-        <div className="w-8 h-0.5 bg-brand-primary mx-auto mb-4" />
-        <h2 className="espinosa-section-title text-brand-dark mb-4">Frequently Asked Questions</h2>
-        <p className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto">Everything you need to know about our car wash services.</p>
-      </div>
-
-      <div className="grid grid-cols-12">
-        <div className="col-span-12 lg:col-start-3 lg:col-span-8">
-          <Accordion type="single" collapsible className="space-y-4">
-            {faqs.map((faq, index) => (
-              <AccordionItem key={faq.question} value={`item-${index}`} className="border border-neutral-200 rounded-lg px-6">
-                <AccordionTrigger className="text-left hover:no-underline py-6 focus-ring rounded-sm">
-                  <span className="text-lg font-semibold text-brand-dark">{faq.question}</span>
-                </AccordionTrigger>
-                <AccordionContent className="text-neutral-600 pb-6">{faq.answer}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
       </div>
     </Section>
   )

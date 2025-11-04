@@ -1,15 +1,12 @@
 // How It Works page - Complete implementation
 import { Container } from "@/components/layout/Container"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
+import { FaqSection } from "@/components/sections/FaqSection"
 import {
-  ShoppingCart,
   CheckCircle,
   Clock,
   CreditCard,
   Car,
-  Sparkles,
   ArrowRight,
 } from "lucide-react"
 import { HOME_BOOKING_STEPS } from "./home/content"
@@ -41,6 +38,26 @@ const additionalFeatures = [
     icon: Car,
     title: "Vehicle Care",
     description: "We handle all vehicle types - cars, SUVs, vans, and motorcycles.",
+  },
+]
+
+// FAQs data
+const howItWorksFaqs = [
+  {
+    question: "How do I book a service?",
+    answer: "Simply browse our services, select your preferred service, choose your location, date, and time slot, then complete your booking. It takes just a few minutes!"
+  },
+  {
+    question: "Can I cancel or reschedule my booking?",
+    answer: "Yes! You can cancel or reschedule your booking up to 2 hours before your scheduled time. Just contact us or use the booking confirmation link."
+  },
+  {
+    question: "Do I need to be present during the service?",
+    answer: "No, you can drop off your vehicle and pick it up when ready. We'll send you a notification when your service is complete."
+  },
+  {
+    question: "How long does a reservation last?",
+    answer: "Your time slot is reserved for 15 minutes after booking. Complete your checkout within this time to secure your slot."
   },
 ]
 
@@ -155,97 +172,12 @@ export function HowItWorks() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20">
-        <Container>
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4 font-heading">
-                Frequently Asked Questions
-              </h2>
-              <div className="w-24 h-1 bg-brand-primary mx-auto"></div>
-            </div>
-
-            <div className="space-y-6">
-              <Card className="border border-neutral-200">
-                <CardHeader>
-                  <CardTitle className="text-lg font-bold text-brand-dark">
-                    How do I book a service?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-neutral-600">
-                    Simply browse our services, select your preferred service, choose your location, date, and time slot, then complete your booking. It takes just a few minutes!
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border border-neutral-200">
-                <CardHeader>
-                  <CardTitle className="text-lg font-bold text-brand-dark">
-                    Can I cancel or reschedule my booking?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-neutral-600">
-                    Yes! You can cancel or reschedule your booking up to 2 hours before your scheduled time. Just contact us or use the booking confirmation link.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border border-neutral-200">
-                <CardHeader>
-                  <CardTitle className="text-lg font-bold text-brand-dark">
-                    Do I need to be present during the service?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-neutral-600">
-                    No, you can drop off your vehicle and pick it up when ready. We'll send you a notification when your service is complete.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border border-neutral-200">
-                <CardHeader>
-                  <CardTitle className="text-lg font-bold text-brand-dark">
-                    How long does a reservation last?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-neutral-600">
-                    Your time slot is reserved for 15 minutes after booking. Complete your checkout within this time to secure your slot.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Call to Action Section */}
-      <section className="py-20 bg-gradient-to-br from-brand-primary via-brand-primary/90 to-brand-dark text-white">
-        <Container>
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="flex justify-center mb-6">
-              <div className="p-4 bg-white/10 rounded-full">
-                <Sparkles className="h-12 w-12 text-white" />
-              </div>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 font-heading">
-              Ready to Get Started?
-            </h2>
-            <p className="text-xl text-white/90 mb-8">
-              Book your car wash service now and experience the Espinosa's difference.
-            </p>
-            <Link to="/services" onClick={() => window.scrollTo(0, 0)}>
-              <Button size="lg" className="bg-white text-brand-primary hover:bg-brand-cream border-2 border-white text-lg px-8 py-6 font-semibold">
-                <ShoppingCart className="h-5 w-5 mr-2" />
-                Book a Service Now
-              </Button>
-            </Link>
-          </div>
-        </Container>
-      </section>
+      <FaqSection 
+        faqs={howItWorksFaqs}
+        title="Frequently Asked Questions"
+        subtitle="Common questions about our booking process and what to expect."
+        className="py-20"
+      />
     </div>
   )
 }

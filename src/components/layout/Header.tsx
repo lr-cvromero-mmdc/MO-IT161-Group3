@@ -23,7 +23,7 @@ const navigation = [
   { name: "Services", href: "/services" },
   { name: "How It Works", href: "/how-it-works" },
   { name: "Locations", href: "/locations" },
-  { name: "Contact", href: "/#contact" },
+  { name: "Contact", href: "/contact" },
 ]
 
 // Header component
@@ -106,12 +106,16 @@ export function Header() {
               <img 
                 src={logo} 
                 alt="Espinosa's Hand Carwash Logo" 
-                className="h-12 w-12"
+                className={`h-10 w-auto transition-all duration-300 ${
+                  isHomePage && !isScrolled 
+                    ? '' 
+                    : 'brightness-0 invert'
+                }`}
               />
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-6" role="navigation" aria-label="Main navigation">
+            {/* Desktop Navigation - Centered */}
+            <nav className="hidden md:flex items-center justify-center space-x-6 flex-1" role="navigation" aria-label="Main navigation">
               {navigation.map((item) => (
                 <Link
                   key={item.name}

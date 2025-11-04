@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ServiceCardSkeleton, ProductCardSkeleton } from "@/components/ui/Skeleton"
 import { EmptyState } from "@/components/ui/EmptyState"
+import { FaqSection } from "@/components/sections/FaqSection"
 import { useCart } from "@/hooks/useCart"
 import { useToast } from "@/hooks/useToast"
 import { useDebouncedCallback } from "@/hooks/useDebouncedCallback"
@@ -349,7 +350,6 @@ export function Services() {
   const [searchInputValue, setSearchInputValue] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [selectedService, setSelectedService] = useState<any>(null)
-  const [expandedFaq, setExpandedFaq] = useState<number | null>(null)
   const [showBookingBar, setShowBookingBar] = useState(false)
 
   const applySearchFilter = useDebouncedCallback((value: string) => {
@@ -859,43 +859,11 @@ export function Services() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16">
-        <Container>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-brand-dark mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Get answers to common questions about our services and booking process.
-            </p>
-          </div>
-
-          <div className="max-w-3xl mx-auto space-y-4">
-            {faqs.map((faq) => (
-              <Card key={faq.id} className="bg-white">
-                <CardHeader 
-                  className="cursor-pointer hover:bg-neutral-50 transition-colors"
-                  onClick={() => setExpandedFaq(expandedFaq === faq.id ? null : faq.id)}
-                >
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-brand-dark">{faq.question}</h3>
-                    <ChevronRight 
-                      className={`h-5 w-5 text-neutral-400 transition-transform ${
-                        expandedFaq === faq.id ? 'rotate-90' : ''
-                      }`} 
-                    />
-                  </div>
-                </CardHeader>
-                {expandedFaq === faq.id && (
-                  <CardContent className="pt-0">
-                    <p className="text-neutral-600">{faq.answer}</p>
-              </CardContent>
-                )}
-            </Card>
-            ))}
-          </div>
-        </Container>
-      </section>
+      <FaqSection 
+        faqs={faqs}
+        title="Frequently Asked Questions"
+        subtitle="Get answers to common questions about our services and booking process."
+      />
 
 
       {/* Sticky Booking Bar */}

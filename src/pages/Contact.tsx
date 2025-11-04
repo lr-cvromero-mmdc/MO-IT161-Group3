@@ -4,7 +4,7 @@ import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { FaqSection } from "@/components/sections/FaqSection"
 import { 
   Phone, 
   Mail, 
@@ -509,33 +509,11 @@ export function Contact() {
       </section>
 
       {/* Enhanced FAQ Section */}
-      <section className="py-16 bg-white">
-        <Container>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Common questions about contacting us and getting help with your car care needs.
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <Accordion type="single" collapsible className="space-y-4" aria-label="Frequently asked questions">
-              {contactFaqs.map((faq, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border border-neutral-200 rounded-lg px-6">
-                  <AccordionTrigger className="text-lg font-semibold text-brand-dark hover:text-brand-primary py-6" aria-label={`Question: ${faq.question}`}>
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-neutral-600 leading-relaxed pb-6">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-        </Container>
-      </section>
+      <FaqSection 
+        faqs={contactFaqs}
+        title="Frequently Asked Questions"
+        subtitle="Common questions about contacting us and getting help with your car care needs."
+      />
 
 
       {/* Mobile Sticky Action Bar - Simplified */}

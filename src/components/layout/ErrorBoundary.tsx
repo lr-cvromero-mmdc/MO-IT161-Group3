@@ -113,7 +113,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
                       <RefreshCw className="h-4 w-4" />
                       Try Again
                     </Button>
-                    <Link to="/" onClick={this.handleReset}>
+                    <Link to="/" onClick={() => { this.handleReset(); window.scrollTo(0, 0); }}>
                       <Button
                         variant="outline"
                         className="flex items-center gap-2 w-full sm:w-auto"

@@ -1,6 +1,8 @@
 import { useLocationSearch } from "@/hooks/useLocationSearch"
 import { useCart } from "@/hooks/useCart"
 import { useToast } from "@/hooks/useToast"
+import { SEO } from "@/components/seo/SEO"
+import { FaqSection as CommonFaqSection } from "@/components/sections/FaqSection"
 
 import {
   HOME_BOOKING_STEPS,
@@ -18,9 +20,7 @@ import {
   AboutSection,
   BookingStepsSection,
   ContactSection,
-  FaqSection,
   HeroSection,
-  PromoBanner,
   QualitySection,
   ServicesSection,
   StoreSection,
@@ -89,6 +89,11 @@ export function Home() {
 
   return (
     <div className="min-h-screen">
+      <SEO 
+        title="Espinosa's Hand Carwash - Professional Car Wash Services in Philippines"
+        description="Experience the best hand car washing and detailing services in Metro Manila, Cebu, Davao, and Iloilo. Family-owned since 2016. Book your service online today!"
+        keywords="car wash, hand car wash, car detailing, auto detailing, Manila car wash, professional car wash, mobile car wash, Cebu car wash, Davao car wash"
+      />
       <HeroSection
         searchQuery={searchQuery}
         isLoading={isLoading}
@@ -113,9 +118,11 @@ export function Home() {
 
       <TestimonialsSection testimonials={HOME_TESTIMONIALS} />
 
-      <PromoBanner />
-
-      <FaqSection faqs={HOME_FAQS} />
+      <CommonFaqSection 
+        faqs={HOME_FAQS}
+        title="Frequently Asked Questions"
+        subtitle="Everything you need to know about our car wash services."
+      />
 
       <ContactSection />
 
