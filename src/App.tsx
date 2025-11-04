@@ -1,3 +1,10 @@
+/**
+ * App Component - Application Root
+ * 
+ * Main entry point for the Espinosa's Hand Carwash application.
+ * Handles routing, lazy loading, splash screen, and global providers.
+ */
+
 import { lazy, Suspense, useState, useEffect } from "react"
 import { Routes, Route } from "react-router-dom"
 import { Header } from "@/components/layout/Header"
@@ -8,8 +15,9 @@ import { ErrorBoundary } from "@/components/layout/ErrorBoundary"
 import { SplashScreen } from "@/components/layout/SplashScreen"
 import { CartProvider } from "@/context/CartContext"
 import { ToastProvider } from "@/components/ui/toast"
+import { CONTENT_FADE_IN_DELAY_MS, STORAGE_KEYS } from "@/lib/constants"
 
-// Lazy load pages for better performance
+// Lazy load pages for code splitting and better performance
 const Home = lazy(() => import("@/pages/Home").then(module => ({ default: module.Home })))
 const About = lazy(() => import("@/pages/About").then(module => ({ default: module.About })))
 const HowItWorks = lazy(() => import("@/pages/HowItWorks").then(module => ({ default: module.HowItWorks })))
@@ -21,16 +29,23 @@ const BookingConfirmation = lazy(() => import("@/pages/BookingConfirmation").the
 const ProductCheckout = lazy(() => import("@/pages/ProductCheckout").then(module => ({ default: module.ProductCheckout })))
 const NotFound = lazy(() => import("@/pages/NotFound").then(module => ({ default: module.NotFound })))
 
-// Loading fallback component is now PageLoader (with Lottie animation)
-
-// Main application component
+/**
+ * Main Application Component
+ * 
+ * Features:
+ * - Session-based splash screen (shows once per session)
+ * - Lazy-loaded routes for optimal performance
+ * - Error boundaries for graceful error handling
+ * - Global state management (Cart, Toast)
+ * - Accessibility features (skip links, keyboard navigation)
+ */
 function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [showContent, setShowContent] = useState(false)
 
   useEffect(() => {
     // Check if this is the first visit in this session
-    const hasVisited = sessionStorage.getItem('hasVisited')
+    const hasVisited = sessionStorage.getItem(STORAGE_KEYS.HAS_VISITED)
     
     if (hasVisited) {
       // Skip splash screen on subsequent page loads
@@ -38,7 +53,7 @@ function App() {
       setShowContent(true)
     } else {
       // Show splash screen on first visit
-      sessionStorage.setItem('hasVisited', 'true')
+      sessionStorage.setItem(STORAGE_KEYS.HAS_VISITED, 'true')
     }
   }, [])
 
@@ -46,7 +61,7 @@ function App() {
     setIsLoading(false)
     setTimeout(() => {
       setShowContent(true)
-    }, 100)
+    }, CONTENT_FADE_IN_DELAY_MS)
   }
 
   return (

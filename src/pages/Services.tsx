@@ -1,30 +1,32 @@
-// Services page - Booking-focused design with real images, sticky booking bar, and enhanced product section
+/**
+ * Services Page
+ * 
+ * Main page for browsing and booking car wash services and purchasing products.
+ * Features tabbed interface, search/filter functionality, and cart integration.
+ */
+
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { Container } from "@/components/layout/Container"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Card, CardContent } from "@/components/ui/card"
 import { ServiceCardSkeleton, ProductCardSkeleton } from "@/components/ui/Skeleton"
 import { EmptyState } from "@/components/ui/EmptyState"
 import { FaqSection } from "@/components/sections/FaqSection"
-import { useCart } from "@/hooks/useCart"
+import { ServiceCard } from "@/components/services/ServiceCard"
+import { ProductCard } from "@/components/services/ProductCard"
+import { ServicesFilters } from "@/components/services/ServicesFilters"
 import { useToast } from "@/hooks/useToast"
 import { useDebouncedCallback } from "@/hooks/useDebouncedCallback"
+import { SKELETON_DELAY_MS, SEARCH_DEBOUNCE_MS } from "@/lib/constants"
+import { Service, Product, Testimonial, FaqItem, CategoryOption } from "@/types/services"
 import {
-  ChevronRight,
   Search,
-  Clock,
-  Star,
-  Filter,
-  ShoppingCart,
   Package,
-  Calendar,
   CheckCircle,
   Users,
   Star as StarIcon,
-  X,
+  Star,
+  Clock,
   Award,
   Shield,
   Sparkles,
@@ -50,7 +52,8 @@ import interiorCleanerImage from "@/assets/images/products/interior-cleaner.png"
 import wheelBrushImage from "@/assets/images/products/wheel-brush.png"
 import detailingKitImage from "@/assets/images/products/detailing-kit.png"
 
-const serviceCategories = [
+// Category filter options
+const serviceCategories: CategoryOption[] = [
   { value: "all", label: "All Services" },
   { value: "basic", label: "Basic Wash" },
   { value: "premium", label: "Premium Wash" },
@@ -58,7 +61,7 @@ const serviceCategories = [
   { value: "addons", label: "Add-ons" },
 ]
 
-const productCategories = [
+const productCategories: CategoryOption[] = [
   { value: "all", label: "All Products" },
   { value: "cleaning", label: "Cleaning" },
   { value: "protection", label: "Protection" },
@@ -67,7 +70,7 @@ const productCategories = [
 ]
 
 // Note: All prices below already include 12% VAT
-const storeProducts = [
+const storeProducts: Product[] = [
   {
     id: "car-shampoo",
     name: "Premium Car Shampoo",
@@ -156,7 +159,7 @@ const storeProducts = [
 ]
 
 // Note: All prices below already include 12% VAT
-const services = [
+const services: Service[] = [
   {
     id: "basic-wash",
     title: "Basic Wash",
@@ -274,7 +277,7 @@ const services = [
   },
 ]
 
-const testimonials = [
+const testimonials: Testimonial[] = [
   {
     id: 1,
     name: "Maria Santos",
@@ -298,7 +301,7 @@ const testimonials = [
   }
 ]
 
-const faqs = [
+const faqs: FaqItem[] = [
   {
     id: 1,
     question: "How do I book a service?",
@@ -323,9 +326,8 @@ const faqs = [
 
 export function Services() {
   const location = useLocation()
-  const { addToCart } = useCart()
-  const { success, info } = useToast()
-  const [activeTab, setActiveTab] = useState("services")
+  const { info } = useToast()
+  const [activeTab, setActiveTab] = useState<"services" | "products">("services")
   const [isLoading, setIsLoading] = useState(true)
 
   // Show message if redirected from booking page
@@ -342,19 +344,17 @@ export function Services() {
     setIsLoading(true)
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 800) // Short delay to show skeletons
+    }, SKELETON_DELAY_MS)
     return () => clearTimeout(timer)
   }, [activeTab])
 
   const [searchTerm, setSearchTerm] = useState("")
   const [searchInputValue, setSearchInputValue] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("all")
-  const [selectedService, setSelectedService] = useState<any>(null)
-  const [showBookingBar, setShowBookingBar] = useState(false)
 
   const applySearchFilter = useDebouncedCallback((value: string) => {
     setSearchTerm(value)
-  }, 200)
+  }, SEARCH_DEBOUNCE_MS)
 
   const handleSearchChange = useCallback((value: string) => {
     setSearchInputValue(value)
@@ -383,11 +383,6 @@ export function Services() {
     return matchesSearch && matchesCategory
   }), [searchTerm, selectedCategory, storeProducts])
 
-
-  const handleBookNow = () => {
-    // This would typically navigate to a booking form or modal
-    // Booking service logic here
-  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -433,6 +428,7 @@ export function Services() {
                         ? "bg-white text-brand-primary"
                         : "text-white hover:bg-white/10"
                     }`}
+                    aria-label="View car wash services"
                   >
                     Services
                   </button>
@@ -443,6 +439,7 @@ export function Services() {
                         ? "bg-white text-brand-primary"
                         : "text-white hover:bg-white/10"
                     }`}
+                    aria-label="View car care products"
                   >
                     Products
                   </button>
@@ -454,44 +451,14 @@ export function Services() {
       </section>
 
       {/* Search and Filter Section */}
-      <section className="py-8 bg-brand-cream">
-        <Container>
-          <div className="flex flex-col md:flex-row gap-4 max-w-3xl mx-auto">
-                {/* Search Input */}
-                <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" />
-                  <Input
-                    type="text"
-                    placeholder={`Search ${activeTab}...`}
-                    value={searchInputValue}
-                    onChange={(e) => handleSearchChange(e.target.value)}
-                    className="pl-10 h-12 text-lg focus-ring"
-                    aria-label={`Search ${activeTab}`}
-                  />
-                </div>
-
-                {/* Category Filter */}
-                <div className="md:w-64">
-              <Select 
-                value={selectedCategory} 
-                onValueChange={setSelectedCategory}
-              >
-                    <SelectTrigger className="h-12 text-lg focus-ring">
-                      <Filter className="h-5 w-5 mr-2" />
-                      <SelectValue placeholder="Filter by category" />
-                    </SelectTrigger>
-                    <SelectContent>
-                  {(activeTab === "services" ? serviceCategories : productCategories).map((category) => (
-                        <SelectItem key={category.value} value={category.value}>
-                          {category.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-            </div>
-          </div>
-        </Container>
-      </section>
+      <ServicesFilters
+        searchValue={searchInputValue}
+        onSearchChange={handleSearchChange}
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+        categories={activeTab === "services" ? serviceCategories : productCategories}
+        activeTab={activeTab}
+      />
 
       {/* Services Tab */}
       {activeTab === "services" && (
@@ -524,101 +491,7 @@ export function Services() {
           ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredServices.map((service) => (
-                  <Card 
-                    key={service.id} 
-                    className={`relative overflow-hidden group hover:shadow-xl transition-all duration-300 h-full ${
-                      service.isRecommended ? 'ring-2 ring-brand-primary shadow-xl bg-gradient-to-br from-brand-accent/5 to-transparent' : ''
-                    }`}
-                  >
-                    {/* Enhanced Badge for Premium Wash */}
-                    {service.isRecommended && (
-                      <div className="absolute top-4 right-4 bg-gradient-to-r from-brand-primary to-brand-primary/80 text-white px-4 py-2 rounded-full text-sm font-bold z-10 flex items-center gap-1 shadow-lg">
-                        <Star className="h-4 w-4" />
-                        Best Value
-                      </div>
-                    )}
-                    
-                    {/* Service Image with consistent aspect ratio */}
-                    <div className="h-48 bg-brand-dark overflow-hidden relative">
-                      <img 
-                        src={service.image} 
-                        alt={`Professional ${service.title.toLowerCase()} service`}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      {service.isRecommended && (
-                        <div className="absolute inset-0 bg-gradient-to-t from-brand-primary/20 to-transparent"></div>
-                      )}
-                    </div>
-                  
-                  <CardHeader className="text-center pb-4">
-                      <div className="mb-2">
-                        <span className="text-sm font-semibold text-brand-primary bg-brand-accent px-3 py-1 rounded-full">
-                          {service.framing}
-                        </span>
-                      </div>
-                      <CardTitle className="text-2xl text-brand-dark mb-2">{service.title}</CardTitle>
-                      <div className="flex items-center justify-center gap-4 text-lg mb-4">
-                        <span className="text-3xl font-bold text-brand-primary">{service.priceDisplay}</span>
-                        <div className="flex items-center gap-2 text-neutral-600 bg-neutral-100 px-3 py-1 rounded-full">
-                          <Clock className="h-5 w-5 text-brand-primary" />
-                          <span className="font-semibold">{service.durationDisplay}</span>
-                        </div>
-                      </div>
-                    </CardHeader>
-                  
-                  <CardContent className="text-center">
-                    <CardDescription className="text-lg mb-6 text-neutral-600">
-                        {service.description}
-                    </CardDescription>
-                    
-                      {/* Value Points with Icons */}
-                      <div className="space-y-3 mb-6">
-                        {service.valuePoints.map((point, index) => {
-                          const IconComponent = point.icon
-                          return (
-                            <div key={index} className="flex items-center gap-3 text-sm text-neutral-600">
-                              <div className="flex-shrink-0 w-8 h-8 bg-brand-accent rounded-full flex items-center justify-center">
-                                <IconComponent className="h-4 w-4 text-brand-primary" />
-                              </div>
-                              <span className="font-medium">{point.text}</span>
-                            </div>
-                          )
-                        })}
-                      </div>
-                      
-                      {/* Features */}
-                      <ul className="space-y-2 mb-8 text-left">
-                        {service.features.map((feature, index) => (
-                          <li key={index} className="flex items-center text-sm text-neutral-600">
-                            <ChevronRight className="h-4 w-4 text-brand-primary mr-2 flex-shrink-0" />
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                      
-                      <Button
-                        onClick={() => {
-                          addToCart({
-                            id: service.id,
-                            type: 'service',
-                            name: service.title,
-                            price: service.price,
-                            quantity: 1,
-                            description: service.description,
-                            duration: service.duration,
-                            image: service.image,
-                          })
-                          success(`${service.title} added to cart!`, 'Click the cart icon to book your date & time.')
-                        }}
-                        className="w-full font-semibold text-lg py-3 focus-ring bg-brand-primary text-white hover:bg-brand-primary/90"
-                      >
-                        <ShoppingCart className="h-5 w-5 mr-2" />
-                        Add to Cart
-                      </Button>
-                    </CardContent>
-                  </Card>
+                  <ServiceCard key={service.id} service={service} />
                 ))}
               </div>
             )}
@@ -670,141 +543,13 @@ export function Services() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {filteredProducts.map((product) => (
-                    <Card 
-                      key={product.id} 
-                      className={`relative overflow-hidden group hover:shadow-xl transition-all duration-300 h-full ${
-                        product.isRecommended ? 'ring-2 ring-brand-accent shadow-lg' : ''
-                      }`}
-                    >
-                      {/* Product Image with clean white background */}
-                      <div className="h-48 bg-white overflow-hidden flex items-center justify-center relative border-b">
-                        <img 
-                          src={product.image} 
-                          alt={`${product.name} - Professional car care product`}
-                          className="w-full h-full object-contain p-6 drop-shadow-sm"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                        {/* Badge */}
-                        {product.badge && (
-                          <div className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-bold ${
-                            product.badge === 'Best Seller' ? 'bg-brand-primary text-white' :
-                            product.badge === 'Popular Choice' ? 'bg-green-500 text-white' :
-                            product.badge === 'New' ? 'bg-blue-500 text-white' :
-                            product.badge === 'Bundle Deal' ? 'bg-orange-500 text-white' :
-                            'bg-neutral-500 text-white'
-                          }`}>
-                            {product.badge}
-                          </div>
-                        )}
-                      </div>
-                      
-                      <CardContent className="p-6 flex flex-col justify-between flex-grow">
-                        <div className="text-center mb-4">
-                          <h3 className="text-xl font-bold text-brand-dark mb-2">{product.name}</h3>
-                          <div className="flex items-center justify-center gap-2 mb-2">
-                            <span className="text-2xl font-bold text-brand-primary">{product.priceDisplay}</span>
-                            {product.originalPrice && (
-                              <span className="text-lg text-neutral-400 line-through">{product.originalPriceDisplay}</span>
-                            )}
-                          </div>
-                          <p className="text-sm text-neutral-600 mb-4">
-                            {product.description}
-                          </p>
-                        </div>
-                        
-                        {/* Stock Status */}
-                        <div className={`flex items-center justify-center gap-2 text-sm mb-4 ${
-                          product.stockStatus === 'Only 8 left' || product.stockStatus === 'Only 5 left' ? 'text-red-600' :
-                          product.stockStatus === 'Restocking Soon' ? 'text-orange-600' :
-                          product.stockStatus === 'Limited Time' ? 'text-purple-600' :
-                          'text-green-600'
-                        }`}>
-                          <div className={`w-2 h-2 rounded-full ${
-                            product.stockStatus === 'Only 8 left' || product.stockStatus === 'Only 5 left' ? 'bg-red-500' :
-                            product.stockStatus === 'Restocking Soon' ? 'bg-orange-500' :
-                            product.stockStatus === 'Limited Time' ? 'bg-purple-500' :
-                            'bg-green-500'
-                          }`}></div>
-                          <span className="font-medium">{product.stockStatus}</span>
-                        </div>
-                        
-                        {/* Upsell Cue for recommended products */}
-                        {product.isRecommended && !product.isBundle && (
-                          <p className="text-xs text-brand-primary font-medium mb-3 text-center">
-                            ✨ Recommended with Premium Wash
-                          </p>
-                        )}
-                        
-                        {/* Add to Cart Button */}
-                        <Button
-                          className={`w-full font-semibold py-3 ${
-                            product.isBundle 
-                              ? 'bg-gradient-to-r from-brand-primary to-brand-accent hover:from-brand-primary/90 hover:to-brand-accent/90 text-white' 
-                              : 'bg-brand-primary hover:bg-brand-primary/90 text-white'
-                          }`}
-                          onClick={() => {
-                            addToCart({
-                              id: product.id,
-                              type: 'product',
-                              name: product.name,
-                              price: product.price,
-                              quantity: 1,
-                              description: product.description,
-                              image: product.image,
-                            })
-                            success(`${product.name} added to cart!`, 'You can continue shopping or proceed to checkout.')
-                          }}
-                        >
-                          <ShoppingCart className="h-4 w-4 mr-2" />
-                          {product.isBundle ? 'Get Bundle Deal' : 'Add to Cart'}
-                        </Button>
-                      </CardContent>
-                    </Card>
+                    <ProductCard key={product.id} product={product} />
                   ))}
                 </div>
               </>
             )}
           </Container>
         </section>
-      )}
-
-      {/* Booking Bar */}
-      {selectedService && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg z-50 p-4">
-          <Container>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-brand-dark rounded-lg flex items-center justify-center">
-                  <p className="text-white text-xs font-medium tracking-wider uppercase">
-                    IMG
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">{selectedService.title}</h3>
-                  <p className="text-neutral-600">{selectedService.durationDisplay} | {selectedService.priceDisplay}</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <Button
-                  variant="outline"
-                  onClick={() => setSelectedService(null)}
-                  className="px-4 py-2"
-                >
-                  <X className="h-4 w-4 mr-2" />
-                  Remove
-                </Button>
-                <Button
-                  onClick={handleBookNow}
-                  className="bg-brand-primary text-white hover:bg-brand-primary/90 px-6 py-2 font-semibold"
-                >
-                  <Calendar className="h-4 w-4 mr-2" />
-                  Book Now
-                </Button>
-              </div>
-            </div>
-          </Container>
-        </div>
       )}
 
       {/* Social Proof Section */}
@@ -864,45 +609,6 @@ export function Services() {
         title="Frequently Asked Questions"
         subtitle="Get answers to common questions about our services and booking process."
       />
-
-
-      {/* Sticky Booking Bar */}
-      {showBookingBar && selectedService && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg z-50 p-4">
-          <Container>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <img 
-                  src={selectedService.image} 
-                  alt={selectedService.title}
-                  className="w-12 h-12 object-cover rounded-lg"
-                />
-                <div>
-                  <h3 className="font-semibold text-brand-dark">{selectedService.title}</h3>
-                  <p className="text-sm text-neutral-600">{selectedService.durationDisplay} | {selectedService.priceDisplay}</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <Button
-                  variant="outline"
-                  onClick={() => setShowBookingBar(false)}
-                  className="px-4"
-                >
-                  <X className="h-4 w-4 mr-2" />
-                  Close
-                </Button>
-                <Button
-                  onClick={handleBookNow}
-                  className="bg-brand-primary hover:bg-brand-primary/90 text-white px-8"
-                >
-                  <Calendar className="h-4 w-4 mr-2" />
-                  Book Now
-                </Button>
-              </div>
-            </div>
-          </Container>
-        </div>
-      )}
     </div>
   )
 }
