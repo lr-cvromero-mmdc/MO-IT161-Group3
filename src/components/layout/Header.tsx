@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { FloatingCartButton } from "@/components/cart/FloatingCartButton"
 import { ChevronRight, Menu } from "lucide-react"
 import { Container } from "@/components/layout/Container"
+import logo from "@/assets/images/logos/brand/SVG/espinosa-logo.svg"
 
 // Mobile menu (Sheet) components
 import {
@@ -99,15 +100,14 @@ export function Header() {
             <Link 
               to="/" 
               onClick={() => window.scrollTo(0, 0)}
-              className="flex items-center space-x-3 focus-ring rounded-lg"
+              className="focus-ring rounded-lg"
               aria-label="Espinosa's Hand Carwash - Home"
             >
-              <div className="h-10 w-10 rounded-lg bg-brand-cream flex items-center justify-center">
-                <span className="text-brand-primary font-bold text-lg">E</span>
-              </div>
-              <span className={`text-lg font-bold transition-colors ${
-                isHomePage && !isScrolled ? 'text-brand-dark' : 'text-white'
-              }`}>Espinosa's</span>
+              <img 
+                src={logo} 
+                alt="Espinosa's Hand Carwash Logo" 
+                className="h-12 w-12"
+              />
             </Link>
 
             {/* Desktop Navigation */}
