@@ -172,28 +172,16 @@ export function About() {
               <div className="w-24 h-1 bg-brand-primary mx-auto mb-6"></div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="grid md:grid-cols-2 gap-12 items-start">
               {/* Story Image */}
-              <div className="order-2 md:order-1">
-                <div className="relative rounded-lg overflow-hidden shadow-xl">
+              <div className="order-2 md:order-1 h-full">
+                <div className="relative rounded-lg overflow-hidden shadow-xl h-full">
                   <img
-                    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop"
+                    src={ourStoryImage}
                     alt="Espinosa's Hand Carwash - Professional car washing service"
-                    className="w-full h-[400px] object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement
-                      target.style.display = 'none'
-                      const placeholder = target.nextElementSibling as HTMLElement
-                      if (placeholder) placeholder.style.display = 'flex'
-                    }}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
                   />
-                  <div className="hidden w-full h-[400px] bg-gradient-to-br from-brand-primary to-brand-accent flex items-center justify-center text-white">
-                    <div className="text-center">
-                      <Car className="h-20 w-20 mx-auto mb-4 opacity-50" />
-                      <p className="text-lg font-semibold">Photo Placeholder</p>
-                      <p className="text-sm opacity-75">Company Image</p>
-                    </div>
-                  </div>
                 </div>
               </div>
 
@@ -233,14 +221,12 @@ export function About() {
               <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow overflow-hidden">
                 <div className="relative h-48 overflow-hidden">
                   <img
-                    src={ourStoryImage}
+                    src={heroBackgroundImage}
                     alt="Our Mission - Professional car care"
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
-                  <div className="hidden absolute inset-0 bg-gradient-to-br from-brand-primary/80 to-brand-primary flex items-center justify-center">
-                    <Target className="h-16 w-16 text-white opacity-50" />
-                  </div>
+                  <div className="absolute inset-0 bg-brand-primary/30"></div>
                 </div>
                 <CardHeader>
                   <div className="flex items-center gap-3 mb-4">
