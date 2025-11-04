@@ -20,6 +20,7 @@ import type {
 import basicWashImage from "@/assets/images/services/basic-wash.jpg"
 import premiumWashImage from "@/assets/images/services/premium-wash.jpg"
 import fullDetailingImage from "@/assets/images/services/full-detailing.jpg"
+import locationsHeroImage from "@/assets/images/pages/Locations/hero-background.png"
 
 interface HeroSectionProps {
   searchQuery: string
@@ -171,7 +172,7 @@ export function AboutSection() {
       <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
         <div className="col-span-12 lg:col-span-6">
           <div className="rounded-2xl h-80 lg:h-96 overflow-hidden">
-            <img src={fullDetailingImage} alt="Professional car detailing service" className="w-full h-full object-cover" loading="lazy" />
+            <img src={locationsHeroImage} alt="Professional car detailing service" className="w-full h-full object-cover" loading="lazy" />
           </div>
         </div>
 
