@@ -1,429 +1,939 @@
-import { useState } from "react"
+// Services page - Booking-focused design with real images, sticky booking bar, and enhanced product section
+import { useCallback, useEffect, useMemo, useState } from "react"
+import { useLocation } from "react-router-dom"
 import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ChevronRight, Search, Car, Shield, Award, Clock, Star, Filter, ShoppingCart, Package } from "lucide-react"
+import { ServiceCardSkeleton, ProductCardSkeleton } from "@/components/ui/Skeleton"
+import { EmptyState } from "@/components/ui/EmptyState"
+import { useCart } from "@/hooks/useCart"
+import { useToast } from "@/hooks/useToast"
+import { useDebouncedCallback } from "@/hooks/useDebouncedCallback"
+import {
+  ChevronRight,
+  Search,
+  Clock,
+  Star,
+  Filter,
+  ShoppingCart,
+  Package,
+  Calendar,
+  CheckCircle,
+  Users,
+  Star as StarIcon,
+  X,
+  Award,
+  Shield,
+  Sparkles,
+  Zap,
+  Heart
+} from "lucide-react"
+import heroBackgroundImage from "@/assets/images/services/hero-background.jpg"
+import basicWashImage from "@/assets/images/services/basic-wash.jpg"
+import premiumWashImage from "@/assets/images/services/premium-wash.jpg"
+import fullDetailingImage from "@/assets/images/services/full-detailing.jpg"
+import waxApplicationImage from "@/assets/images/services/wax-application.jpg"
+import interiorDeepCleanImage from "@/assets/images/services/interior-deepclean.jpg"
+import engineBayCleanImage from "@/assets/images/services/engine-bay-clean.jpg"
+import serviceBasicsImage from "@/assets/images/services/service-basics.jpg"
+import servicePremiumImage from "@/assets/images/services/service-premium.jpg"
+import serviceDetailingImage from "@/assets/images/services/service-detailing.jpg"
+import carShampooImage from "@/assets/images/products/car-shampoo.png"
+import microfiberTowelImage from "@/assets/images/products/microfiber-towel.png"
+import carWaxImage from "@/assets/images/products/car-wax.png"
+import tireGelImage from "@/assets/images/products/tire-gel.png"
+import interiorCleanerImage from "@/assets/images/products/interior-cleaner.png"
+import wheelBrushImage from "@/assets/images/products/wheel-brush.png"
+import detailingKitImage from "@/assets/images/products/detailing-kit.png"
 
-// Service categories for filtering
 const serviceCategories = [
   { value: "all", label: "All Services" },
   { value: "basic", label: "Basic Wash" },
   { value: "premium", label: "Premium Wash" },
   { value: "detailing", label: "Full Detailing" },
   { value: "addons", label: "Add-ons" },
-  { value: "products", label: "Products" },
 ]
 
-// Store products data
+const productCategories = [
+  { value: "all", label: "All Products" },
+  { value: "cleaning", label: "Cleaning" },
+  { value: "protection", label: "Protection" },
+  { value: "tools", label: "Tools" },
+  { value: "bundles", label: "Bundles" },
+]
+
+// Note: All prices below already include 12% VAT
 const storeProducts = [
   {
-    id: 1,
+    id: "car-shampoo",
     name: "Premium Car Shampoo",
-    price: "₱299",
-    description: "Professional-grade car shampoo for gentle cleaning",
-    image: "🧽",
+    price: 299,
+    priceDisplay: "₱299",
+    originalPrice: 399,
+    originalPriceDisplay: "₱399",
+    description: "Professional-grade car shampoo (500ml) for gentle cleaning. pH-balanced formula.",
     category: "cleaning",
+    image: carShampooImage,
+    badge: "Best Seller",
+    stockStatus: "Only 8 left",
+    isRecommended: true
   },
   {
-    id: 2,
+    id: "microfiber-towels",
     name: "Microfiber Towels (Set of 3)",
-    price: "₱499",
-    description: "High-quality microfiber towels for streak-free drying",
-    image: "🧻",
+    price: 499,
+    priceDisplay: "₱499",
+    description: "High-quality microfiber towels (16x16 inches) for streak-free drying. Machine washable.",
     category: "cleaning",
+    image: microfiberTowelImage,
+    badge: "Popular Choice",
+    stockStatus: "In Stock",
+    isRecommended: true
   },
   {
-    id: 3,
+    id: "car-wax",
     name: "Car Wax (16oz)",
-    price: "₱799",
-    description: "Long-lasting car wax for protection and shine",
-    image: "✨",
+    price: 799,
+    priceDisplay: "₱799",
+    description: "Long-lasting car wax (16oz) for protection and shine. Lasts 3-6 months.",
     category: "protection",
+    image: carWaxImage,
+    badge: null,
+    stockStatus: "In Stock"
   },
   {
-    id: 4,
+    id: "tire-shine",
     name: "Tire Shine Gel",
-    price: "₱199",
-    description: "Non-greasy tire shine for a glossy finish",
-    image: "🛞",
+    price: 199,
+    priceDisplay: "₱199",
+    description: "Non-greasy tire shine (250ml) for a glossy finish. Water-resistant formula.",
     category: "protection",
+    image: tireGelImage,
+    badge: "New",
+    stockStatus: "Restocking Soon"
   },
   {
-    id: 5,
+    id: "interior-cleaner",
     name: "Interior Cleaner",
-    price: "₱399",
-    description: "Safe cleaner for dashboard, seats, and interior surfaces",
-    image: "🧴",
+    price: 399,
+    priceDisplay: "₱399",
+    description: "Safe cleaner (500ml) for dashboard, seats, and interior surfaces. Non-toxic formula.",
     category: "cleaning",
+    image: interiorCleanerImage,
+    badge: null,
+    stockStatus: "In Stock"
   },
   {
-    id: 6,
+    id: "wheel-brush",
     name: "Wheel Brush Set",
-    price: "₱599",
-    description: "Professional wheel cleaning brushes for all rim types",
-    image: "🪥",
+    price: 599,
+    priceDisplay: "₱599",
+    description: "Professional wheel cleaning brushes (3 brushes) for all rim types. Durable nylon bristles.",
     category: "tools",
+    image: wheelBrushImage,
+    badge: null,
+    stockStatus: "In Stock"
+  },
+  {
+    id: "detailing-kit",
+    name: "Complete Detailing Kit",
+    price: 1800,
+    priceDisplay: "₱1,800",
+    originalPrice: 2200,
+    originalPriceDisplay: "₱2,200",
+    description: "Everything you need: shampoo, towels, wax, and cleaner. Save ₱400!",
+    category: "bundles",
+    image: detailingKitImage,
+    badge: "Bundle Deal",
+    stockStatus: "Limited Time",
+    isRecommended: true,
+    isBundle: true
   },
 ]
 
-// Service offerings data
+// Note: All prices below already include 12% VAT
 const services = [
   {
-    id: 1,
+    id: "basic-wash",
     title: "Basic Wash",
     category: "basic",
-    price: "₱1,500",
-    duration: "30 min",
+    price: 1500,
+    priceDisplay: "₱1,500",
+    duration: 30,
+    durationDisplay: "30 min",
     description: "Exterior wash, wheel clean, dry & shine. Perfect for weekly maintenance.",
     features: ["Exterior wash", "Wheel cleaning", "Dry & shine", "Tire dressing"],
-    icon: Car,
     popular: false,
+    valuePoints: [
+      { text: "Quick & efficient", icon: Zap },
+      { text: "Perfect for regular maintenance", icon: Clock },
+      { text: "Professional quality", icon: Award }
+    ],
+    image: basicWashImage,
+    framing: "Essential Care"
   },
   {
-    id: 2,
+    id: "premium-wash",
     title: "Premium Wash",
     category: "premium",
-    price: "₱2,500",
-    duration: "45 min",
+    price: 2500,
+    priceDisplay: "₱2,500",
+    duration: 45,
+    durationDisplay: "45 min",
     description: "Basic wash plus interior vacuum, dashboard clean, tire shine. Complete care.",
     features: ["Everything in Basic", "Interior vacuum", "Dashboard clean", "Tire shine"],
-    icon: Shield,
     popular: true,
+    valuePoints: [
+      { text: "Most popular choice", icon: Heart },
+      { text: "Complete interior & exterior", icon: Shield },
+      { text: "Best value for money", icon: Star }
+    ],
+    image: premiumWashImage,
+    framing: "Best Value",
+    isRecommended: true
   },
   {
-    id: 3,
+    id: "full-detailing",
     title: "Full Detailing",
     category: "detailing",
-    price: "₱4,500",
-    duration: "90 min",
+    price: 4500,
+    priceDisplay: "₱4,500",
+    duration: 90,
+    durationDisplay: "90 min",
     description: "Premium wash plus wax, leather conditioning, engine bay clean. Showroom ready.",
     features: ["Everything in Premium", "Wax application", "Leather conditioning", "Engine bay clean"],
-    icon: Award,
     popular: false,
+    valuePoints: [
+      { text: "Showroom quality", icon: Sparkles },
+      { text: "Comprehensive service", icon: Award },
+      { text: "Long-lasting protection", icon: Shield }
+    ],
+    image: fullDetailingImage,
+    framing: "Complete Care"
   },
   {
-    id: 4,
+    id: "wax-application",
     title: "Wax Application",
     category: "addons",
-    price: "₱800",
-    duration: "20 min",
+    price: 800,
+    priceDisplay: "₱800",
+    duration: 20,
+    durationDisplay: "20 min",
     description: "Professional wax application for extra protection and shine.",
     features: ["Premium wax", "Hand application", "UV protection", "Long-lasting shine"],
-    icon: Star,
     popular: false,
+    valuePoints: [
+      { text: "Extra protection", icon: Shield },
+      { text: "Enhanced shine", icon: Sparkles },
+      { text: "UV resistant", icon: Award }
+    ],
+    image: waxApplicationImage,
+    framing: "Add-on Service"
   },
   {
-    id: 5,
+    id: "interior-deep-clean",
     title: "Interior Deep Clean",
     category: "addons",
-    price: "₱1,200",
-    duration: "30 min",
+    price: 1200,
+    priceDisplay: "₱1,200",
+    duration: 30,
+    durationDisplay: "30 min",
     description: "Thorough interior cleaning including seats, carpets, and dashboard.",
     features: ["Seat cleaning", "Carpet shampoo", "Dashboard detail", "Leather treatment"],
-    icon: Shield,
     popular: false,
+    valuePoints: [
+      { text: "Deep cleaning", icon: Zap },
+      { text: "Safe for all materials", icon: Shield },
+      { text: "Fresh interior", icon: Heart }
+    ],
+    image: interiorDeepCleanImage,
+    framing: "Add-on Service"
   },
   {
-    id: 6,
+    id: "engine-bay-clean",
     title: "Engine Bay Clean",
     category: "addons",
-    price: "₱600",
-    duration: "15 min",
+    price: 600,
+    priceDisplay: "₱600",
+    duration: 15,
+    durationDisplay: "15 min",
     description: "Safe engine bay cleaning to remove dirt and grime.",
     features: ["Safe cleaning", "Degreasing", "Protection coating", "Visual inspection"],
-    icon: Car,
     popular: false,
+    valuePoints: [
+      { text: "Safe cleaning", icon: Shield },
+      { text: "Professional degreasing", icon: Zap },
+      { text: "Protection coating", icon: Award }
+    ],
+    image: engineBayCleanImage,
+    framing: "Add-on Service"
   },
 ]
 
-// Services page component
+const testimonials = [
+  {
+    id: 1,
+    name: "Maria Santos",
+    rating: 5,
+    text: "Excellent service! My car looks brand new after the Premium Wash. The team was professional and efficient.",
+    service: "Premium Wash"
+  },
+  {
+    id: 2,
+    name: "John Rodriguez",
+    rating: 5,
+    text: "The Full Detailing service exceeded my expectations. Worth every peso for the showroom quality finish.",
+    service: "Full Detailing"
+  },
+  {
+    id: 3,
+    name: "Sarah Chen",
+    rating: 5,
+    text: "Quick and reliable Basic Wash service. Perfect for my weekly car maintenance routine.",
+    service: "Basic Wash"
+  }
+]
+
+const faqs = [
+  {
+    id: 1,
+    question: "How do I book a service?",
+    answer: "Simply select your preferred service from our list, click 'Select & Book', and follow the booking process. You can choose your preferred date and time."
+  },
+  {
+    id: 2,
+    question: "What's included in the Premium Wash?",
+    answer: "The Premium Wash includes everything in Basic Wash plus interior vacuum, dashboard cleaning, and tire shine for complete care."
+  },
+  {
+    id: 3,
+    question: "How long does a service take?",
+    answer: "Service duration varies: Basic Wash (30 min), Premium Wash (45 min), Full Detailing (90 min), and Add-ons (15-30 min)."
+  },
+  {
+    id: 4,
+    question: "Can I customize my service?",
+    answer: "Yes! You can add any of our add-on services to your main service package for a customized experience."
+  }
+]
+
 export function Services() {
+  const location = useLocation()
+  const { addToCart } = useCart()
+  const { success, info } = useToast()
+  const [activeTab, setActiveTab] = useState("services")
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Show message if redirected from booking page
+  useEffect(() => {
+    if (location.state?.message) {
+      info('Cart Empty', location.state.message)
+      // Clear the state to prevent showing the message again
+      window.history.replaceState({}, document.title)
+    }
+  }, [location.state, info])
+
+  // Simulate loading (in real app, this would be from API)
+  useEffect(() => {
+    setIsLoading(true)
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 800) // Short delay to show skeletons
+    return () => clearTimeout(timer)
+  }, [activeTab])
+
   const [searchTerm, setSearchTerm] = useState("")
+  const [searchInputValue, setSearchInputValue] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("all")
+  const [selectedService, setSelectedService] = useState<any>(null)
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(null)
+  const [showBookingBar, setShowBookingBar] = useState(false)
 
-  const allItems = [...services, ...storeProducts.map(product => ({
-    id: product.id + 1000, // Offset to avoid ID conflicts
-    title: product.name,
-    category: "products",
-    price: product.price,
-    duration: "In Stock",
-    description: product.description,
-    features: [product.category],
-    icon: Package,
-    popular: false,
-    isProduct: true,
-    product: product
-  }))]
+  const applySearchFilter = useDebouncedCallback((value: string) => {
+    setSearchTerm(value)
+  }, 200)
 
-  const filteredServices = allItems.filter((item) => {
-    const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         item.description.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = selectedCategory === "all" || item.category === selectedCategory
+  const handleSearchChange = useCallback((value: string) => {
+    setSearchInputValue(value)
+    applySearchFilter(value)
+  }, [applySearchFilter])
+
+  const clearSearchTerm = useCallback(() => {
+    setSearchInputValue("")
+    setSearchTerm("")
+    applySearchFilter("")
+  }, [applySearchFilter])
+
+  const filteredServices = useMemo(() => services.filter((service) => {
+    const normalizedQuery = searchTerm.toLowerCase()
+    const matchesSearch = service.title.toLowerCase().includes(normalizedQuery) ||
+                         service.description.toLowerCase().includes(normalizedQuery)
+    const matchesCategory = selectedCategory === "all" || service.category === selectedCategory
     return matchesSearch && matchesCategory
-  })
+  }), [searchTerm, selectedCategory, services])
+
+  const filteredProducts = useMemo(() => storeProducts.filter((product) => {
+    const normalizedQuery = searchTerm.toLowerCase()
+    const matchesSearch = product.name.toLowerCase().includes(normalizedQuery) ||
+                         product.description.toLowerCase().includes(normalizedQuery)
+    const matchesCategory = selectedCategory === "all" || product.category === selectedCategory
+    return matchesSearch && matchesCategory
+  }), [searchTerm, selectedCategory, storeProducts])
+
+
+  const handleBookNow = () => {
+    // This would typically navigate to a booking form or modal
+    // Booking service logic here
+  }
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="bg-brand-primary text-white py-20">
-        <Container>
-          <div className="grid grid-cols-12">
-            <div className="col-span-12 lg:col-start-3 lg:col-span-8 text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                Our Services
+      {/* Header Section with Background Image */}
+      <section className="relative bg-brand-primary text-white py-20 min-h-[500px] flex items-center pt-32">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={heroBackgroundImage} 
+            alt="Professional car wash service"
+            className="w-full h-full object-cover"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <div className="absolute inset-0 bg-brand-primary/50"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="relative z-10 w-full">
+          <Container>
+            <div className="text-center">
+              <h1 className="espinosa-hero text-white mb-4">
+                Book Your Car Service
               </h1>
-              <p className="text-lg md:text-xl text-brand-cream mb-8">
-                Professional hand washing and detailing services tailored to your needs. 
-                Choose from our range of packages or customize your own.
+              <p className="espinosa-body-large text-brand-cream mb-8 max-w-3xl mx-auto">
+                Professional hand washing and detailing services. Choose your service, book online, and we'll take care of the rest.
               </p>
+              
+              {/* Trust Signal */}
+              <div className="flex items-center justify-center gap-2 text-brand-cream/90 mb-8">
+                <CheckCircle className="h-5 w-5" />
+                <span className="text-lg font-semibold">Trusted by 1,200+ happy drivers</span>
+              </div>
+              
+              {/* Tab Navigation */}
+              <div className="flex justify-center">
+                <div className="bg-white/10 rounded-lg p-1 flex">
+                  <button
+                    onClick={() => setActiveTab("services")}
+                    className={`px-6 py-3 rounded-md font-semibold transition-all ${
+                      activeTab === "services"
+                        ? "bg-white text-brand-primary"
+                        : "text-white hover:bg-white/10"
+                    }`}
+                  >
+                    Services
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("products")}
+                    className={`px-6 py-3 rounded-md font-semibold transition-all ${
+                      activeTab === "products"
+                        ? "bg-white text-brand-primary"
+                        : "text-white hover:bg-white/10"
+                    }`}
+                  >
+                    Products
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </Container>
+          </Container>
+        </div>
       </section>
 
       {/* Search and Filter Section */}
-      <section className="py-12 bg-brand-cream">
+      <section className="py-8 bg-brand-cream">
         <Container>
-          <div className="grid grid-cols-12">
-            <div className="col-span-12 lg:col-start-3 lg:col-span-8">
-              <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col md:flex-row gap-4 max-w-3xl mx-auto">
                 {/* Search Input */}
                 <div className="flex-1 relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" />
                   <Input
                     type="text"
-                    placeholder="Search services..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder={`Search ${activeTab}...`}
+                    value={searchInputValue}
+                    onChange={(e) => handleSearchChange(e.target.value)}
                     className="pl-10 h-12 text-lg focus-ring"
-                    aria-label="Search services"
+                    aria-label={`Search ${activeTab}`}
                   />
                 </div>
 
                 {/* Category Filter */}
                 <div className="md:w-64">
-                  <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              <Select 
+                value={selectedCategory} 
+                onValueChange={setSelectedCategory}
+              >
                     <SelectTrigger className="h-12 text-lg focus-ring">
                       <Filter className="h-5 w-5 mr-2" />
                       <SelectValue placeholder="Filter by category" />
                     </SelectTrigger>
                     <SelectContent>
-                      {serviceCategories.map((category) => (
+                  {(activeTab === "services" ? serviceCategories : productCategories).map((category) => (
                         <SelectItem key={category.value} value={category.value}>
                           {category.label}
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
-                </div>
-              </div>
-
-              {/* Results Count */}
-              <div className="mt-4 text-center">
-                <p className="text-neutral-600">
-                  Showing {filteredServices.length} of {allItems.length} items
-                </p>
-              </div>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* Services Grid */}
-      <section className="py-20">
+      {/* Services Tab */}
+      {activeTab === "services" && (
+        <section className="py-12">
         <Container>
-          {filteredServices.length === 0 ? (
-            <div className="text-center py-16">
-              <Search className="h-16 w-16 text-neutral-300 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-brand-dark mb-2">No services found</h3>
-              <p className="text-neutral-600 mb-6">
-                Try adjusting your search terms or category filter.
-              </p>
-              <Button
-                onClick={() => {
-                  setSearchTerm("")
-                  setSelectedCategory("all")
-                }}
-                className="bg-brand-primary text-white hover:bg-brand-primary/90 focus-ring"
-              >
-                Clear Filters
-              </Button>
+          {isLoading ? (
+            /* Loading skeletons */
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <ServiceCardSkeleton />
+              <ServiceCardSkeleton />
+              <ServiceCardSkeleton />
+              <ServiceCardSkeleton />
+              <ServiceCardSkeleton />
+              <ServiceCardSkeleton />
             </div>
+          ) : filteredServices.length === 0 ? (
+            /* Empty state with improved design */
+            <EmptyState
+              icon={Search}
+              title="No services found"
+              description="Try adjusting your search terms or category filter to find what you're looking for."
+                action={{
+                  label: "Clear Filters",
+                  onClick: () => {
+                    clearSearchTerm()
+                    setSelectedCategory("all")
+                  }
+                }}
+            />
           ) : (
-            <div className="grid grid-cols-12 gap-6 md:gap-8">
-              {filteredServices.map((item) => (
-                <Card key={item.id} className="col-span-12 md:col-span-6 lg:col-span-4 relative overflow-hidden group hover:shadow-lg transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
-                  {item.popular && (
-                    <div className="absolute top-4 right-4 bg-brand-primary text-white px-3 py-1 rounded-full text-sm font-semibold z-10">
-                      Most Popular
-                    </div>
-                  )}
-                  
-                  <CardHeader className="text-center pb-4">
-                    <div className="mx-auto mb-4 p-3 bg-brand-accent rounded-full w-fit">
-                      {item.isProduct ? (
-                        <span className="text-2xl">{item.product.image}</span>
-                      ) : (
-                        <item.icon className="h-8 w-8 text-brand-primary" />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredServices.map((service) => (
+                  <Card 
+                    key={service.id} 
+                    className={`relative overflow-hidden group hover:shadow-xl transition-all duration-300 h-full ${
+                      service.isRecommended ? 'ring-2 ring-brand-primary shadow-xl bg-gradient-to-br from-brand-accent/5 to-transparent' : ''
+                    }`}
+                  >
+                    {/* Enhanced Badge for Premium Wash */}
+                    {service.isRecommended && (
+                      <div className="absolute top-4 right-4 bg-gradient-to-r from-brand-primary to-brand-primary/80 text-white px-4 py-2 rounded-full text-sm font-bold z-10 flex items-center gap-1 shadow-lg">
+                        <Star className="h-4 w-4" />
+                        Best Value
+                      </div>
+                    )}
+                    
+                    {/* Service Image with consistent aspect ratio */}
+                    <div className="h-48 bg-brand-dark overflow-hidden relative">
+                      <img 
+                        src={service.image} 
+                        alt={`Professional ${service.title.toLowerCase()} service`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      {service.isRecommended && (
+                        <div className="absolute inset-0 bg-gradient-to-t from-brand-primary/20 to-transparent"></div>
                       )}
                     </div>
-                    <CardTitle className="text-2xl text-brand-dark">{item.title}</CardTitle>
-                    <div className="flex items-center justify-center gap-4 text-lg">
-                      <span className="text-3xl font-bold text-brand-primary">{item.price}</span>
-                      <div className="flex items-center gap-1 text-neutral-600">
-                        {item.isProduct ? (
-                          <Package className="h-4 w-4" />
-                        ) : (
-                          <Clock className="h-4 w-4" />
-                        )}
-                        <span>{item.duration}</span>
+                  
+                  <CardHeader className="text-center pb-4">
+                      <div className="mb-2">
+                        <span className="text-sm font-semibold text-brand-primary bg-brand-accent px-3 py-1 rounded-full">
+                          {service.framing}
+                        </span>
                       </div>
-                    </div>
-                  </CardHeader>
+                      <CardTitle className="text-2xl text-brand-dark mb-2">{service.title}</CardTitle>
+                      <div className="flex items-center justify-center gap-4 text-lg mb-4">
+                        <span className="text-3xl font-bold text-brand-primary">{service.priceDisplay}</span>
+                        <div className="flex items-center gap-2 text-neutral-600 bg-neutral-100 px-3 py-1 rounded-full">
+                          <Clock className="h-5 w-5 text-brand-primary" />
+                          <span className="font-semibold">{service.durationDisplay}</span>
+                        </div>
+                      </div>
+                    </CardHeader>
                   
                   <CardContent className="text-center">
                     <CardDescription className="text-lg mb-6 text-neutral-600">
-                      {item.description}
+                        {service.description}
                     </CardDescription>
                     
-                    {!item.isProduct && (
+                      {/* Value Points with Icons */}
+                      <div className="space-y-3 mb-6">
+                        {service.valuePoints.map((point, index) => {
+                          const IconComponent = point.icon
+                          return (
+                            <div key={index} className="flex items-center gap-3 text-sm text-neutral-600">
+                              <div className="flex-shrink-0 w-8 h-8 bg-brand-accent rounded-full flex items-center justify-center">
+                                <IconComponent className="h-4 w-4 text-brand-primary" />
+                              </div>
+                              <span className="font-medium">{point.text}</span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                      
+                      {/* Features */}
                       <ul className="space-y-2 mb-8 text-left">
-                        {item.features.map((feature, index) => (
+                        {service.features.map((feature, index) => (
                           <li key={index} className="flex items-center text-sm text-neutral-600">
                             <ChevronRight className="h-4 w-4 text-brand-primary mr-2 flex-shrink-0" />
                             {feature}
                           </li>
                         ))}
                       </ul>
-                    )}
-                    
-                    <Button
-                      asChild
-                      className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold focus-ring"
-                    >
-                      <a href={item.isProduct ? "/#store" : "/#book-now"}>
-                        {item.isProduct ? (
-                          <>
-                            <ShoppingCart className="h-4 w-4 mr-2" />
-                            Add to Cart
-                          </>
-                        ) : (
-                          `Book ${item.title}`
-                        )}
-                      </a>
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
-        </Container>
-      </section>
+                      
+                      <Button
+                        onClick={() => {
+                          addToCart({
+                            id: service.id,
+                            type: 'service',
+                            name: service.title,
+                            price: service.price,
+                            quantity: 1,
+                            description: service.description,
+                            duration: service.duration,
+                            image: service.image,
+                          })
+                          success(`${service.title} added to cart!`, 'Click the cart icon to book your date & time.')
+                        }}
+                        className="w-full font-semibold text-lg py-3 focus-ring bg-brand-primary text-white hover:bg-brand-primary/90"
+                      >
+                        <ShoppingCart className="h-5 w-5 mr-2" />
+                        Add to Cart
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
+          </Container>
+        </section>
+      )}
 
-      {/* Service Categories Info */}
-      <section className="bg-brand-accent py-16">
+      {/* Products Tab */}
+      {activeTab === "products" && (
+        <section className="py-12">
+          <Container>
+            {isLoading ? (
+              /* Loading skeletons */
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <ProductCardSkeleton />
+                <ProductCardSkeleton />
+                <ProductCardSkeleton />
+                <ProductCardSkeleton />
+                <ProductCardSkeleton />
+                <ProductCardSkeleton />
+              </div>
+            ) : filteredProducts.length === 0 ? (
+              /* Empty state */
+              <EmptyState
+                icon={Package}
+                title="No products found"
+                description="Try adjusting your search terms or category filter to find what you're looking for."
+                action={{
+                  label: "Clear Filters",
+                  onClick: () => {
+                    clearSearchTerm()
+                    setSelectedCategory("all")
+                  }
+                }}
+              />
+            ) : (
+              <>
+                {/* Trust Reassurance */}
+                <div className="text-center bg-brand-cream/50 rounded-lg p-6 mb-8">
+                  <div className="flex items-center justify-center gap-2 text-brand-dark mb-2">
+                    <Shield className="h-5 w-5" />
+                    <span className="font-semibold">100% Authentic & Satisfaction Guaranteed</span>
+                  </div>
+                  <p className="text-sm text-neutral-600">
+                    All products are genuine and backed by our quality promise.
+                    <span className="font-medium text-brand-primary"> Pair with Premium Wash for best results.</span>
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {filteredProducts.map((product) => (
+                    <Card 
+                      key={product.id} 
+                      className={`relative overflow-hidden group hover:shadow-xl transition-all duration-300 h-full ${
+                        product.isRecommended ? 'ring-2 ring-brand-accent shadow-lg' : ''
+                      }`}
+                    >
+                      {/* Product Image with clean white background */}
+                      <div className="h-48 bg-white overflow-hidden flex items-center justify-center relative border-b">
+                        <img 
+                          src={product.image} 
+                          alt={`${product.name} - Professional car care product`}
+                          className="w-full h-full object-contain p-6 drop-shadow-sm"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        {/* Badge */}
+                        {product.badge && (
+                          <div className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-bold ${
+                            product.badge === 'Best Seller' ? 'bg-brand-primary text-white' :
+                            product.badge === 'Popular Choice' ? 'bg-green-500 text-white' :
+                            product.badge === 'New' ? 'bg-blue-500 text-white' :
+                            product.badge === 'Bundle Deal' ? 'bg-orange-500 text-white' :
+                            'bg-neutral-500 text-white'
+                          }`}>
+                            {product.badge}
+                          </div>
+                        )}
+                      </div>
+                      
+                      <CardContent className="p-6 flex flex-col justify-between flex-grow">
+                        <div className="text-center mb-4">
+                          <h3 className="text-xl font-bold text-brand-dark mb-2">{product.name}</h3>
+                          <div className="flex items-center justify-center gap-2 mb-2">
+                            <span className="text-2xl font-bold text-brand-primary">{product.priceDisplay}</span>
+                            {product.originalPrice && (
+                              <span className="text-lg text-neutral-400 line-through">{product.originalPriceDisplay}</span>
+                            )}
+                          </div>
+                          <p className="text-sm text-neutral-600 mb-4">
+                            {product.description}
+                          </p>
+                        </div>
+                        
+                        {/* Stock Status */}
+                        <div className={`flex items-center justify-center gap-2 text-sm mb-4 ${
+                          product.stockStatus === 'Only 8 left' || product.stockStatus === 'Only 5 left' ? 'text-red-600' :
+                          product.stockStatus === 'Restocking Soon' ? 'text-orange-600' :
+                          product.stockStatus === 'Limited Time' ? 'text-purple-600' :
+                          'text-green-600'
+                        }`}>
+                          <div className={`w-2 h-2 rounded-full ${
+                            product.stockStatus === 'Only 8 left' || product.stockStatus === 'Only 5 left' ? 'bg-red-500' :
+                            product.stockStatus === 'Restocking Soon' ? 'bg-orange-500' :
+                            product.stockStatus === 'Limited Time' ? 'bg-purple-500' :
+                            'bg-green-500'
+                          }`}></div>
+                          <span className="font-medium">{product.stockStatus}</span>
+                        </div>
+                        
+                        {/* Upsell Cue for recommended products */}
+                        {product.isRecommended && !product.isBundle && (
+                          <p className="text-xs text-brand-primary font-medium mb-3 text-center">
+                            ✨ Recommended with Premium Wash
+                          </p>
+                        )}
+                        
+                        {/* Add to Cart Button */}
+                        <Button
+                          className={`w-full font-semibold py-3 ${
+                            product.isBundle 
+                              ? 'bg-gradient-to-r from-brand-primary to-brand-accent hover:from-brand-primary/90 hover:to-brand-accent/90 text-white' 
+                              : 'bg-brand-primary hover:bg-brand-primary/90 text-white'
+                          }`}
+                          onClick={() => {
+                            addToCart({
+                              id: product.id,
+                              type: 'product',
+                              name: product.name,
+                              price: product.price,
+                              quantity: 1,
+                              description: product.description,
+                              image: product.image,
+                            })
+                            success(`${product.name} added to cart!`, 'You can continue shopping or proceed to checkout.')
+                          }}
+                        >
+                          <ShoppingCart className="h-4 w-4 mr-2" />
+                          {product.isBundle ? 'Get Bundle Deal' : 'Add to Cart'}
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </>
+            )}
+          </Container>
+        </section>
+      )}
+
+      {/* Booking Bar */}
+      {selectedService && (
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg z-50 p-4">
+          <Container>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-brand-dark rounded-lg flex items-center justify-center">
+                  <p className="text-white text-xs font-medium tracking-wider uppercase">
+                    IMG
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg">{selectedService.title}</h3>
+                  <p className="text-neutral-600">{selectedService.durationDisplay} | {selectedService.priceDisplay}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <Button
+                  variant="outline"
+                  onClick={() => setSelectedService(null)}
+                  className="px-4 py-2"
+                >
+                  <X className="h-4 w-4 mr-2" />
+                  Remove
+                </Button>
+                <Button
+                  onClick={handleBookNow}
+                  className="bg-brand-primary text-white hover:bg-brand-primary/90 px-6 py-2 font-semibold"
+                >
+                  <Calendar className="h-4 w-4 mr-2" />
+                  Book Now
+                </Button>
+              </div>
+            </div>
+          </Container>
+        </div>
+      )}
+
+      {/* Social Proof Section */}
+      <section className="py-16 bg-brand-accent">
         <Container>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-brand-dark mb-4">
-              Service Categories
+              What Our Customers Say
             </h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Understanding our service categories to help you choose the right package.
+              Join thousands of satisfied customers who trust us with their car care needs.
             </p>
           </div>
 
-          <div className="grid grid-cols-12 gap-4 md:gap-6">
-            <Card className="col-span-6 md:col-span-3 bg-white">
-              <CardContent className="p-6 text-center">
-                <Car className="h-8 w-8 text-brand-primary mx-auto mb-3" />
-                <h3 className="font-bold text-brand-dark mb-2">Basic Wash</h3>
-                <p className="text-sm text-neutral-600">
-                  Essential cleaning for regular maintenance
-                </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial) => (
+              <Card key={testimonial.id} className="bg-white">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <StarIcon key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-neutral-600 mb-4">"{testimonial.text}"</p>
+                  <div>
+                    <p className="font-semibold text-brand-dark">{testimonial.name}</p>
+                    <p className="text-sm text-neutral-500">{testimonial.service}</p>
+                  </div>
               </CardContent>
             </Card>
+            ))}
+          </div>
 
-            <Card className="col-span-6 md:col-span-3 bg-white">
-              <CardContent className="p-6 text-center">
-                <Shield className="h-8 w-8 text-brand-primary mx-auto mb-3" />
-                <h3 className="font-bold text-brand-dark mb-2">Premium Wash</h3>
-                <p className="text-sm text-neutral-600">
-                  Complete interior and exterior cleaning
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="col-span-6 md:col-span-3 bg-white">
-              <CardContent className="p-6 text-center">
-                <Award className="h-8 w-8 text-brand-primary mx-auto mb-3" />
-                <h3 className="font-bold text-brand-dark mb-2">Full Detailing</h3>
-                <p className="text-sm text-neutral-600">
-                  Showroom-quality comprehensive service
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="col-span-6 md:col-span-3 bg-white">
-              <CardContent className="p-6 text-center">
-                <Star className="h-8 w-8 text-brand-primary mx-auto mb-3" />
-                <h3 className="font-bold text-brand-dark mb-2">Add-ons</h3>
-                <p className="text-sm text-neutral-600">
-                  Customize your service with extras
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="col-span-6 md:col-span-3 bg-white">
-              <CardContent className="p-6 text-center">
-                <ShoppingCart className="h-8 w-8 text-brand-primary mx-auto mb-3" />
-                <h3 className="font-bold text-brand-dark mb-2">Products</h3>
-                <p className="text-sm text-neutral-600">
-                  Professional car care products
-                </p>
-              </CardContent>
-            </Card>
+          {/* Trust Signals */}
+          <div className="mt-12 text-center">
+            <div className="flex flex-wrap justify-center items-center gap-8 text-neutral-600">
+              <div className="flex items-center gap-2">
+                <Users className="h-5 w-5" />
+                <span>5000+ Happy Customers</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Award className="h-5 w-5" />
+                <span>5-Star Rated Service</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield className="h-5 w-5" />
+                <span>100% Satisfaction Guarantee</span>
+              </div>
+            </div>
           </div>
         </Container>
       </section>
 
-      {/* Contact CTA */}
-      <section className="bg-brand-dark text-white py-20">
+      {/* FAQ Section */}
+      <section className="py-16">
         <Container>
-          <div className="grid grid-cols-12">
-            <div className="col-span-12 lg:col-start-3 lg:col-span-8 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Ready to Book Your Service?
-              </h2>
-              <p className="text-lg md:text-xl text-neutral-300 mb-8">
-                Choose your preferred service and book online in just a few clicks.
-              </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-brand-cream text-brand-dark hover:bg-brand-cream/90 font-semibold text-lg px-8 py-4 focus-ring"
-              >
-                <a href="/#book-now">
-                  Book Now
-                </a>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="border-brand-cream text-brand-cream hover:bg-brand-cream hover:text-brand-dark font-semibold text-lg px-8 py-4 focus-ring"
-              >
-                <a href="/locations">
-                  See Locations
-                </a>
-              </Button>
-            </div>
-            </div>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-brand-dark mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+              Get answers to common questions about our services and booking process.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-4">
+            {faqs.map((faq) => (
+              <Card key={faq.id} className="bg-white">
+                <CardHeader 
+                  className="cursor-pointer hover:bg-neutral-50 transition-colors"
+                  onClick={() => setExpandedFaq(expandedFaq === faq.id ? null : faq.id)}
+                >
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-semibold text-brand-dark">{faq.question}</h3>
+                    <ChevronRight 
+                      className={`h-5 w-5 text-neutral-400 transition-transform ${
+                        expandedFaq === faq.id ? 'rotate-90' : ''
+                      }`} 
+                    />
+                  </div>
+                </CardHeader>
+                {expandedFaq === faq.id && (
+                  <CardContent className="pt-0">
+                    <p className="text-neutral-600">{faq.answer}</p>
+              </CardContent>
+                )}
+            </Card>
+            ))}
           </div>
         </Container>
       </section>
+
+
+      {/* Sticky Booking Bar */}
+      {showBookingBar && selectedService && (
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg z-50 p-4">
+          <Container>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <img 
+                  src={selectedService.image} 
+                  alt={selectedService.title}
+                  className="w-12 h-12 object-cover rounded-lg"
+                />
+                <div>
+                  <h3 className="font-semibold text-brand-dark">{selectedService.title}</h3>
+                  <p className="text-sm text-neutral-600">{selectedService.durationDisplay} | {selectedService.priceDisplay}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowBookingBar(false)}
+                  className="px-4"
+                >
+                  <X className="h-4 w-4 mr-2" />
+                  Close
+                </Button>
+                <Button
+                  onClick={handleBookNow}
+                  className="bg-brand-primary hover:bg-brand-primary/90 text-white px-8"
+                >
+                  <Calendar className="h-4 w-4 mr-2" />
+                  Book Now
+                </Button>
+              </div>
+            </div>
+          </Container>
+        </div>
+      )}
     </div>
   )
 }

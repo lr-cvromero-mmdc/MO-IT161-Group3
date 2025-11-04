@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { MapPin } from "lucide-react"
 
 interface LocationSearchSuggestionsProps {
@@ -6,7 +7,7 @@ interface LocationSearchSuggestionsProps {
   className?: string
 }
 
-export function LocationSearchSuggestions({ 
+function LocationSearchSuggestionsComponent({ 
   suggestions, 
   onSuggestionClick, 
   className 
@@ -21,6 +22,7 @@ export function LocationSearchSuggestions({
             key={index}
             onClick={() => onSuggestionClick(suggestion.lat, suggestion.lng, suggestion.name)}
             className="w-full px-4 py-3 text-left hover:bg-neutral-50 flex items-center gap-3 transition-colors"
+            type="button"
           >
             <MapPin className="h-4 w-4 text-brand-primary flex-shrink-0" />
             <span className="text-brand-dark">{suggestion.name}</span>
@@ -30,3 +32,6 @@ export function LocationSearchSuggestions({
     </div>
   )
 }
+
+export const LocationSearchSuggestions = memo(LocationSearchSuggestionsComponent)
+LocationSearchSuggestions.displayName = "LocationSearchSuggestions"

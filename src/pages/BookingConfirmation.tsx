@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { CheckCircle, Calendar, MapPin, Phone, Mail, Download, Car, Package, Clock, Banknote, Smartphone, CreditCard } from 'lucide-react'
 import { formatPrice } from '@/lib/paymentUtils'
 import { LOCATIONS, VEHICLE_TYPES, PAYMENT_METHODS } from '@/lib/bookingUtils'
+import { logger } from '@/lib/logger'
 
 interface BookingData {
   confirmationCode: string
@@ -69,7 +70,7 @@ export function BookingConfirmation() {
         setBookingData(parsed)
         setIsLoading(false)
       } catch (error) {
-        console.error('Failed to parse booking data:', error)
+        logger.error('Failed to parse booking data', error as Error)
         setIsLoading(false)
       }
     } else {

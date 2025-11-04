@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react'
+import { createContext, useContext, useReducer, useEffect, ReactNode, useCallback, useMemo } from 'react'
+import { logger } from '@/lib/logger'
 
 // Types
 export type CartItemType = 'product' | 'service'
@@ -27,20 +28,8 @@ export interface CartItem {
   }
 }
 
-// DEPRECATED - Legacy ServiceBooking interface kept for backwards compatibility
-// Booking details are now stored per-item in CartItem.bookingDetails
-export interface ServiceBooking {
-  locationId: string
-  locationName: string
-  date: string
-  timeSlot: string
-  vehicleType?: string
-  specialInstructions?: string
-}
-
 export interface CartState {
   items: CartItem[]
-  booking: ServiceBooking | null // DEPRECATED - kept for backwards compatibility only
   subtotal: number
   tax: number
   total: number
@@ -53,16 +42,143 @@ type CartAction =
   | { type: 'UPDATE_QUANTITY'; payload: { id: string; quantity: number } }
   | { type: 'UPDATE_ITEM_BOOKING'; payload: { id: string; bookingDetails: CartItem['bookingDetails'] } }
   | { type: 'CLEAR_CART' }
-  | { type: 'SET_BOOKING_DETAILS'; payload: ServiceBooking } // DEPRECATED
   | { type: 'LOAD_CART'; payload: CartState }
 
 // Initial State
 const initialState: CartState = {
   items: [],
-  booking: null,
   subtotal: 0,
   tax: 0,
   total: 0,
+}
+
+interface PersistedCartState {
+  items?: unknown
+  subtotal?: unknown
+  tax?: unknown
+  total?: unknown
+  booking?: unknown
+}
+
+/**
+ * Rehydrate cart state loaded from storage and strip deprecated fields.
+ *
+ * @param rawValue - Parsed JSON value from localStorage.
+ * @returns A validated cart state object.
+ */
+function sanitizeCartState(rawValue: unknown): CartState {
+  const candidate = (typeof rawValue === 'object' && rawValue !== null)
+    ? rawValue as PersistedCartState
+    : {}
+
+  const items = Array.isArray(candidate.items)
+    ? candidate.items
+        .map(item => sanitizeCartItem(item))
+        .filter((item): item is CartItem => item !== null)
+    : []
+
+  const hydrated: CartState = {
+    items,
+    subtotal: typeof candidate.subtotal === 'number' ? candidate.subtotal : 0,
+    tax: typeof candidate.tax === 'number' ? candidate.tax : 0,
+    total: typeof candidate.total === 'number' ? candidate.total : 0,
+  }
+
+  return calculateTotals(hydrated)
+}
+
+interface PersistedCartItem {
+  id?: unknown
+  type?: unknown
+  name?: unknown
+  price?: unknown
+  quantity?: unknown
+  image?: unknown
+  description?: unknown
+  duration?: unknown
+  requiresLocation?: unknown
+  requiresTimeSlot?: unknown
+  bookingDetails?: unknown
+}
+
+interface PersistedBookingDetails {
+  date?: unknown
+  timeSlot?: unknown
+  locationId?: unknown
+  locationName?: unknown
+  vehicleType?: unknown
+  reservationId?: unknown
+  reservedUntil?: unknown
+}
+
+/**
+ * Validate a cart item loaded from storage.
+ *
+ * @param rawItem - Potential cart entry stored in localStorage.
+ * @returns A normalized cart item or null when validation fails.
+ */
+function sanitizeCartItem(rawItem: unknown): CartItem | null {
+  if (typeof rawItem !== 'object' || rawItem === null) {
+    return null
+  }
+
+  const candidate = rawItem as PersistedCartItem
+
+  if (
+    typeof candidate.id !== 'string' ||
+    (candidate.type !== 'product' && candidate.type !== 'service') ||
+    typeof candidate.name !== 'string' ||
+    typeof candidate.price !== 'number' ||
+    typeof candidate.quantity !== 'number'
+  ) {
+    return null
+  }
+
+  return {
+    id: candidate.id,
+    type: candidate.type,
+    name: candidate.name,
+    price: candidate.price,
+    quantity: candidate.quantity,
+    image: typeof candidate.image === 'string' ? candidate.image : undefined,
+    description: typeof candidate.description === 'string' ? candidate.description : undefined,
+    duration: typeof candidate.duration === 'number' ? candidate.duration : undefined,
+    requiresLocation: typeof candidate.requiresLocation === 'boolean' ? candidate.requiresLocation : undefined,
+    requiresTimeSlot: typeof candidate.requiresTimeSlot === 'boolean' ? candidate.requiresTimeSlot : undefined,
+    bookingDetails: sanitizeBookingDetails(candidate.bookingDetails),
+  }
+}
+
+/**
+ * Validate booking details stored on a legacy cart item.
+ *
+ * @param rawValue - Potential booking details object.
+ * @returns Normalized booking details or undefined when invalid.
+ */
+function sanitizeBookingDetails(rawValue: unknown): CartItem['bookingDetails'] {
+  if (typeof rawValue !== 'object' || rawValue === null) {
+    return undefined
+  }
+
+  const candidate = rawValue as PersistedBookingDetails
+
+  if (
+    typeof candidate.date !== 'string' ||
+    typeof candidate.timeSlot !== 'string' ||
+    typeof candidate.locationId !== 'string'
+  ) {
+    return undefined
+  }
+
+  return {
+    date: candidate.date,
+    timeSlot: candidate.timeSlot,
+    locationId: candidate.locationId,
+    locationName: typeof candidate.locationName === 'string' ? candidate.locationName : undefined,
+    vehicleType: typeof candidate.vehicleType === 'string' ? candidate.vehicleType : undefined,
+    reservationId: typeof candidate.reservationId === 'string' ? candidate.reservationId : undefined,
+    reservedUntil: typeof candidate.reservedUntil === 'string' ? candidate.reservedUntil : undefined,
+  }
 }
 
 // Cart Reducer
@@ -123,11 +239,6 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       return initialState
     }
 
-    case 'SET_BOOKING_DETAILS': {
-      // DEPRECATED - kept for backwards compatibility
-      return { ...state, booking: action.payload }
-    }
-
     case 'LOAD_CART': {
       return action.payload
     }
@@ -137,8 +248,11 @@ function cartReducer(state: CartState, action: CartAction): CartState {
   }
 }
 
-// Helper function to calculate totals
-// Note: All prices already include 12% VAT, so we don't add additional tax
+/**
+ * Calculate cart financial totals.
+ *
+ * Note: All prices already include 12% VAT, so we don't add additional tax.
+ */
 function calculateTotals(state: CartState): CartState {
   const total = state.items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
   
@@ -163,7 +277,6 @@ interface CartContextType {
   updateQuantity: (itemId: string, quantity: number) => void
   updateItemBooking: (itemId: string, bookingDetails: CartItem['bookingDetails']) => void
   clearCart: () => void
-  setBookingDetails: (booking: ServiceBooking) => void // DEPRECATED - use updateItemBooking instead
   getItemCount: () => number
   hasServices: () => boolean
   hasProducts: () => boolean
@@ -186,74 +299,109 @@ export function CartProvider({ children }: CartProviderProps) {
     if (savedCart) {
       try {
         const parsedCart = JSON.parse(savedCart)
-        dispatch({ type: 'LOAD_CART', payload: parsedCart })
+        dispatch({ type: 'LOAD_CART', payload: sanitizeCartState(parsedCart) })
       } catch (error) {
-        console.error('Failed to load cart from localStorage:', error)
+        logger.error('Failed to load cart from localStorage', error as Error)
       }
     }
   }, [])
 
   // Save cart to localStorage whenever state changes
   useEffect(() => {
-    localStorage.setItem('espinosa-cart', JSON.stringify(state))
+    try {
+      localStorage.setItem('espinosa-cart', JSON.stringify(state))
+    } catch (error) {
+      logger.error('Failed to persist cart to localStorage', error as Error)
+    }
   }, [state])
 
   // Context methods
-  const addToCart = (item: CartItem) => {
+  /**
+   * Add an item to the cart or merge quantities for duplicate product entries.
+   */
+  const addToCart = useCallback((item: CartItem) => {
     dispatch({ type: 'ADD_TO_CART', payload: item })
-  }
+  }, [])
 
-  const removeFromCart = (itemId: string) => {
+  /**
+   * Remove a cart entry by its identifier.
+   */
+  const removeFromCart = useCallback((itemId: string) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: itemId })
-  }
+  }, [])
 
-  const updateQuantity = (itemId: string, quantity: number) => {
+  /**
+   * Update the quantity of a cart entry, removing it when the value drops to zero.
+   */
+  const updateQuantity = useCallback((itemId: string, quantity: number) => {
     dispatch({ type: 'UPDATE_QUANTITY', payload: { id: itemId, quantity } })
-  }
+  }, [])
 
-  const updateItemBooking = (itemId: string, bookingDetails: CartItem['bookingDetails']) => {
+  /**
+   * Attach booking details to a service item for scheduling information.
+   */
+  const updateItemBooking = useCallback((itemId: string, bookingDetails: CartItem['bookingDetails']) => {
     dispatch({ type: 'UPDATE_ITEM_BOOKING', payload: { id: itemId, bookingDetails } })
-  }
+  }, [])
 
-  const clearCart = () => {
+  /**
+   * Clear all items from the cart and reset totals.
+   */
+  const clearCart = useCallback(() => {
     dispatch({ type: 'CLEAR_CART' })
-  }
+  }, [])
 
-  // DEPRECATED - kept for backwards compatibility
-  const setBookingDetails = (booking: ServiceBooking) => {
-    console.warn('setBookingDetails is deprecated. Use updateItemBooking instead.')
-    dispatch({ type: 'SET_BOOKING_DETAILS', payload: booking })
-  }
-
-  const getItemCount = () => {
+  /**
+   * Count the total number of product and service units in the cart.
+   */
+  const getItemCount = useCallback(() => {
     return state.items.reduce((sum, item) => sum + item.quantity, 0)
-  }
+  }, [state.items])
 
-  const hasServices = () => {
+  /**
+   * Determine if any services are present in the cart.
+   */
+  const hasServices = useCallback(() => {
     return state.items.some(item => item.type === 'service')
-  }
+  }, [state.items])
 
-  const hasProducts = () => {
+  /**
+   * Determine if any products are present in the cart.
+   */
+  const hasProducts = useCallback(() => {
     return state.items.some(item => item.type === 'product')
-  }
+  }, [state.items])
 
-  const hasUnbookedServices = () => {
+  /**
+   * Determine if any service items still require booking details.
+   */
+  const hasUnbookedServices = useCallback(() => {
     return state.items.some(item => item.type === 'service' && !item.bookingDetails)
-  }
+  }, [state.items])
 
-  const value: CartContextType = {
+  const value: CartContextType = useMemo(() => ({
     state,
     addToCart,
     removeFromCart,
     updateQuantity,
     updateItemBooking,
     clearCart,
-    setBookingDetails,
     getItemCount,
     hasServices,
     hasProducts,
     hasUnbookedServices,
-  }
+  }), [
+    state,
+    addToCart,
+    removeFromCart,
+    updateQuantity,
+    updateItemBooking,
+    clearCart,
+    getItemCount,
+    hasServices,
+    hasProducts,
+    hasUnbookedServices,
+  ])
 
   return (
     <CartContext.Provider value={value}>

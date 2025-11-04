@@ -108,18 +108,18 @@ export function BookingQuickModal({ isOpen, onClose, service, onBookingComplete 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md" aria-describedby="booking-description">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-brand-dark flex items-center gap-2">
-            <Calendar className="h-5 w-5 text-brand-primary" />
+            <Calendar className="h-5 w-5 text-brand-primary" aria-hidden="true" />
             Book: {service.name}
           </DialogTitle>
-          <p className="text-xs text-neutral-500 mt-1">🎭 Demo Mode - No real payment required</p>
+          <p id="booking-description" className="text-xs text-neutral-500 mt-1">🎭 Demo Mode - No real payment required</p>
         </DialogHeader>
 
         <div className="space-y-4 py-4">
           {/* Service Info */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3" role="region" aria-label="Service information">
             <div className="flex items-center justify-between text-sm">
               <span className="text-blue-700">Duration:</span>
               <span className="font-semibold text-blue-900">{service.duration} minutes</span>
@@ -132,11 +132,12 @@ export function BookingQuickModal({ isOpen, onClose, service, onBookingComplete 
 
           {/* Date Selection */}
           <div>
-            <label className="block text-sm font-semibold text-brand-dark mb-2 flex items-center gap-2">
-              <Calendar className="h-4 w-4 text-brand-primary" />
+            <label htmlFor="booking-date" className="block text-sm font-semibold text-brand-dark mb-2 flex items-center gap-2">
+              <Calendar className="h-4 w-4 text-brand-primary" aria-hidden="true" />
               Select Date *
             </label>
             <Input
+              id="booking-date"
               type="date"
               min={today}
               value={date}
@@ -145,13 +146,18 @@ export function BookingQuickModal({ isOpen, onClose, service, onBookingComplete 
                 setTimeSlot('') // Reset time when date changes
               }}
               className="focus-ring"
+              aria-required="true"
+              aria-describedby="date-help"
             />
+            <span id="date-help" className="sr-only">
+              Select the date for your booking. Minimum date is today.
+            </span>
           </div>
 
           {/* Location Selection */}
           <div>
-            <label className="block text-sm font-semibold text-brand-dark mb-2 flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-brand-primary" />
+            <label htmlFor="booking-location" className="block text-sm font-semibold text-brand-dark mb-2 flex items-center gap-2">
+              <MapPin className="h-4 w-4 text-brand-primary" aria-hidden="true" />
               Location *
             </label>
             <Select
@@ -161,7 +167,7 @@ export function BookingQuickModal({ isOpen, onClose, service, onBookingComplete 
                 setTimeSlot('') // Reset time when location changes
               }}
             >
-              <SelectTrigger className="focus-ring">
+              <SelectTrigger id="booking-location" className="focus-ring" aria-required="true" aria-label="Select service location">
                 <SelectValue placeholder="Select location" />
               </SelectTrigger>
               <SelectContent>
@@ -179,17 +185,22 @@ export function BookingQuickModal({ isOpen, onClose, service, onBookingComplete 
 
           {/* Time Slot Selection */}
           <div>
-            <label className="block text-sm font-semibold text-brand-dark mb-2 flex items-center gap-2">
-              <Clock className="h-4 w-4 text-brand-primary" />
+            <label id="time-slot-label" className="block text-sm font-semibold text-brand-dark mb-2 flex items-center gap-2">
+              <Clock className="h-4 w-4 text-brand-primary" aria-hidden="true" />
               Select Time *
             </label>
 
             {!date || !locationId ? (
-              <div className="text-sm text-neutral-500 italic py-3 px-4 bg-neutral-50 rounded-md">
+              <div className="text-sm text-neutral-500 italic py-3 px-4 bg-neutral-50 rounded-md" role="status">
                 Select date and location first to see available times
               </div>
             ) : (
-              <div className="grid grid-cols-3 gap-2 max-h-48 overflow-y-auto p-2 border rounded-md bg-neutral-50">
+              <div
+                className="grid grid-cols-3 gap-2 max-h-48 overflow-y-auto p-2 border rounded-md bg-neutral-50"
+                role="radiogroup"
+                aria-labelledby="time-slot-label"
+                aria-required="true"
+              >
                 {TIME_SLOTS.map((slot) => {
                   const { available, reason } = getSlotAvailability(slot)
                   const isSelected = timeSlot === slot
@@ -198,9 +209,16 @@ export function BookingQuickModal({ isOpen, onClose, service, onBookingComplete 
                     <button
                       key={slot}
                       type="button"
+                      role="radio"
                       onClick={() => available && setTimeSlot(slot)}
                       disabled={!available}
                       title={!available ? reason : undefined}
+                      aria-label={available
+                        ? `Select time slot ${formatTimeDisplay(slot)}`
+                        : `Time slot ${formatTimeDisplay(slot)} is ${reason?.includes('past') ? 'in the past' : 'unavailable'}`
+                      }
+                      aria-checked={isSelected}
+                      aria-disabled={!available}
                       className={`
                         px-2 py-2 rounded-md text-sm font-medium transition-all
                         ${isSelected
@@ -226,12 +244,12 @@ export function BookingQuickModal({ isOpen, onClose, service, onBookingComplete 
 
           {/* Vehicle Type (Optional) */}
           <div>
-            <label className="block text-sm font-semibold text-brand-dark mb-2 flex items-center gap-2">
-              <Car className="h-4 w-4 text-brand-primary" />
+            <label htmlFor="vehicle-type" className="block text-sm font-semibold text-brand-dark mb-2 flex items-center gap-2">
+              <Car className="h-4 w-4 text-brand-primary" aria-hidden="true" />
               Vehicle Type <span className="text-xs text-neutral-500">(Optional)</span>
             </label>
             <Select value={vehicleType} onValueChange={setVehicleType}>
-              <SelectTrigger className="focus-ring">
+              <SelectTrigger id="vehicle-type" className="focus-ring" aria-label="Select vehicle type (optional)">
                 <SelectValue placeholder="Select vehicle type" />
               </SelectTrigger>
               <SelectContent>
@@ -246,9 +264,9 @@ export function BookingQuickModal({ isOpen, onClose, service, onBookingComplete 
 
           {/* Auto-reservation notice */}
           {date && timeSlot && locationId && (
-            <div className="bg-yellow-50 border border-yellow-200 rounded-md p-3 animate-in fade-in duration-300">
+            <div className="bg-yellow-50 border border-yellow-200 rounded-md p-3 animate-in fade-in duration-300" role="alert" aria-live="polite">
               <div className="flex items-start gap-2">
-                <AlertCircle className="h-4 w-4 text-yellow-600 flex-shrink-0 mt-0.5" />
+                <AlertCircle className="h-4 w-4 text-yellow-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
                 <div className="text-xs text-yellow-800">
                   <strong>Note:</strong> This time slot will be reserved for 15 minutes once confirmed. Complete your checkout before it expires.
                 </div>
@@ -258,12 +276,13 @@ export function BookingQuickModal({ isOpen, onClose, service, onBookingComplete 
         </div>
 
         {/* Actions */}
-        <div className="flex gap-3 pt-4 border-t">
+        <div className="flex gap-3 pt-4 border-t" role="group" aria-label="Booking actions">
           <Button
             variant="outline"
             onClick={onClose}
             disabled={isProcessing || isReserving}
             className="flex-1"
+            aria-label="Cancel booking"
           >
             Cancel
           </Button>
@@ -271,15 +290,17 @@ export function BookingQuickModal({ isOpen, onClose, service, onBookingComplete 
             onClick={handleConfirm}
             disabled={!date || !timeSlot || !locationId || isProcessing || isReserving}
             className="flex-1 bg-brand-primary text-white hover:bg-brand-primary/90"
+            aria-label={isProcessing || isReserving ? "Reserving time slot" : "Confirm booking"}
+            aria-busy={isProcessing || isReserving}
           >
             {isProcessing || isReserving ? (
               <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" aria-hidden="true" />
                 Reserving...
               </>
             ) : (
               <>
-                <CheckCircle className="h-4 w-4 mr-2" />
+                <CheckCircle className="h-4 w-4 mr-2" aria-hidden="true" />
                 Confirm Booking
               </>
             )}

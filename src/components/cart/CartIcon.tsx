@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import { ShoppingCart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useCart } from '@/hooks/useCart'
@@ -7,7 +8,7 @@ interface CartIconProps {
   className?: string
 }
 
-export const CartIcon = React.forwardRef<HTMLButtonElement, CartIconProps>(
+export const CartIcon = forwardRef<HTMLButtonElement, CartIconProps>(
   ({ onClick, className }, ref) => {
     const { getItemCount, hasServices } = useCart()
     const itemCount = getItemCount()

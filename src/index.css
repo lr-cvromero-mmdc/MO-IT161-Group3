@@ -266,7 +266,16 @@ body.modal-open {
   }
 
   .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:ring-offset-2 focus:ring-offset-transparent;
+    @apply focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 focus:ring-offset-transparent;
+  }
+
+  /* Enhanced focus indicators for better keyboard navigation */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply outline-none ring-2 ring-brand-primary ring-offset-2;
   }
 
   /* Typography Hierarchy */
@@ -440,13 +449,48 @@ body.modal-open {
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Screen Reader Only - Accessibility Utility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Focus Visible - Enhanced keyboard navigation */
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2;
+  }
+
+  /* Skip to main content link */
+  .skip-to-main {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    background: #133e87;
+    color: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    z-index: 9999;
+    transition: top 0.3s;
+  }
+
+  .skip-to-main:focus {
+    top: 0;
   }
 }

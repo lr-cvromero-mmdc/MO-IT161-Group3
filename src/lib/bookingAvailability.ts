@@ -58,6 +58,7 @@ const temporaryReservations: Array<{
   duration: number
   reservedUntil: string
   reservedBy: string
+  serviceId?: string
 }> = []
 
 // Business hours and time slots
@@ -82,7 +83,59 @@ export const LOCATION_CAPACITY = {
 }
 
 /**
- * Check if a time slot is available for booking
+ * Comprehensive booking availability checker with conflict detection
+ *
+ * Validates if a time slot is available for booking at a specific location and date.
+ * Checks against business hours, existing bookings, temporary reservations,
+ * lunch breaks, and location capacity constraints.
+ *
+ * @param locationId - Location identifier (e.g., 'location-1', 'location-2')
+ * @param date - Booking date in YYYY-MM-DD format (e.g., '2025-01-15')
+ * @param timeSlot - Start time in HH:mm format (e.g., '10:00', '14:30')
+ * @param duration - Service duration in minutes (e.g., 60, 90, 120)
+ * @param excludeBookingId - Optional booking ID to exclude from conflict check (for rescheduling)
+ *
+ * @returns Object containing:
+ *   - available: boolean indicating if the slot can be booked
+ *   - conflicts: Array of conflict objects with type, message, and conflicting slots
+ *
+ * @example
+ * ```typescript
+ * // Check if 10:00 AM slot is available on Jan 15, 2025 for 60 minutes
+ * const result = isTimeSlotAvailable(
+ *   'location-1',
+ *   '2025-01-15',
+ *   '10:00',
+ *   60
+ * )
+ *
+ * if (result.available) {
+ *   console.log('Slot is available for booking!')
+ * } else {
+ *   console.error('Conflicts found:', result.conflicts)
+ *   // Display conflicts to user
+ *   result.conflicts.forEach(conflict => {
+ *     console.log(`${conflict.type}: ${conflict.message}`)
+ *   })
+ * }
+ * ```
+ *
+ * @remarks
+ * **Business Constraints:**
+ * - Business hours: 8:00 AM - 6:00 PM daily
+ * - Lunch break: 12:00 PM - 1:00 PM (no bookings)
+ * - Temporary reservations expire after 15 minutes
+ * - Location capacity varies by location (2-4 cars)
+ *
+ * **Conflict Types:**
+ * - `time_conflict`: Past date, outside business hours, overlapping bookings
+ * - `location_conflict`: Location unavailable or invalid
+ * - `capacity_exceeded`: Too many concurrent bookings at location
+ *
+ * **Performance:**
+ * - O(n) time complexity where n is number of existing bookings
+ * - Filters expired reservations automatically
+ * - Validates in sequence: date → time slot → business hours → conflicts
  */
 export function isTimeSlotAvailable(
   locationId: string,
@@ -208,7 +261,33 @@ export function isTimeSlotAvailable(
 }
 
 /**
- * Check if two time periods overlap
+ * Checks if two time periods overlap with each other
+ *
+ * Uses interval comparison logic to determine if two bookings would conflict.
+ * Converts times to slot indices based on 30-minute intervals.
+ *
+ * @param start1 - Start time of first period in HH:mm format (e.g., "10:00")
+ * @param duration1 - Duration of first period in minutes
+ * @param start2 - Start time of second period in HH:mm format (e.g., "11:00")
+ * @param duration2 - Duration of second period in minutes
+ * @returns true if the periods overlap, false otherwise
+ *
+ * @example
+ * ```typescript
+ * // Check if 10:00-11:00 (60min) overlaps with 10:30-12:00 (90min)
+ * const overlaps = isTimeOverlap("10:00", 60, "10:30", 90)
+ * console.log(overlaps) // true - they overlap from 10:30-11:00
+ *
+ * // Check if 10:00-11:00 (60min) overlaps with 11:00-12:00 (60min)
+ * const adjacent = isTimeOverlap("10:00", 60, "11:00", 60)
+ * console.log(adjacent) // false - adjacent but not overlapping
+ * ```
+ *
+ * @remarks
+ * Uses the interval comparison formula: !(end1 < start2 || end2 < start1)
+ * Time slots are 30-minute intervals, so duration is rounded up to nearest slot
+ *
+ * @internal This is a helper function used by isTimeSlotAvailable()
  */
 function isTimeOverlap(
   start1: string, duration1: number,
@@ -224,7 +303,39 @@ function isTimeOverlap(
 }
 
 /**
- * Get available time slots for a given date and location
+ * Retrieves all available time slots for a specific date and location
+ *
+ * Generates a list of all business hour time slots with their availability status.
+ * Automatically filters out slots that would extend beyond business hours.
+ *
+ * @param locationId - Location identifier (e.g., 'location-1')
+ * @param date - Booking date in YYYY-MM-DD format
+ * @param duration - Service duration in minutes
+ * @returns Array of time slot objects with availability and conflict information
+ *
+ * @example
+ * ```typescript
+ * // Get all available slots for a 60-minute service
+ * const slots = getAvailableTimeSlots('location-1', '2025-01-15', 60)
+ *
+ * // Filter to show only available slots
+ * const availableOnly = slots.filter(slot => slot.available)
+ * console.log(`Found ${availableOnly.length} available slots`)
+ *
+ * // Display slots with conflict information
+ * slots.forEach(slot => {
+ *   console.log(`${slot.timeSlot}: ${slot.available ? 'Available' : 'Unavailable'}`)
+ *   if (!slot.available) {
+ *     slot.conflicts.forEach(c => console.log(`  - ${c.message}`))
+ *   }
+ * })
+ * ```
+ *
+ * @remarks
+ * - Filters out slots that would extend past closing time (6:00 PM)
+ * - Each slot is checked independently using isTimeSlotAvailable()
+ * - Returns both available and unavailable slots for UI rendering
+ * - Useful for displaying time picker with availability indicators
  */
 export function getAvailableTimeSlots(
   locationId: string,
@@ -254,8 +365,9 @@ export function reserveTimeSlot(
   date: string,
   timeSlot: string,
   duration: number,
-  reservedBy: string
-): { success: boolean; reservationId?: string; conflicts: BookingConflict[] } {
+  reservedBy: string,
+  serviceId?: string
+): { success: boolean; reservationId?: string; reservedUntil?: string; conflicts: BookingConflict[] } {
   // Check availability first
   const availability = isTimeSlotAvailable(locationId, date, timeSlot, duration)
   
@@ -269,6 +381,15 @@ export function reserveTimeSlot(
   // Create reservation
   const reservationId = `reservation-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
   const reservedUntil = new Date(Date.now() + 15 * 60 * 1000).toISOString() // 15 minutes from now
+
+  if (serviceId) {
+    for (let i = temporaryReservations.length - 1; i >= 0; i--) {
+      const reservation = temporaryReservations[i]
+      if (reservation.serviceId === serviceId && reservation.reservedBy === reservedBy) {
+        temporaryReservations.splice(i, 1)
+      }
+    }
+  }
   
   temporaryReservations.push({
     id: reservationId,
@@ -277,7 +398,8 @@ export function reserveTimeSlot(
     timeSlot,
     duration,
     reservedUntil,
-    reservedBy
+    reservedBy,
+    serviceId
   })
   
   // Clean up expired reservations
@@ -286,8 +408,27 @@ export function reserveTimeSlot(
   return {
     success: true,
     reservationId,
+    reservedUntil,
     conflicts: []
   }
+}
+
+/**
+ * Get active reservations for a user/session
+ */
+export function getReservationsForUser(reservedBy: string) {
+  cleanupExpiredReservations()
+  return temporaryReservations
+    .filter(reservation => reservation.reservedBy === reservedBy)
+    .map(reservation => ({
+      id: reservation.id,
+      locationId: reservation.locationId,
+      date: reservation.date,
+      timeSlot: reservation.timeSlot,
+      duration: reservation.duration,
+      reservedUntil: reservation.reservedUntil,
+      serviceId: reservation.serviceId,
+    }))
 }
 
 /**
@@ -295,12 +436,12 @@ export function reserveTimeSlot(
  */
 export function confirmBooking(
   reservationId: string,
-  customerInfo: {
+  _customerInfo: {
     name: string
     email: string
     phone: string
   },
-  services: CartItem[]
+  _services: CartItem[]
 ): { success: boolean; bookingId?: string; conflicts: BookingConflict[] } {
   // Find the reservation
   const reservationIndex = temporaryReservations.findIndex(r => r.id === reservationId)

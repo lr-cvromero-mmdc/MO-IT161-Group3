@@ -1,18 +1,21 @@
+import { useCallback, useMemo } from 'react'
 import { useCart as useCartContext } from '@/context/CartContext'
+
+export type { CartItem } from '@/context/CartContext'
 
 // Re-export the useCart hook with additional utilities
 export function useCart() {
   const cart = useCartContext()
   
   // Check if cart is empty
-  const isEmpty = cart.getItemCount() === 0
+  const isEmpty = useMemo(() => cart.state.items.length === 0, [cart.state.items])
   
   // Check if cart has items requiring booking (services)
-  const requiresBooking = cart.hasServices()
+  const requiresBooking = useMemo(() => cart.state.items.some(item => item.type === 'service'), [cart.state.items])
   
   // Get cart summary (combined services and products)
   // Note: All prices already include 12% VAT
-  const getCartSummary = () => {
+  const getCartSummary = useCallback(() => {
     const allItems = cart.state.items
     const serviceItems = allItems.filter(item => item.type === 'service')
     const productItems = allItems.filter(item => item.type === 'product')
@@ -38,22 +41,22 @@ export function useCart() {
       tax,
       total,
       isEmpty: allItems.length === 0,
-      requiresBooking: cart.hasServices(),
+      requiresBooking,
     }
-  }
+  }, [cart.state.items, requiresBooking])
   
   // Format price for display
-  const formatPrice = (price: number) => {
+  const formatPrice = useCallback((price: number) => {
     return new Intl.NumberFormat('en-PH', {
       style: 'currency',
       currency: 'PHP',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(price)
-  }
+  }, [])
   
   // Check if item can be added to cart
-  const canAddToCart = (item: { id: string; type: 'product' | 'service' }) => {
+  const canAddToCart = useCallback((item: { id: string; type: 'product' | 'service' }) => {
     const existingItem = cart.state.items.find(cartItem => cartItem.id === item.id)
     if (!existingItem) return true
     
@@ -65,17 +68,17 @@ export function useCart() {
     
     // For services, typically only one booking per service
     return false
-  }
+  }, [cart.state.items])
   
   // Get services from cart
-  const getServices = () => {
+  const getServices = useCallback(() => {
     return cart.state.items.filter(item => item.type === 'service')
-  }
+  }, [cart.state.items])
   
   // Get products from cart
-  const getProducts = () => {
+  const getProducts = useCallback(() => {
     return cart.state.items.filter(item => item.type === 'product')
-  }
+  }, [cart.state.items])
 
   return {
     ...cart,
