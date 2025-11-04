@@ -37,9 +37,10 @@ import fullDetailingImage from "@/assets/images/services/full-detailing.jpg"
 import waxApplicationImage from "@/assets/images/services/wax-application.jpg"
 import interiorDeepCleanImage from "@/assets/images/services/interior-deepclean.jpg"
 import engineBayCleanImage from "@/assets/images/services/engine-bay-clean.jpg"
-import serviceBasicsImage from "@/assets/images/services/service-basics.jpg"
-import servicePremiumImage from "@/assets/images/services/service-premium.jpg"
-import serviceDetailingImage from "@/assets/images/services/service-detailing.jpg"
+// Reserved for future use
+// import serviceBasicsImage from "@/assets/images/services/service-basics.jpg"
+// import servicePremiumImage from "@/assets/images/services/service-premium.jpg"
+// import serviceDetailingImage from "@/assets/images/services/service-detailing.jpg"
 import carShampooImage from "@/assets/images/products/car-shampoo.png"
 import microfiberTowelImage from "@/assets/images/products/microfiber-towel.png"
 import carWaxImage from "@/assets/images/products/car-wax.png"
@@ -400,7 +401,7 @@ export function Services() {
             className="w-full h-full object-cover"
             loading="eager"
             decoding="async"
-            fetchpriority="high"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-brand-primary/50"></div>
         </div>

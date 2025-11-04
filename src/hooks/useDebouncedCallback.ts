@@ -26,7 +26,7 @@ export function useDebouncedCallback<T extends (...args: never[]) => void>(
     }
   }, [])
 
-  return useCallback(<U extends Parameters<T>>(...args: U) => {
+  return useCallback((...args: Parameters<T>) => {
     if (timeoutId.current) {
       window.clearTimeout(timeoutId.current)
     }

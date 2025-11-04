@@ -1,7 +1,9 @@
 import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { MapPin, Clock, Phone, CreditCard, Smartphone, QrCode } from "lucide-react"
+import { MapPin, Clock, Phone } from "lucide-react"
+import { LocationMap } from "@/components/ui/LocationMap"
+import { AllLocationsMap } from "@/components/ui/AllLocationsMap"
 
 // List of Espinosa's branch locations with contact and payment details
 const locations = [
@@ -34,31 +36,15 @@ const locations = [
   },
 ]
 
-//
-const paymentMethods = [
-  { name: "Visa", icon: CreditCard, color: "text-blue-600" },
-  { name: "Mastercard", icon: CreditCard, color: "text-red-600" },
-  { name: "GCash", icon: Smartphone, color: "text-blue-500" },
-  { name: "QR Ph", icon: QrCode, color: "text-green-600" },
-]
+// Payment methods accepted (for future use)
+// const paymentMethods = [
+//   { name: "Visa", icon: CreditCard, color: "text-blue-600" },
+//   { name: "Mastercard", icon: CreditCard, color: "text-red-600" },
+//   { name: "GCash", icon: Smartphone, color: "text-blue-500" },
+//   { name: "QR Ph", icon: QrCode, color: "text-green-600" },
+// ]
 
-
-<<<<<<< HEAD
 // Card component to display individual location details
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Card component to display individual location details
-=======
->>>>>>> origin/staging
-=======
-// Card component to display individual location details
->>>>>>> Stashed changes
-=======
-// Card component to display individual location details
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 function LocationCard({ location }: { location: typeof locations[0] }) {
   return (
     <Card className="h-full hover:shadow-lg transition-shadow focus-within:ring-2 focus-within:ring-brand-primary">
@@ -89,7 +75,6 @@ function LocationCard({ location }: { location: typeof locations[0] }) {
             <p className="text-sm text-neutral-600">{location.phone}</p>
           </div>
         </div>
-
 
         {/* Interactive Map */}
         <div className="mt-6">
@@ -126,22 +111,7 @@ function LocationCard({ location }: { location: typeof locations[0] }) {
   )
 }
 
-<<<<<<< HEAD
 // Locations page component
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Locations page component
-=======
->>>>>>> origin/staging
-=======
-// Locations page component
->>>>>>> Stashed changes
-=======
-// Locations page component
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 export function Locations() {
   return (
     <div className="min-h-screen bg-white">
@@ -185,8 +155,6 @@ export function Locations() {
           </div>
         </Container>
       </section>
-
-
     </div>
   )
 }

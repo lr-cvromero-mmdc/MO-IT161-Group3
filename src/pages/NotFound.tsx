@@ -3,7 +3,7 @@ import { Container } from '@/components/layout/Container'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Link } from 'react-router-dom'
-import { Home, Search, ArrowLeft, AlertCircle } from 'lucide-react'
+import { Home, ArrowLeft, AlertCircle } from 'lucide-react'
 
 export function NotFound() {
   return (

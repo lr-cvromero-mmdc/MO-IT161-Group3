@@ -8,6 +8,8 @@ interface LogLevel {
   ERROR: 'error'
 }
 
+// Available log levels for future use
+// @ts-expect-error - Reserved for future use
 const LOG_LEVELS: LogLevel = {
   DEBUG: 'debug',
   INFO: 'info',
@@ -84,10 +86,10 @@ class Logger {
     this.log('WARN', message, data)
   }
 
-  error(message: string, error: Error | string, data?: unknown) {
+  error(_message: string, error: Error | string, data?: unknown) {
     const errorMessage = error instanceof Error ? error.message : error
     const errorData = error instanceof Error 
-      ? { ...data, stack: error.stack, name: error.name }
+      ? { ...data as object, stack: error.stack, name: error.name }
       : data
     
     this.log('ERROR', errorMessage, errorData)

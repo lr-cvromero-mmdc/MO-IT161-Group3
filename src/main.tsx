@@ -14,10 +14,10 @@ try {
 }
 
 // Track performance metrics
-trackWebVitals((metric) => {
+trackWebVitals((_metric) => {
   // Send to analytics service if enabled
   if (import.meta.env.VITE_ENABLE_ANALYTICS === 'true') {
-    // Example: gtag('event', metric.name, { value: metric.value, rating: metric.rating })
+    // Example: gtag('event', _metric.name, { value: _metric.value, rating: _metric.rating })
   }
 })
 

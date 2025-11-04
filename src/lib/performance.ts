@@ -9,6 +9,7 @@ interface PerformanceMetric {
   rating?: 'good' | 'needs-improvement' | 'poor'
 }
 
+// @ts-expect-error - Type augmentation for performance API
 interface PerformanceObserver {
   disconnect(): void
   observe(): void
@@ -92,7 +93,7 @@ export function trackWebVitals(onPerfEntry?: (metric: PerformanceMetric) => void
     let clsValue = 0
     const clsObserver = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        const layoutShift = entry as PerformanceEntry & { value?: number }
+        const layoutShift = entry as PerformanceEntry & { value?: number; hadRecentInput?: boolean }
         if (!layoutShift.hadRecentInput) {
           clsValue += layoutShift.value || 0
         }
