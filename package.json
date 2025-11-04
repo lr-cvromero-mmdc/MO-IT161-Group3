@@ -1,6 +1,6 @@
 {
   "name": "espinosa-carwash",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "homepage": "https://lr-cvromero-mmdc.github.io/MO-IT161-Group3/",

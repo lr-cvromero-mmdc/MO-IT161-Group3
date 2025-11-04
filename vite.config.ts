@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/MO-IT161-Group3/',
+  base: "/MO-IT161-Group3",
   //resolve:
   //{
   //  alias: {
