@@ -266,7 +266,16 @@ body.modal-open {
   }
 
   .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:ring-offset-2 focus:ring-offset-transparent;
+    @apply focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 focus:ring-offset-transparent;
+  }
+
+  /* Enhanced focus indicators for better keyboard navigation */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply outline-none ring-2 ring-brand-primary ring-offset-2;
   }
 
   /* Typography Hierarchy */
@@ -415,24 +424,103 @@ body.modal-open {
     @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
   }
   
+  /* Enhanced Button Styles with Micro-interactions */
   .btn-primary {
-    @apply bg-primary text-white hover:bg-primary/90 focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 transition-colors duration-200;
+    @apply bg-primary text-white hover:bg-primary/90 focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 transition-all duration-300 ease-out;
+    transform: translateY(0);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(19, 62, 135, 0.3);
+  }
+  
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 10px rgba(19, 62, 135, 0.2);
+    transition-duration: 150ms;
   }
   
   .btn-secondary {
-    @apply bg-cream text-dark hover:bg-cream/90 focus:ring-2 focus:ring-cream/50 focus:ring-offset-2 transition-colors duration-200;
+    @apply bg-cream text-dark hover:bg-cream/90 focus:ring-2 focus:ring-cream/50 focus:ring-offset-2 transition-all duration-300 ease-out;
+    transform: translateY(0);
+  }
+  
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(243, 243, 224, 0.4);
+  }
+  
+  .btn-secondary:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 10px rgba(243, 243, 224, 0.3);
+    transition-duration: 150ms;
   }
   
   .btn-outline {
-    @apply border border-primary text-primary hover:bg-primary hover:text-white focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 transition-colors duration-200;
+    @apply border border-primary text-primary hover:bg-primary hover:text-white focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 transition-all duration-300 ease-out;
+    transform: translateY(0);
   }
   
+  .btn-outline:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(19, 62, 135, 0.2);
+  }
+  
+  .btn-outline:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 10px rgba(19, 62, 135, 0.15);
+    transition-duration: 150ms;
+  }
+  
+  /* Enhanced Card Styles with Micro-interactions */
   .card {
-    @apply bg-white rounded-lg shadow-sm border border-neutral-200;
+    @apply bg-white rounded-lg shadow-sm border border-neutral-200 transition-all duration-300 ease-out;
+    transform: translateY(0);
   }
   
   .card-hover {
-    @apply card hover:shadow-md transition-shadow duration-200;
+    @apply card hover:shadow-lg;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-4px);
+    border-color: rgb(203, 213, 225);
+  }
+  
+  /* Micro-interaction: Scale on hover for interactive elements */
+  .scale-hover {
+    @apply transition-transform duration-300 ease-out;
+    transform: scale(1);
+  }
+  
+  .scale-hover:hover {
+    transform: scale(1.05);
+  }
+  
+  .scale-hover:active {
+    transform: scale(0.98);
+    transition-duration: 150ms;
+  }
+  
+  /* Micro-interaction: Glow effect for important elements */
+  .glow-on-hover {
+    @apply transition-all duration-300 ease-out;
+    box-shadow: 0 0 0 0 rgba(19, 62, 135, 0);
+  }
+  
+  .glow-on-hover:hover {
+    box-shadow: 0 0 20px 5px rgba(19, 62, 135, 0.3);
+  }
+  
+  /* Micro-interaction: Smooth rotate for icons */
+  .rotate-on-hover {
+    @apply transition-transform duration-300 ease-out;
+    transform: rotate(0deg);
+  }
+  
+  .rotate-on-hover:hover {
+    transform: rotate(5deg);
   }
 }
 
@@ -440,13 +528,48 @@ body.modal-open {
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Screen Reader Only - Accessibility Utility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Focus Visible - Enhanced keyboard navigation */
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2;
+  }
+
+  /* Skip to main content link */
+  .skip-to-main {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    background: #133e87;
+    color: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    z-index: 9999;
+    transition: top 0.3s;
+  }
+
+  .skip-to-main:focus {
+    top: 0;
   }
 }

@@ -1,3 +1,4 @@
+import { memo, useMemo } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import { Icon } from 'leaflet'
 import { cn } from '@/lib/utils'
@@ -26,11 +27,50 @@ interface AllLocationsMapProps {
   className?: string
 }
 
-export function AllLocationsMap({ locations, className }: AllLocationsMapProps) {
+function AllLocationsMapComponent({ locations, className }: AllLocationsMapProps) {
   // Center of Philippines for country-wide view
   const philippinesCenter: [number, number] = [12.8797, 121.7740]
   // Zoom level 6 shows the entire Philippines
   const defaultZoom = 6
+  const markers = useMemo(() => locations.map((location, index) => (
+    <Marker 
+      key={`${location.lat}-${location.lng}-${index}`} 
+      position={[location.lat, location.lng]} 
+      icon={customIcon}
+    >
+      <Popup>
+        <div className="text-sm max-w-xs">
+          <h3 className="font-semibold text-brand-dark mb-2">{location.name}</h3>
+          <p className="text-neutral-600 mb-2">{location.address}</p>
+          <div className="space-y-1 text-xs">
+            <p className="flex items-center gap-1">
+              <span className="font-medium">Hours:</span>
+              <span className="text-neutral-600">{location.hours}</span>
+            </p>
+            <p className="flex items-center gap-1">
+              <span className="font-medium">Phone:</span>
+              <a 
+                href={`tel:${location.phone}`}
+                className="text-brand-primary hover:underline"
+              >
+                {location.phone}
+              </a>
+            </p>
+          </div>
+          <div className="mt-3 pt-2 border-t border-neutral-200">
+            <a
+              href={`https://maps.google.com/?q=${encodeURIComponent(location.address)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-primary hover:underline text-xs font-medium"
+            >
+              Get Directions
+            </a>
+          </div>
+        </div>
+      </Popup>
+    </Marker>
+  )), [locations])
 
   return (
     <div className={cn("w-full h-96 rounded-lg overflow-hidden border border-neutral-200 shadow-sm", className)}>
@@ -45,46 +85,37 @@ export function AllLocationsMap({ locations, className }: AllLocationsMapProps) 
           attribution=''
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
         />
-        {locations.map((location, index) => (
-          <Marker 
-            key={index} 
-            position={[location.lat, location.lng]} 
-            icon={customIcon}
-          >
-            <Popup>
-              <div className="text-sm max-w-xs">
-                <h3 className="font-semibold text-brand-dark mb-2">{location.name}</h3>
-                <p className="text-neutral-600 mb-2">{location.address}</p>
-                <div className="space-y-1 text-xs">
-                  <p className="flex items-center gap-1">
-                    <span className="font-medium">Hours:</span>
-                    <span className="text-neutral-600">{location.hours}</span>
-                  </p>
-                  <p className="flex items-center gap-1">
-                    <span className="font-medium">Phone:</span>
-                    <a 
-                      href={`tel:${location.phone}`}
-                      className="text-brand-primary hover:underline"
-                    >
-                      {location.phone}
-                    </a>
-                  </p>
-                </div>
-                <div className="mt-3 pt-2 border-t border-neutral-200">
-                  <a
-                    href={`https://maps.google.com/?q=${encodeURIComponent(location.address)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-brand-primary hover:underline text-xs font-medium"
-                  >
-                    Get Directions
-                  </a>
-                </div>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
+        {markers}
       </MapContainer>
     </div>
   )
 }
+
+function locationsPropsAreEqual(
+  prev: AllLocationsMapProps,
+  next: AllLocationsMapProps
+) {
+  if (prev.className !== next.className) {
+    return false
+  }
+
+  if (prev.locations.length !== next.locations.length) {
+    return false
+  }
+
+  return prev.locations.every((location, index) => {
+    const nextLocation = next.locations[index]
+    return (
+      location.lat === nextLocation.lat &&
+      location.lng === nextLocation.lng &&
+      location.name === nextLocation.name &&
+      location.address === nextLocation.address &&
+      location.hours === nextLocation.hours &&
+      location.phone === nextLocation.phone
+    )
+  })
+}
+
+export const AllLocationsMap = memo(AllLocationsMapComponent, locationsPropsAreEqual)
+
+AllLocationsMap.displayName = "AllLocationsMap"

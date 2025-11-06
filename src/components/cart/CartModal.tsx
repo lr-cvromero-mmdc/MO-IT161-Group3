@@ -62,7 +62,7 @@ export function CartModal({ isOpen, onClose }: CartModalProps) {
                   Add services and products to get started
                 </p>
                 <Button asChild size="sm" className="bg-brand-primary text-white hover:bg-brand-primary/90">
-                  <Link to="/services" onClick={onClose}>
+                  <Link to="/services" onClick={() => { onClose(); window.scrollTo(0, 0); }}>
                     Browse Services
                   </Link>
                 </Button>
@@ -187,7 +187,7 @@ export function CartModal({ isOpen, onClose }: CartModalProps) {
                     size="lg"
                     className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 hover:scale-105 transition-all duration-200"
                   >
-                    <Link to={hasServices() ? '/booking' : '/checkout'} onClick={onClose}>
+                    <Link to={hasServices() ? '/booking' : '/checkout'} onClick={() => { onClose(); window.scrollTo(0, 0); }}>
                       <span>{hasServices() ? 'Proceed to Booking' : 'Proceed to Checkout'}</span>
                       <ArrowRight className="h-4 w-4 ml-2" />
                     </Link>
@@ -201,7 +201,7 @@ export function CartModal({ isOpen, onClose }: CartModalProps) {
                     className="flex-1 text-sm hover:scale-105 transition-all duration-200"
                     asChild
                   >
-                    <Link to="/services" onClick={onClose}>
+                    <Link to="/services" onClick={() => { onClose(); window.scrollTo(0, 0); }}>
                       Continue Shopping
                     </Link>
                   </Button>

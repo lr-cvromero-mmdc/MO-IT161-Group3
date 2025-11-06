@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { CheckCircle, Calendar, MapPin, Phone, Mail, Download, Car, Package, Clock, Banknote, Smartphone, CreditCard } from 'lucide-react'
 import { formatPrice } from '@/lib/paymentUtils'
 import { LOCATIONS, VEHICLE_TYPES, PAYMENT_METHODS } from '@/lib/bookingUtils'
+import { logger } from '@/lib/logger'
 
 interface BookingData {
   confirmationCode: string
@@ -69,7 +70,7 @@ export function BookingConfirmation() {
         setBookingData(parsed)
         setIsLoading(false)
       } catch (error) {
-        console.error('Failed to parse booking data:', error)
+        logger.error('Failed to parse booking data', error as Error)
         setIsLoading(false)
       }
     } else {
@@ -128,7 +129,7 @@ export function BookingConfirmation() {
             We couldn't find your booking details. Please contact us if you need assistance.
           </p>
           <Button asChild className="bg-brand-primary text-white hover:bg-brand-primary/90">
-            <Link to="/contact">
+            <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
               Contact Support
             </Link>
           </Button>
@@ -444,7 +445,7 @@ export function BookingConfirmation() {
             {/* Return Home */}
             <div className="text-center mt-8">
               <Button asChild size="lg" className="bg-brand-primary text-white hover:bg-brand-primary/90">
-                <Link to="/">
+                <Link to="/" onClick={() => window.scrollTo(0, 0)}>
                   Return to Home
                 </Link>
               </Button>
