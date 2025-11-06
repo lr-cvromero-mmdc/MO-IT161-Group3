@@ -1,1 +1,0 @@
-const e="/MO-IT161-Group3/assets/car-shampoo-da9cd6bd.png",s="/MO-IT161-Group3/assets/microfiber-towel-a7a0c6c1.png",a="/MO-IT161-Group3/assets/car-wax-95592c26.png",r="/MO-IT161-Group3/assets/tire-gel-2fcfcf8f.png",o="/MO-IT161-Group3/assets/interior-cleaner-e879ef31.png",c="/MO-IT161-Group3/assets/wheel-brush-96b8f730.png";export{a,e as c,o as i,s as m,r as t,c as w};
