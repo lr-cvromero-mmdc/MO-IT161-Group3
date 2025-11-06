@@ -1,8 +1,9 @@
 // Demo booking data and mock backend functions
 // This simulates a real backend for testing the booking system
 
-import { TIME_SLOTS } from './bookingAvailability'
+import { TIME_SLOTS, getReservationsForUser, cancelReservation as cancelBookingReservation } from './bookingAvailability'
 import type { CartItem } from '@/context/CartContext'
+import { logger } from './logger'
 
 // Demo existing bookings (simulates what would be in a database)
 export const DEMO_BOOKINGS = [
@@ -189,7 +190,7 @@ export function reserveSlot(
   // Cleanup expired reservations
   cleanupExpiredReservations()
 
-  console.log('[DEMO] Reserved slot:', {
+  logger.logReservation('Reserved slot', {
     reservationId,
     locationId,
     date,
@@ -214,7 +215,7 @@ export function cancelReservation(reservationId: string): boolean {
 
   if (index !== -1) {
     temporaryReservations.splice(index, 1)
-    console.log('[DEMO] Cancelled reservation:', reservationId)
+    logger.logReservation('Cancelled reservation', reservationId)
     return true
   }
 
@@ -246,7 +247,33 @@ function cleanupExpiredReservations() {
 
   const removed = before - temporaryReservations.length
   if (removed > 0) {
-    console.log(`[DEMO] Cleaned up ${removed} expired reservations`)
+    logger.debug(`Cleaned up ${removed} expired reservations`)
+  }
+}
+
+/**
+ * Get session ID from sessionStorage (same as useBookingReservation hook)
+ */
+function getSessionId(): string {
+  if (typeof window === 'undefined') {
+    return `session-${Math.random().toString(36).slice(2)}-${Date.now()}`
+  }
+
+  try {
+    const SESSION_STORAGE_KEY = "espinosa-reservation-session"
+    const existing = window.sessionStorage.getItem(SESSION_STORAGE_KEY)
+    if (existing) {
+      return existing
+    }
+
+    const newId = typeof crypto !== "undefined" && "randomUUID" in crypto
+      ? `session-${crypto.randomUUID()}`
+      : `session-${Math.random().toString(36).slice(2)}-${Date.now()}`
+
+    window.sessionStorage.setItem(SESSION_STORAGE_KEY, newId)
+    return newId
+  } catch {
+    return `session-${Math.random().toString(36).slice(2)}-${Date.now()}`
   }
 }
 
@@ -277,23 +304,32 @@ export function confirmBooking(
     }
   }
 
+  // Get session ID to check reservations
+  const sessionId = getSessionId()
+  
+  // Get all reservations for this user from bookingAvailability system
+  const userReservations = getReservationsForUser(sessionId)
+  
   // Validate all reservations still valid
-  const now = Date.now()
+  const now = new Date()
   for (const service of services) {
-    if (!service.bookingDetails?.reservationId) continue
+    const bookingDetails = service.bookingDetails
+    if (!bookingDetails?.reservationId) continue
 
-    const reservation = temporaryReservations.find(
-      res => res.id === service.bookingDetails.reservationId
+    // Check if reservation exists in bookingAvailability system
+    const reservation = userReservations.find(
+      res => res.id === bookingDetails.reservationId
     )
 
     if (!reservation) {
       return {
         success: false,
-        error: `Reservation for ${service.name} not found`,
+        error: `Reservation for ${service.name} not found or expired`,
       }
     }
 
-    if (reservation.expiresAt < now) {
+    // Check if reservation is still valid (not expired)
+    if (new Date(reservation.reservedUntil) < now) {
       return {
         success: false,
         error: `Reservation for ${service.name} has expired`,
@@ -307,7 +343,7 @@ export function confirmBooking(
   const confirmationCode = `ESP-${timestamp}-${random}`
 
   // In production, this would save to database
-  console.log('[DEMO] Booking confirmed:', {
+  logger.logBooking('Booking confirmed', {
     confirmationCode,
     customer: customerInfo,
     items: items.map(item => ({
@@ -319,10 +355,10 @@ export function confirmBooking(
     total: items.reduce((sum, item) => sum + item.price * item.quantity, 0),
   })
 
-  // Clear reservations after confirmation
+  // Clear reservations after confirmation using bookingAvailability system
   services.forEach(service => {
     if (service.bookingDetails?.reservationId) {
-      cancelReservation(service.bookingDetails.reservationId)
+      cancelBookingReservation(service.bookingDetails.reservationId)
     }
   })
 

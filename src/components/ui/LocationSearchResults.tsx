@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { MapPin, Clock, Phone, Navigation, X } from "lucide-react"
@@ -17,11 +18,13 @@ interface LocationSearchResultsProps {
   className?: string
 }
 
-export function LocationSearchResults({ 
+function LocationSearchResultsComponent({ 
   location, 
   onClose, 
   className 
 }: LocationSearchResultsProps) {
+  const formattedDistance = useMemo(() => formatDistance(location.distance), [location.distance])
+
   return (
     <Card className={`mt-4 border-brand-primary/20 shadow-lg ${className}`}>
       <CardContent className="p-6">
@@ -33,7 +36,7 @@ export function LocationSearchResults({
                 Nearest Location
               </h3>
               <p className="text-sm text-brand-primary font-medium">
-                {formatDistance(location.distance)}
+                {formattedDistance}
               </p>
             </div>
           </div>
@@ -103,3 +106,6 @@ export function LocationSearchResults({
     </Card>
   )
 }
+
+export const LocationSearchResults = memo(LocationSearchResultsComponent)
+LocationSearchResults.displayName = "LocationSearchResults"

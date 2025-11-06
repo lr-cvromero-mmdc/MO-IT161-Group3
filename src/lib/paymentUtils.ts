@@ -1,6 +1,22 @@
 // Payment utilities for handling pricing, taxes, and payment processing
+import { logger } from './logger'
 
-// Calculate tax (12% VAT in Philippines)
+/**
+ * Calculates the 12% VAT (Value Added Tax) for Philippines
+ *
+ * @param subtotal - Price before tax in Philippine Pesos (₱)
+ * @returns Tax amount rounded to 2 decimal places
+ *
+ * @example
+ * ```typescript
+ * const tax = calculateTax(2232) // Returns 268
+ * // ₱2,232 * 12% = ₱268
+ * ```
+ *
+ * @remarks
+ * Philippines standard VAT rate is 12% as of 2025
+ * Result is rounded to nearest centavo (₱0.01)
+ */
 export function calculateTax(subtotal: number): number {
   return Math.round(subtotal * 0.12 * 100) / 100
 }
@@ -11,7 +27,22 @@ export function calculateTotal(subtotal: number): number {
   return Math.round((subtotal + tax) * 100) / 100
 }
 
-// Format price for display
+/**
+ * Formats price as Philippine Peso currency string without decimals
+ *
+ * @param price - Amount in Philippine Pesos (₱)
+ * @returns Formatted currency string (e.g., "₱2,500")
+ *
+ * @example
+ * ```typescript
+ * const formatted = formatPrice(2500) // Returns "₱2,500"
+ * const formatted2 = formatPrice(125000) // Returns "₱125,000"
+ * ```
+ *
+ * @remarks
+ * Uses Philippine English locale (en-PH) with PHP currency
+ * Rounds to nearest peso (no decimal places)
+ */
 export function formatPrice(price: number): string {
   return new Intl.NumberFormat('en-PH', {
     style: 'currency',
@@ -59,6 +90,11 @@ export async function processPayment(
   // Mock payment processing
   return new Promise((resolve) => {
     setTimeout(() => {
+      logger.logPayment('Processing payment', {
+        amount,
+        method,
+        customer: customerInfo,
+      })
       // Simulate 95% success rate
       if (Math.random() > 0.05) {
         const transactionId = `TXN-${Date.now()}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`
@@ -121,7 +157,40 @@ export function calculateFinalAmount(subtotal: number, method: string): number {
   return Math.round((subtotal + tax + processingFee) * 100) / 100
 }
 
-// Generate payment summary
+/**
+ * Generates a complete payment summary with all charges and formatted strings
+ *
+ * @param subtotal - Base price before taxes and fees in Philippine Pesos (₱)
+ * @param method - Payment method ('cash', 'gcash', 'maya', 'card')
+ * @returns Object containing raw numbers and formatted strings for display
+ *
+ * @example
+ * ```typescript
+ * const summary = generatePaymentSummary(2232, 'cash')
+ * console.log(summary)
+ * // {
+ * //   subtotal: 2232,
+ * //   tax: 268,           // 12% VAT
+ * //   processingFee: 0,   // No fee for cash
+ * //   total: 2500,
+ * //   formatted: {
+ * //     subtotal: '₱2,232',
+ * //     tax: '₱268',
+ * //     processingFee: '₱0',
+ * //     total: '₱2,500'
+ * //   }
+ * // }
+ * ```
+ *
+ * @remarks
+ * Processing fees:
+ * - Cash: 0%
+ * - GCash: 0%
+ * - Maya: 0%
+ * - Card: 3%
+ *
+ * Tax is always 12% VAT (Philippines standard)
+ */
 export function generatePaymentSummary(
   subtotal: number,
   method: string
