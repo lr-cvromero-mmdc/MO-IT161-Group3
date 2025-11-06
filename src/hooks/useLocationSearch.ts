@@ -4,6 +4,7 @@ import {
   findNearestLocation, 
   searchPhilippineArea
 } from '@/lib/locationUtils'
+import { useDebouncedCallback } from './useDebouncedCallback'
 
 export interface LocationSearchResult {
   location: Location & { distance: number }
@@ -27,14 +28,21 @@ export function useLocationSearch(locations: Location[]) {
     searchQuery: ''
   })
 
+  const updateSuggestions = useDebouncedCallback((query: string) => {
+    setState(prev => ({
+      ...prev,
+      suggestions: query.length > 0 ? searchPhilippineArea(query).slice(0, 5) : []
+    }))
+  }, 250)
+
   // Update search query and suggestions
   const updateSearchQuery = useCallback((query: string) => {
     setState(prev => ({
       ...prev,
-      searchQuery: query,
-      suggestions: query.length > 0 ? searchPhilippineArea(query).slice(0, 5) : []
+      searchQuery: query
     }))
-  }, [])
+    updateSuggestions(query)
+  }, [updateSuggestions])
 
   // Search by text input (city name)
   const searchByText = useCallback(async (query: string) => {

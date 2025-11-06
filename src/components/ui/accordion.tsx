@@ -4,33 +4,8 @@ import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-// Accordion component using Radix UI
 const Accordion = AccordionPrimitive.Root
 
-// Accordion Item component
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-const Accordion = AccordionPrimitive.Root
-
->>>>>>> origin/staging
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
@@ -43,22 +18,6 @@ const AccordionItem = React.forwardRef<
 ))
 AccordionItem.displayName = "AccordionItem"
 
-<<<<<<< HEAD
-// Accordion Trigger component
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Accordion Trigger component
-=======
->>>>>>> origin/staging
-=======
-// Accordion Trigger component
->>>>>>> Stashed changes
-=======
-// Accordion Trigger component
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
@@ -79,22 +38,6 @@ const AccordionTrigger = React.forwardRef<
 ))
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
 
-<<<<<<< HEAD
-// Accordion Content component
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-// Accordion Content component
-=======
->>>>>>> origin/staging
-=======
-// Accordion Content component
->>>>>>> Stashed changes
-=======
-// Accordion Content component
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
@@ -108,31 +51,6 @@ const AccordionContent = React.forwardRef<
   </AccordionPrimitive.Content>
 ))
 
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
-// Set display names for better debugging
 AccordionContent.displayName = AccordionPrimitive.Content.displayName
 
-// Export all components
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-AccordionContent.displayName = AccordionPrimitive.Content.displayName
-
->>>>>>> origin/staging
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
->>>>>>> c47e2c8a892b754f47d3d42d7dec489354be9ac7
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }

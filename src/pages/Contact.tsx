@@ -4,7 +4,7 @@ import { Container } from "@/components/layout/Container"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { FaqSection } from "@/components/sections/FaqSection"
 import { 
   Phone, 
   Mail, 
@@ -194,14 +194,6 @@ export function Contact() {
     }, 3000)
   }
 
-  const formatPhoneNumber = (value: string) => {
-    const phoneNumber = value.replace(/\D/g, '')
-    if (phoneNumber.length <= 3) return phoneNumber
-    if (phoneNumber.length <= 6) return `${phoneNumber.slice(0, 3)} ${phoneNumber.slice(3)}`
-    if (phoneNumber.length <= 10) return `${phoneNumber.slice(0, 3)} ${phoneNumber.slice(3, 6)} ${phoneNumber.slice(6)}`
-    return `${phoneNumber.slice(0, 3)} ${phoneNumber.slice(3, 6)} ${phoneNumber.slice(6, 10)}`
-  }
-
   return (
     <div className="min-h-screen bg-white">
       {/* Enhanced Hero Section */}
@@ -265,17 +257,17 @@ export function Contact() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {contactMethods.map((method, index) => (
-              <Card key={index} className={`relative overflow-hidden hover:shadow-xl transition-all duration-300 border-2 ${method.accent} group`}>
+              <Card key={index} className={`relative overflow-hidden hover:shadow-xl transition-all duration-300 border-2 ${method.accent} group`} role="article" aria-label={`${method.title} contact option`}>
                 <CardContent className="p-8 text-center">
                   {method.subtitle && (
-                    <div className="absolute top-4 right-4">
+                    <div className="absolute top-4 right-4" aria-label="Recommended contact method">
                       <div className="px-3 py-1 bg-brand-primary text-white text-xs font-bold rounded-full">
                         {method.subtitle}
                       </div>
                     </div>
                   )}
-                  
-                  <div className={`mx-auto mb-6 p-6 rounded-full w-fit ${method.iconBg} group-hover:scale-110 transition-transform duration-300`}>
+
+                  <div className={`mx-auto mb-6 p-6 rounded-full w-fit ${method.iconBg} group-hover:scale-110 transition-transform duration-300`} aria-hidden="true">
                     <method.icon className="h-8 w-8 text-white" />
                   </div>
                   
@@ -286,23 +278,23 @@ export function Contact() {
                   {method.staffedHours && (
                     <p className="text-sm text-neutral-500 mb-2">Staffed: {method.staffedHours}</p>
                   )}
-                  
+
                   <div className="flex items-center justify-center gap-2 mb-6">
-                    <CheckCircle className="h-4 w-4 text-green-600" />
+                    <CheckCircle className="h-4 w-4 text-green-600" aria-hidden="true" />
                     <span className="text-sm font-semibold text-green-600">{method.responseTime}</span>
                   </div>
-                  
+
                   <Button
                     asChild
                     className={`w-full font-semibold py-3 focus-ring ${
-                      method.color === 'primary' 
-                        ? 'bg-brand-primary text-white hover:bg-brand-primary/90' 
+                      method.color === 'primary'
+                        ? 'bg-brand-primary text-white hover:bg-brand-primary/90'
                         : method.color === 'green'
-                        ? 'bg-green-600 text-white hover:bg-green-700' 
+                        ? 'bg-green-600 text-white hover:bg-green-700'
                         : 'bg-blue-600 text-white hover:bg-blue-700'
                     }`}
                   >
-                    <a href={method.href}>
+                    <a href={method.href} aria-label={`${method.action}: ${method.details}`}>
                       {method.action}
                     </a>
                   </Button>
@@ -336,21 +328,21 @@ export function Contact() {
             <Card className="bg-white shadow-xl border-0">
               <CardContent className="p-8">
                 {isSuccess ? (
-                  <div className="text-center py-12">
+                  <div className="text-center py-12" role="status" aria-live="polite">
                     <div className="mx-auto mb-6 p-6 bg-green-100 rounded-full w-fit">
-                      <CheckCircle className="h-12 w-12 text-green-600" />
+                      <CheckCircle className="h-12 w-12 text-green-600" aria-hidden="true" />
                     </div>
                     <h3 className="text-2xl font-bold text-brand-dark mb-4">Message Sent Successfully!</h3>
                     <p className="text-lg text-neutral-600 mb-6">
                       Thank you for contacting us. We'll get back to you within 2 hours during business hours.
                     </p>
                     <div className="flex items-center justify-center gap-2 text-sm text-green-600">
-                      <Timer className="h-4 w-4" />
+                      <Timer className="h-4 w-4" aria-hidden="true" />
                       <span className="font-semibold">Expected response time: {trustIndicators.responseTime}</span>
                     </div>
                   </div>
                 ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6" aria-label="Contact form">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-lg font-semibold text-brand-dark mb-2">
@@ -365,10 +357,13 @@ export function Contact() {
                       onChange={handleInputChange}
                           className={`focus-ring text-lg py-3 ${formErrors.name ? 'border-red-500 focus:border-red-500' : ''}`}
                       placeholder="Enter your full name"
+                      aria-required="true"
+                      aria-invalid={!!formErrors.name}
+                      aria-describedby={formErrors.name ? "name-error" : undefined}
                     />
                         {formErrors.name && (
-                          <div className="flex items-center gap-2 mt-2 text-red-600">
-                            <AlertCircle className="h-4 w-4" />
+                          <div id="name-error" className="flex items-center gap-2 mt-2 text-red-600" role="alert">
+                            <AlertCircle className="h-4 w-4" aria-hidden="true" />
                             <span className="text-sm">{formErrors.name}</span>
                           </div>
                         )}
@@ -387,10 +382,13 @@ export function Contact() {
                       onChange={handleInputChange}
                           className={`focus-ring text-lg py-3 ${formErrors.contact ? 'border-red-500 focus:border-red-500' : ''}`}
                       placeholder="Phone number or email address"
+                      aria-required="true"
+                      aria-invalid={!!formErrors.contact}
+                      aria-describedby={formErrors.contact ? "contact-error" : undefined}
                     />
                         {formErrors.contact && (
-                          <div className="flex items-center gap-2 mt-2 text-red-600">
-                            <AlertCircle className="h-4 w-4" />
+                          <div id="contact-error" className="flex items-center gap-2 mt-2 text-red-600" role="alert">
+                            <AlertCircle className="h-4 w-4" aria-hidden="true" />
                             <span className="text-sm">{formErrors.contact}</span>
                           </div>
                         )}
@@ -409,6 +407,9 @@ export function Contact() {
                           value={formData.serviceType}
                           onChange={handleInputChange}
                           className={`w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent text-lg ${formErrors.serviceType ? 'border-red-500 focus:border-red-500' : ''}`}
+                          aria-required="true"
+                          aria-invalid={!!formErrors.serviceType}
+                          aria-describedby={formErrors.serviceType ? "service-error" : undefined}
                         >
                           <option value="">Select a service</option>
                           {serviceTypes.map((service) => (
@@ -416,8 +417,8 @@ export function Contact() {
                           ))}
                         </select>
                         {formErrors.serviceType && (
-                          <div className="flex items-center gap-2 mt-2 text-red-600">
-                            <AlertCircle className="h-4 w-4" />
+                          <div id="service-error" className="flex items-center gap-2 mt-2 text-red-600" role="alert">
+                            <AlertCircle className="h-4 w-4" aria-hidden="true" />
                             <span className="text-sm">{formErrors.serviceType}</span>
                           </div>
                         )}
@@ -433,6 +434,7 @@ export function Contact() {
                           value={formData.preferredMethod}
                           onChange={handleInputChange}
                           className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent text-lg"
+                          aria-label="Select preferred contact method (optional)"
                         >
                           <option value="">No preference</option>
                           <option value="call">Phone Call</option>
@@ -455,17 +457,21 @@ export function Contact() {
                       onChange={handleInputChange}
                         className={`w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent resize-none focus-ring text-lg ${formErrors.message ? 'border-red-500 focus:border-red-500' : ''}`}
                         placeholder="Tell us what service you need, any specific requirements, or questions you have..."
+                      aria-required="true"
+                      aria-invalid={!!formErrors.message}
+                      aria-describedby={formErrors.message ? "message-error" : "message-length"}
+                      maxLength={500}
                       />
                       <div className="flex justify-between items-center mt-2">
                         {formErrors.message ? (
-                          <div className="flex items-center gap-2 text-red-600">
-                            <AlertCircle className="h-4 w-4" />
+                          <div id="message-error" className="flex items-center gap-2 text-red-600" role="alert">
+                            <AlertCircle className="h-4 w-4" aria-hidden="true" />
                             <span className="text-sm">{formErrors.message}</span>
                           </div>
                         ) : (
                           <div></div>
                         )}
-                        <span className="text-sm text-neutral-500">
+                        <span id="message-length" className="text-sm text-neutral-500" aria-live="polite">
                           {formData.message.length}/500 characters
                         </span>
                       </div>
@@ -475,15 +481,17 @@ export function Contact() {
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 font-bold text-xl py-4 focus-ring"
+                    aria-label={isSubmitting ? "Sending message" : "Send message"}
+                    aria-busy={isSubmitting}
                   >
                     {isSubmitting ? (
                         <div className="flex items-center gap-3">
-                          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white" aria-hidden="true"></div>
                           <span>Sending Message...</span>
                         </div>
                       ) : (
                         <div className="flex items-center gap-3">
-                          <Send className="h-6 w-6" />
+                          <Send className="h-6 w-6" aria-hidden="true" />
                           <span>Send Message</span>
                         </div>
                     )}
@@ -501,44 +509,22 @@ export function Contact() {
       </section>
 
       {/* Enhanced FAQ Section */}
-      <section className="py-16 bg-white">
-        <Container>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Common questions about contacting us and getting help with your car care needs.
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <Accordion type="single" collapsible className="space-y-4">
-              {contactFaqs.map((faq, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border border-neutral-200 rounded-lg px-6">
-                  <AccordionTrigger className="text-lg font-semibold text-brand-dark hover:text-brand-primary py-6">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-neutral-600 leading-relaxed pb-6">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-        </Container>
-      </section>
+      <FaqSection 
+        faqs={contactFaqs}
+        title="Frequently Asked Questions"
+        subtitle="Common questions about contacting us and getting help with your car care needs."
+      />
 
 
       {/* Mobile Sticky Action Bar - Simplified */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg z-50 md:hidden">
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg z-50 md:hidden" role="region" aria-label="Quick contact actions">
         <div className="flex">
           <Button
             asChild
             className="flex-1 rounded-none border-r border-neutral-200 bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold py-4 focus-ring"
           >
-            <a href="tel:+639171234567" className="flex flex-col items-center gap-1">
-              <Phone className="h-5 w-5" />
+            <a href="tel:+639171234567" className="flex flex-col items-center gap-1" aria-label="Call us now at +63 917 123 4567">
+              <Phone className="h-5 w-5" aria-hidden="true" />
               <span className="text-sm">Call Now</span>
             </a>
           </Button>
@@ -546,8 +532,8 @@ export function Contact() {
             asChild
             className="flex-1 rounded-none bg-green-600 text-white hover:bg-green-700 font-semibold py-4 focus-ring"
           >
-            <a href="https://wa.me/639171234567" className="flex flex-col items-center gap-1">
-              <MessageCircle className="h-5 w-5" />
+            <a href="https://wa.me/639171234567" className="flex flex-col items-center gap-1" aria-label="Contact us on WhatsApp at +63 917 123 4567">
+              <MessageCircle className="h-5 w-5" aria-hidden="true" />
               <span className="text-sm">WhatsApp</span>
             </a>
           </Button>

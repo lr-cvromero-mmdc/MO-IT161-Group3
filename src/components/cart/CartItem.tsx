@@ -1,7 +1,6 @@
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { Minus, Plus, Trash2, Calendar, MapPin, Clock, AlertTriangle, CheckCircle, Car, Package } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
 import { useCart, type CartItem } from '@/hooks/useCart'
 import { BookingQuickModal } from './BookingQuickModal'
 import { formatTimeDisplay } from '@/lib/bookingUtils'
@@ -10,7 +9,7 @@ interface CartItemProps {
   item: CartItem
 }
 
-export function CartItemComponent({ item }: CartItemProps) {
+const CartItemComponent = memo(function CartItemComponent({ item }: CartItemProps) {
   const { updateQuantity, removeFromCart, updateItemBooking, formatPrice, hasServices } = useCart()
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
 
@@ -68,6 +67,8 @@ export function CartItemComponent({ item }: CartItemProps) {
               src={item.image}
               alt={item.name}
               className="w-12 h-12 object-cover rounded"
+              loading="lazy"
+              decoding="async"
               onError={(e) => {
                 // Fallback to emoji if image fails to load
                 const target = e.target as HTMLImageElement
@@ -269,4 +270,6 @@ export function CartItemComponent({ item }: CartItemProps) {
     </div>
     </>
   )
-}
+})
+
+export { CartItemComponent }
