@@ -8,7 +8,7 @@
 import { Container } from "@/components/layout/Container"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Search, Filter } from "lucide-react"
+import { Search, Filter, Loader2 } from "lucide-react"
 import { CategoryOption } from "@/types/services"
 
 interface ServicesFiltersProps {
@@ -24,6 +24,8 @@ interface ServicesFiltersProps {
   categories: CategoryOption[]
   /** Active tab name for placeholder text */
   activeTab: string
+  /** Whether search is currently processing */
+  isSearching?: boolean
 }
 
 /**
@@ -48,7 +50,8 @@ export function ServicesFilters({
   selectedCategory,
   onCategoryChange,
   categories,
-  activeTab
+  activeTab,
+  isSearching = false
 }: ServicesFiltersProps) {
   return (
     <section className="py-8 bg-brand-cream" role="search" aria-label="Filter services and products">
@@ -56,17 +59,25 @@ export function ServicesFilters({
         <div className="flex flex-col md:flex-row gap-4 max-w-3xl mx-auto">
           {/* Search Input */}
           <div className="flex-1 relative">
-            <Search 
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" 
-              aria-hidden="true"
-            />
+            {isSearching ? (
+              <Loader2 
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-brand-primary animate-spin z-10" 
+                aria-hidden="true"
+              />
+            ) : (
+              <Search 
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" 
+                aria-hidden="true"
+              />
+            )}
             <Input
               type="text"
               placeholder={`Search ${activeTab}...`}
               value={searchValue}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="pl-10 h-12 text-lg focus-ring"
+              className={`pl-10 h-12 text-lg focus-ring ${isSearching ? 'pr-10' : ''}`}
               aria-label={`Search ${activeTab}`}
+              aria-busy={isSearching}
             />
           </div>
 

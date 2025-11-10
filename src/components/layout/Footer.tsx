@@ -60,15 +60,15 @@ export function Footer() {
             <p className="text-neutral-400 text-sm mb-6">
               We accept all major payment methods
             </p>
-            <div className="flex items-center justify-center gap-8 flex-wrap" role="list" aria-label="Accepted payment methods">
+            <div className="flex items-center justify-center gap-6 flex-wrap" role="list" aria-label="Accepted payment methods">
               {paymentMethods.map((method) => (
                 <div
                   key={method.name}
                   role="listitem"
-                  className="flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity"
+                  className="flex items-center justify-center"
                   aria-label={`${method.name} payment accepted`}
                 >
-                  <PaymentLogo name={method.key} className="h-16" />
+                  <PaymentLogo name={method.key} className="h-12 md:h-14" />
                 </div>
               ))}
             </div>

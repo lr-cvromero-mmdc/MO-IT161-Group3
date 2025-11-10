@@ -71,6 +71,54 @@ body.modal-open {
     bottom: 1rem;
     right: 1rem;
   }
+
+  /* Improve button touch targets on mobile */
+  button,
+  .cta-button-professional,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+
+  /* Better spacing between buttons on mobile */
+  .space-y-3 > * + *,
+  .space-y-4 > * + *,
+  .space-y-6 > * + * {
+    margin-top: 1rem;
+  }
+
+  /* Improve button groups */
+  .flex.gap-2 button,
+  .flex.gap-3 button,
+  .flex.gap-4 button {
+    min-width: 44px;
+  }
+
+  /* CTA button mobile improvements */
+  .cta-button-professional {
+    min-height: 48px;
+    padding: 0.875rem 1.75rem;
+    font-size: 1rem;
+  }
+
+  /* Remove hover effects on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    button:hover,
+    .cta-button-professional:hover {
+      transform: none;
+      box-shadow: inherit;
+    }
+
+    button:active,
+    .cta-button-professional:active {
+      transform: scale(0.97);
+      opacity: 0.9;
+    }
+  }
 }
 
 /* Ensure modal doesn't interfere with other elements */

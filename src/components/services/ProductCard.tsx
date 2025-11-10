@@ -5,9 +5,10 @@
  * Includes special styling for bundles and recommended products.
  */
 
+import { useState, memo, useCallback, useMemo } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ShoppingCart } from "lucide-react"
+import { ShoppingCart, Loader2 } from "lucide-react"
 import { Product } from "@/types/services"
 import { useCart } from "@/hooks/useCart"
 import { useToast } from "@/hooks/useToast"
@@ -30,43 +31,49 @@ interface ProductCardProps {
  * 
  * @param product - Product object containing all display data
  */
-export function ProductCard({ product }: ProductCardProps) {
+function ProductCardComponent({ product }: ProductCardProps) {
   const { addToCart } = useCart()
   const { success } = useToast()
+  const [isAdding, setIsAdding] = useState(false)
 
-  const handleAddToCart = () => {
-    addToCart({
-      id: product.id,
-      type: 'product',
-      name: product.name,
-      price: product.price,
-      quantity: 1,
-      description: product.description,
-      image: product.image,
-    })
-    success(`${product.name} added to cart!`, 'You can continue shopping or proceed to checkout.')
-  }
+  const handleAddToCart = useCallback(async () => {
+    setIsAdding(true)
+    try {
+      addToCart({
+        id: product.id,
+        type: 'product',
+        name: product.name,
+        price: product.price,
+        quantity: 1,
+        description: product.description,
+        image: product.image,
+      })
+      success(`${product.name} added to cart!`, 'You can continue shopping or proceed to checkout.')
+    } finally {
+      // Brief delay for visual feedback
+      setTimeout(() => setIsAdding(false), 300)
+    }
+  }, [product.id, product.name, product.price, product.description, product.image, addToCart, success])
 
   /**
    * Get badge styling based on badge type
    */
-  const getBadgeStyles = (badge: string | null): string => {
+  const badgeStyles = useMemo(() => ({
+    'Best Seller': 'bg-brand-primary text-white',
+    'Popular Choice': 'bg-green-500 text-white',
+    'New': 'bg-blue-500 text-white',
+    'Bundle Deal': 'bg-orange-500 text-white',
+  }), [])
+
+  const getBadgeStyles = useCallback((badge: string | null): string => {
     if (!badge) return ''
-    
-    const badgeStyles: Record<string, string> = {
-      'Best Seller': 'bg-brand-primary text-white',
-      'Popular Choice': 'bg-green-500 text-white',
-      'New': 'bg-blue-500 text-white',
-      'Bundle Deal': 'bg-orange-500 text-white',
-    }
-    
-    return badgeStyles[badge] || 'bg-neutral-500 text-white'
-  }
+    return badgeStyles[badge as keyof typeof badgeStyles] || 'bg-neutral-500 text-white'
+  }, [badgeStyles])
 
   /**
    * Get stock status indicator color
    */
-  const getStockStatusColor = (status: string): string => {
+  const getStockStatusColor = useCallback((status: string): string => {
     if (status === 'Only 8 left' || status === 'Only 5 left') {
       return 'text-red-600'
     }
@@ -77,12 +84,12 @@ export function ProductCard({ product }: ProductCardProps) {
       return 'text-purple-600'
     }
     return 'text-green-600'
-  }
+  }, [])
 
   /**
    * Get stock status dot color
    */
-  const getStockDotColor = (status: string): string => {
+  const getStockDotColor = useCallback((status: string): string => {
     if (status === 'Only 8 left' || status === 'Only 5 left') {
       return 'bg-red-500'
     }
@@ -93,7 +100,7 @@ export function ProductCard({ product }: ProductCardProps) {
       return 'bg-purple-500'
     }
     return 'bg-green-500'
-  }
+  }, [])
 
   return (
     <Card 
@@ -151,18 +158,31 @@ export function ProductCard({ product }: ProductCardProps) {
         
         {/* Add to Cart Button */}
         <Button
-          className={`w-full font-semibold py-3 ${
+          className={`w-full font-semibold py-3 sm:py-2.5 min-h-[48px] sm:min-h-[44px] text-base sm:text-sm disabled:opacity-70 ${
             product.isBundle 
-              ? 'bg-gradient-to-r from-brand-primary to-brand-accent hover:from-brand-primary/90 hover:to-brand-accent/90 text-white' 
-              : 'bg-brand-primary hover:bg-brand-primary/90 text-white'
+              ? 'bg-gradient-to-r from-brand-primary to-brand-accent hover:from-brand-primary/90 hover:to-brand-accent/90 active:from-brand-primary/80 active:to-brand-accent/80 text-white' 
+              : 'bg-brand-primary hover:bg-brand-primary/90 active:bg-brand-primary/80 text-white'
           }`}
           onClick={handleAddToCart}
+          disabled={isAdding}
         >
-          <ShoppingCart className="h-4 w-4 mr-2" />
-          {product.isBundle ? 'Get Bundle Deal' : 'Add to Cart'}
+          {isAdding ? (
+            <>
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              Adding...
+            </>
+          ) : (
+            <>
+              <ShoppingCart className="h-4 w-4 mr-2" />
+              {product.isBundle ? 'Get Bundle Deal' : 'Add to Cart'}
+            </>
+          )}
         </Button>
       </CardContent>
     </Card>
   )
 }
+
+// Memoize component to prevent unnecessary re-renders
+export const ProductCard = memo(ProductCardComponent)
 

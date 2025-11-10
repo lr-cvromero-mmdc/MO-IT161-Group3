@@ -15,7 +15,8 @@ import {
   Shield,
   Timer,
   AlertCircle,
-  Users
+  Users,
+  Loader2
 } from "lucide-react"
 
 // Trust indicators data
@@ -485,16 +486,16 @@ export function Contact() {
                     aria-busy={isSubmitting}
                   >
                     {isSubmitting ? (
-                        <div className="flex items-center gap-3">
-                          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white" aria-hidden="true"></div>
+                        <>
+                          <Loader2 className="h-6 w-6 animate-spin" aria-hidden="true" />
                           <span>Sending Message...</span>
-                        </div>
+                        </>
                       ) : (
-                        <div className="flex items-center gap-3">
+                        <>
                           <Send className="h-6 w-6" aria-hidden="true" />
                           <span>Send Message</span>
-                        </div>
-                    )}
+                        </>
+                      )}
                   </Button>
                   
                   <p className="text-sm text-neutral-500 text-center mt-4">
@@ -521,20 +522,20 @@ export function Contact() {
         <div className="flex">
           <Button
             asChild
-            className="flex-1 rounded-none border-r border-neutral-200 bg-brand-primary text-white hover:bg-brand-primary/90 font-semibold py-4 focus-ring"
+            className="flex-1 rounded-none border-r border-neutral-200 bg-brand-primary text-white hover:bg-brand-primary/90 active:bg-brand-primary/80 font-semibold py-4 min-h-[56px] focus-ring"
           >
             <a href="tel:+639171234567" className="flex flex-col items-center gap-1" aria-label="Call us now at +63 917 123 4567">
               <Phone className="h-5 w-5" aria-hidden="true" />
-              <span className="text-sm">Call Now</span>
+              <span className="text-sm font-medium">Call Now</span>
             </a>
           </Button>
           <Button
             asChild
-            className="flex-1 rounded-none bg-green-600 text-white hover:bg-green-700 font-semibold py-4 focus-ring"
+            className="flex-1 rounded-none bg-green-600 text-white hover:bg-green-700 active:bg-green-800 font-semibold py-4 min-h-[56px] focus-ring"
           >
             <a href="https://wa.me/639171234567" className="flex flex-col items-center gap-1" aria-label="Contact us on WhatsApp at +63 917 123 4567">
               <MessageCircle className="h-5 w-5" aria-hidden="true" />
-              <span className="text-sm">WhatsApp</span>
+              <span className="text-sm font-medium">WhatsApp</span>
             </a>
           </Button>
         </div>

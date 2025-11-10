@@ -351,13 +351,16 @@ export function Services() {
   const [searchTerm, setSearchTerm] = useState("")
   const [searchInputValue, setSearchInputValue] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("all")
+  const [isSearching, setIsSearching] = useState(false)
 
   const applySearchFilter = useDebouncedCallback((value: string) => {
     setSearchTerm(value)
+    setIsSearching(false)
   }, SEARCH_DEBOUNCE_MS)
 
   const handleSearchChange = useCallback((value: string) => {
     setSearchInputValue(value)
+    setIsSearching(true)
     applySearchFilter(value)
   }, [applySearchFilter])
 
@@ -458,6 +461,7 @@ export function Services() {
         onCategoryChange={setSelectedCategory}
         categories={activeTab === "services" ? serviceCategories : productCategories}
         activeTab={activeTab}
+        isSearching={isSearching}
       />
 
       {/* Services Tab */}

@@ -5,9 +5,10 @@
  * Includes visual enhancements for recommended services and micro-interactions.
  */
 
+import { useState, memo, useCallback } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Clock, Star, ShoppingCart, ChevronRight } from "lucide-react"
+import { Clock, Star, ShoppingCart, ChevronRight, Loader2 } from "lucide-react"
 import { Service } from "@/types/services"
 import { useCart } from "@/hooks/useCart"
 import { useToast } from "@/hooks/useToast"
@@ -29,23 +30,34 @@ interface ServiceCardProps {
  * 
  * @param service - Service object containing all display data
  */
-export function ServiceCard({ service }: ServiceCardProps) {
+function ServiceCardComponent({ service }: ServiceCardProps) {
+  // Always call hooks at the top level - no early returns before this
   const { addToCart } = useCart()
   const { success } = useToast()
+  const [isAdding, setIsAdding] = useState(false)
 
-  const handleAddToCart = () => {
-    addToCart({
-      id: service.id,
-      type: 'service',
-      name: service.title,
-      price: service.price,
-      quantity: 1,
-      description: service.description,
-      duration: service.duration,
-      image: service.image,
-    })
-    success(`${service.title} added to cart!`, 'Click the cart icon to book your date & time.')
-  }
+  const handleAddToCart = useCallback(async () => {
+    setIsAdding(true)
+    try {
+      addToCart({
+        id: service.id,
+        type: 'service',
+        name: service.title,
+        price: service.price,
+        quantity: 1,
+        description: service.description,
+        duration: service.duration,
+        image: service.image,
+      })
+      success(`${service.title} added to cart!`, 'Click the cart icon to book your date & time.')
+    } catch (error) {
+      // Silently fail if toast is not available (shouldn't happen in normal flow)
+      console.error('Failed to add to cart or show toast:', error)
+    } finally {
+      // Brief delay for visual feedback
+      setTimeout(() => setIsAdding(false), 300)
+    }
+  }, [service.id, service.title, service.price, service.description, service.duration, service.image, addToCart, success])
 
   return (
     <Card 
@@ -123,13 +135,26 @@ export function ServiceCard({ service }: ServiceCardProps) {
         
         <Button
           onClick={handleAddToCart}
-          className="w-full font-semibold text-lg py-3 focus-ring bg-brand-primary text-white hover:bg-brand-primary/90"
+          disabled={isAdding}
+          className="w-full font-semibold text-base sm:text-lg py-3 sm:py-2.5 min-h-[48px] sm:min-h-[44px] focus-ring bg-brand-primary text-white hover:bg-brand-primary/90 active:bg-brand-primary/80 disabled:opacity-70"
         >
-          <ShoppingCart className="h-5 w-5 mr-2" />
-          Add to Cart
+          {isAdding ? (
+            <>
+              <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+              Adding...
+            </>
+          ) : (
+            <>
+              <ShoppingCart className="h-5 w-5 mr-2" />
+              Add to Cart
+            </>
+          )}
         </Button>
       </CardContent>
     </Card>
   )
 }
+
+// Memoize component to prevent unnecessary re-renders
+export const ServiceCard = memo(ServiceCardComponent)
 

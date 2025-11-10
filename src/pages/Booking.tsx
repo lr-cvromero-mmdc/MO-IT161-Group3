@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Container } from '@/components/layout/Container'
 import { Button } from '@/components/ui/button'
@@ -10,16 +10,50 @@ import { useCart } from '@/hooks/useCart'
 import { useToast } from '@/hooks/useToast'
 import { PAYMENT_METHODS, formatTimeDisplay } from '@/lib/bookingUtils'
 import { confirmBooking } from '@/lib/demoBookingData'
-import { CheckCircle, User, CreditCard, Calendar, MapPin, Clock, Package, Banknote, Smartphone } from 'lucide-react'
+import { CheckCircle, User, CreditCard, Calendar, MapPin, Clock, Package, Banknote, Smartphone, Loader2 } from 'lucide-react'
 
 export function Booking() {
+  // ALL HOOKS MUST BE CALLED FIRST - before any conditional returns
   const navigate = useNavigate()
   const { state, clearCart, getCartSummary, getServices, getProducts, formatPrice: cartFormatPrice } = useCart()
   const { error, success } = useToast()
 
+  // Customer information state
+  const [customerInfo, setCustomerInfo] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    paymentMethod: '',
+    specialRequests: '',
+  })
+
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [isConfirming, setIsConfirming] = useState(false)
+
+  // Get cart data
   const { isEmpty, servicesSubtotal, productsSubtotal, tax, total } = getCartSummary()
   const services = getServices()
   const products = getProducts()
+  const unbookedServices = services.filter(s => !s.bookingDetails)
+
+  // Redirect if cart is empty (but not if we're confirming a booking)
+  useEffect(() => {
+    if (isEmpty && !isConfirming) {
+      navigate('/services', {
+        state: {
+          message: 'Your cart is empty. Browse our services and products to get started.'
+        }
+      })
+    }
+  }, [isEmpty, navigate, isConfirming])
+
+  // Redirect if services don't have booking details (should book via cart first)
+  useEffect(() => {
+    if (unbookedServices.length > 0) {
+      error('Booking Required', `${unbookedServices.length} service(s) need booking details. Please complete booking in cart first.`)
+      navigate('/services')
+    }
+  }, [unbookedServices.length, navigate, error])
 
   // Get payment icon component
   const getPaymentIcon = (iconName: string) => {
@@ -32,32 +66,12 @@ export function Booking() {
     }
   }
 
-  // Customer information
-  const [customerInfo, setCustomerInfo] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    paymentMethod: '',
-    specialRequests: '',
-  })
-
-  const [isProcessing, setIsProcessing] = useState(false)
-
-  // Redirect if cart is empty
+  // NOW we can do early returns after all hooks are called
   if (isEmpty) {
-    navigate('/services', {
-      state: {
-        message: 'Your cart is empty. Browse our services and products to get started.'
-      }
-    })
     return null
   }
 
-  // Redirect if services don't have booking details (should book via cart first)
-  const unbookedServices = services.filter(s => !s.bookingDetails)
   if (unbookedServices.length > 0) {
-    error('Booking Required', `${unbookedServices.length} service(s) need booking details. Please complete booking in cart first.`)
-    navigate('/services')
     return null
   }
 
@@ -70,6 +84,7 @@ export function Booking() {
     }
 
     setIsProcessing(true)
+    setIsConfirming(true)
 
     try {
       // Simulate booking confirmation
@@ -127,16 +142,24 @@ export function Booking() {
         // Store in localStorage as backup
         localStorage.setItem('demo-booking', JSON.stringify(bookingData))
         
-        clearCart()
+        // Navigate first, then clear cart after navigation
         success('Booking Confirmed!', `Your confirmation code is: ${result.confirmationCode}`)
         navigate('/booking-confirmation', {
-          state: { bookingData }
+          state: { bookingData },
+          replace: true // Replace current history entry to prevent back navigation
         })
+        
+        // Clear cart after navigation (use setTimeout to ensure navigation completes)
+        setTimeout(() => {
+          clearCart()
+        }, 100)
       } else {
         error('Booking Failed', result.error || 'Unable to confirm booking. Please try again.')
+        setIsConfirming(false)
       }
     } catch (err) {
       error('Error', 'An unexpected error occurred. Please try again.')
+      setIsConfirming(false)
     } finally {
       setIsProcessing(false)
     }
@@ -289,7 +312,10 @@ export function Booking() {
                       className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 text-lg py-6"
                     >
                       {isProcessing ? (
-                        <>Processing...</>
+                        <>
+                          <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                          Processing...
+                        </>
                       ) : (
                         <>
                           <CheckCircle className="h-5 w-5 mr-2" />

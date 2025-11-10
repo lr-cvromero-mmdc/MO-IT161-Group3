@@ -229,16 +229,16 @@ const serviceImageMap: Record<string, string> = {
 export function ServicesSection({ services, onSelectService }: ServicesSectionProps) {
   return (
     <Section id="services" background="white" className="py-20" fullWidthBackground>
-      <div className="flex items-center justify-between mb-12">
-        <div>
-          <div className="flex items-center mb-4">
-            <div className="w-8 h-0.5 bg-brand-primary" />
-            <span className="mx-4 text-brand-primary text-sm font-medium">Signature Services</span>
-            <div className="w-8 h-0.5 bg-brand-primary" />
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-4 md:gap-0">
+        <div className="flex-1">
+          <div className="flex items-center mb-4 flex-wrap gap-2">
+            <div className="w-6 md:w-8 h-0.5 bg-brand-primary flex-shrink-0" />
+            <span className="text-brand-primary text-xs sm:text-sm font-medium whitespace-nowrap">Signature Services</span>
+            <div className="w-6 md:w-8 h-0.5 bg-brand-primary flex-shrink-0" />
           </div>
           <h2 className="espinosa-section-title text-brand-dark">Choose Your Package</h2>
         </div>
-        <Link to="/services" onClick={() => window.scrollTo(0, 0)} className="text-brand-primary hover:text-brand-primary/80 font-medium focus-ring rounded-sm px-2 py-1">
+        <Link to="/services" onClick={() => window.scrollTo(0, 0)} className="text-brand-primary hover:text-brand-primary/80 font-medium focus-ring rounded-sm px-3 py-2 min-h-[44px] flex items-center justify-center md:justify-start">
           View full catalog
         </Link>
       </div>
@@ -297,9 +297,9 @@ interface StoreSectionProps {
 export function StoreSection({ products, onAddProduct }: StoreSectionProps) {
   return (
     <Section background="white" className="py-20">
-      <div className="flex items-center justify-between mb-12">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-4 md:gap-0">
         <h2 className="espinosa-section-title text-brand-dark">Our Store</h2>
-        <Link to="/services" onClick={() => window.scrollTo(0, 0)} className="text-brand-primary hover:text-brand-primary/80 font-medium focus-ring rounded-sm px-2 py-1">
+        <Link to="/services" onClick={() => window.scrollTo(0, 0)} className="text-brand-primary hover:text-brand-primary/80 font-medium focus-ring rounded-sm px-3 py-2 min-h-[44px] flex items-center justify-center md:justify-start">
           View all
         </Link>
       </div>
@@ -349,16 +349,16 @@ interface BookingStepsSectionProps {
 export function BookingStepsSection({ steps }: BookingStepsSectionProps) {
   return (
     <Section background="cream" className="py-20" fullWidthBackground>
-      <div className="flex items-center justify-between mb-12">
-        <div>
-          <div className="flex items-center mb-4">
-            <div className="w-8 h-0.5 bg-brand-primary" />
-            <span className="mx-4 text-brand-primary text-sm font-medium">How to book online</span>
-            <div className="w-8 h-0.5 bg-brand-primary" />
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-4 md:gap-0">
+        <div className="flex-1">
+          <div className="flex items-center mb-4 flex-wrap gap-2">
+            <div className="w-6 md:w-8 h-0.5 bg-brand-primary flex-shrink-0" />
+            <span className="text-brand-primary text-xs sm:text-sm font-medium whitespace-nowrap">How to book online</span>
+            <div className="w-6 md:w-8 h-0.5 bg-brand-primary flex-shrink-0" />
           </div>
           <h2 className="espinosa-section-title text-brand-dark">Book in four easy steps</h2>
         </div>
-        <Button asChild variant="outline" className="border-brand-primary text-brand-primary hover:bg-brand-primary/10 focus-ring">
+        <Button asChild variant="outline" className="border-brand-primary text-brand-primary hover:bg-brand-primary/10 focus-ring min-h-[44px] w-full md:w-auto">
           <Link to="/booking" onClick={() => window.scrollTo(0, 0)}>Start Booking</Link>
         </Button>
       </div>
@@ -389,10 +389,10 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
   return (
     <Section background="white" className="py-20" fullWidthBackground>
       <div className="text-center mb-16">
-        <div className="flex items-center justify-center mb-4">
-          <div className="w-8 h-0.5 bg-brand-primary" />
-          <span className="mx-4 text-brand-primary text-sm font-medium">What our customers say</span>
-          <div className="w-8 h-0.5 bg-brand-primary" />
+        <div className="flex items-center justify-center mb-4 flex-wrap gap-2">
+          <div className="w-6 md:w-8 h-0.5 bg-brand-primary flex-shrink-0" />
+          <span className="text-brand-primary text-xs sm:text-sm font-medium whitespace-nowrap">What our customers say</span>
+          <div className="w-6 md:w-8 h-0.5 bg-brand-primary flex-shrink-0" />
         </div>
         <h2 className="espinosa-section-title text-brand-dark">Customer Testimonials</h2>
       </div>
@@ -434,12 +434,13 @@ export function ContactSection() {
   return (
     <Section background="cream" className="py-20" fullWidthBackground>
       <div className="text-center mb-16">
-        <div className="flex items-center justify-center mb-4">
-          <div className="w-8 h-0.5 bg-brand-primary" />
-          <span className="mx-4 text-brand-primary text-sm font-medium">Contact the Espinosa Car Wash Team</span>
+        <div className="flex items-center justify-center mb-4 flex-wrap gap-2">
+          <div className="w-6 md:w-8 h-0.5 bg-brand-primary flex-shrink-0" />
+          <span className="text-brand-primary text-xs sm:text-sm font-medium whitespace-nowrap">Contact the Espinosa Car Wash Team</span>
+          <div className="w-6 md:w-8 h-0.5 bg-brand-primary flex-shrink-0" />
         </div>
-        <h3 className="espinosa-section-title text-brand-dark mb-6">Want to get in touch?</h3>
-        <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+        <h3 className="espinosa-section-title text-brand-dark mb-4 md:mb-6">Want to get in touch?</h3>
+        <p className="text-base sm:text-lg text-neutral-600 max-w-3xl mx-auto px-4">
           Whether you want to share feedback, ask about fleet packages, or explore joining the Espinosa&apos;s team, we would love to hear from you. Choose the option that fits best and we will get back to you soon.
         </p>
       </div>
@@ -479,7 +480,7 @@ export function QualitySection({ features }: QualitySectionProps) {
   return (
     <Section background="white" className="py-20" fullWidthBackground>
       <div className="text-center mb-16">
-        <h2 className="espinosa-section-title text-brand-dark mb-12">Quality Guaranteed</h2>
+        <h2 className="espinosa-section-title text-brand-dark mb-4 md:mb-12">Quality Guaranteed</h2>
         <div className="grid grid-cols-12 gap-6 md:gap-8">
           {features.map((feature) => (
             <Card

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -108,13 +108,15 @@ export function BookingQuickModal({ isOpen, onClose, service, onBookingComplete 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md" aria-describedby="booking-description">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-brand-dark flex items-center gap-2">
             <Calendar className="h-5 w-5 text-brand-primary" aria-hidden="true" />
             Book: {service.name}
           </DialogTitle>
-          <p id="booking-description" className="text-xs text-neutral-500 mt-1">🎭 Demo Mode - No real payment required</p>
+          <DialogDescription className="text-xs text-neutral-500 mt-1">
+            🎭 Demo Mode - No real payment required
+          </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4 py-4">

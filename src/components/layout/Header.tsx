@@ -106,7 +106,7 @@ export function Header() {
               <img 
                 src={logo} 
                 alt="Espinosa's Hand Carwash Logo" 
-                className={`h-10 w-auto transition-all duration-300 ${
+                className={`h-8 md:h-10 w-auto transition-all duration-300 ${
                   isHomePage && !isScrolled 
                     ? '' 
                     : 'brightness-0 invert'
@@ -151,10 +151,10 @@ export function Header() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className={`focus-ring transition-all duration-200 p-2 rounded-lg ${
+                    className={`focus-ring transition-all duration-200 p-2 rounded-lg min-h-[44px] min-w-[44px] active:bg-opacity-20 ${
                       !isScrolled 
-                        ? 'text-brand-dark hover:bg-brand-dark/10' 
-                        : 'text-white hover:bg-white/10'
+                        ? 'text-brand-dark hover:bg-brand-dark/10 active:bg-brand-dark/20' 
+                        : 'text-white hover:bg-white/10 active:bg-white/20'
                     }`}
                     aria-label="Open mobile menu"
                   >

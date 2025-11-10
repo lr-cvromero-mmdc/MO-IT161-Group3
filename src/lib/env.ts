@@ -34,17 +34,9 @@ export const env: EnvConfig = {
 
 // Validate required environment variables
 export function validateEnv(): void {
-  const required = ['VITE_APP_NAME']
-  const missing: string[] = []
-
-  for (const key of required) {
-    if (!getEnvVar(key)) {
-      missing.push(key)
-    }
-  }
-
-  if (missing.length > 0) {
-    throw new Error(`Missing required environment variables: ${missing.join(', ')}`)
+  // Check if appName has a value (either from env or default)
+  if (!env.appName) {
+    throw new Error(`Missing required environment variables: VITE_APP_NAME`)
   }
 }
 

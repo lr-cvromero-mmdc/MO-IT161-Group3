@@ -161,7 +161,21 @@ function ToastItem({ toast, onRemove }: { toast: Toast; onRemove: (id: string) =
 export function useToast() {
   const context = useContext(ToastContext)
   if (context === undefined) {
-    throw new Error('useToast must be used within a ToastProvider')
+    // In development, throw to catch issues early
+    // In production, return no-op to prevent crashes during error recovery
+    if (import.meta.env.DEV) {
+      throw new Error('useToast must be used within a ToastProvider. Make sure ToastProvider wraps your component tree in App.tsx')
+    }
+    // Production fallback - return no-op to allow error recovery
+    return {
+      toasts: [],
+      addToast: () => {},
+      removeToast: () => {},
+      success: () => {},
+      error: () => {},
+      info: () => {},
+      warning: () => {},
+    }
   }
   return context
 }

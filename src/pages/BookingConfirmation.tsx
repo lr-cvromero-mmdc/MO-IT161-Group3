@@ -4,12 +4,14 @@ import { Container } from '@/components/layout/Container'
 import { Section } from '@/components/layout/Section'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { CheckCircle, Calendar, MapPin, Phone, Mail, Download, Car, Package, Clock, Banknote, Smartphone, CreditCard } from 'lucide-react'
+import { CheckCircle, Calendar, MapPin, Phone, Mail, Download, Car, Package, Clock, Banknote, Smartphone, CreditCard, Loader2 } from 'lucide-react'
 import { formatPrice } from '@/lib/paymentUtils'
 import { LOCATIONS, VEHICLE_TYPES, PAYMENT_METHODS } from '@/lib/bookingUtils'
 import { logger } from '@/lib/logger'
+import { generateReceiptPDF } from '@/lib/pdfReceipt'
+import { useToast } from '@/hooks/useToast'
 
-interface BookingData {
+export interface BookingData {
   confirmationCode: string
   services: Array<{
     id: string
@@ -52,6 +54,8 @@ export function BookingConfirmation() {
   const location = useLocation()
   const [bookingData, setBookingData] = useState<BookingData | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false)
+  const { success, error } = useToast()
   
   useEffect(() => {
     // First try to get booking data from navigation state
@@ -100,8 +104,22 @@ export function BookingConfirmation() {
     })
   }
   
-  const handlePrintReceipt = () => {
-    window.print()
+  const handleDownloadPDF = () => {
+    if (!bookingData) {
+      error('Error', 'Booking data not available')
+      return
+    }
+
+    setIsGeneratingPDF(true)
+    try {
+      generateReceiptPDF(bookingData)
+      success('PDF Downloaded', 'Your receipt has been downloaded successfully!')
+    } catch (err) {
+      logger.error('Failed to generate PDF', err as Error)
+      error('PDF Generation Failed', 'Unable to generate PDF receipt. Please try again.')
+    } finally {
+      setIsGeneratingPDF(false)
+    }
   }
   
   if (isLoading) {
@@ -417,12 +435,22 @@ export function BookingConfirmation() {
             {/* Action Buttons */}
             <div className="flex flex-wrap gap-4 justify-center mb-8">
               <Button
-                onClick={handlePrintReceipt}
+                onClick={handleDownloadPDF}
                 variant="outline"
+                disabled={isGeneratingPDF}
                 className="flex items-center gap-2"
               >
-                <Download className="h-4 w-4" />
-                Print Receipt
+                {isGeneratingPDF ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Generating PDF...
+                  </>
+                ) : (
+                  <>
+                    <Download className="h-4 w-4" />
+                    Download PDF Receipt
+                  </>
+                )}
               </Button>
             </div>
             

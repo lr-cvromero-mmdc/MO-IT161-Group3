@@ -59,3 +59,19 @@ yarn-error.log*
 
 # TypeScript
 *.tsbuildinfo
+
+# Archive files
+*.zip
+
+# Development documentation
+docs/development/
+docs/testing/
+
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/.lighthouseci/
+
+# Visual regression snapshots (keep baseline, ignore diffs)
+/test-results/

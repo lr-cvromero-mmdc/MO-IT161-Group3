@@ -1,6 +1,4 @@
 // PageLoader component - Shows during page transitions
-import { DotLottieReact } from '@lottiefiles/dotlottie-react'
-
 export function PageLoader() {
   return (
     <div 
@@ -9,15 +7,13 @@ export function PageLoader() {
       aria-live="polite"
       aria-label="Loading page"
     >
-      {/* Lottie Animation - New car wash animation */}
-      <div className="w-[300px] h-[300px]">
-        <DotLottieReact
-          src="https://lottie.host/d31db985-e874-4c82-9f78-cbfccbf32ee7/BqDt57UdSj.lottie"
-          loop
-          autoplay
-          className="w-full h-full"
-        />
-      </div>
+      {/* Lottie Animation - Using web component */}
+      <dotlottie-wc 
+        src="https://lottie.host/d31db985-e874-4c82-9f78-cbfccbf32ee7/BqDt57UdSj.lottie" 
+        style={{ width: '300px', height: '300px' }}
+        autoplay 
+        loop
+      />
     </div>
   )
 }

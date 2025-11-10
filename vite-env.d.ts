@@ -13,3 +13,17 @@ interface ImportMeta {
   readonly env: ImportMetaEnv
 }
 
+// Lottie Web Component type declaration
+declare namespace JSX {
+  interface IntrinsicElements {
+    'dotlottie-wc': React.DetailedHTMLProps<
+      React.HTMLAttributes<HTMLElement> & {
+        src: string
+        autoplay?: boolean
+        loop?: boolean
+      },
+      HTMLElement
+    >
+  }
+}
+

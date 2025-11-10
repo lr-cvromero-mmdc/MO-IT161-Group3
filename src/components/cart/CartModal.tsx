@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ShoppingCart, ArrowRight, Trash2, X, Car, Package } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { CartItemComponent } from './CartItem'
 import { useCart } from '@/hooks/useCart'
 
@@ -45,6 +45,9 @@ export function CartModal({ isOpen, onClose }: CartModalProps) {
               <X className="h-4 w-4" />
             </Button>
           </div>
+          <DialogDescription className="sr-only">
+            Shopping cart containing {itemCount > 0 ? `${itemCount} item${itemCount > 1 ? 's' : ''}` : 'no items'}
+          </DialogDescription>
         </DialogHeader>
 
         <div className="flex flex-col h-full sm:h-auto min-h-0">
@@ -185,7 +188,7 @@ export function CartModal({ isOpen, onClose }: CartModalProps) {
                   <Button
                     asChild
                     size="lg"
-                    className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 hover:scale-105 transition-all duration-200"
+                    className="w-full bg-brand-primary text-white hover:bg-brand-primary/90 active:bg-brand-primary/80 min-h-[48px] sm:min-h-[44px] hover:scale-105 active:scale-95 transition-all duration-200"
                   >
                     <Link to={hasServices() ? '/booking' : '/checkout'} onClick={() => { onClose(); window.scrollTo(0, 0); }}>
                       <span>{hasServices() ? 'Proceed to Booking' : 'Proceed to Checkout'}</span>
@@ -194,11 +197,11 @@ export function CartModal({ isOpen, onClose }: CartModalProps) {
                   </Button>
                 )}
 
-                <div className="flex gap-2">
+                <div className="flex gap-2 sm:gap-3">
                   <Button
                     variant="outline"
                     size="sm"
-                    className="flex-1 text-sm hover:scale-105 transition-all duration-200"
+                    className="flex-1 text-sm sm:text-xs min-h-[44px] sm:min-h-[36px] hover:scale-105 active:scale-95 transition-all duration-200"
                     asChild
                   >
                     <Link to="/services" onClick={() => { onClose(); window.scrollTo(0, 0); }}>
@@ -210,7 +213,8 @@ export function CartModal({ isOpen, onClose }: CartModalProps) {
                     variant="outline"
                     size="sm"
                     onClick={clearCart}
-                    className="text-red-600 hover:text-red-700 hover:bg-red-50 px-3 hover:scale-105 transition-all duration-200"
+                    className="text-red-600 hover:text-red-700 hover:bg-red-50 active:bg-red-100 px-3 sm:px-2 min-h-[44px] min-w-[44px] sm:min-h-[36px] sm:min-w-[36px] hover:scale-105 active:scale-95 transition-all duration-200"
+                    aria-label="Clear cart"
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>

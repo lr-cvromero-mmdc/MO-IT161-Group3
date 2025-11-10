@@ -19,15 +19,15 @@ export function FloatingCartButton({ className = '' }: FloatingCartButtonProps) 
   return (
     <>
       {/* Floating Cart Button */}
-      <div className={`fixed bottom-6 right-6 floating-cart-button ${className}`}>
+      <div className={`fixed bottom-6 right-6 floating-cart-button group ${className}`}>
         <Button
           onClick={() => setIsModalOpen(true)}
-          className={`relative h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 ${
+          className={`relative h-14 w-14 sm:h-12 sm:w-12 min-h-[56px] min-w-[56px] sm:min-h-[48px] sm:min-w-[48px] rounded-full shadow-lg hover:shadow-xl transition-shadow duration-200 hover:scale-105 active:scale-95 active:opacity-90 will-change-[transform,opacity] ${
             hasUnbooked
-              ? 'bg-yellow-500 hover:bg-yellow-600'
+              ? 'bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700'
               : servicesInCart
-                ? 'bg-blue-600 hover:bg-blue-700'
-                : 'bg-brand-primary hover:bg-brand-primary/90'
+                ? 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800'
+                : 'bg-brand-primary hover:bg-brand-primary/90 active:bg-brand-primary/80'
           }`}
           aria-label={`Shopping cart with ${itemCount} items${hasUnbooked ? ' - action required' : servicesInCart ? ' including services' : ''}`}
         >
@@ -49,23 +49,23 @@ export function FloatingCartButton({ className = '' }: FloatingCartButtonProps) 
             </div>
           )}
 
-          {/* Pulse Animation for Services */}
+          {/* Pulse Animation for Services - Optimized */}
           {servicesInCart && !hasUnbooked && (
-            <div className="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-20"></div>
+            <div className="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-20 will-change-[opacity,transform] pointer-events-none"></div>
           )}
 
-          {/* Pulse Animation for Unbooked (stronger) */}
+          {/* Pulse Animation for Unbooked (stronger) - Optimized */}
           {hasUnbooked && (
-            <div className="absolute inset-0 rounded-full bg-yellow-400 animate-ping opacity-30"></div>
+            <div className="absolute inset-0 rounded-full bg-yellow-400 animate-ping opacity-30 will-change-[opacity,transform] pointer-events-none"></div>
           )}
 
-          {/* Ripple Effect on Click */}
-          <div className="absolute inset-0 rounded-full bg-white opacity-0 hover:opacity-10 transition-opacity duration-200"></div>
+          {/* Ripple Effect on Click - Optimized for performance */}
+          <div className="absolute inset-0 rounded-full bg-white opacity-0 hover:opacity-10 transition-opacity duration-200 pointer-events-none will-change-[opacity]"></div>
         </Button>
 
-        {/* Quick Cart Preview Tooltip - Desktop Only */}
+        {/* Quick Cart Preview Tooltip - Desktop Only - Optimized */}
         {itemCount > 0 && (
-          <div className="hidden sm:block absolute bottom-full right-0 mb-2 bg-white rounded-lg shadow-lg border p-3 min-w-[220px] opacity-0 hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+          <div className="hidden sm:block absolute bottom-full right-0 mb-2 bg-white rounded-lg shadow-lg border p-3 min-w-[220px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none will-change-[opacity]">
             <div className="text-sm font-semibold text-brand-dark mb-1">
               {itemCount} item{itemCount !== 1 ? 's' : ''} in cart
             </div>
